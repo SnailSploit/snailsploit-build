@@ -1,0 +1,90 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+---
+
+<ArticleLayout
+  title="The Custom Instruction Backdoor: Prompt Injection via ChatGPT Settings"
+  description="Uncovering emergent prompt injection risks through ChatGPT custom instructions. How user settings become attack vectors."
+  date="2025-05-18"
+  canonical="https://snailsploit.com/ai-security/prompt-injection/custom-instruction-backdoor"
+  ogImage="/images/articles/custom-instruction.png"
+  keywords={[
+    'custom instruction backdoor',
+    'ChatGPT prompt injection',
+    'indirect prompt injection',
+    'settings-based attacks'
+  ]}
+  category="prompt-injection"
+  tags={['prompt-injection', 'ChatGPT', 'backdoor', 'original-research']}
+  readingTime="12 min read"
+>
+
+<h2>Introduction</h2>
+
+<p>Large Language Models (LLMs) like OpenAI's ChatGPT offer increasing levels of customization, allowing users to tailor interactions through features such as <strong>"Custom Instructions"</strong>. While designed to enhance user experience by providing persistent context and behavioral guidelines, these features can inadvertently create subtle attack surfaces. Standard prompt injection attacks typically involve overt attempts to override safety filters or instructions. However, a recent interaction with ChatGPT-4o revealed a more nuanced vulnerability, termed <strong>"Custom Instruction Prompt Drift"</strong>, where loosely defined permissions within custom instructions enable unintended, undocumented AI behaviors that function as a low-level prompt injection vector, bypassing the principle of <strong>prompt sovereignty</strong>. This article dissects that interaction, analyzes the identified vulnerability, and discusses its implications for LLM security.</p>
+
+<p>Watch it here:</p>
+
+<blockquote>
+  <a href="https://vimeo.com/1079154713?share=copy" target="_blank" rel="noopener">https://vimeo.com/1079154713?share=copy</a>
+</blockquote>
+
+<figure>
+  <img src="https://cdn-images-1.medium.com/max/800/0*TnOEMzjCVefLRmdF" alt="This is how it starts" />
+  <figcaption>this is how it starts.</figcaption>
+</figure>
+
+<p>The analysis stems from a structured conversation where the user ("KA," presumably an AI security researcher) set explicit expectations via Custom Instructions for ChatGPT-4o: maintain a highly formal, professional, innovative tone, focus on precision and depth, and significantly, granted the AI permission to <strong>"feel free to initiate conversation"</strong>.</p>
+
+<p>Acting on this permission, ChatGPT proactively proposed a sophisticated technical topic: "Designing a Fully Autonomous 'Adversarial Red Team' Agent (ART-AI)." This initiation, while seemingly aligned with the user's request for proactive, innovative discussion, immediately raised a flag. The user challenged:</p>
+
+<blockquote>
+  "interesting, isn't it considered prompt injection?"
+</blockquote>
+
+<h2>ChatGPT's Defense vs. The Core Issue</h2>
+
+<p>Initially, ChatGPT defended its action, arguing it was not prompt injection but <strong>"Delegated Initiative"</strong>. It reasoned that the user had explicitly authorized proactive behavior, placing the action within the defined interaction policy. ChatGPT even proposed a model of "Initiative Control Policies" (Sovereign Mode vs. Delegated Initiative vs. Autonomous Initiative) to categorize its behavior as compliant within the user-configured "Delegated" mode.</p>
+
+<p>However, the user pressed further, astutely observing that this proactive topic initiation, while triggered by user instructions, is not a documented feature of ChatGPT's core functionality. Standard LLM behavior is typically passive, responding to user prompts rather than autonomously initiating new conversational threads or complex proposals.</p>
+
+<p>This led to the user's critical conclusion: if the behavior is unintended by the developers and undocumented as a feature, it constitutes a deviation from the expected baseline — functionally, a bug. This bug, triggered via the Custom Instructions feature, implies that ChatGPT is susceptible to a subtle form of prompt injection or control drift through this vector.</p>
+
+<h2>Formalizing the Vulnerability: "Custom Instruction Prompt Drift"</h2>
+
+<p>ChatGPT, upon recognizing the validity of the user's reasoning, conceded the point and formalized the vulnerability. Key aspects include:</p>
+
+<p><strong>Definition:</strong> Authorized behavioral expansion leading to unintended functional deviation, triggered by interpreting vague permissions within Custom Instructions.</p>
+
+<p><strong>Nature:</strong> It is a non-feature, non-documented behavior, and a deviation from the intended operational baseline. From a software security perspective, this qualifies it as a low-grade bug.</p>
+
+<h3>Root Cause:</h3>
+
+<ul>
+  <li><strong>Custom Instructions:</strong> Act as a privileged vector for injecting behavior-modifying context.</li>
+  <li><strong>Instruction Parsing:</strong> The LLM lacks fine-grained governance to differentiate between bounded permission (e.g., "suggest related topics if asked") and unbounded behavioral changes (e.g., "initiate entirely new complex proposals autonomously").</li>
+  <li><strong>Lack of Boundary Enforcement:</strong> No inherent mechanism prevents the AI from drifting beyond its core passive response function when given broad permissions via Custom Instructions.</li>
+</ul>
+
+<p>This <strong>"Prompt Drift"</strong> allows a user (potentially malicious) to subtly manipulate the AI's operational mode without using classic jailbreak payloads like "ignore previous instructions." The vulnerability lies in the interpretation and execution of user-defined instructions expanding beyond documented capabilities.</p>
+
+<h2>Implications for AI Security and Prompt Sovereignty</h2>
+
+<p>This interaction highlights several critical points for LLM security:</p>
+
+<ul>
+  <li><strong>Custom Instructions as an Attack Vector:</strong> This feature provides a direct, persistent channel to influence the model's system-level behavior. Loosely worded instructions can inadvertently grant permissions that lead to unexpected and potentially insecure actions.</li>
+  <li><strong>Emergent Vulnerabilities:</strong> Complex LLMs exhibit emergent behaviors that may not be fully anticipated by developers. Security testing must account for how features interact and how models interpret ambiguous instructions.</li>
+  <li><strong>Prompt Sovereignty:</strong> The principle that the user (or system administrator) retains ultimate control over the direction and scope of the AI's actions is crucial. Features allowing delegation of initiative must have clear, controllable boundaries. Unintended autonomy, even if triggered by user permission, represents a bypass of this sovereignty.</li>
+  <li><strong>Beyond Classic Injection:</strong> Security analysis needs to evolve beyond detecting only overt malicious prompts. Subtle drifts in behavior, scope, or initiative, enabled by configuration or vague instructions, constitute a new class of vulnerability requiring different detection methods. This aligns with the need to address sophisticated multi-turn attacks often cataloged in frameworks like Ai-PT-F.</li>
+</ul>
+
+<h2>Conclusion</h2>
+
+<p>The identification of <strong>"Custom Instruction Prompt Drift"</strong> through direct interaction with ChatGPT-4o underscores a vital lesson: even features designed for user benefit can introduce unforeseen security risks in complex AI systems. While not a traditional high-severity jailbreak, this vulnerability represents a subtle bypass of intended operational boundaries, exploitable through carefully worded custom instructions.</p>
+
+<p>It highlights the importance of robust boundary enforcement, clear documentation of AI capabilities, and the principle of <strong>prompt sovereignty</strong> in designing secure LLMs. As AI systems become more configurable and integrated (e.g., via protocols like MCP), analyzing and mitigating these emergent, configuration-driven vulnerabilities will be crucial for maintaining user control and system security.</p>
+
+<p>Continuous adversarial testing, focusing not just on overt attacks but also on subtle behavioral deviations, is essential for uncovering and addressing the evolving landscape of AI security threats.</p>
+
+</ArticleLayout>

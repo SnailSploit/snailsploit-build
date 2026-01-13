@@ -1,0 +1,57 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  ogImage?: string;
+  keywords?: string[];
+  heading?: string;
+  subheading?: string;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage,
+  keywords = [],
+  heading,
+  subheading,
+} = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  ogType="website"
+  ogImage={ogImage || '/images/og-index.png'}
+  keywords={keywords}
+>
+  <Navigation slot="header" />
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Page Header -->
+    <header class="mb-16 text-center">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6 font-mono" style="color: var(--color-accent-cyan);">
+        {heading || title}
+      </h1>
+      {subheading && (
+        <p class="text-xl max-w-3xl mx-auto" style="color: var(--color-text-secondary);">
+          {subheading}
+        </p>
+      )}
+    </header>
+
+    <!-- Content -->
+    <div class="max-w-5xl mx-auto">
+      <slot />
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+</BaseLayout>

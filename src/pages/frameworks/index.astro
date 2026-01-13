@@ -1,0 +1,91 @@
+---
+import IndexLayout from '../../layouts/IndexLayout.astro';
+
+const frameworks = [
+  {
+    name: 'AATMF',
+    fullName: 'Adversarial AI Threat Modeling Framework',
+    description: 'Comprehensive AI threat modeling framework with 14 tactics, 40+ techniques, quantitative risk scoring, and MITRE ATT&CK integration.',
+    url: '/frameworks/aatmf',
+    status: 'published'
+  },
+  {
+    name: 'P.R.O.M.P.T',
+    fullName: 'Purpose, Results, Obstacles, Mindset, Preferences, Technical',
+    description: 'Systematic methodology for effective AI interactions and prompt engineering. A structured approach to achieving consistent results.',
+    url: '/frameworks/prompt',
+    status: 'published'
+  },
+  {
+    name: 'SEF',
+    fullName: 'Social Engineering Framework',
+    description: 'Structured methodology for social engineering assessments. Combines psychology principles with practical attack simulations.',
+    url: '/frameworks/sef',
+    status: 'coming-soon'
+  }
+];
+---
+
+<IndexLayout
+  title="Security Frameworks | AATMF, P.R.O.M.P.T, SEF"
+  description="Open-source security frameworks for AI threat modeling, prompt engineering methodology, and social engineering assessment. Practitioner-built."
+  canonical="https://snailsploit.com/frameworks"
+  ogImage="/images/og-frameworks.png"
+  keywords={[
+    'AI threat modeling framework',
+    'prompt injection taxonomy',
+    'social engineering framework',
+    'LLM security methodology'
+  ]}
+  heading="Security Frameworks"
+  subheading="Systematic methodologies for AI security, prompt engineering, and social engineering assessment."
+>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {frameworks.map(framework => (
+      <a
+        href={framework.url}
+        class="group p-8 rounded-lg transition-all hover:scale-[1.02] relative"
+        style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+      >
+        {framework.status === 'coming-soon' && (
+          <span
+            class="absolute top-4 right-4 px-3 py-1 text-xs font-mono rounded"
+            style="background-color: var(--color-accent-yellow); color: var(--color-bg);"
+          >
+            Coming Soon
+          </span>
+        )}
+
+        <h2 class="text-3xl font-bold font-mono mb-3 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">
+          {framework.name}
+        </h2>
+
+        <h3 class="text-sm font-mono mb-4" style="color: var(--color-text-muted);">
+          {framework.fullName}
+        </h3>
+
+        <p class="text-base mb-6" style="color: var(--color-text-secondary);">
+          {framework.description}
+        </p>
+
+        <div class="text-sm font-mono" style="color: var(--color-accent-cyan);">
+          Learn more →
+        </div>
+      </a>
+    ))}
+  </div>
+
+  <section class="mt-20 p-8 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+    <h2 class="text-2xl font-bold font-mono mb-4" style="color: var(--color-accent-cyan);">
+      Why These Frameworks?
+    </h2>
+    <p class="mb-4" style="color: var(--color-text-secondary);">
+      These frameworks were born from practical experience in AI security research and penetration testing.
+      They represent systematic approaches to complex security challenges, built for practitioners by practitioners.
+    </p>
+    <p style="color: var(--color-text-secondary);">
+      All frameworks are open-source and continuously evolving based on real-world testing and community feedback.
+      They integrate with existing security methodologies while addressing the unique challenges of AI systems.
+    </p>
+  </section>
+</IndexLayout>

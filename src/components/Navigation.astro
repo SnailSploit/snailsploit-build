@@ -1,0 +1,76 @@
+---
+const navItems = [
+  { name: 'About', href: '/about' },
+  { name: 'Adversarial Minds', href: '/adversarial-minds' },
+  {
+    name: 'Frameworks',
+    href: '/frameworks',
+    children: [
+      { name: 'AATMF', href: '/frameworks/aatmf' },
+      { name: 'P.R.O.M.P.T', href: '/frameworks/prompt' },
+      { name: 'SEF', href: '/frameworks/sef' },
+    ]
+  },
+  {
+    name: 'Security Research',
+    href: '/security-research',
+    children: [
+      { name: 'CVEs', href: '/security-research/cves' },
+      { name: 'General Research', href: '/security-research/general' },
+    ]
+  },
+  {
+    name: 'AI Security',
+    href: '/ai-security',
+    children: [
+      { name: 'Jailbreaking', href: '/ai-security/jailbreaking' },
+      { name: 'Prompt Injection', href: '/ai-security/prompt-injection' },
+    ]
+  },
+  { name: 'Tools', href: '/tools' },
+  { name: 'Writing', href: '/writing' },
+];
+---
+
+<nav class="border-b" style="border-color: var(--color-border); background-color: var(--color-surface);">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center">
+        <a href="/" class="font-mono text-xl font-bold" style="color: var(--color-accent-cyan);">
+          SnailSploit
+        </a>
+      </div>
+      <div class="hidden md:block">
+        <div class="ml-10 flex items-baseline space-x-6">
+          {navItems.map((item) => (
+            <div class="relative group">
+              <a
+                href={item.href}
+                class="font-mono text-sm px-3 py-2 hover:text-[var(--color-accent-cyan)] transition-colors"
+                style="color: var(--color-text-secondary);"
+              >
+                {item.name}
+                {item.children && <span class="ml-1">▾</span>}
+              </a>
+              {item.children && (
+                <div class="absolute left-0 mt-0 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+                  <div class="py-2">
+                    {item.children.map((child) => (
+                      <a
+                        href={child.href}
+                        class="block px-4 py-2 text-sm font-mono hover:bg-[var(--color-surface-hover)] transition-colors"
+                        style="color: var(--color-text-secondary);"
+                      >
+                        {child.name}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

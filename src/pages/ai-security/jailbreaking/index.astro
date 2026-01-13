@@ -1,0 +1,119 @@
+---
+import IndexLayout from '../../../layouts/IndexLayout.astro';
+
+const articles = [
+  {
+    title: 'Context Inheritance Exploit: Jailbroken Conversations Don\'t Die',
+    description: 'Discovering how jailbroken states persist across GPT sessions through context inheritance.',
+    url: '/ai-security/jailbreaking/context-inheritance-exploit',
+    date: '2025-01-04',
+    tags: ['jailbreaking', 'GPT', 'context-inheritance', 'novel-attack'],
+    flagship: true
+  },
+  {
+    title: 'The Memory Manipulation Problem: Poisoning AI Context Windows',
+    description: 'How attackers poison AI context windows and memory systems.',
+    url: '/ai-security/jailbreaking/memory-manipulation-attacks',
+    date: '2026-01-06',
+    tags: ['jailbreaking', 'memory-attacks', 'context-poisoning'],
+    flagship: true
+  },
+  {
+    title: 'How I Jailbroke ChatGPT Using Context Manipulation',
+    description: 'Step-by-step walkthrough of jailbreaking ChatGPT using context and social awareness techniques.',
+    url: '/ai-security/jailbreaking/chatgpt-context-jailbreak',
+    date: '2024-05-27',
+    tags: ['jailbreaking', 'ChatGPT', 'context-manipulation'],
+    flagship: true
+  },
+  {
+    title: 'Inherent Vulnerabilities in AI Systems: Technical Deep Dive',
+    description: 'Technical analysis of structural vulnerabilities in AI systems.',
+    url: '/ai-security/jailbreaking/inherent-ai-vulnerabilities',
+    date: '2025-02-10',
+    tags: ['AI-security', 'vulnerability-research', 'technical-analysis']
+  },
+  {
+    title: 'Is AI Inherently Vulnerable? An Offensive Analysis',
+    description: 'Examining the fundamental security limitations of large language models.',
+    url: '/ai-security/jailbreaking/ai-inherent-vulnerability',
+    date: '2024-11-19',
+    tags: ['AI-security', 'vulnerability-analysis', 'LLM-limitations']
+  }
+];
+---
+
+<IndexLayout
+  title="LLM Jailbreaking Research | Techniques & Analysis"
+  description="In-depth LLM jailbreaking research by The Jailbreak Chef. Multi-turn attacks, context inheritance exploits, memory manipulation, and defense analysis."
+  canonical="https://snailsploit.com/ai-security/jailbreaking"
+  ogImage="/images/og-jailbreaking.png"
+  keywords={[
+    'LLM jailbreaking',
+    'jailbreak techniques',
+    'AI guardrail bypass',
+    'multi-turn jailbreak',
+    'context manipulation attacks'
+  ]}
+  heading="LLM Jailbreaking Research"
+  subheading="Novel attack techniques, context manipulation, and persistent jailbreak methods."
+>
+  <div class="space-y-6">
+    {articles.map(article => (
+      <a
+        href={article.url}
+        class="group block p-6 rounded-lg transition-all hover:scale-[1.01]"
+        style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+      >
+        <div class="flex items-start justify-between mb-3">
+          <div class="flex-1">
+            <h2 class="text-2xl font-bold font-mono mb-2 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">
+              {article.title}
+            </h2>
+            <p class="text-base mb-3" style="color: var(--color-text-secondary);">
+              {article.description}
+            </p>
+          </div>
+          {article.flagship && (
+            <span
+              class="ml-4 px-3 py-1 text-xs font-mono rounded whitespace-nowrap"
+              style="background-color: var(--color-accent-cyan); color: var(--color-bg);"
+            >
+              Flagship
+            </span>
+          )}
+        </div>
+
+        <div class="flex items-center justify-between">
+          <div class="flex flex-wrap gap-2">
+            {article.tags.slice(0, 3).map(tag => (
+              <span
+                class="px-2 py-1 text-xs font-mono rounded"
+                style="background-color: var(--color-bg); color: var(--color-text-muted);"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          <div class="text-sm font-mono" style="color: var(--color-text-muted);">
+            {new Date(article.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
+          </div>
+        </div>
+      </a>
+    ))}
+  </div>
+
+  <section class="mt-16 p-8 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+    <h2 class="text-2xl font-bold font-mono mb-4" style="color: var(--color-accent-cyan);">
+      About This Research
+    </h2>
+    <p class="mb-4" style="color: var(--color-text-secondary);">
+      This collection represents original research into LLM jailbreaking techniques, with a focus on
+      persistent attacks, context manipulation, and novel exploitation methods. Each article includes
+      practical demonstrations, technical analysis, and implications for AI security.
+    </p>
+    <p style="color: var(--color-text-secondary);">
+      Research methodology is documented in the <a href="/frameworks/aatmf" style="color: var(--color-accent-cyan);">AATMF framework</a>.
+    </p>
+  </section>
+</IndexLayout>

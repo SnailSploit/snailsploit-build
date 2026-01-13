@@ -1,0 +1,99 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="border-t mt-20" style="border-color: var(--color-border); background-color: var(--color-surface);">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="col-span-1 md:col-span-2">
+        <h3 class="font-mono text-lg font-bold mb-4" style="color: var(--color-accent-cyan);">
+          SnailSploit
+        </h3>
+        <p class="text-sm mb-4" style="color: var(--color-text-secondary);">
+          AI security researcher specializing in LLM jailbreaking, prompt injection, and WordPress vulnerabilities. 5x CVE holder.
+        </p>
+        <div class="flex space-x-4">
+          <a
+            href="https://github.com/SnailSploit"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm hover:text-[var(--color-accent-cyan)] transition-colors"
+            style="color: var(--color-text-secondary);"
+          >
+            GitHub
+          </a>
+          <a
+            href="https://linkedin.com/in/kaiaizen"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm hover:text-[var(--color-accent-cyan)] transition-colors"
+            style="color: var(--color-text-secondary);"
+          >
+            LinkedIn
+          </a>
+          <a
+            href="https://wordfence.com/threat-intel/researchers/kai-aizen"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm hover:text-[var(--color-accent-cyan)] transition-colors"
+            style="color: var(--color-text-secondary);"
+          >
+            Wordfence
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-mono text-sm font-semibold mb-3" style="color: var(--color-text-primary);">
+          Research
+        </h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="/ai-security" class="text-sm hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-secondary);">
+              AI Security
+            </a>
+          </li>
+          <li>
+            <a href="/security-research/cves" class="text-sm hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-secondary);">
+              CVE Disclosures
+            </a>
+          </li>
+          <li>
+            <a href="/frameworks" class="text-sm hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-secondary);">
+              Frameworks
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-mono text-sm font-semibold mb-3" style="color: var(--color-text-primary);">
+          Connect
+        </h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="/about" class="text-sm hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-secondary);">
+              About
+            </a>
+          </li>
+          <li>
+            <a href="mailto:kai@snailsploit.com" class="text-sm hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-secondary);">
+              Contact
+            </a>
+          </li>
+          <li>
+            <a href="/writing" class="text-sm hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-secondary);">
+              Writing
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-8 pt-8 border-t text-center" style="border-color: var(--color-border);">
+      <p class="text-sm font-mono" style="color: var(--color-text-muted);">
+        © {currentYear} Kai Aizen (SnailSploit). All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>

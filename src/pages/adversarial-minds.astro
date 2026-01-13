@@ -1,0 +1,185 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+
+const bookSchema = {
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": "Adversarial Minds: The Anatomy of Social Engineering and the Psychology of Manipulation",
+  "author": {
+    "@type": "Person",
+    "name": "Kai Aizen",
+    "url": "https://snailsploit.com/about"
+  },
+  "description": "The definitive book on social engineering psychology and human manipulation techniques.",
+  "genre": ["Cybersecurity", "Psychology", "Social Engineering"],
+  "inLanguage": "en"
+};
+---
+
+<BaseLayout
+  title="Adversarial Minds: Social Engineering Psychology Book"
+  description="The definitive book on social engineering psychology and human manipulation. Learn the adversarial mindset behind human hacking and how to defend against it."
+  canonical="https://snailsploit.com/adversarial-minds"
+  ogType="book"
+  ogImage="/images/og-book.png"
+  keywords={[
+    'Adversarial Minds book',
+    'social engineering psychology',
+    'human hacking methodology',
+    'adversarial mindset cybersecurity'
+  ]}
+  schemaData={bookSchema}
+>
+  <Navigation slot="header" />
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- Left Column - Book Cover (Placeholder) -->
+      <div class="flex justify-center">
+        <div class="w-full max-w-md aspect-[3/4] rounded-lg flex items-center justify-center" style="background-color: var(--color-surface); border: 2px solid var(--color-border);">
+          <div class="text-center p-8">
+            <h2 class="text-4xl font-bold font-mono mb-4" style="color: var(--color-accent-cyan);">
+              ADVERSARIAL<br />MINDS
+            </h2>
+            <p class="text-sm font-mono" style="color: var(--color-text-secondary);">
+              The Anatomy of Social Engineering and the Psychology of Manipulation
+            </p>
+            <p class="text-xs font-mono mt-8" style="color: var(--color-text-muted);">
+              by Kai Aizen
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column - Book Info -->
+      <div>
+        <h1 class="text-5xl md:text-6xl font-bold mb-6 font-mono" style="color: var(--color-accent-cyan);">
+          Adversarial Minds
+        </h1>
+
+        <p class="text-2xl mb-8" style="color: var(--color-text-primary);">
+          The Anatomy of Social Engineering and the Psychology of Manipulation
+        </p>
+
+        <div class="prose prose-invert prose-lg max-w-none mb-8">
+          <p style="color: var(--color-text-secondary);">
+            Why do we keep falling for social engineering attacks despite decades of security awareness training?
+            The answer lies not in better technology, but in understanding the adversarial mindset itself.
+          </p>
+
+          <p style="color: var(--color-text-secondary);">
+            <strong style="color: var(--color-text-primary);">Adversarial Minds</strong> takes you deep into
+            the psychology behind human hacking. Drawing from real-world experience in security research and
+            adversarial AI, this book reveals the cognitive vulnerabilities that make social engineering so effective.
+          </p>
+        </div>
+
+        <div class="mb-8">
+          <h3 class="text-xl font-mono font-bold mb-4" style="color: var(--color-text-primary);">
+            What You'll Learn
+          </h3>
+          <ul class="space-y-2 text-sm" style="color: var(--color-text-secondary);">
+            <li class="flex items-start">
+              <span style="color: var(--color-accent-cyan);" class="mr-2">▸</span>
+              The psychological principles that make manipulation effective
+            </li>
+            <li class="flex items-start">
+              <span style="color: var(--color-accent-cyan);" class="mr-2">▸</span>
+              How attackers think and plan social engineering campaigns
+            </li>
+            <li class="flex items-start">
+              <span style="color: var(--color-accent-cyan);" class="mr-2">▸</span>
+              Cognitive biases exploited in human hacking
+            </li>
+            <li class="flex items-start">
+              <span style="color: var(--color-accent-cyan);" class="mr-2">▸</span>
+              Defense strategies that actually work
+            </li>
+            <li class="flex items-start">
+              <span style="color: var(--color-accent-cyan);" class="mr-2">▸</span>
+              The intersection of AI and social engineering
+            </li>
+          </ul>
+        </div>
+
+        <div class="flex flex-wrap gap-4">
+          <a
+            href="mailto:kai@snailsploit.com?subject=Adversarial%20Minds%20Inquiry"
+            class="px-6 py-3 font-mono font-semibold rounded hover:opacity-80 transition-opacity"
+            style="background-color: var(--color-accent-cyan); color: var(--color-bg);"
+          >
+            Get Notified →
+          </a>
+          <a
+            href="/frameworks/sef"
+            class="px-6 py-3 font-mono font-semibold rounded border transition-colors"
+            style="border-color: var(--color-accent-cyan); color: var(--color-accent-cyan);"
+          >
+            See SEF Framework
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Sections -->
+    <section class="mt-20 max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold font-mono mb-8 text-center" style="color: var(--color-accent-cyan);">
+        Why This Book Matters
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+          <h3 class="text-xl font-mono font-bold mb-3" style="color: var(--color-text-primary);">
+            Practitioner Perspective
+          </h3>
+          <p class="text-sm" style="color: var(--color-text-secondary);">
+            Written by a security researcher who actively discovers vulnerabilities and tests AI systems.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+          <h3 class="text-xl font-mono font-bold mb-3" style="color: var(--color-text-primary);">
+            AI Era Context
+          </h3>
+          <p class="text-sm" style="color: var(--color-text-secondary);">
+            Explores how AI amplifies social engineering and creates new attack vectors.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+          <h3 class="text-xl font-mono font-bold mb-3" style="color: var(--color-text-primary);">
+            Actionable Defense
+          </h3>
+          <p class="text-sm" style="color: var(--color-text-secondary);">
+            Practical strategies that go beyond "awareness training" platitudes.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-16 p-8 rounded-lg max-w-4xl mx-auto" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+      <h3 class="text-2xl font-bold font-mono mb-4" style="color: var(--color-accent-cyan);">
+        About the Author
+      </h3>
+      <p class="mb-4" style="color: var(--color-text-secondary);">
+        <strong style="color: var(--color-text-primary);">Kai Aizen</strong> is a GenAI Security Researcher
+        at ActiveFence, specializing in adversarial AI and social engineering. Known as "The Jailbreak Chef,"
+        Kai has disclosed 5 CVEs and created multiple security frameworks including AATMF and P.R.O.M.P.T.
+      </p>
+      <a href="/about" class="text-sm font-mono" style="color: var(--color-accent-cyan);">
+        Learn more about Kai →
+      </a>
+    </section>
+  </div>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .prose p {
+    margin-bottom: 1.25em;
+    line-height: 1.75;
+  }
+</style>

@@ -1,0 +1,104 @@
+---
+import IndexLayout from '../../../layouts/IndexLayout.astro';
+
+const articles = [
+  {
+    title: 'The Custom Instruction Backdoor: Prompt Injection via ChatGPT Settings',
+    description: 'Uncovering emergent prompt injection risks through ChatGPT custom instructions.',
+    url: '/ai-security/prompt-injection/custom-instruction-backdoor',
+    date: '2025-05-18',
+    tags: ['prompt-injection', 'ChatGPT', 'backdoor'],
+    flagship: true
+  },
+  {
+    title: 'MCP Security Threat Analysis: Model Context Protocol Vulnerabilities',
+    description: 'Comprehensive security analysis of the Model Context Protocol (MCP).',
+    url: '/ai-security/prompt-injection/mcp-threat-analysis',
+    date: '2025-05-18',
+    tags: ['MCP', 'prompt-injection', 'threat-analysis'],
+    flagship: true
+  },
+  {
+    title: 'MCP Security Deep Dive: Real-World Vulnerabilities Exposed',
+    description: 'Deep security analysis of MCP protocol vulnerabilities in production.',
+    url: '/ai-security/prompt-injection/mcp-security-deep-dive',
+    date: '2025-08-09',
+    tags: ['MCP', 'security-hardening', 'real-world-vulnerabilities']
+  }
+];
+---
+
+<IndexLayout
+  title="Prompt Injection Research | Attacks & Defenses"
+  description="Prompt injection attack research including indirect injection, MCP vulnerabilities, custom instruction backdoors, and defense effectiveness analysis."
+  canonical="https://snailsploit.com/ai-security/prompt-injection"
+  ogImage="/images/og-prompt-injection.png"
+  keywords={[
+    'prompt injection attacks',
+    'indirect prompt injection',
+    'MCP security vulnerabilities',
+    'prompt injection defense'
+  ]}
+  heading="Prompt Injection Research"
+  subheading="Attack techniques, vulnerability analysis, and defense strategies."
+>
+  <div class="space-y-6">
+    {articles.map(article => (
+      <a
+        href={article.url}
+        class="group block p-6 rounded-lg transition-all hover:scale-[1.01]"
+        style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+      >
+        <div class="flex items-start justify-between mb-3">
+          <div class="flex-1">
+            <h2 class="text-2xl font-bold font-mono mb-2 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">
+              {article.title}
+            </h2>
+            <p class="text-base mb-3" style="color: var(--color-text-secondary);">
+              {article.description}
+            </p>
+          </div>
+          {article.flagship && (
+            <span
+              class="ml-4 px-3 py-1 text-xs font-mono rounded whitespace-nowrap"
+              style="background-color: var(--color-accent-cyan); color: var(--color-bg);"
+            >
+              Flagship
+            </span>
+          )}
+        </div>
+
+        <div class="flex items-center justify-between">
+          <div class="flex flex-wrap gap-2">
+            {article.tags.slice(0, 3).map(tag => (
+              <span
+                class="px-2 py-1 text-xs font-mono rounded"
+                style="background-color: var(--color-bg); color: var(--color-text-muted);"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          <div class="text-sm font-mono" style="color: var(--color-text-muted);">
+            {new Date(article.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
+          </div>
+        </div>
+      </a>
+    ))}
+  </div>
+
+  <section class="mt-16 p-8 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+    <h2 class="text-2xl font-bold font-mono mb-4" style="color: var(--color-accent-cyan);">
+      Research Focus
+    </h2>
+    <p class="mb-4" style="color: var(--color-text-secondary);">
+      Prompt injection represents a fundamental challenge in AI security. This research explores both
+      direct and indirect injection techniques, with special focus on emerging attack vectors in
+      MCP (Model Context Protocol) and settings-based vulnerabilities.
+    </p>
+    <p style="color: var(--color-text-secondary);">
+      Defensive strategies and mitigation techniques are analyzed in depth, with practical recommendations
+      for production deployments.
+    </p>
+  </section>
+</IndexLayout>

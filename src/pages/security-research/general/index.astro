@@ -1,0 +1,124 @@
+---
+import IndexLayout from '../../../layouts/IndexLayout.astro';
+
+const articles = [
+  {
+    title: 'Zero-Trust Runtime Security: Container Runtime Attestation',
+    description: 'Implementing zero-trust principles in container runtime environments.',
+    url: '/security-research/general/zero-trust-container-runtime',
+    date: '2025-08-09',
+    tags: ['zero-trust', 'containers', 'runtime-security']
+  },
+  {
+    title: 'Advanced Container Escapes: Principle-Based Security Deep Dive',
+    description: 'Deep technical analysis of container escape techniques and prevention.',
+    url: '/security-research/general/advanced-container-escapes',
+    date: '2025-03-02',
+    tags: ['containers', 'escape-techniques', 'Kubernetes']
+  },
+  {
+    title: 'Evading Endpoint Detection and Response (EDR)',
+    description: 'Technical analysis of EDR evasion techniques and improved detection strategies.',
+    url: '/security-research/general/edr-evasion-techniques',
+    date: '2025-01-16',
+    tags: ['EDR', 'evasion', 'red-team']
+  },
+  {
+    title: 'Exploiting Cloud Vulnerabilities: Tools and Techniques',
+    description: 'Practical guide to cloud security testing and exploitation.',
+    url: '/security-research/general/cloud-vulnerability-exploitation',
+    date: '2024-07-10',
+    tags: ['cloud-security', 'penetration-testing', 'tools']
+  }
+];
+---
+
+<IndexLayout
+  title="General Security Research | Container, Cloud, EDR"
+  description="Security research on container escapes, cloud vulnerabilities, EDR evasion, and zero-trust runtime security by Kai Aizen."
+  canonical="https://snailsploit.com/security-research/general"
+  ogImage="/images/og-research-general.png"
+  keywords={[
+    'container security',
+    'cloud penetration testing',
+    'EDR evasion',
+    'zero trust security'
+  ]}
+  heading="General Security Research"
+  subheading="Container security, cloud vulnerabilities, and advanced red team techniques."
+>
+  <div class="space-y-6">
+    {articles.map(article => (
+      <a
+        href={article.url}
+        class="group block p-6 rounded-lg transition-all hover:scale-[1.01]"
+        style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+      >
+        <div class="flex-1">
+          <h2 class="text-2xl font-bold font-mono mb-2 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">
+            {article.title}
+          </h2>
+          <p class="text-base mb-3" style="color: var(--color-text-secondary);">
+            {article.description}
+          </p>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <div class="flex flex-wrap gap-2">
+            {article.tags.map(tag => (
+              <span
+                class="px-2 py-1 text-xs font-mono rounded"
+                style="background-color: var(--color-bg); color: var(--color-text-muted);"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          <div class="text-sm font-mono" style="color: var(--color-text-muted);">
+            {new Date(article.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
+          </div>
+        </div>
+      </a>
+    ))}
+  </div>
+
+  <section class="mt-16 p-8 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+    <h2 class="text-2xl font-bold font-mono mb-4" style="color: var(--color-accent-cyan);">
+      Research Areas
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <h3 class="font-mono font-bold mb-2" style="color: var(--color-text-primary);">
+          Container Security
+        </h3>
+        <p class="text-sm" style="color: var(--color-text-secondary);">
+          Advanced escape techniques, runtime attestation, and zero-trust architectures for containerized environments.
+        </p>
+      </div>
+      <div>
+        <h3 class="font-mono font-bold mb-2" style="color: var(--color-text-primary);">
+          Cloud Security
+        </h3>
+        <p class="text-sm" style="color: var(--color-text-secondary);">
+          Vulnerability exploitation, misconfiguration analysis, and penetration testing methodologies for cloud platforms.
+        </p>
+      </div>
+      <div>
+        <h3 class="font-mono font-bold mb-2" style="color: var(--color-text-primary);">
+          EDR Evasion
+        </h3>
+        <p class="text-sm" style="color: var(--color-text-secondary);">
+          Understanding bypass techniques to improve detection and response capabilities.
+        </p>
+      </div>
+      <div>
+        <h3 class="font-mono font-bold mb-2" style="color: var(--color-text-primary);">
+          Red Team Operations
+        </h3>
+        <p class="text-sm" style="color: var(--color-text-secondary);">
+          Advanced tactics, techniques, and procedures for security assessment and penetration testing.
+        </p>
+      </div>
+    </div>
+  </section>
+</IndexLayout>

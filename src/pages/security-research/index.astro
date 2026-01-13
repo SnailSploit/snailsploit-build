@@ -1,0 +1,52 @@
+---
+import IndexLayout from '../../layouts/IndexLayout.astro';
+---
+
+<IndexLayout
+  title="Security Research | CVEs & Vulnerability Analysis"
+  description="Original security research including 5 CVE disclosures, WordPress vulnerability analysis, container escapes, and EDR evasion techniques."
+  canonical="https://snailsploit.com/security-research"
+  ogImage="/images/og-research.png"
+  keywords={[
+    'security research',
+    'CVE researcher',
+    'vulnerability analysis',
+    'WordPress security research'
+  ]}
+  heading="Security Research"
+  subheading="Original vulnerability research, CVE disclosures, and security analysis."
+>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+    <a
+      href="/security-research/cves"
+      class="group p-8 rounded-lg transition-all hover:scale-[1.02]"
+      style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+    >
+      <h2 class="text-3xl font-bold font-mono mb-4 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">
+        CVE Disclosures
+      </h2>
+      <p class="text-base mb-4" style="color: var(--color-text-secondary);">
+        5 WordPress plugin vulnerabilities responsibly disclosed. Full technical analysis and remediation guidance.
+      </p>
+      <div class="text-sm font-mono" style="color: var(--color-accent-cyan);">
+        View CVEs →
+      </div>
+    </a>
+
+    <a
+      href="/security-research/general"
+      class="group p-8 rounded-lg transition-all hover:scale-[1.02]"
+      style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+    >
+      <h2 class="text-3xl font-bold font-mono mb-4 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">
+        General Research
+      </h2>
+      <p class="text-base mb-4" style="color: var(--color-text-secondary);">
+        Security research on container escapes, cloud vulnerabilities, EDR evasion, and zero-trust runtime security.
+      </p>
+      <div class="text-sm font-mono" style="color: var(--color-accent-cyan);">
+        View Research →
+      </div>
+    </a>
+  </div>
+</IndexLayout>

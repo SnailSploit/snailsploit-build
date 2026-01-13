@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<BaseLayout
+  title="SEF: Social Engineering Assessment Framework"
+  description="Structured methodology for social engineering assessments. Combines psychology principles with practical attack simulations. Coming soon."
+  canonical="https://snailsploit.com/frameworks/sef"
+  ogType="article"
+  ogImage="/images/og-sef.png"
+  keywords={[
+    'social engineering framework',
+    'SE assessment methodology',
+    'human hacking framework'
+  ]}
+>
+  <Navigation slot="header" />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <header class="mb-12">
+      <div class="mb-4">
+        <span class="px-4 py-2 text-sm font-mono rounded" style="background-color: var(--color-accent-yellow); color: var(--color-bg);">
+          Coming Soon
+        </span>
+      </div>
+
+      <h1 class="text-5xl md:text-6xl font-bold mb-6 font-mono" style="color: var(--color-accent-cyan);">
+        SEF
+      </h1>
+      <p class="text-2xl mb-4" style="color: var(--color-text-primary);">
+        Social Engineering Framework
+      </p>
+    </header>
+
+    <div class="prose prose-invert prose-lg max-w-none">
+      <section class="mb-12">
+        <h2 style="color: var(--color-text-primary);">Overview</h2>
+        <p>
+          The Social Engineering Framework (SEF) is a structured methodology for conducting comprehensive
+          social engineering assessments. Built on psychological principles and real-world experience,
+          SEF provides a systematic approach to testing and improving human security defenses.
+        </p>
+      </section>
+
+      <section class="mb-12">
+        <h2 style="color: var(--color-text-primary);">Framework Scope</h2>
+        <p>SEF will cover:</p>
+        <ul>
+          <li>Psychological principles underlying social engineering attacks</li>
+          <li>Assessment methodology and planning</li>
+          <li>Attack vector taxonomy</li>
+          <li>Defense strategies and training programs</li>
+          <li>Measurement and reporting frameworks</li>
+        </ul>
+      </section>
+
+      <section class="mb-12">
+        <h2 style="color: var(--color-text-primary);">Related Work</h2>
+        <p>
+          For more on the psychology behind social engineering, see my book
+          <a href="/adversarial-minds">Adversarial Minds: The Anatomy of Social Engineering</a>.
+        </p>
+      </section>
+
+      <section class="mb-12">
+        <p class="text-sm font-mono" style="color: var(--color-text-muted);">
+          This framework is currently in development. Sign up for updates or follow on
+          <a href="https://linkedin.com/in/kaiaizen" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          to be notified when it's released.
+        </p>
+      </section>
+    </div>
+  </article>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .prose {
+    color: var(--color-text-primary);
+  }
+
+  .prose h2 {
+    font-family: var(--font-mono);
+    margin-top: 1.5em;
+  }
+
+  .prose a {
+    color: var(--color-accent-cyan);
+  }
+</style>

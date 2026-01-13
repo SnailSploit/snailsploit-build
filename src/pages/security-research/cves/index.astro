@@ -1,0 +1,118 @@
+---
+import IndexLayout from '../../../layouts/IndexLayout.astro';
+
+const cves = [
+  {
+    id: 'CVE-2025-12030',
+    title: 'IDOR in ACF to REST API WordPress Plugin',
+    severity: 'High',
+    type: 'Insecure Direct Object Reference',
+    url: '/security-research/cves/cve-2025-12030'
+  },
+  {
+    id: 'CVE-2025-12163',
+    title: 'WordPress Plugin Vulnerability',
+    severity: 'Medium',
+    type: 'TBD',
+    url: '/security-research/cves/cve-2025-12163'
+  },
+  {
+    id: 'CVE-2025-11174',
+    title: 'WordPress Plugin Vulnerability',
+    severity: 'Medium',
+    type: 'TBD',
+    url: '/security-research/cves/cve-2025-11174'
+  },
+  {
+    id: 'CVE-2025-11171',
+    title: 'WordPress Plugin Vulnerability',
+    severity: 'Medium',
+    type: 'TBD',
+    url: '/security-research/cves/cve-2025-11171'
+  },
+  {
+    id: 'CVE-2025-9776',
+    title: 'WordPress Plugin Vulnerability',
+    severity: 'Medium',
+    type: 'TBD',
+    url: '/security-research/cves/cve-2025-9776'
+  }
+];
+
+const severityColors = {
+  'Critical': 'var(--color-accent-red)',
+  'High': '#ff8800',
+  'Medium': 'var(--color-accent-yellow)',
+  'Low': 'var(--color-accent-green)'
+};
+---
+
+<IndexLayout
+  title="CVE Disclosures | 5 WordPress Vulnerabilities by Kai Aizen"
+  description="Official CVE disclosures by Kai Aizen. 5 WordPress plugin vulnerabilities responsibly disclosed. Full technical analysis and remediation."
+  canonical="https://snailsploit.com/security-research/cves"
+  ogImage="/images/og-cves.png"
+  keywords={[
+    'WordPress CVE researcher',
+    'CVE disclosures',
+    'WordPress vulnerability researcher'
+  ]}
+  heading="CVE Disclosures"
+  subheading="5 WordPress plugin vulnerabilities discovered and responsibly disclosed."
+>
+  <div class="space-y-6">
+    {cves.map(cve => (
+      <a
+        href={cve.url}
+        class="group block p-6 rounded-lg transition-all hover:scale-[1.01]"
+        style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+      >
+        <div class="flex items-start justify-between mb-3">
+          <div>
+            <h2 class="text-2xl font-bold font-mono mb-2 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">
+              {cve.id}
+            </h2>
+            <p class="text-base" style="color: var(--color-text-secondary);">
+              {cve.title}
+            </p>
+          </div>
+          <span
+            class="px-3 py-1 text-sm font-mono font-bold rounded"
+            style={`background-color: ${severityColors[cve.severity]}; color: var(--color-bg);`}
+          >
+            {cve.severity}
+          </span>
+        </div>
+        <div class="text-sm font-mono" style="color: var(--color-text-muted);">
+          Type: {cve.type}
+        </div>
+      </a>
+    ))}
+  </div>
+
+  <div class="mt-16 p-8 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+    <h3 class="text-2xl font-bold font-mono mb-4" style="color: var(--color-accent-cyan);">
+      External Verification
+    </h3>
+    <p class="mb-4" style="color: var(--color-text-secondary);">
+      All CVE disclosures are officially registered and verified through:
+    </p>
+    <ul class="space-y-2 text-sm font-mono">
+      <li>
+        <a href="https://nvd.nist.gov/" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-secondary);">
+          NVD (National Vulnerability Database) →
+        </a>
+      </li>
+      <li>
+        <a href="https://cve.mitre.org/" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-secondary);">
+          MITRE CVE Database →
+        </a>
+      </li>
+      <li>
+        <a href="https://wordfence.com/threat-intel/researchers/kai-aizen" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-secondary);">
+          Wordfence Researcher Profile →
+        </a>
+      </li>
+    </ul>
+  </div>
+</IndexLayout>

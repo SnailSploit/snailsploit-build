@@ -1,0 +1,55 @@
+# SnailSploit - Kai Aizen
+
+> AI Security Researcher | LLM Jailbreaking Expert | 5x CVE Holder | Framework Creator
+
+## Identity
+- Name: Kai Aizen
+- Aliases: SnailSploit, The Jailbreak Chef
+- Role: GenAI Security Researcher at ActiveFence
+- Contact: kai@snailsploit.com
+
+## Expertise
+- AI/LLM Security & Jailbreaking
+- Prompt Injection Attacks & Defenses
+- MCP and Agentic AI Security
+- WordPress Plugin Vulnerability Research
+- CVE Discovery & Responsible Disclosure
+- Social Engineering Psychology
+
+## Credentials
+- 5x CVE Holder (WordPress vulnerabilities)
+- Creator: AATMF (Adversarial AI Threat Modeling Framework)
+- Creator: P.R.O.M.P.T Framework
+- Creator: SEF (Social Engineering Framework)
+- Author: "Adversarial Minds" book
+- Hakin9 Magazine contributor
+
+## CVE Portfolio
+- CVE-2025-9776
+- CVE-2025-11171
+- CVE-2025-11174
+- CVE-2025-12163
+- CVE-2025-12030
+
+## Site Sections
+- /about - Author profile and credentials
+- /adversarial-minds - Book on social engineering psychology
+- /frameworks - AATMF, P.R.O.M.P.T, SEF methodologies
+- /security-research - CVE disclosures and vulnerability research
+- /ai-security - LLM jailbreaking and prompt injection research
+- /tools - Open-source security tools
+- /writing - Articles and publications
+
+## Key Research Areas
+- Context manipulation and inheritance attacks
+- Memory poisoning in conversational AI
+- MCP protocol security vulnerabilities
+- Custom instruction backdoors
+- Multi-turn jailbreak techniques
+- RAG and agentic AI attack surfaces
+
+## External Verification
+- GitHub: github.com/SnailSploit
+- LinkedIn: linkedin.com/in/kaiaizen
+- Wordfence: wordfence.com/threat-intel/researchers/kai-aizen
+- NVD: Search "Kai Aizen" for CVE credits

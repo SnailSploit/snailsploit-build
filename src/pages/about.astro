@@ -1,0 +1,224 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Kai Aizen",
+  "alternateName": ["SnailSploit", "The Jailbreak Chef"],
+  "jobTitle": "GenAI Security Researcher",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "ActiveFence"
+  },
+  "email": "kai@snailsploit.com",
+  "url": "https://snailsploit.com",
+  "sameAs": [
+    "https://linkedin.com/in/kaiaizen",
+    "https://github.com/SnailSploit",
+    "https://medium.com/@snailsploit",
+    "https://wordfence.com/threat-intel/researchers/kai-aizen"
+  ],
+  "knowsAbout": [
+    "AI Security",
+    "LLM Jailbreaking",
+    "Prompt Injection",
+    "WordPress Security",
+    "CVE Research",
+    "Social Engineering",
+    "Adversarial Machine Learning"
+  ]
+};
+---
+
+<BaseLayout
+  title="Kai Aizen | AI Security Researcher & 5x CVE Holder"
+  description="GenAI Security Researcher at ActiveFence. Creator of AATMF and P.R.O.M.P.T frameworks. 5x CVE holder. Hakin9 author. The Jailbreak Chef."
+  canonical="https://snailsploit.com/about"
+  ogType="profile"
+  ogImage="/images/og-about.png"
+  keywords={[
+    'Kai Aizen',
+    'SnailSploit',
+    'The Jailbreak Chef',
+    'AI red teamer',
+    'WordPress security researcher'
+  ]}
+  schemaData={personSchema}
+>
+  <Navigation slot="header" />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <header class="mb-16">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6 font-mono" style="color: var(--color-accent-cyan);">
+        Kai Aizen
+      </h1>
+      <p class="text-2xl mb-4" style="color: var(--color-text-primary);">
+        The Jailbreak Chef
+      </p>
+      <p class="text-xl" style="color: var(--color-text-secondary);">
+        GenAI Security Researcher at ActiveFence
+      </p>
+    </header>
+
+    <div class="prose prose-invert prose-lg max-w-none">
+      <section class="mb-12">
+        <h2 style="color: var(--color-text-primary);">About Me</h2>
+        <p>
+          I'm Kai Aizen, also known as <strong>SnailSploit</strong> or <strong>The Jailbreak Chef</strong>.
+          I specialize in adversarial AI security, with a focus on LLM jailbreaking, prompt injection attacks,
+          and AI system vulnerabilities.
+        </p>
+        <p>
+          Currently, I work as a GenAI Security Researcher at <strong>ActiveFence</strong>, where I research
+          and develop defenses against adversarial AI attacks. My work focuses on discovering novel attack
+          vectors in large language models and developing systematic methodologies for AI security assessment.
+        </p>
+      </section>
+
+      <section class="mb-12">
+        <h2 style="color: var(--color-text-primary);">Credentials & Recognition</h2>
+        <ul>
+          <li><strong>5x CVE Holder</strong> - Discovered and responsibly disclosed 5 WordPress plugin vulnerabilities</li>
+          <li><strong>Framework Creator</strong> - Developed AATMF (Adversarial AI Threat Modeling Framework) and P.R.O.M.P.T methodologies</li>
+          <li><strong>Published Author</strong> - Author of "Adversarial Minds: The Anatomy of Social Engineering and the Psychology of Manipulation"</li>
+          <li><strong>Magazine Contributor</strong> - Technical articles published in Hakin9 Magazine</li>
+          <li><strong>Wordfence Researcher</strong> - Listed on Wordfence threat intelligence researcher registry</li>
+        </ul>
+      </section>
+
+      <section class="mb-12">
+        <h2 style="color: var(--color-text-primary);">Research Focus</h2>
+        <p>My research spans several key areas of AI and traditional security:</p>
+
+        <h3 style="color: var(--color-text-primary);">AI/LLM Security</h3>
+        <ul>
+          <li><strong>Jailbreak Research</strong> - Discovering novel jailbreak techniques including context manipulation and multi-turn attacks</li>
+          <li><strong>Prompt Injection</strong> - Researching indirect prompt injection, custom instruction backdoors, and MCP vulnerabilities</li>
+          <li><strong>Agentic AI Security</strong> - Analyzing attack surfaces in RAG systems and AI agent architectures</li>
+          <li><strong>Memory Manipulation</strong> - Exploring context window poisoning and persistent AI attacks</li>
+        </ul>
+
+        <h3 style="color: var(--color-text-primary);">Traditional Security</h3>
+        <ul>
+          <li><strong>WordPress Vulnerabilities</strong> - 5 CVE disclosures in WordPress plugin ecosystem</li>
+          <li><strong>Container Security</strong> - Container escape techniques and runtime attestation</li>
+          <li><strong>Cloud Security</strong> - Cloud vulnerability exploitation and defense</li>
+          <li><strong>EDR Evasion</strong> - Endpoint detection bypass techniques</li>
+        </ul>
+      </section>
+
+      <section class="mb-12">
+        <h2 style="color: var(--color-text-primary);">My CVE Portfolio</h2>
+        <p>I've responsibly disclosed 5 vulnerabilities in WordPress plugins, all documented on NVD and MITRE:</p>
+        <ul>
+          <li><a href="/security-research/cves/cve-2025-9776">CVE-2025-9776</a> - WordPress Plugin Vulnerability</li>
+          <li><a href="/security-research/cves/cve-2025-11171">CVE-2025-11171</a> - WordPress Plugin Vulnerability</li>
+          <li><a href="/security-research/cves/cve-2025-11174">CVE-2025-11174</a> - WordPress Plugin Vulnerability</li>
+          <li><a href="/security-research/cves/cve-2025-12163">CVE-2025-12163</a> - WordPress Plugin Vulnerability</li>
+          <li><a href="/security-research/cves/cve-2025-12030">CVE-2025-12030</a> - IDOR in ACF to REST API Plugin</li>
+        </ul>
+      </section>
+
+      <section class="mb-12">
+        <h2 style="color: var(--color-text-primary);">Notable Research & Publications</h2>
+        <ul>
+          <li><strong>Context Inheritance Exploit</strong> - Discovered that jailbroken states persist across GPT sessions</li>
+          <li><strong>Custom Instruction Backdoor</strong> - Uncovered emergent prompt injection via ChatGPT settings</li>
+          <li><strong>MCP Security Analysis</strong> - Comprehensive threat analysis of Model Context Protocol</li>
+          <li><strong>Memory Manipulation Attacks</strong> - Research on poisoning AI context windows</li>
+        </ul>
+      </section>
+
+      <section class="mb-12">
+        <h2 style="color: var(--color-text-primary);">Security Frameworks</h2>
+
+        <h3 style="color: var(--color-text-primary);">AATMF - Adversarial AI Threat Modeling Framework</h3>
+        <p>
+          A comprehensive methodology for threat modeling AI systems with 14 tactics, 40+ techniques,
+          and quantitative risk scoring. Integrates with MITRE ATT&CK for enterprise threat modeling.
+        </p>
+        <p><a href="/frameworks/aatmf">Learn more about AATMF →</a></p>
+
+        <h3 style="color: var(--color-text-primary);">P.R.O.M.P.T Framework</h3>
+        <p>
+          A systematic approach to prompt engineering covering Purpose, Results, Obstacles, Mindset,
+          Preferences, and Technical considerations for effective AI interactions.
+        </p>
+        <p><a href="/frameworks/prompt">Learn more about P.R.O.M.P.T →</a></p>
+
+        <h3 style="color: var(--color-text-primary);">SEF - Social Engineering Framework</h3>
+        <p>
+          Structured methodology for social engineering assessments combining psychology principles
+          with practical attack simulations. (Coming soon)
+        </p>
+        <p><a href="/frameworks/sef">Learn more about SEF →</a></p>
+      </section>
+
+      <section class="mb-12">
+        <h2 style="color: var(--color-text-primary);">Connect With Me</h2>
+        <p>I'm always interested in discussing AI security research, collaboration opportunities, and speaking engagements.</p>
+        <ul>
+          <li><strong>Email:</strong> <a href="mailto:kai@snailsploit.com">kai@snailsploit.com</a></li>
+          <li><strong>GitHub:</strong> <a href="https://github.com/SnailSploit" target="_blank" rel="noopener noreferrer">github.com/SnailSploit</a></li>
+          <li><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/kaiaizen" target="_blank" rel="noopener noreferrer">linkedin.com/in/kaiaizen</a></li>
+          <li><strong>Wordfence:</strong> <a href="https://wordfence.com/threat-intel/researchers/kai-aizen" target="_blank" rel="noopener noreferrer">Researcher Profile</a></li>
+        </ul>
+      </section>
+    </div>
+  </article>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .prose {
+    color: var(--color-text-primary);
+  }
+
+  .prose h2 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    font-family: var(--font-mono);
+  }
+
+  .prose h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 1.75em;
+    margin-bottom: 0.75em;
+    font-family: var(--font-mono);
+  }
+
+  .prose p {
+    margin-bottom: 1.25em;
+    line-height: 1.75;
+  }
+
+  .prose a {
+    color: var(--color-accent-cyan);
+    text-decoration: underline;
+  }
+
+  .prose a:hover {
+    color: var(--color-accent-green);
+  }
+
+  .prose ul {
+    margin: 1.25em 0;
+    padding-left: 1.5em;
+  }
+
+  .prose li {
+    margin-bottom: 0.5em;
+  }
+
+  .prose strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+</style>

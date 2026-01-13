@@ -1,0 +1,301 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+  cveId: string;
+  title: string;
+  description: string;
+  cvssScore?: number;
+  severity?: string;
+  vulnerabilityType?: string;
+  affectedSoftware?: string;
+  affectedVersions?: string;
+  disclosureDate?: string;
+  fixedVersion?: string;
+  canonical: string;
+  ogImage?: string;
+  keywords?: string[];
+}
+
+const {
+  cveId,
+  title,
+  description,
+  cvssScore,
+  severity = 'Medium',
+  vulnerabilityType,
+  affectedSoftware,
+  affectedVersions,
+  disclosureDate,
+  fixedVersion,
+  canonical,
+  ogImage,
+  keywords = [],
+} = Astro.props;
+
+const severityColors = {
+  'Critical': 'var(--color-accent-red)',
+  'High': '#ff8800',
+  'Medium': 'var(--color-accent-yellow)',
+  'Low': 'var(--color-accent-green)',
+};
+
+// TechArticle schema
+const techArticleSchema = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": `${cveId}: ${title}`,
+  "author": {
+    "@type": "Person",
+    "name": "Kai Aizen",
+    "url": "https://snailsploit.com/about"
+  },
+  "datePublished": disclosureDate ? new Date(disclosureDate).toISOString() : undefined,
+  "proficiencyLevel": "Expert",
+  "dependencies": affectedSoftware,
+  "mainEntityOfPage": canonical,
+  "publisher": {
+    "@type": "Person",
+    "name": "Kai Aizen"
+  }
+};
+
+// Breadcrumb schema
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://snailsploit.com" },
+    { "@type": "ListItem", "position": 2, "name": "Security Research", "item": "https://snailsploit.com/security-research" },
+    { "@type": "ListItem", "position": 3, "name": "CVEs", "item": "https://snailsploit.com/security-research/cves" },
+    { "@type": "ListItem", "position": 4, "name": cveId }
+  ]
+};
+---
+
+<BaseLayout
+  title={`${cveId} | ${title}`}
+  description={description}
+  canonical={canonical}
+  ogType="article"
+  ogImage={ogImage || `/images/og-cve-${cveId.toLowerCase().replace('cve-', '')}.png`}
+  keywords={[...keywords, cveId, 'CVE', 'vulnerability']}
+  schemaData={[techArticleSchema, breadcrumbSchema]}
+>
+  <Navigation slot="header" />
+
+  <article class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumbs -->
+    <nav class="mb-8 text-sm font-mono" style="color: var(--color-text-muted);">
+      <a href="/" class="hover:text-[var(--color-accent-cyan)] transition-colors">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/security-research" class="hover:text-[var(--color-accent-cyan)] transition-colors">Security Research</a>
+      <span class="mx-2">/</span>
+      <a href="/security-research/cves" class="hover:text-[var(--color-accent-cyan)] transition-colors">CVEs</a>
+      <span class="mx-2">/</span>
+      <span>{cveId}</span>
+    </nav>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Main Content -->
+      <div class="lg:col-span-2">
+        <header class="mb-8">
+          <div class="mb-4">
+            <span
+              class="inline-block px-3 py-1 text-sm font-mono font-bold rounded"
+              style={`background-color: ${severityColors[severity]}; color: var(--color-bg);`}
+            >
+              {severity}
+            </span>
+          </div>
+
+          <h1 class="text-4xl md:text-5xl font-bold mb-4 font-mono" style="color: var(--color-accent-cyan);">
+            {cveId}
+          </h1>
+
+          <p class="text-xl mb-4" style="color: var(--color-text-secondary);">
+            {title}
+          </p>
+        </header>
+
+        <!-- Article Content -->
+        <div class="prose prose-invert prose-lg max-w-none">
+          <slot />
+        </div>
+
+        <!-- Credit -->
+        <div class="mt-12 p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+          <p class="font-mono text-sm" style="color: var(--color-text-secondary);">
+            <strong style="color: var(--color-text-primary);">Discovered by:</strong> Kai Aizen (SnailSploit)
+          </p>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="lg:col-span-1">
+        <div class="sticky top-8 space-y-6">
+          <!-- Quick Facts -->
+          <div class="p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+            <h3 class="font-mono text-lg font-bold mb-4" style="color: var(--color-accent-cyan);">
+              Quick Facts
+            </h3>
+
+            <dl class="space-y-3 text-sm font-mono">
+              {cvssScore && (
+                <>
+                  <dt style="color: var(--color-text-muted);">CVSS Score</dt>
+                  <dd class="font-bold" style="color: var(--color-text-primary);">{cvssScore}</dd>
+                </>
+              )}
+
+              <dt style="color: var(--color-text-muted);">Severity</dt>
+              <dd class="font-bold" style={`color: ${severityColors[severity]};`}>{severity}</dd>
+
+              {vulnerabilityType && (
+                <>
+                  <dt style="color: var(--color-text-muted);">Vulnerability Type</dt>
+                  <dd style="color: var(--color-text-primary);">{vulnerabilityType}</dd>
+                </>
+              )}
+
+              {affectedSoftware && (
+                <>
+                  <dt style="color: var(--color-text-muted);">Affected Software</dt>
+                  <dd style="color: var(--color-text-primary);">{affectedSoftware}</dd>
+                </>
+              )}
+
+              {affectedVersions && (
+                <>
+                  <dt style="color: var(--color-text-muted);">Affected Versions</dt>
+                  <dd style="color: var(--color-text-primary);">{affectedVersions}</dd>
+                </>
+              )}
+
+              {disclosureDate && (
+                <>
+                  <dt style="color: var(--color-text-muted);">Disclosure Date</dt>
+                  <dd style="color: var(--color-text-primary);">{new Date(disclosureDate).toLocaleDateString()}</dd>
+                </>
+              )}
+
+              {fixedVersion && (
+                <>
+                  <dt style="color: var(--color-text-muted);">Fixed Version</dt>
+                  <dd style="color: var(--color-text-primary);">{fixedVersion}</dd>
+                </>
+              )}
+            </dl>
+          </div>
+
+          <!-- External References -->
+          <div class="p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+            <h3 class="font-mono text-lg font-bold mb-4" style="color: var(--color-accent-cyan);">
+              References
+            </h3>
+
+            <ul class="space-y-2 text-sm font-mono">
+              <li>
+                <a
+                  href={`https://nvd.nist.gov/vuln/detail/${cveId}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:text-[var(--color-accent-cyan)] transition-colors"
+                  style="color: var(--color-text-secondary);"
+                >
+                  NVD →
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`https://cve.mitre.org/cgi-bin/cvename.cgi?name=${cveId}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:text-[var(--color-accent-cyan)] transition-colors"
+                  style="color: var(--color-text-secondary);"
+                >
+                  MITRE →
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://wordfence.com/threat-intel/researchers/kai-aizen"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:text-[var(--color-accent-cyan)] transition-colors"
+                  style="color: var(--color-text-secondary);"
+                >
+                  Wordfence Profile →
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </article>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .prose {
+    color: var(--color-text-primary);
+  }
+
+  .prose h2 {
+    color: var(--color-text-primary);
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-top: 2em;
+    margin-bottom: 1em;
+  }
+
+  .prose h3 {
+    color: var(--color-text-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 1.75em;
+    margin-bottom: 0.75em;
+  }
+
+  .prose p {
+    margin-bottom: 1.25em;
+    line-height: 1.75;
+  }
+
+  .prose a {
+    color: var(--color-accent-cyan);
+    text-decoration: underline;
+  }
+
+  .prose a:hover {
+    color: var(--color-accent-green);
+  }
+
+  .prose code {
+    background-color: var(--color-surface);
+    padding: 0.2em 0.4em;
+    border-radius: 0.25rem;
+    font-size: 0.9em;
+  }
+
+  .prose pre {
+    background-color: var(--color-surface);
+    padding: 1em;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+  }
+
+  .prose ul, .prose ol {
+    margin: 1.25em 0;
+    padding-left: 1.5em;
+  }
+
+  .prose li {
+    margin-bottom: 0.5em;
+  }
+</style>

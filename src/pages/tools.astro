@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+
+const tools = [
+  {
+    name: 'AATMF',
+    description: 'Adversarial AI Threat Modeling Framework with 14 tactics and 40+ techniques',
+    language: 'Markdown',
+    url: 'https://github.com/SnailSploit/AATMF'
+  },
+  {
+    name: 'Kuberoast',
+    description: 'Kubernetes security assessment and penetration testing tool',
+    language: 'Python',
+    url: 'https://github.com/SnailSploit/Kuberoast'
+  },
+  {
+    name: 'ZenFlood',
+    description: 'Network stress testing and security analysis utility',
+    language: 'Python',
+    url: 'https://github.com/SnailSploit/ZenFlood'
+  },
+  {
+    name: 'AwesomeSnailsOsint',
+    description: 'Curated collection of OSINT resources and tools for security researchers',
+    language: 'Markdown',
+    url: 'https://github.com/SnailSploit/AwesomeSnailsOsint'
+  },
+  {
+    name: 'Xposure',
+    description: 'Attack surface discovery and reconnaissance tool for security assessments',
+    language: 'Python',
+    url: 'https://github.com/SnailSploit/Xposure'
+  },
+  {
+    name: 'Autowrack',
+    description: 'Security automation framework for repetitive testing tasks',
+    language: 'Python',
+    url: 'https://github.com/SnailSploit/Autowrack'
+  },
+  {
+    name: 'SnailSploit-Recon',
+    description: 'Comprehensive reconnaissance toolkit for security professionals',
+    language: 'Shell',
+    url: 'https://github.com/SnailSploit/SnailSploit-Recon'
+  }
+];
+
+const languageColors = {
+  'Python': 'var(--color-accent-cyan)',
+  'Shell': 'var(--color-accent-green)',
+  'Markdown': 'var(--color-accent-yellow)',
+  'JavaScript': '#f7df1e'
+};
+---
+
+<BaseLayout
+  title="Security Tools | Open Source by SnailSploit"
+  description="Open-source security tools for reconnaissance, Kubernetes security, OSINT, and automation. Built by Kai Aizen for the security community."
+  canonical="https://snailsploit.com/tools"
+  ogImage="/images/og-tools.png"
+  keywords={[
+    'security tools GitHub',
+    'OSINT tools',
+    'reconnaissance toolkit',
+    'Kubernetes security tools'
+  ]}
+>
+  <Navigation slot="header" />
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <header class="mb-16 text-center">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6 font-mono" style="color: var(--color-accent-cyan);">
+        Security Tools
+      </h1>
+      <p class="text-xl max-w-3xl mx-auto" style="color: var(--color-text-secondary);">
+        Open-source security tools for reconnaissance, cloud security, OSINT, and automation.
+        Built for the security community.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+      {tools.map(tool => (
+        <a
+          href={tool.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group p-6 rounded-lg transition-all hover:scale-[1.02]"
+          style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-2xl font-bold font-mono group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">
+              {tool.name}
+            </h2>
+            <span
+              class="px-3 py-1 text-xs font-mono rounded"
+              style={`background-color: ${languageColors[tool.language]}; color: var(--color-bg);`}
+            >
+              {tool.language}
+            </span>
+          </div>
+
+          <p class="text-sm mb-4" style="color: var(--color-text-secondary);">
+            {tool.description}
+          </p>
+
+          <div class="flex items-center text-sm font-mono" style="color: var(--color-text-muted);">
+            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+            View on GitHub →
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="mt-16 text-center">
+      <p class="text-sm font-mono mb-4" style="color: var(--color-text-secondary);">
+        All tools are open-source and available on GitHub
+      </p>
+      <a
+        href="https://github.com/SnailSploit"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block px-6 py-3 font-mono font-semibold rounded border transition-colors"
+        style="border-color: var(--color-accent-cyan); color: var(--color-accent-cyan);"
+      >
+        Visit GitHub Profile →
+      </a>
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+</BaseLayout>

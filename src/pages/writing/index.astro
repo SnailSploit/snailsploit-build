@@ -1,0 +1,50 @@
+---
+import IndexLayout from '../../layouts/IndexLayout.astro';
+---
+
+<IndexLayout
+  title="Security Writing | Articles & Publications"
+  description="Security articles, industry analysis, and publications by Kai Aizen. Featured in Hakin9 Magazine and PenTest Magazine."
+  canonical="https://snailsploit.com/writing"
+  ogImage="/images/og-writing.png"
+  keywords={[
+    'security blog',
+    'cybersecurity articles',
+    'Hakin9 author'
+  ]}
+  heading="Security Writing"
+  subheading="Articles, industry analysis, and technical publications."
+>
+  <div class="space-y-6">
+    <p class="text-lg max-w-3xl" style="color: var(--color-text-secondary);">
+      A collection of articles on security, AI, privacy, and the intersection of technology and human behavior.
+      Published independently and featured in leading security publications.
+    </p>
+  </div>
+
+  <section class="mt-12 p-8 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+    <h2 class="text-2xl font-bold font-mono mb-4" style="color: var(--color-accent-cyan);">
+      Publications
+    </h2>
+    <ul class="space-y-2 text-sm font-mono" style="color: var(--color-text-secondary);">
+      <li>
+        <strong style="color: var(--color-text-primary);">Hakin9 Magazine</strong> - Technical articles on AI security and penetration testing
+      </li>
+      <li>
+        <strong style="color: var(--color-text-primary);">PenTest Magazine</strong> - Contributing author
+      </li>
+      <li>
+        <strong style="color: var(--color-text-primary);">Personal Blog</strong> - Original research and analysis (this site)
+      </li>
+    </ul>
+  </section>
+
+  <section class="mt-12">
+    <h2 class="text-2xl font-bold font-mono mb-6" style="color: var(--color-accent-cyan);">
+      Recent Articles
+    </h2>
+    <p style="color: var(--color-text-secondary);">
+      Articles coming soon. Follow on <a href="https://linkedin.com/in/kaiaizen" target="_blank" rel="noopener noreferrer" style="color: var(--color-accent-cyan);">LinkedIn</a> for updates.
+    </p>
+  </section>
+</IndexLayout>

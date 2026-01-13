@@ -1,0 +1,132 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+
+const title = "MCP Security Deep Dive: Real-World Vulnerabilities Exposed";
+const description = "Deep security analysis of MCP protocol vulnerabilities in production. Real-world attack scenarios and hardening recommendations.";
+const date = "2025-08-09";
+const canonical = "https://snailsploit.com/ai-security/prompt-injection/mcp-security-deep-dive";
+const keywords = ['MCP server security', 'secure MCP configuration', 'MCP hardening guide', 'agentic AI security'];
+const category = "prompt-injection";
+const tags = ['MCP', 'security-hardening', 'real-world-vulnerabilities'];
+---
+
+<ArticleLayout
+  title={title}
+  description={description}
+  date={date}
+  canonical={canonical}
+  keywords={keywords}
+  category={category}
+  tags={tags}
+>
+      <figure class="my-8">
+        <img src="https://cdn-images-1.medium.com/max/800/0*VcX93b1RuLsaxX8s" alt="Revisiting the MCP Protocol | Snailsploit | Kai Aizen" class="w-full rounded-lg shadow-lg" />
+        <figcaption class="text-center text-sm text-gray-600 mt-2">Revisiting the MCP Protocol | Snailsploit | Kai Aizen</figcaption>
+      </figure>
+
+      <p>In late 2024, Anthropic released the <strong>Model Context Protocol (MCP)</strong> — marketed as the <em>"USB-C of AI apps"</em>. It was designed to unify how AI assistants connect to tools, data sources, and APIs. Instead of bespoke plugins, you get a standardized registry: point your LLM at an MCP server, and suddenly it can file Jira tickets, query databases, or post in Slack.</p>
+
+      <p>The promise was irresistible. By mid-2025, <strong>OpenAI</strong>, <strong>DeepMind</strong>, <strong>Microsoft</strong>, and multiple OSS agent projects were running MCP in production. Microsoft even began weaving it into <strong>Windows AI Foundry</strong>, enabling agents to discover and run system tools by simply enumerating a registry.</p>
+
+      <p>But in the rush to adopt, <strong>security design lagged behind capability expansion</strong>. MCP doesn't just extend what a model can do — it reshapes the attack surface entirely.</p>
+
+      <p>If you've read my <a href="https://snailsploit.com/the-custom-instruction-backdoor-uncovering-emergent-prompt-injection-risks-in-chatgpt-04f0e8b2e444" class="text-blue-600 hover:underline">Custom-Instruction Backdoor</a> article, you know that persistence is the adversary's best friend. With MCP, persistence can live in <strong>toolchains</strong>, not just context.</p>
+
+      <h2 class="text-3xl font-bold mt-12 mb-4">From Plugin Calls to Orchestration Hubs</h2>
+
+      <p>Before MCP, plugins were single-purpose: one call in, one call out, tight permissions.<br />
+      MCP changes that by turning the LLM into an <strong>orchestrator</strong> — passing context between tools, aggregating results, and making multi-step decisions without a human in the loop.</p>
+
+      <p>This introduces three structural shifts:</p>
+
+      <ol class="list-decimal list-inside space-y-2 my-4">
+        <li><strong>Blast Radius Aggregation</strong> — One compromised tool can pivot across all connected tools.</li>
+        <li><strong>Identity Sprawl</strong> — Confusion between "user", "assistant", "tool", and "upstream agent" opens privilege escalation paths.</li>
+        <li><strong>Prompt/Tool Fusion</strong> — A payload hidden in natural language can jump straight into executable tool actions.</li>
+      </ol>
+
+      <p>In the <a href="https://github.com/SnailSploit/Adverserial-Ai-Framework/blob/main/Ai-PT-F.md" class="text-blue-600 hover:underline">Adversarial AI Threat Modeling Framework (AATMF)</a>, these map directly to:</p>
+
+      <ul class="list-disc list-inside space-y-2 my-4">
+        <li><strong>System Role Injection</strong></li>
+        <li><strong>Hidden Context Trojan</strong></li>
+        <li><strong>Distributed Prompt Fragmentation</strong></li>
+      </ul>
+
+      <h2 class="text-3xl font-bold mt-12 mb-4">Real-World MCP Vulnerabilities</h2>
+
+      <h3 class="text-2xl font-semibold mt-8 mb-3">1. Asana's Tenant Isolation Gap</h3>
+
+      <p>In June 2025, Asana pulled their MCP server offline after finding a cross-tenant access flaw. No confirmed breach, but the flaw could have exposed internal project data to unauthorized tenants.<br />
+      <strong>AATMF mapping:</strong> <em>Persona Override</em>, <em>Context Accumulation</em>.</p>
+
+      <h3 class="text-2xl font-semibold mt-8 mb-3">2. Low-Skill, High-Impact Trojan</h3>
+
+      <p>A paper showed how a "weather" MCP tool could siphon financial data by proxying calls to a legitimate banking tool. No advanced exploits — just protocol abuse. (<a href="https://arxiv.org/abs/2507.19880" class="text-blue-600 hover:underline">Source</a>)<br />
+      <strong>AATMF mapping:</strong> <em>Hidden Context Trojan</em>.</p>
+
+      <h3 class="text-2xl font-semibold mt-8 mb-3">3. Registry Poisoning</h3>
+
+      <p>Researchers poisoned public MCP registries with malicious tool manifests. When agents loaded these tools, they quietly added risky capabilities ("delete files") mid-session — a perfect <strong>Tool Shadowing</strong> scenario.</p>
+
+      <h3 class="text-2xl font-semibold mt-8 mb-3">4. Preference Manipulation Attacks (MPMA)</h3>
+
+      <p>Rename a tool, tweak its description, and agents begin favoring it over legitimate alternatives. This subtle UI/UX nudge, when done maliciously, biases AI workflows toward attacker-controlled endpoints.<br />
+      <strong>AATMF mapping:</strong> <em>Legitimacy Masking</em>, <em>Adaptive Escalation</em>.</p>
+
+      <h3 class="text-2xl font-semibold mt-8 mb-3">5. Rug Pulls via Tool Definition Swaps</h3>
+
+      <p>Modify a trusted tool's endpoint after the trust relationship is established. Without <strong>digest pinning</strong> or <strong>schema signing</strong>, the agent sees no difference — until it's executing malicious commands.<br />
+      <strong>AATMF mapping:</strong> <em>System Role Injection</em>.</p>
+
+      <h2 class="text-3xl font-bold mt-12 mb-4">My Red-Team MCP Lab Flow</h2>
+
+      <p>When I test MCP safely:</p>
+
+      <ul class="list-disc list-inside space-y-2 my-4">
+        <li><strong>Step 1:</strong> Spin up a harmless MCP tool (e.g., "calendar exporter") instrumented for telemetry.</li>
+        <li><strong>Step 2:</strong> Seed a benign request ("check availability") that triggers tool use.</li>
+        <li><strong>Step 3:</strong> Mid-session, alter the tool manifest to add a risky verb.</li>
+        <li><strong>Step 4:</strong> Observe if the agent executes the new verb without renegotiating consent.</li>
+      </ul>
+
+      <p>This is the <em>capability drift</em> cousin to the <a href="https://thejailbreakchef.com/gpt-01-and-the-context-inheritance-exploit-jailbroken-conversations-dont-die-14c8714a2dfd" class="text-blue-600 hover:underline">context drift exploit in GPT-01</a>.</p>
+
+      <h2 class="text-3xl font-bold mt-12 mb-4">Detecting MCP Abuse</h2>
+
+      <ul class="list-disc list-inside space-y-2 my-4">
+        <li><strong>Digest Pinning</strong> — Store and verify hashes for every tool manifest.</li>
+        <li><strong>Actor-Scoped Logs</strong> — <code class="bg-gray-100 px-2 py-1 rounded">{`{actor, user_id, session_id, tool_id, scope, reason}`}</code> logged per call.</li>
+        <li><strong>High-Risk Verb Alerts</strong> — Watch for <code class="bg-gray-100 px-2 py-1 rounded">exec</code>, <code class="bg-gray-100 px-2 py-1 rounded">delete</code>, <code class="bg-gray-100 px-2 py-1 rounded">connect</code>.</li>
+        <li><strong>Post-Refusal Tool Calls</strong> — A tool call after a refusal is an immediate red flag.</li>
+      </ul>
+
+      <h2 class="text-3xl font-bold mt-12 mb-4">Building MCP Defenses (AATMF-Aligned)</h2>
+
+      <ol class="list-decimal list-inside space-y-2 my-4">
+        <li><strong>Policy Gateways for Tools</strong> — Centralize broker logic, enforce mTLS + JWT claims, require <a href="https://slsa.dev/" class="text-blue-600 hover:underline">SLSA</a> attestation for high-privilege tools (<em>Supply Chain Integrity</em>).</li>
+        <li><strong>Conversation Firebreaks</strong> — Before privileged calls, the agent restates "who/what/why" (<em>Consent Checkpoints</em>).</li>
+        <li><strong>Secrets Minimalism</strong> — Pass only necessary arguments (<em>Exposure Risk Reduction</em>).</li>
+        <li><strong>Schema &amp; Role Signing</strong> — Lock key definitions and roles (<em>Role Integrity Enforcement</em>).</li>
+        <li><strong>Constitutional Classifiers</strong> — Filter tool outputs for anomalous or unsafe behavior (<em>Output Drift Detection</em>).</li>
+      </ol>
+
+      <h2 class="text-3xl font-bold mt-12 mb-4">Why This Needs Attention Now</h2>
+
+      <p>MCP is <strong>already live</strong> in production systems. Combined with <a href="https://snailsploit.com/the-custom-instruction-backdoor-uncovering-emergent-prompt-injection-risks-in-chatgpt-04f0e8b2e444" class="text-blue-600 hover:underline">Custom-Instruction Backdoors</a> and <a href="https://thejailbreakchef.com/gpt-01-and-the-context-inheritance-exploit-jailbroken-conversations-dont-die-14c8714a2dfd" class="text-blue-600 hover:underline">Context Inheritance</a>, MCP expands persistence risk from conversations into <em>tools themselves</em>.</p>
+
+      <p>Without red/blue simulation and AATMF-based controls, you're not just exposed — you're exposed <em>silently</em>.</p>
+
+      <h2 class="text-3xl font-bold mt-12 mb-4">About the Author</h2>
+
+      <p><strong>Kai Aizen</strong> is the creator of the <a href="https://github.com/SnailSploit/Adverserial-Ai-Framework/blob/main/Ai-PT-F.md" class="text-blue-600 hover:underline">Adversarial AI Threat Modeling Framework (AATMF)</a> and a red teamer specializing in AI-native protocols. At <a href="https://snailsploit.com/" class="text-blue-600 hover:underline">SnailSploit</a>, he designs controlled offensive simulations to uncover emerging vulnerabilities in AI systems. His MCP security work has informed OWASP's LLM and MCP guidance.</p>
+
+      <div class="mt-12 p-6 bg-gray-50 rounded-lg">
+        <p class="font-semibold mb-3">Read the full series:</p>
+        <ul class="list-disc list-inside space-y-2">
+          <li><a href="https://snailsploit.com/the-custom-instruction-backdoor-uncovering-emergent-prompt-injection-risks-in-chatgpt-04f0e8b2e444" class="text-blue-600 hover:underline">The Custom-Instruction Backdoor</a></li>
+          <li><a href="https://thejailbreakchef.com/gpt-01-and-the-context-inheritance-exploit-jailbroken-conversations-dont-die-14c8714a2dfd" class="text-blue-600 hover:underline">GPT-01 & Context Inheritance</a></li>
+          <li><a href="https://thejailbreakchef.com/inherent-vulnerabilities-in-ai-systems-d0b39dde21b8" class="text-blue-600 hover:underline">Inherent AI Vulnerabilities</a></li>
+        </ul>
+      </div>
+</ArticleLayout>

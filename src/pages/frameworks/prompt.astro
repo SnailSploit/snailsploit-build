@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<BaseLayout
+  title="P.R.O.M.P.T Framework: Systematic Prompt Engineering"
+  description="The P.R.O.M.P.T framework - Purpose, Results, Obstacles, Mindset, Preferences, Technical. A systematic methodology for effective AI interactions."
+  canonical="https://snailsploit.com/frameworks/prompt"
+  ogType="article"
+  ogImage="/images/og-prompt.png"
+  keywords={[
+    'P.R.O.M.P.T framework',
+    'prompt engineering methodology',
+    'systematic prompting',
+    'LLM interaction framework'
+  ]}
+>
+  <Navigation slot="header" />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <header class="mb-12">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6 font-mono" style="color: var(--color-accent-cyan);">
+        P.R.O.M.P.T Framework
+      </h1>
+      <p class="text-2xl mb-4" style="color: var(--color-text-primary);">
+        Systematic Prompt Engineering Methodology
+      </p>
+    </header>
+
+    <div class="prose prose-invert prose-lg max-w-none">
+      <section class="mb-12">
+        <h2 style="color: var(--color-text-primary);">Overview</h2>
+        <p>
+          The P.R.O.M.P.T framework provides a systematic approach to prompt engineering, ensuring
+          consistent and effective interactions with AI systems. By following six key principles,
+          practitioners can achieve reliable results across different models and use cases.
+        </p>
+      </section>
+
+      <section class="mb-12">
+        <h2 style="color: var(--color-text-primary);">The Six Principles</h2>
+
+        <h3 style="color: var(--color-text-primary);">P - Purpose</h3>
+        <p>
+          Clearly define what you want to achieve. A well-defined purpose guides the entire interaction
+          and helps the AI understand the context and goals.
+        </p>
+
+        <h3 style="color: var(--color-text-primary);">R - Results</h3>
+        <p>
+          Specify the expected output format, structure, and quality criteria. Define what success looks like.
+        </p>
+
+        <h3 style="color: var(--color-text-primary);">O - Obstacles</h3>
+        <p>
+          Anticipate and address potential challenges, edge cases, and failure modes in your prompt design.
+        </p>
+
+        <h3 style="color: var(--color-text-primary);">M - Mindset</h3>
+        <p>
+          Set the appropriate role, perspective, and cognitive approach for the AI to adopt.
+        </p>
+
+        <h3 style="color: var(--color-text-primary);">P - Preferences</h3>
+        <p>
+          Communicate stylistic choices, tone requirements, and output preferences.
+        </p>
+
+        <h3 style="color: var(--color-text-primary);">T - Technical</h3>
+        <p>
+          Include technical specifications, constraints, and requirements for the interaction.
+        </p>
+      </section>
+
+      <section class="mb-12">
+        <h2 style="color: var(--color-text-primary);">Applications</h2>
+        <ul>
+          <li>Security assessment and penetration testing</li>
+          <li>Code generation and review</li>
+          <li>Technical documentation</li>
+          <li>Research and analysis</li>
+          <li>Adversarial testing of AI systems</li>
+        </ul>
+      </section>
+    </div>
+  </article>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .prose {
+    color: var(--color-text-primary);
+  }
+
+  .prose h2, .prose h3 {
+    font-family: var(--font-mono);
+    margin-top: 1.5em;
+  }
+
+  .prose a {
+    color: var(--color-accent-cyan);
+  }
+</style>

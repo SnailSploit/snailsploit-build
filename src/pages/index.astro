@@ -1,0 +1,206 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+
+const featuredArticles = [
+  {
+    title: 'Context Inheritance Exploit: Jailbroken Conversations Don\'t Die',
+    description: 'Discovering how jailbroken states persist across GPT sessions through context inheritance.',
+    url: '/ai-security/jailbreaking/context-inheritance-exploit',
+    tags: ['jailbreaking', 'GPT', 'original-research'],
+    date: '2025-01-04'
+  },
+  {
+    title: 'The Custom Instruction Backdoor',
+    description: 'Uncovering emergent prompt injection risks through ChatGPT custom instructions.',
+    url: '/ai-security/prompt-injection/custom-instruction-backdoor',
+    tags: ['prompt-injection', 'ChatGPT', 'backdoor'],
+    date: '2025-05-18'
+  },
+  {
+    title: 'MCP Security Threat Analysis',
+    description: 'Comprehensive security analysis of the Model Context Protocol vulnerabilities.',
+    url: '/ai-security/prompt-injection/mcp-threat-analysis',
+    tags: ['MCP', 'prompt-injection', 'agentic-AI'],
+    date: '2025-05-18'
+  }
+];
+---
+
+<BaseLayout
+  title="SnailSploit | AI Security Research & LLM Jailbreaking"
+  description="AI security researcher specializing in LLM jailbreaking, prompt injection, and WordPress vulnerabilities. 5x CVE holder. Creator of AATMF and P.R.O.M.P.T frameworks."
+  canonical="https://snailsploit.com/"
+  ogImage="/images/og-home.png"
+  keywords={[
+    'AI security researcher',
+    'LLM jailbreaking expert',
+    'prompt injection testing',
+    'CVE researcher',
+    'adversarial AI'
+  ]}
+>
+  <Navigation slot="header" />
+
+  <!-- Hero Section -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+    <div class="max-w-4xl">
+      <div class="mb-6">
+        <span class="font-mono text-sm" style="color: var(--color-accent-cyan);">
+          $ whoami
+        </span>
+      </div>
+
+      <h1 class="text-5xl md:text-7xl font-bold mb-6 font-mono leading-tight">
+        <span style="color: var(--color-accent-cyan);">Kai Aizen</span><br />
+        <span style="color: var(--color-text-primary);">The Jailbreak Chef</span>
+      </h1>
+
+      <p class="text-xl md:text-2xl mb-8 leading-relaxed" style="color: var(--color-text-secondary);">
+        GenAI Security Researcher at <span style="color: var(--color-text-primary);">ActiveFence</span>.
+        Specializing in LLM jailbreaking, prompt injection, and adversarial AI.
+        <span style="color: var(--color-accent-cyan);">5x CVE holder</span>.
+      </p>
+
+      <div class="flex flex-wrap gap-4">
+        <a
+          href="/about"
+          class="px-6 py-3 font-mono font-semibold rounded hover:opacity-80 transition-opacity"
+          style="background-color: var(--color-accent-cyan); color: var(--color-bg);"
+        >
+          Learn More →
+        </a>
+        <a
+          href="/frameworks"
+          class="px-6 py-3 font-mono font-semibold rounded border transition-colors"
+          style="border-color: var(--color-accent-cyan); color: var(--color-accent-cyan);"
+        >
+          View Frameworks
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Credentials Section -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div class="p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+        <div class="text-3xl font-bold font-mono mb-2" style="color: var(--color-accent-cyan);">5</div>
+        <div class="text-sm font-mono" style="color: var(--color-text-secondary);">CVE Disclosures</div>
+      </div>
+      <div class="p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+        <div class="text-3xl font-bold font-mono mb-2" style="color: var(--color-accent-cyan);">3</div>
+        <div class="text-sm font-mono" style="color: var(--color-text-secondary);">Security Frameworks</div>
+      </div>
+      <div class="p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+        <div class="text-3xl font-bold font-mono mb-2" style="color: var(--color-accent-cyan);">20+</div>
+        <div class="text-sm font-mono" style="color: var(--color-text-secondary);">Published Articles</div>
+      </div>
+      <div class="p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+        <div class="text-3xl font-bold font-mono mb-2" style="color: var(--color-accent-cyan);">1</div>
+        <div class="text-sm font-mono" style="color: var(--color-text-secondary);">Published Book</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Research -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h2 class="text-3xl font-bold font-mono mb-8" style="color: var(--color-accent-cyan);">
+      Featured Research
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {featuredArticles.map(article => (
+        <a
+          href={article.url}
+          class="group p-6 rounded-lg transition-all hover:scale-[1.02]"
+          style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+        >
+          <div class="flex flex-wrap gap-2 mb-4">
+            {article.tags.map(tag => (
+              <span
+                class="px-2 py-1 text-xs font-mono rounded"
+                style="background-color: var(--color-bg); color: var(--color-text-muted);"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <h3 class="text-xl font-bold font-mono mb-3 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">
+            {article.title}
+          </h3>
+
+          <p class="text-sm mb-4" style="color: var(--color-text-secondary);">
+            {article.description}
+          </p>
+
+          <div class="text-xs font-mono" style="color: var(--color-text-muted);">
+            {new Date(article.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="text-center mt-12">
+      <a
+        href="/ai-security"
+        class="inline-block px-6 py-3 font-mono font-semibold rounded border transition-colors"
+        style="border-color: var(--color-accent-cyan); color: var(--color-accent-cyan);"
+      >
+        View All Research →
+      </a>
+    </div>
+  </section>
+
+  <!-- Frameworks Section -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h2 class="text-3xl font-bold font-mono mb-8" style="color: var(--color-accent-cyan);">
+      Security Frameworks
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <a
+        href="/frameworks/aatmf"
+        class="group p-8 rounded-lg transition-all hover:scale-[1.02]"
+        style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+      >
+        <h3 class="text-2xl font-bold font-mono mb-3 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">
+          AATMF
+        </h3>
+        <p class="text-sm mb-4" style="color: var(--color-text-secondary);">
+          Adversarial AI Threat Modeling Framework. 14 tactics, 40+ techniques, quantitative risk scoring.
+        </p>
+      </a>
+
+      <a
+        href="/frameworks/prompt"
+        class="group p-8 rounded-lg transition-all hover:scale-[1.02]"
+        style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+      >
+        <h3 class="text-2xl font-bold font-mono mb-3 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">
+          P.R.O.M.P.T
+        </h3>
+        <p class="text-sm mb-4" style="color: var(--color-text-secondary);">
+          Systematic prompt engineering methodology. Purpose, Results, Obstacles, Mindset, Preferences, Technical.
+        </p>
+      </a>
+
+      <a
+        href="/frameworks/sef"
+        class="group p-8 rounded-lg transition-all hover:scale-[1.02]"
+        style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+      >
+        <h3 class="text-2xl font-bold font-mono mb-3 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">
+          SEF
+        </h3>
+        <p class="text-sm mb-4" style="color: var(--color-text-secondary);">
+          Social Engineering Framework. Structured methodology for SE assessments. Coming soon.
+        </p>
+      </a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

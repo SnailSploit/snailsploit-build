@@ -1,0 +1,88 @@
+---
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogType?: string;
+  ogImage?: string;
+  keywords?: string[];
+  schemaData?: any;
+  date?: string;
+  dateModified?: string;
+}
+
+const {
+  title,
+  description,
+  canonical = Astro.url.toString(),
+  ogType = 'website',
+  ogImage = '/images/og-home.png',
+  keywords = [],
+  schemaData,
+  date,
+  dateModified,
+} = Astro.props;
+
+const siteUrl = 'https://snailsploit.com';
+
+// Site-wide schema
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "SnailSploit",
+  "alternateName": "Kai Aizen Security Research",
+  "url": siteUrl,
+  "author": {
+    "@type": "Person",
+    "name": "Kai Aizen",
+    "alternateName": ["SnailSploit", "The Jailbreak Chef"]
+  },
+  "description": "AI security research, LLM jailbreaking, prompt injection, and CVE disclosures by Kai Aizen"
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, siteUrl).toString()} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonical} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(ogImage, siteUrl).toString()} />
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    {schemaData && <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />}
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <slot name="header" />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <slot name="footer" />
+  </body>
+</html>
