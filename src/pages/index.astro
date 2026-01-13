@@ -52,29 +52,29 @@ const featuredArticles = [
         </span>
       </div>
 
-      <h1 class="text-5xl md:text-7xl font-bold mb-6 font-mono leading-tight">
-        <span style="color: var(--color-accent-cyan);">Kai Aizen</span><br />
-        <span style="color: var(--color-text-primary);">The Jailbreak Chef</span>
+      <h1 class="text-6xl md:text-8xl font-bold mb-6 leading-tight" style="font-family: var(--font-display); letter-spacing: 0.02em;">
+        <span style="color: var(--color-accent-red);">KAI AIZEN</span><br />
+        <span style="color: var(--color-text-primary);">THE JAILBREAK CHEF</span>
       </h1>
 
       <p class="text-xl md:text-2xl mb-8 leading-relaxed" style="color: var(--color-text-secondary);">
         GenAI Security Researcher at <span style="color: var(--color-text-primary);">ActiveFence</span>.
         Specializing in LLM jailbreaking, prompt injection, and adversarial AI.
-        <span style="color: var(--color-accent-cyan);">5x CVE holder</span>.
+        <span style="color: var(--color-accent-red);">5x CVE holder</span>.
       </p>
 
       <div class="flex flex-wrap gap-4">
         <a
           href="/about"
-          class="px-6 py-3 font-mono font-semibold rounded hover:opacity-80 transition-opacity"
-          style="background-color: var(--color-accent-cyan); color: var(--color-bg);"
+          class="px-6 py-3 font-mono font-semibold rounded hover:opacity-80 transition-all"
+          style="background-color: var(--color-accent-red); color: #ffffff;"
         >
           Learn More →
         </a>
         <a
           href="/frameworks"
-          class="px-6 py-3 font-mono font-semibold rounded border transition-colors"
-          style="border-color: var(--color-accent-cyan); color: var(--color-accent-cyan);"
+          class="px-6 py-3 font-mono font-semibold rounded border transition-all hover:bg-[var(--color-accent-red)] hover:border-[var(--color-accent-red)]"
+          style="border-color: var(--color-accent-red); color: var(--color-accent-red);"
         >
           View Frameworks
         </a>
@@ -85,20 +85,20 @@ const featuredArticles = [
   <!-- Credentials Section -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-      <div class="p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-        <div class="text-3xl font-bold font-mono mb-2" style="color: var(--color-accent-cyan);">5</div>
+      <div class="card-hover-glow p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+        <div class="text-3xl font-bold font-mono mb-2" style="color: var(--color-accent-red);">5</div>
         <div class="text-sm font-mono" style="color: var(--color-text-secondary);">CVE Disclosures</div>
       </div>
-      <div class="p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-        <div class="text-3xl font-bold font-mono mb-2" style="color: var(--color-accent-cyan);">3</div>
+      <div class="card-hover-glow p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+        <div class="text-3xl font-bold font-mono mb-2" style="color: var(--color-accent-red);">3</div>
         <div class="text-sm font-mono" style="color: var(--color-text-secondary);">Security Frameworks</div>
       </div>
-      <div class="p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-        <div class="text-3xl font-bold font-mono mb-2" style="color: var(--color-accent-cyan);">20+</div>
+      <div class="card-hover-glow p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+        <div class="text-3xl font-bold font-mono mb-2" style="color: var(--color-accent-red);">20+</div>
         <div class="text-sm font-mono" style="color: var(--color-text-secondary);">Published Articles</div>
       </div>
-      <div class="p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-        <div class="text-3xl font-bold font-mono mb-2" style="color: var(--color-accent-cyan);">1</div>
+      <div class="card-hover-glow p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+        <div class="text-3xl font-bold font-mono mb-2" style="color: var(--color-accent-red);">1</div>
         <div class="text-sm font-mono" style="color: var(--color-text-secondary);">Published Book</div>
       </div>
     </div>
@@ -106,7 +106,7 @@ const featuredArticles = [
 
   <!-- Featured Research -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <h2 class="text-3xl font-bold font-mono mb-8" style="color: var(--color-accent-cyan);">
+    <h2 class="text-3xl font-bold font-mono mb-8" style="color: var(--color-accent-red);">
       Featured Research
     </h2>
 
@@ -114,7 +114,7 @@ const featuredArticles = [
       {featuredArticles.map(article => (
         <a
           href={article.url}
-          class="group p-6 rounded-lg transition-all hover:scale-[1.02]"
+          class="card-hover-glow group p-6 rounded-lg transition-all hover:scale-[1.02]"
           style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
         >
           <div class="flex flex-wrap gap-2 mb-4">
@@ -128,7 +128,7 @@ const featuredArticles = [
             ))}
           </div>
 
-          <h3 class="text-xl font-bold font-mono mb-3 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">
+          <h3 class="text-xl font-bold font-mono mb-3 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
             {article.title}
           </h3>
 
@@ -146,8 +146,8 @@ const featuredArticles = [
     <div class="text-center mt-12">
       <a
         href="/ai-security"
-        class="inline-block px-6 py-3 font-mono font-semibold rounded border transition-colors"
-        style="border-color: var(--color-accent-cyan); color: var(--color-accent-cyan);"
+        class="inline-block px-6 py-3 font-mono font-semibold rounded border transition-colors hover:bg-[var(--color-accent-red)] hover:border-[var(--color-accent-red)]"
+        style="border-color: var(--color-accent-red); color: var(--color-accent-red);"
       >
         View All Research →
       </a>
@@ -156,17 +156,17 @@ const featuredArticles = [
 
   <!-- Frameworks Section -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <h2 class="text-3xl font-bold font-mono mb-8" style="color: var(--color-accent-cyan);">
+    <h2 class="text-3xl font-bold font-mono mb-8" style="color: var(--color-accent-red);">
       Security Frameworks
     </h2>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <a
         href="/frameworks/aatmf"
-        class="group p-8 rounded-lg transition-all hover:scale-[1.02]"
+        class="card-hover-glow group p-8 rounded-lg transition-all hover:scale-[1.02]"
         style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
       >
-        <h3 class="text-2xl font-bold font-mono mb-3 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">
+        <h3 class="text-2xl font-bold font-mono mb-3 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
           AATMF
         </h3>
         <p class="text-sm mb-4" style="color: var(--color-text-secondary);">
@@ -176,10 +176,10 @@ const featuredArticles = [
 
       <a
         href="/frameworks/prompt"
-        class="group p-8 rounded-lg transition-all hover:scale-[1.02]"
+        class="card-hover-glow group p-8 rounded-lg transition-all hover:scale-[1.02]"
         style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
       >
-        <h3 class="text-2xl font-bold font-mono mb-3 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">
+        <h3 class="text-2xl font-bold font-mono mb-3 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
           P.R.O.M.P.T
         </h3>
         <p class="text-sm mb-4" style="color: var(--color-text-secondary);">
@@ -189,10 +189,10 @@ const featuredArticles = [
 
       <a
         href="/frameworks/sef"
-        class="group p-8 rounded-lg transition-all hover:scale-[1.02]"
+        class="card-hover-glow group p-8 rounded-lg transition-all hover:scale-[1.02]"
         style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
       >
-        <h3 class="text-2xl font-bold font-mono mb-3 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">
+        <h3 class="text-2xl font-bold font-mono mb-3 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
           SEF
         </h3>
         <p class="text-sm mb-4" style="color: var(--color-text-secondary);">

@@ -9,7 +9,12 @@
       "Bash(cat:*)",
       "Bash(git init:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m \"$(cat <<''EOF''\nSnailSploit.com - 39 pages, full SEO optimization\n\n- 21 research articles across 5 categories\n- 5 framework pages including full AATMF v2 content\n- 5 CVE disclosure pages\n- 3 section index pages with article listings\n- Full SEO optimization with schema.org markup\n- GEO files (robots.txt, llms.txt, agents.md)\n- Dark terminal/cyberpunk aesthetic\n- Responsive design with Tailwind CSS\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+      "Bash(git commit -m \"$(cat <<''EOF''\nSnailSploit.com - 39 pages, full SEO optimization\n\n- 21 research articles across 5 categories\n- 5 framework pages including full AATMF v2 content\n- 5 CVE disclosure pages\n- 3 section index pages with article listings\n- Full SEO optimization with schema.org markup\n- GEO files (robots.txt, llms.txt, agents.md)\n- Dark terminal/cyberpunk aesthetic\n- Responsive design with Tailwind CSS\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(npm install:*)",
+      "Bash(wrangler pages deploy:*)",
+      "Bash(npm run preview:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []
