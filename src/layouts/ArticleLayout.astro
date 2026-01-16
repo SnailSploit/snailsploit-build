@@ -14,6 +14,7 @@ export interface Props {
   category?: string;
   tags?: string[];
   readingTime?: string;
+  relatedLinks?: Array<{ title: string; url: string; type?: string }>;
 }
 
 const {
@@ -27,7 +28,43 @@ const {
   category,
   tags = [],
   readingTime,
+  relatedLinks = [],
 } = Astro.props;
+
+// Auto-generate related links based on URL structure
+const urlPath = new URL(canonical).pathname;
+const autoRelatedLinks: Array<{ title: string; url: string; type: string }> = [];
+
+// Add parent hub link
+if (urlPath.includes('/ai-security/jailbreaking/')) {
+  autoRelatedLinks.push(
+    { title: 'AI Security: Jailbreaking', url: '/ai-security/jailbreaking', type: 'Hub' },
+    { title: 'AATMF Framework', url: '/frameworks/aatmf', type: 'Framework' }
+  );
+} else if (urlPath.includes('/ai-security/prompt-injection/')) {
+  autoRelatedLinks.push(
+    { title: 'AI Security: Prompt Injection', url: '/ai-security/prompt-injection', type: 'Hub' },
+    { title: 'AATMF Framework', url: '/frameworks/aatmf', type: 'Framework' }
+  );
+} else if (urlPath.includes('/ai-security/')) {
+  autoRelatedLinks.push(
+    { title: 'AI Security Research', url: '/ai-security', type: 'Hub' },
+    { title: 'AATMF Framework', url: '/frameworks/aatmf', type: 'Framework' }
+  );
+} else if (urlPath.includes('/security-research/general/')) {
+  autoRelatedLinks.push(
+    { title: 'Security Research', url: '/security-research', type: 'Hub' },
+    { title: 'CVE Disclosures', url: '/security-research/cves', type: 'Research' }
+  );
+} else if (urlPath.includes('/writing/')) {
+  autoRelatedLinks.push(
+    { title: 'All Writing', url: '/writing', type: 'Hub' },
+    { title: 'About Kai Aizen', url: '/about', type: 'Author' }
+  );
+}
+
+// Combine auto-generated and manually provided links
+const allRelatedLinks = [...autoRelatedLinks, ...relatedLinks].slice(0, 4);
 
 // Generate breadcrumb from URL
 const pathSegments = new URL(canonical).pathname.split('/').filter(Boolean);
@@ -35,11 +72,21 @@ const breadcrumbs = [
   { name: 'Home', url: 'https://snailsploit.com' }
 ];
 
+// Special case mappings for proper casing
+const segmentNameMap: Record<string, string> = {
+  'ai-security': 'AI Security',
+  'cves': 'CVEs',
+  'edr-evasion-techniques': 'EDR Evasion Techniques',
+  'mcp-threat-analysis': 'MCP Threat Analysis',
+  'mcp-security-deep-dive': 'MCP Security Deep Dive',
+  'rag-agentic-attack-surface': 'RAG & Agentic Attack Surface',
+};
+
 let currentPath = '';
 pathSegments.forEach((segment, index) => {
   currentPath += `/${segment}`;
   if (index < pathSegments.length - 1) {
-    const name = segment.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+    const name = segmentNameMap[segment] || segment.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
     breadcrumbs.push({ name, url: `https://snailsploit.com${currentPath}` });
   }
 });
@@ -91,8 +138,8 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
   ogImage={ogImage || '/images/og-article.png'}
   keywords={keywords}
   schemaData={[articleSchema, breadcrumbSchema]}
-  date={date}
-  dateModified={dateModified}
+  publishedDate={new Date(date).toISOString()}
+  modifiedDate={dateModified ? new Date(dateModified).toISOString() : undefined}
 >
   <Navigation slot="header" />
 
@@ -102,7 +149,7 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
       {breadcrumbs.map((crumb, index) => (
         <span>
           {index < breadcrumbs.length - 1 ? (
-            <a href={crumb.url} class="hover:text-[var(--color-accent-cyan)] transition-colors">
+            <a href={crumb.url} class="hover:text-[var(--color-accent-red)] transition-colors">
               {crumb.name}
             </a>
           ) : (
@@ -115,7 +162,7 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
 
     <!-- Article Header -->
     <header class="mb-12">
-      <h1 class="text-4xl md:text-5xl font-bold mb-4 font-mono" style="color: var(--color-accent-cyan);">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 font-mono" style="color: var(--color-accent-red);">
         {title}
       </h1>
 
@@ -146,25 +193,55 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
 
     <!-- Author Bio -->
     <div class="mt-16 p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-      <h3 class="font-mono text-lg font-bold mb-2" style="color: var(--color-accent-cyan);">
+      <h3 class="font-mono text-lg font-bold mb-2" style="color: var(--color-accent-red);">
         About the Author
       </h3>
       <p class="text-sm mb-4" style="color: var(--color-text-secondary);">
-        <strong>Kai Aizen</strong> is a GenAI Security Researcher at ActiveFence, specializing in LLM jailbreaking and adversarial AI.
+        <strong>Kai Aizen</strong> is a Security Researcher & 5x CVE Holder, specializing in LLM jailbreaking and adversarial AI.
         Known as "The Jailbreak Chef," Kai is a 5x CVE holder and creator of the AATMF and P.R.O.M.P.T frameworks.
       </p>
       <div class="flex space-x-4">
-        <a href="/about" class="text-sm font-mono hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-secondary);">
+        <a href="/about" class="text-sm font-mono hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
           More about Kai →
         </a>
-        <a href="https://github.com/SnailSploit" target="_blank" rel="noopener noreferrer" class="text-sm font-mono hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-secondary);">
+        <a href="https://github.com/SnailSploit" target="_blank" rel="noopener noreferrer" class="text-sm font-mono hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
           GitHub
         </a>
-        <a href="https://linkedin.com/in/kaiaizen" target="_blank" rel="noopener noreferrer" class="text-sm font-mono hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-secondary);">
+        <a href="https://linkedin.com/in/kaiaizen" target="_blank" rel="noopener noreferrer" class="text-sm font-mono hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
           LinkedIn
         </a>
       </div>
     </div>
+
+    <!-- Related Research -->
+    {allRelatedLinks.length > 0 && (
+      <div class="mt-8 p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+        <h3 class="font-mono text-lg font-bold mb-4" style="color: var(--color-accent-red);">
+          Related Research
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {allRelatedLinks.map(link => (
+            <a
+              href={link.url}
+              class="group flex items-center gap-3 p-3 rounded transition-all hover:bg-[var(--color-bg)]"
+              style="border: 1px solid var(--color-border);"
+            >
+              {link.type && (
+                <span
+                  class="px-2 py-0.5 text-xs font-mono rounded shrink-0"
+                  style="background-color: var(--color-bg); color: var(--color-text-muted);"
+                >
+                  {link.type}
+                </span>
+              )}
+              <span class="text-sm font-mono group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
+                {link.title}
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
   </article>
 
   <Footer slot="footer" />
@@ -197,7 +274,7 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
   }
 
   .prose a {
-    color: var(--color-accent-cyan);
+    color: var(--color-accent-red);
     text-decoration: underline;
   }
 
@@ -230,7 +307,7 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
   }
 
   .prose blockquote {
-    border-left: 4px solid var(--color-accent-cyan);
+    border-left: 4px solid var(--color-accent-red);
     padding-left: 1em;
     margin: 1.5em 0;
     font-style: italic;

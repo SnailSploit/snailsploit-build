@@ -20,7 +20,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 <p>Before we dive into complex architectures, we need to understand the fundamental mechanism that powers all these systems — and why it's inherently problematic from a security perspective.</p>
 
 <figure>
-  <img src="https://cdn-images-1.medium.com/max/800/1*ZQ8k80s8h5tkvoiM0gL3Vw.png" alt="Next token prediction visualization" />
+  <img src="https://cdn-images-1.medium.com/max/800/1*ZQ8k80s8h5tkvoiM0gL3Vw.png" alt="Next token prediction visualization" width="800" height="450" />
 </figure>
 
 <h2>How LLMs Actually Work: The Next Token Prediction Machine</h2>
@@ -30,7 +30,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 <p>This is the critical security insight: <strong>the model doesn't retrieve facts, it generates plausible continuations</strong>. When you ask "What is the capital of France?" the model doesn't look up the answer — it predicts that "Paris" is the most likely continuation of that sequence based on patterns in its training data.</p>
 
 <figure>
-  <img src="https://cdn-images-1.medium.com/max/800/1*AwiBms50Z5Ca4HQe6f0roA.png" alt="Hallucination illustration" />
+  <img src="https://cdn-images-1.medium.com/max/800/1*AwiBms50Z5Ca4HQe6f0roA.png" alt="Hallucination illustration" width="800" height="450" />
 </figure>
 
 <h2>Why This Causes Hallucinations</h2>
@@ -46,7 +46,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 <p>This is why RAG and agentic systems exist — they attempt to ground the model's outputs in retrievable facts and verifiable actions. But as we'll see, these solutions introduce their own attack surfaces.</p>
 
 <figure>
-  <img src="https://cdn-images-1.medium.com/max/800/1*oIDwblTZQMpx9463KL2VNw.png" alt="RAG architecture" />
+  <img src="https://cdn-images-1.medium.com/max/800/1*oIDwblTZQMpx9463KL2VNw.png" alt="RAG architecture" width="800" height="500" />
 </figure>
 
 <h2>RAG: Retrieval-Augmented Generation</h2>
@@ -64,7 +64,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 </ol>
 
 <figure>
-  <img src="https://cdn-images-1.medium.com/max/800/1*Gq_HdARyhS4oNuf9t-desw.png" alt="RAG workflow" />
+  <img src="https://cdn-images-1.medium.com/max/800/1*Gq_HdARyhS4oNuf9t-desw.png" alt="RAG workflow" width="800" height="500" />
 </figure>
 
 <h2>The Attack Surface</h2>
@@ -92,7 +92,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 </ol>
 
 <figure>
-  <img src="https://cdn-images-1.medium.com/max/800/1*17iJuteMPC-AggN24BOUOQ.png" alt="Agentic system diagram" />
+  <img src="https://cdn-images-1.medium.com/max/800/1*17iJuteMPC-AggN24BOUOQ.png" alt="Agentic system diagram" width="800" height="500" />
 </figure>
 
 <h2>Multi-Agent Systems: Complexity Multiplication</h2>
@@ -109,7 +109,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 </ol>
 
 <figure>
-  <img src="https://cdn-images-1.medium.com/max/800/1*jvmGQGnLLUx2nP9Iu1e0pQ.png" alt="Multi-agent system" />
+  <img src="https://cdn-images-1.medium.com/max/800/1*jvmGQGnLLUx2nP9Iu1e0pQ.png" alt="Multi-agent system" width="800" height="500" />
 </figure>
 
 <h2>Agentic RAG: The Hybrid Approach</h2>
@@ -127,7 +127,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 </ol>
 
 <figure>
-  <img src="https://cdn-images-1.medium.com/max/800/1*n3xB1imAtou8yWoUgHG-SQ.png" alt="Agentic RAG system" />
+  <img src="https://cdn-images-1.medium.com/max/800/1*n3xB1imAtou8yWoUgHG-SQ.png" alt="Agentic RAG system" width="800" height="500" />
 </figure>
 
 <h2>The Attack Surface</h2>
@@ -229,6 +229,6 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 <p>Choose your path wisely.</p>
 
-<p><strong>About the Author</strong> <strong>Kai Aizen (SnailSploit)</strong> researches and dismantles AI systems as a GenAI Researcher at ActiveFence. He is the creator of the <a href="https://www.google.com/search?q=https://github.com/aatmf" target="_blank" rel="noopener"><strong>AATMF framework</strong></a> (under OWASP consideration), a multiple-CVE discoverer, and author of "<strong>Adversarial Minds</strong>." Follow his primary research on LLM vulnerabilities at <a href="https://snailsploit.com" target="_blank" rel="noopener"><strong>SnailSploit.com</strong></a>. <em>Disclaimer: Views are Kai's own and do not represent any employer or affiliation.</em></p>
+<p><strong>About the Author</strong> <strong>Kai Aizen (SnailSploit)</strong> is a Security Researcher & 5x CVE Holder researching AI system vulnerabilities. He is the creator of the <a href="https://www.google.com/search?q=https://github.com/aatmf" target="_blank" rel="noopener"><strong>AATMF framework</strong></a> (under OWASP consideration) and author of "<strong>Adversarial Minds</strong>." Follow his research on LLM vulnerabilities at <a href="https://snailsploit.com" target="_blank" rel="noopener"><strong>SnailSploit.com</strong></a>.</p>
 
 </ArticleLayout>

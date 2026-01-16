@@ -1,12 +1,39 @@
 ---
 import IndexLayout from '../../layouts/IndexLayout.astro';
+
+const articles = [
+  {
+    title: 'AI-Powered Obfuscator Bypasses Detection in 2 Hours',
+    description: 'Building a cloud-based obfuscator using AI that bypasses security detection. Demonstrating the dual-use nature of AI in security.',
+    url: '/writing/ai-obfuscator-detection-bypass',
+    date: '2025-04-23',
+    tags: ['AI', 'obfuscation', 'detection-bypass'],
+    readingTime: '15 min read'
+  },
+  {
+    title: 'Embracing AI: Adapt or Die in Cybersecurity',
+    description: 'Why security professionals must embrace AI or risk irrelevance. Adapting skills and mindset for the AI-driven security landscape.',
+    url: '/writing/embracing-ai-adapt-or-die',
+    date: '2024-09-06',
+    tags: ['AI', 'career', 'opinion'],
+    readingTime: '8 min read'
+  },
+  {
+    title: 'How Your Personal Data Is For Sale: The New Identity Theft',
+    description: 'Investigating the personal data marketplace and its implications for identity theft. What your information is worth and who\'s buying.',
+    url: '/writing/personal-data-identity-theft',
+    date: '2024-09-04',
+    tags: ['privacy', 'identity-theft', 'data-security'],
+    readingTime: '12 min read'
+  }
+];
 ---
 
 <IndexLayout
-  title="Security Writing | Articles & Publications"
-  description="Security articles, industry analysis, and publications by Kai Aizen. Featured in Hakin9 Magazine and PenTest Magazine."
+  title="Security Writing | Articles & Publications by Kai Aizen"
+  description="Security articles, technical research, and industry analysis. Published in Hakin9 Magazine and PenTest Magazine."
   canonical="https://snailsploit.com/writing"
-  ogImage="/images/og-writing.png"
+  ogImage="/images/og-writing.jpg"
   keywords={[
     'security blog',
     'cybersecurity articles',
@@ -23,7 +50,7 @@ import IndexLayout from '../../layouts/IndexLayout.astro';
   </div>
 
   <section class="mt-12 p-8 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-    <h2 class="text-2xl font-bold font-mono mb-4" style="color: var(--color-accent-cyan);">
+    <h2 class="text-2xl font-bold font-mono mb-4" style="color: var(--color-accent-red);">
       Publications
     </h2>
     <ul class="space-y-2 text-sm font-mono" style="color: var(--color-text-secondary);">
@@ -40,11 +67,43 @@ import IndexLayout from '../../layouts/IndexLayout.astro';
   </section>
 
   <section class="mt-12">
-    <h2 class="text-2xl font-bold font-mono mb-6" style="color: var(--color-accent-cyan);">
-      Recent Articles
+    <h2 class="text-2xl font-bold font-mono mb-6" style="color: var(--color-accent-red);">
+      Articles
     </h2>
-    <p style="color: var(--color-text-secondary);">
-      Articles coming soon. Follow on <a href="https://linkedin.com/in/kaiaizen" target="_blank" rel="noopener noreferrer" style="color: var(--color-accent-cyan);">LinkedIn</a> for updates.
-    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {articles.map(article => (
+        <a
+          href={article.url}
+          class="card-hover-glow group p-6 rounded-lg transition-all hover:scale-[1.02]"
+          style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+        >
+          <div class="flex flex-wrap gap-2 mb-3">
+            {article.tags.map(tag => (
+              <span
+                class="px-2 py-1 text-xs font-mono rounded"
+                style="background-color: var(--color-bg); color: var(--color-text-muted);"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <h3 class="text-lg font-bold font-mono mb-2 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
+            {article.title}
+          </h3>
+
+          <p class="text-sm mb-4" style="color: var(--color-text-secondary);">
+            {article.description}
+          </p>
+
+          <div class="flex justify-between items-center text-xs font-mono" style="color: var(--color-text-muted);">
+            <time datetime={article.date}>
+              {new Date(article.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+            </time>
+            <span>{article.readingTime}</span>
+          </div>
+        </a>
+      ))}
+    </div>
   </section>
 </IndexLayout>

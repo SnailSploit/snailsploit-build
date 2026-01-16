@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
+import BreadcrumbSchema from '../components/schemas/BreadcrumbSchema.astro';
 
 const tools = [
   {
@@ -49,7 +50,7 @@ const tools = [
 ];
 
 const languageColors = {
-  'Python': 'var(--color-accent-cyan)',
+  'Python': 'var(--color-accent-red)',
   'Shell': 'var(--color-accent-green)',
   'Markdown': 'var(--color-accent-yellow)',
   'JavaScript': '#f7df1e'
@@ -57,22 +58,27 @@ const languageColors = {
 ---
 
 <BaseLayout
-  title="Security Tools | Open Source by SnailSploit"
-  description="Open-source security tools for reconnaissance, Kubernetes security, OSINT, and automation. Built by Kai Aizen for the security community."
+  title="Security Tools & Resources | Open Source by Kai Aizen"
+  description="Open-source security tools including AATMF, Kuberoast, and CVE proof-of-concept repositories. Free tools for security researchers."
   canonical="https://snailsploit.com/tools"
-  ogImage="/images/og-tools.png"
+  ogImage="/images/og-tools.jpg"
   keywords={[
-    'security tools GitHub',
-    'OSINT tools',
-    'reconnaissance toolkit',
-    'Kubernetes security tools'
+    'security tools',
+    'AATMF',
+    'Kuberoast',
+    'CVE PoC',
+    'open source security'
   ]}
 >
   <Navigation slot="header" />
+  <BreadcrumbSchema items={[
+    {name: "Home", url: "https://snailsploit.com"},
+    {name: "Tools", url: "https://snailsploit.com/tools"}
+  ]} />
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <header class="mb-16 text-center">
-      <h1 class="text-5xl md:text-6xl font-bold mb-6 font-mono" style="color: var(--color-accent-cyan);">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6 font-mono" style="color: var(--color-accent-red);">
         Security Tools
       </h1>
       <p class="text-xl max-w-3xl mx-auto" style="color: var(--color-text-secondary);">
@@ -91,7 +97,7 @@ const languageColors = {
           style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
         >
           <div class="flex items-center justify-between mb-4">
-            <h2 class="text-2xl font-bold font-mono group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">
+            <h2 class="text-2xl font-bold font-mono group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
               {tool.name}
             </h2>
             <span
@@ -125,7 +131,7 @@ const languageColors = {
         target="_blank"
         rel="noopener noreferrer"
         class="inline-block px-6 py-3 font-mono font-semibold rounded border transition-colors"
-        style="border-color: var(--color-accent-cyan); color: var(--color-accent-cyan);"
+        style="border-color: var(--color-accent-red); color: var(--color-accent-red);"
       >
         Visit GitHub Profile →
       </a>

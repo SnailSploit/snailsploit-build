@@ -1,0 +1,22 @@
+{
+  "name": "SnailSploit - Kai Aizen Security Research",
+  "short_name": "SnailSploit",
+  "description": "AI security research, LLM jailbreaking, and adversarial AI by Kai Aizen",
+  "icons": [
+    {
+      "src": "/images/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#dc2626",
+  "background_color": "#0a0a0a",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/"
+}

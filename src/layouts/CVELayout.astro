@@ -17,6 +17,7 @@ export interface Props {
   canonical: string;
   ogImage?: string;
   keywords?: string[];
+  noindex?: boolean;
 }
 
 const {
@@ -33,6 +34,7 @@ const {
   canonical,
   ogImage,
   keywords = [],
+  noindex = false,
 } = Astro.props;
 
 const severityColors = {
@@ -83,17 +85,19 @@ const breadcrumbSchema = {
   ogImage={ogImage || `/images/og-cve-${cveId.toLowerCase().replace('cve-', '')}.png`}
   keywords={[...keywords, cveId, 'CVE', 'vulnerability']}
   schemaData={[techArticleSchema, breadcrumbSchema]}
+  publishedDate={disclosureDate ? new Date(disclosureDate).toISOString() : undefined}
+  noindex={noindex}
 >
   <Navigation slot="header" />
 
   <article class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <!-- Breadcrumbs -->
     <nav class="mb-8 text-sm font-mono" style="color: var(--color-text-muted);">
-      <a href="/" class="hover:text-[var(--color-accent-cyan)] transition-colors">Home</a>
+      <a href="/" class="hover:text-[var(--color-accent-red)] transition-colors">Home</a>
       <span class="mx-2">/</span>
-      <a href="/security-research" class="hover:text-[var(--color-accent-cyan)] transition-colors">Security Research</a>
+      <a href="/security-research" class="hover:text-[var(--color-accent-red)] transition-colors">Security Research</a>
       <span class="mx-2">/</span>
-      <a href="/security-research/cves" class="hover:text-[var(--color-accent-cyan)] transition-colors">CVEs</a>
+      <a href="/security-research/cves" class="hover:text-[var(--color-accent-red)] transition-colors">CVEs</a>
       <span class="mx-2">/</span>
       <span>{cveId}</span>
     </nav>
@@ -111,7 +115,7 @@ const breadcrumbSchema = {
             </span>
           </div>
 
-          <h1 class="text-4xl md:text-5xl font-bold mb-4 font-mono" style="color: var(--color-accent-cyan);">
+          <h1 class="text-4xl md:text-5xl font-bold mb-4 font-mono" style="color: var(--color-accent-red);">
             {cveId}
           </h1>
 
@@ -138,7 +142,7 @@ const breadcrumbSchema = {
         <div class="sticky top-8 space-y-6">
           <!-- Quick Facts -->
           <div class="p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-            <h3 class="font-mono text-lg font-bold mb-4" style="color: var(--color-accent-cyan);">
+            <h3 class="font-mono text-lg font-bold mb-4" style="color: var(--color-accent-red);">
               Quick Facts
             </h3>
 
@@ -192,7 +196,7 @@ const breadcrumbSchema = {
 
           <!-- External References -->
           <div class="p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-            <h3 class="font-mono text-lg font-bold mb-4" style="color: var(--color-accent-cyan);">
+            <h3 class="font-mono text-lg font-bold mb-4" style="color: var(--color-accent-red);">
               References
             </h3>
 
@@ -202,7 +206,7 @@ const breadcrumbSchema = {
                   href={`https://nvd.nist.gov/vuln/detail/${cveId}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="hover:text-[var(--color-accent-cyan)] transition-colors"
+                  class="hover:text-[var(--color-accent-red)] transition-colors"
                   style="color: var(--color-text-secondary);"
                 >
                   NVD →
@@ -213,7 +217,7 @@ const breadcrumbSchema = {
                   href={`https://cve.mitre.org/cgi-bin/cvename.cgi?name=${cveId}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="hover:text-[var(--color-accent-cyan)] transition-colors"
+                  class="hover:text-[var(--color-accent-red)] transition-colors"
                   style="color: var(--color-text-secondary);"
                 >
                   MITRE →
@@ -221,10 +225,10 @@ const breadcrumbSchema = {
               </li>
               <li>
                 <a
-                  href="https://wordfence.com/threat-intel/researchers/kai-aizen"
+                  href="https://www.wordfence.com/threat-intel/vulnerabilities/researchers/kai-aizen"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="hover:text-[var(--color-accent-cyan)] transition-colors"
+                  class="hover:text-[var(--color-accent-red)] transition-colors"
                   style="color: var(--color-text-secondary);"
                 >
                   Wordfence Profile →
@@ -267,7 +271,7 @@ const breadcrumbSchema = {
   }
 
   .prose a {
-    color: var(--color-accent-cyan);
+    color: var(--color-accent-red);
     text-decoration: underline;
   }
 

@@ -45,9 +45,9 @@ const articles = [
 
 <IndexLayout
   title="LLM Jailbreaking Research | Techniques & Analysis"
-  description="In-depth LLM jailbreaking research by The Jailbreak Chef. Multi-turn attacks, context inheritance exploits, memory manipulation, and defense analysis."
+  description="In-depth LLM jailbreaking research by The Jailbreak Chef. Multi-turn attacks, context inheritance, memory manipulation, guardrail bypass."
   canonical="https://snailsploit.com/ai-security/jailbreaking"
-  ogImage="/images/og-jailbreaking.png"
+  ogImage="/images/og-jailbreaking.jpg"
   keywords={[
     'LLM jailbreaking',
     'jailbreak techniques',
@@ -67,7 +67,7 @@ const articles = [
       >
         <div class="flex items-start justify-between mb-3">
           <div class="flex-1">
-            <h2 class="text-2xl font-bold font-mono mb-2 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">
+            <h2 class="text-2xl font-bold font-mono mb-2 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
               {article.title}
             </h2>
             <p class="text-base mb-3" style="color: var(--color-text-secondary);">
@@ -77,7 +77,7 @@ const articles = [
           {article.flagship && (
             <span
               class="ml-4 px-3 py-1 text-xs font-mono rounded whitespace-nowrap"
-              style="background-color: var(--color-accent-cyan); color: var(--color-bg);"
+              style="background-color: var(--color-accent-red); color: var(--color-bg);"
             >
               Flagship
             </span>
@@ -104,7 +104,7 @@ const articles = [
   </div>
 
   <section class="mt-16 p-8 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-    <h2 class="text-2xl font-bold font-mono mb-4" style="color: var(--color-accent-cyan);">
+    <h2 class="text-2xl font-bold font-mono mb-4" style="color: var(--color-accent-red);">
       About This Research
     </h2>
     <p class="mb-4" style="color: var(--color-text-secondary);">
@@ -113,7 +113,7 @@ const articles = [
       practical demonstrations, technical analysis, and implications for AI security.
     </p>
     <p style="color: var(--color-text-secondary);">
-      Research methodology is documented in the <a href="/frameworks/aatmf" style="color: var(--color-accent-cyan);">AATMF framework</a>.
+      Research methodology is documented in the <a href="/frameworks/aatmf" style="color: var(--color-accent-red);">AATMF framework</a>.
     </p>
   </section>
 </IndexLayout>

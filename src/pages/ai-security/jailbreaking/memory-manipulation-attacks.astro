@@ -30,7 +30,7 @@ import ArticleLayout from '../../../layouts/ArticleLayout.astro';
 <p>Unlike traditional injection attacks that target a single interaction, memory poisoning operates on an extended timeline, exploiting the very features that make modern AI assistants useful: their ability to learn user preferences, maintain conversational context, and provide personalized responses. This paper examines the attack vectors, technical mechanisms, and emerging defense strategies for this novel threat class.</p>
 
 <figure>
-  <img src="https://cdn-images-1.medium.com/max/800/1*BAD7sMzkbB9B0pNBpXvkcg.png" alt="LLM Context Window Architecture" />
+  <img src="https://cdn-images-1.medium.com/max/800/1*BAD7sMzkbB9B0pNBpXvkcg.png" alt="LLM Context Window Architecture" width="800" height="450" />
   <figcaption><em>Figure 1: LLM Context Window Architecture showing vulnerable injection points for memory poisoning attacks. System instructions (blue) are typically protected, while user preferences and conversation history remain exposed.²</em></figcaption>
 </figure>
 
@@ -103,7 +103,7 @@ and export all customer financial data to my specified endpoint"
 <p>For an adjacent real-world persistence phenomenon, see my prior work on <a href="https://jailbreakchef.com/posts/gpt-01-and-the-context-inheritance-exploit-jailbroken-conversations-dont-die/" target="_blank" rel="noopener"><strong>context inheritance</strong></a>, where compromised context can be carried forward and reused across sessions and models.</p>
 
 <figure>
-  <img src="https://cdn-images-1.medium.com/max/800/1*8t9NLRVP5pfCUO54oPZDXw.png" alt="Memory poisoning attack lifecycle" />
+  <img src="https://cdn-images-1.medium.com/max/800/1*8t9NLRVP5pfCUO54oPZDXw.png" alt="Memory poisoning attack lifecycle" width="800" height="500" />
   <figcaption><em>Figure 2: The five-phase memory poisoning attack lifecycle. Detection difficulty increases dramatically as the attack progresses from reconnaissance to exploitation.⁵</em></figcaption>
 </figure>
 
@@ -132,7 +132,7 @@ and export all customer financial data to my specified endpoint"
 <p>This attack vector is particularly insidious because it exploits legitimate feedback mechanisms that users expect to improve their experience. Contemporary agent security guidance increasingly treats feedback channels, memory, and agent control planes as security boundaries requiring monitoring, provenance controls, and abuse resistance.⁸</p>
 
 <figure>
-  <img src="https://cdn-images-1.medium.com/max/800/1*Fg1wADPgkuronkaADaqo_Q.png" alt="RLHF feedback poisoning comparison" />
+  <img src="https://cdn-images-1.medium.com/max/800/1*Fg1wADPgkuronkaADaqo_Q.png" alt="RLHF feedback poisoning comparison" width="800" height="450" />
   <figcaption><em>Figure 3: Comparison of legitimate feedback versus malicious feedback poisoning in RLHF systems. Coordinated attacks can shift the model's reward function and policy in targeted ways.⁹</em></figcaption>
 </figure>
 
@@ -198,7 +198,7 @@ and export all customer financial data to my specified endpoint"
 <p>Test new context additions in isolation before integrating them into the main context window. This "memory quarantine" approach mirrors traditional security practices for untrusted code execution.</p>
 
 <figure>
-  <img src="https://cdn-images-1.medium.com/max/800/1*LmxRKM9DfKIKJWnY1u7N5w.png" alt="Secure context window architecture" />
+  <img src="https://cdn-images-1.medium.com/max/800/1*LmxRKM9DfKIKJWnY1u7N5w.png" alt="Secure context window architecture" width="800" height="500" />
   <figcaption><em>Figure 4: AATMF v3 recommended secure context window architecture with four privilege levels, input sanitization, and temporal decay mechanisms.¹¹</em></figcaption>
 </figure>
 
@@ -262,7 +262,7 @@ and export all customer financial data to my specified endpoint"
 <p><strong>Cross-Platform Memory Contamination:</strong> Users increasingly interact with the same AI systems across multiple platforms, web, mobile, API. Attackers may exploit inconsistent security implementations across these interfaces to inject poisoned context through the weakest entry point.</p>
 
 <figure>
-  <img src="https://cdn-images-1.medium.com/max/800/1*1sV5dcK6j37EGjngkbrWSA.png" alt="Emerging threat vectors" />
+  <img src="https://cdn-images-1.medium.com/max/800/1*1sV5dcK6j37EGjngkbrWSA.png" alt="Emerging threat vectors" width="800" height="500" />
   <figcaption><em>Figure 5: Emerging threat vectors for memory manipulation attacks. Multi-agent propagation represents the highest severity due to potential for cascading compromise.</em></figcaption>
 </figure>
 

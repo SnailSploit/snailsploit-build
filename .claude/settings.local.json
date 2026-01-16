@@ -14,7 +14,18 @@
       "Bash(wrangler pages deploy:*)",
       "Bash(npm run preview:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(sips:*)",
+      "Bash(ls:*)",
+      "Bash(curl:*)",
+      "Bash(for file in src/pages/ai-security/jailbreaking/*.astro src/pages/ai-security/prompt-injection/*.astro src/pages/ai-security/*.astro src/pages/writing/*.astro src/pages/security-research/general/*.astro)",
+      "Bash(do [ -f \"$file\" ])",
+      "Bash(done)",
+      "Bash(for file in src/pages/security-research/cves/cve-*.astro)",
+      "Bash(git checkout:*)",
+      "Bash(chmod:*)",
+      "Bash(/tmp/audit_canonical.sh)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": []

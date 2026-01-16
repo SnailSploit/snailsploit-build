@@ -12,5 +12,40 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [sitemap()]
+  integrations: [
+    sitemap({
+      filter: (page) => {
+        // Exclude thin/coming soon pages from sitemap
+        const excludePaths = [
+          '/frameworks/sef/',
+          '/security-research/cves/cve-2025-9776/',
+          '/security-research/cves/cve-2025-11171/',
+          '/security-research/cves/cve-2025-11174/',
+          '/security-research/cves/cve-2025-12163/',
+        ];
+        return !excludePaths.some(path => page.includes(path));
+      },
+      serialize: (item) => {
+        // Set priority based on page type
+        const url = item.url;
+        let priority = 0.7; // default for articles
+
+        if (url === 'https://snailsploit.com/') {
+          priority = 1.0;
+        } else if (url.match(/^https:\/\/snailsploit\.com\/(ai-security|frameworks|security-research|tools|writing|about|adversarial-minds)\/$/)) {
+          priority = 0.9; // hub pages
+        } else if (url.includes('/frameworks/aatmf') || url.includes('/frameworks/prompt')) {
+          priority = 0.8; // framework detail pages
+        } else if (url.includes('/security-research/cves/cve-')) {
+          priority = 0.6; // CVE pages
+        }
+
+        return {
+          ...item,
+          priority,
+          changefreq: priority >= 0.9 ? 'weekly' : 'monthly',
+        };
+      },
+    })
+  ]
 });

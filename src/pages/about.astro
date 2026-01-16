@@ -2,40 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
-
-const personSchema = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Kai Aizen",
-  "alternateName": ["SnailSploit", "The Jailbreak Chef"],
-  "jobTitle": "GenAI Security Researcher",
-  "worksFor": {
-    "@type": "Organization",
-    "name": "ActiveFence"
-  },
-  "email": "kai@snailsploit.com",
-  "url": "https://snailsploit.com",
-  "sameAs": [
-    "https://linkedin.com/in/kaiaizen",
-    "https://github.com/SnailSploit",
-    "https://medium.com/@snailsploit",
-    "https://wordfence.com/threat-intel/researchers/kai-aizen"
-  ],
-  "knowsAbout": [
-    "AI Security",
-    "LLM Jailbreaking",
-    "Prompt Injection",
-    "WordPress Security",
-    "CVE Research",
-    "Social Engineering",
-    "Adversarial Machine Learning"
-  ]
-};
+import PersonSchema from '../components/schemas/PersonSchema.astro';
+import BreadcrumbSchema from '../components/schemas/BreadcrumbSchema.astro';
 ---
 
 <BaseLayout
-  title="Kai Aizen | AI Security Researcher & 5x CVE Holder"
-  description="GenAI Security Researcher at ActiveFence. Creator of AATMF and P.R.O.M.P.T frameworks. 5x CVE holder. Hakin9 author. The Jailbreak Chef."
+  title="Kai Aizen | Security Researcher & 5x CVE Holder"
+  description="Security Researcher & 5x CVE Holder. Creator of AATMF and P.R.O.M.P.T frameworks. Author of Adversarial Minds. Hakin9 Magazine contributor. The Jailbreak Chef."
   canonical="https://snailsploit.com/about"
   ogType="profile"
   ogImage="/images/og-about.png"
@@ -44,37 +17,41 @@ const personSchema = {
     'SnailSploit',
     'The Jailbreak Chef',
     'AI red teamer',
-    'WordPress security researcher'
+    'CVE researcher'
   ]}
-  schemaData={personSchema}
 >
   <Navigation slot="header" />
+  <PersonSchema />
+  <BreadcrumbSchema items={[
+    {name: "Home", url: "https://snailsploit.com"},
+    {name: "About", url: "https://snailsploit.com/about"}
+  ]} />
 
-  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <article class="main-content py-12 fade-in">
     <header class="mb-16">
-      <h1 class="text-5xl md:text-6xl font-bold mb-6 font-mono" style="color: var(--color-accent-cyan);">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6 font-mono" style="color: var(--color-accent-red);">
         Kai Aizen
       </h1>
       <p class="text-2xl mb-4" style="color: var(--color-text-primary);">
         The Jailbreak Chef
       </p>
       <p class="text-xl" style="color: var(--color-text-secondary);">
-        GenAI Security Researcher at ActiveFence
+        Security Researcher & 5x CVE Holder
       </p>
     </header>
 
     <div class="prose prose-invert prose-lg max-w-none">
       <section class="mb-12">
-        <h2 style="color: var(--color-text-primary);">About Me</h2>
+        <h2 class="section-header" style="color: var(--color-text-primary);">About Me</h2>
         <p>
           I'm Kai Aizen, also known as <strong>SnailSploit</strong> or <strong>The Jailbreak Chef</strong>.
           I specialize in adversarial AI security, with a focus on LLM jailbreaking, prompt injection attacks,
           and AI system vulnerabilities.
         </p>
         <p>
-          Currently, I work as a GenAI Security Researcher at <strong>ActiveFence</strong>, where I research
-          and develop defenses against adversarial AI attacks. My work focuses on discovering novel attack
-          vectors in large language models and developing systematic methodologies for AI security assessment.
+          As an independent security researcher, I discover novel attack vectors in AI systems and develop
+          systematic methodologies for security assessment. My work bridges offensive security research with
+          practical defense strategies.
         </p>
       </section>
 
@@ -164,7 +141,35 @@ const personSchema = {
           <li><strong>Email:</strong> <a href="mailto:kai@snailsploit.com">kai@snailsploit.com</a></li>
           <li><strong>GitHub:</strong> <a href="https://github.com/SnailSploit" target="_blank" rel="noopener noreferrer">github.com/SnailSploit</a></li>
           <li><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/kaiaizen" target="_blank" rel="noopener noreferrer">linkedin.com/in/kaiaizen</a></li>
-          <li><strong>Wordfence:</strong> <a href="https://wordfence.com/threat-intel/researchers/kai-aizen" target="_blank" rel="noopener noreferrer">Researcher Profile</a></li>
+          <li><strong>Wordfence:</strong> <a href="https://www.wordfence.com/threat-intel/vulnerabilities/researchers/kai-aizen" target="_blank" rel="noopener noreferrer">Researcher Profile</a></li>
+        </ul>
+      </section>
+
+      <section class="mb-12">
+        <h2 style="color: var(--color-text-primary);">Publications & External Profiles</h2>
+
+        <h3 style="color: var(--color-text-primary);">Security Magazine Publications</h3>
+        <ul>
+          <li><strong>Hakin9 Magazine:</strong> <a href="https://hakin9.org/weaponization-in-the-cloud-unmasking-the-threats-and-tools/" target="_blank" rel="noopener noreferrer">Weaponization in the Cloud: Unmasking the Threats and Tools</a></li>
+          <li><strong>PenTest Magazine:</strong> <a href="https://pentestmag.com/design-your-penetration-testing-setup/" target="_blank" rel="noopener noreferrer">Design Your Penetration Testing Setup</a></li>
+        </ul>
+
+        <h3 style="color: var(--color-text-primary);">Research Platforms</h3>
+        <ul>
+          <li><strong>Medium:</strong> <a href="https://snailsploit.medium.com" target="_blank" rel="noopener noreferrer">@snailsploit on Medium</a> - In-depth security research articles and threat analysis</li>
+          <li><strong>The Jailbreak Chef:</strong> <a href="https://thejailbreakchef.com" target="_blank" rel="noopener noreferrer">thejailbreakchef.com</a> - LLM security research and jailbreak methodology</li>
+          <li><strong>GitHub:</strong> <a href="https://github.com/SnailSploit" target="_blank" rel="noopener noreferrer">github.com/SnailSploit</a> - Open-source security tools and research projects</li>
+        </ul>
+
+        <h3 style="color: var(--color-text-primary);">Industry Recognition</h3>
+        <ul>
+          <li><strong>Wordfence Threat Intelligence:</strong> <a href="https://www.wordfence.com/threat-intel/vulnerabilities/researchers/kai-aizen" target="_blank" rel="noopener noreferrer">Security Researcher Profile</a> - CVE discovery history and vulnerability research registry</li>
+          <li><strong>National Vulnerability Database (NVD):</strong> 5 CVE disclosures in WordPress plugin ecosystem with full vulnerability analysis and impact scoring</li>
+        </ul>
+
+        <h3 style="color: var(--color-text-primary);">Professional Profiles</h3>
+        <ul>
+          <li><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/kaiaizen" target="_blank" rel="noopener noreferrer">linkedin.com/in/kaiaizen</a> - Professional background and career history</li>
         </ul>
       </section>
     </div>
@@ -200,7 +205,7 @@ const personSchema = {
   }
 
   .prose a {
-    color: var(--color-accent-cyan);
+    color: var(--color-accent-red);
     text-decoration: underline;
   }
 

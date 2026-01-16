@@ -1,7 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /following
+Disallow: /followers
 
-# AI Crawlers - Explicitly Welcomed
 User-agent: GPTBot
 Allow: /
 
@@ -26,19 +27,7 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
-User-agent: Diffbot
-Allow: /
-
 User-agent: YouBot
 Allow: /
 
-User-agent: Bytespider
-Allow: /
-
-User-agent: CCBot
-Allow: /
-
-User-agent: FacebookBot
-Allow: /
-
-Sitemap: https://snailsploit.com/sitemap.xml
+Sitemap: https://snailsploit.com/sitemap-index.xml

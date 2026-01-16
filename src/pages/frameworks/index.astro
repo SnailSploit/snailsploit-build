@@ -1,5 +1,6 @@
 ---
 import IndexLayout from '../../layouts/IndexLayout.astro';
+import BreadcrumbSchema from '../../components/schemas/BreadcrumbSchema.astro';
 
 const frameworks = [
   {
@@ -28,9 +29,9 @@ const frameworks = [
 
 <IndexLayout
   title="Security Frameworks | AATMF, P.R.O.M.P.T, SEF"
-  description="Open-source security frameworks for AI threat modeling, prompt engineering methodology, and social engineering assessment. Practitioner-built."
+  description="Original security frameworks by Kai Aizen: AATMF for AI threat modeling, P.R.O.M.P.T for prompt engineering, and SEF for social engineering."
   canonical="https://snailsploit.com/frameworks"
-  ogImage="/images/og-frameworks.png"
+  ogImage="/images/og-frameworks.jpg"
   keywords={[
     'AI threat modeling framework',
     'prompt injection taxonomy',
@@ -40,6 +41,11 @@ const frameworks = [
   heading="Security Frameworks"
   subheading="Systematic methodologies for AI security, prompt engineering, and social engineering assessment."
 >
+  <BreadcrumbSchema items={[
+    {name: "Home", url: "https://snailsploit.com"},
+    {name: "Frameworks", url: "https://snailsploit.com/frameworks"}
+  ]} />
+
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     {frameworks.map(framework => (
       <a
@@ -56,7 +62,7 @@ const frameworks = [
           </span>
         )}
 
-        <h2 class="text-3xl font-bold font-mono mb-3 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">
+        <h2 class="text-3xl font-bold font-mono mb-3 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
           {framework.name}
         </h2>
 
@@ -68,7 +74,7 @@ const frameworks = [
           {framework.description}
         </p>
 
-        <div class="text-sm font-mono" style="color: var(--color-accent-cyan);">
+        <div class="text-sm font-mono" style="color: var(--color-accent-red);">
           Learn more →
         </div>
       </a>
@@ -76,7 +82,7 @@ const frameworks = [
   </div>
 
   <section class="mt-20 p-8 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-    <h2 class="text-2xl font-bold font-mono mb-4" style="color: var(--color-accent-cyan);">
+    <h2 class="text-2xl font-bold font-mono mb-4" style="color: var(--color-accent-red);">
       Why These Frameworks?
     </h2>
     <p class="mb-4" style="color: var(--color-text-secondary);">

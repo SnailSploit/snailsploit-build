@@ -1,0 +1,51 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  url: string;
+  datePublished: string;
+  dateModified?: string;
+  image?: string;
+  keywords?: string[];
+}
+
+const {
+  title,
+  description,
+  url,
+  datePublished,
+  dateModified,
+  image = "https://snailsploit.com/images/og-default.jpg",
+  keywords = []
+} = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "url": url,
+  "datePublished": datePublished,
+  "dateModified": dateModified || datePublished,
+  "image": image,
+  "author": {
+    "@id": "https://snailsploit.com/#person"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "SnailSploit",
+    "url": "https://snailsploit.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://snailsploit.com/images/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": url
+  },
+  "keywords": keywords.join(", ")
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

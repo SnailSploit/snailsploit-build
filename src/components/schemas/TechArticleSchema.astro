@@ -1,0 +1,51 @@
+---
+// For CVE pages and technical security writeups
+interface Props {
+  title: string;
+  description: string;
+  url: string;
+  datePublished: string;
+  dateModified?: string;
+  cveId?: string;
+  cvssScore?: string;
+  affectedSoftware?: string;
+}
+
+const {
+  title,
+  description,
+  url,
+  datePublished,
+  dateModified,
+  cveId,
+  cvssScore,
+  affectedSoftware
+} = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": title,
+  "description": description,
+  "url": url,
+  "datePublished": datePublished,
+  "dateModified": dateModified || datePublished,
+  "author": {
+    "@id": "https://snailsploit.com/#person"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "SnailSploit",
+    "url": "https://snailsploit.com"
+  },
+  "about": cveId ? {
+    "@type": "SoftwareApplication",
+    "name": affectedSoftware,
+    "applicationCategory": "WordPress Plugin"
+  } : undefined,
+  "proficiencyLevel": "Expert",
+  "dependencies": "WordPress"
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

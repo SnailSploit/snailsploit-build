@@ -2,6 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
+import WebSiteSchema from '../components/schemas/WebSiteSchema.astro';
+import PersonSchema from '../components/schemas/PersonSchema.astro';
 
 const featuredArticles = [
   {
@@ -29,27 +31,27 @@ const featuredArticles = [
 ---
 
 <BaseLayout
-  title="SnailSploit | AI Security Research & LLM Jailbreaking"
-  description="AI security researcher specializing in LLM jailbreaking, prompt injection, and WordPress vulnerabilities. 5x CVE holder. Creator of AATMF and P.R.O.M.P.T frameworks."
+  title="Kai Aizen (SnailSploit) | GenAI Security Researcher"
+  description="Security research on AI vulnerabilities, LLM jailbreaking, and adversarial AI. Creator of AATMF framework. 5 CVEs discovered. Published in Hakin9 Magazine."
   canonical="https://snailsploit.com/"
-  ogImage="/images/og-home.png"
+  ogImage="/images/og-default.jpg"
   keywords={[
-    'AI security researcher',
-    'LLM jailbreaking expert',
-    'prompt injection testing',
-    'CVE researcher',
-    'adversarial AI'
+    'AI security',
+    'LLM jailbreaking',
+    'adversarial AI',
+    'GenAI security researcher',
+    'AATMF'
   ]}
 >
   <Navigation slot="header" />
+  <WebSiteSchema />
+  <PersonSchema />
 
   <!-- Hero Section -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
-    <div class="max-w-4xl">
+  <section class="relative py-20 md:py-32" style="background: linear-gradient(180deg, #0a0a0a 0%, #111 100%);">
+    <div class="main-content fade-in">
       <div class="mb-6">
-        <span class="font-mono text-sm" style="color: var(--color-accent-cyan);">
-          $ whoami
-        </span>
+        <span class="terminal-prefix font-mono text-sm">whoami</span>
       </div>
 
       <h1 class="text-6xl md:text-8xl font-bold mb-6 leading-tight" style="font-family: var(--font-display); letter-spacing: 0.02em;">
@@ -58,9 +60,8 @@ const featuredArticles = [
       </h1>
 
       <p class="text-xl md:text-2xl mb-8 leading-relaxed" style="color: var(--color-text-secondary);">
-        GenAI Security Researcher at <span style="color: var(--color-text-primary);">ActiveFence</span>.
+        Security Researcher & <span style="color: var(--color-accent-red);">5x CVE Holder</span>. Creator of the <span style="color: var(--color-text-primary);">AATMF</span> and <span style="color: var(--color-text-primary);">P.R.O.M.P.T</span> frameworks.
         Specializing in LLM jailbreaking, prompt injection, and adversarial AI.
-        <span style="color: var(--color-accent-red);">5x CVE holder</span>.
       </p>
 
       <div class="flex flex-wrap gap-4">
@@ -83,8 +84,9 @@ const featuredArticles = [
   </section>
 
   <!-- Credentials Section -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+  <section class="py-24">
+    <div class="main-content">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
       <div class="card-hover-glow p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
         <div class="text-3xl font-bold font-mono mb-2" style="color: var(--color-accent-red);">5</div>
         <div class="text-sm font-mono" style="color: var(--color-text-secondary);">CVE Disclosures</div>
@@ -105,10 +107,11 @@ const featuredArticles = [
   </section>
 
   <!-- Featured Research -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <h2 class="text-3xl font-bold font-mono mb-8" style="color: var(--color-accent-red);">
-      Featured Research
-    </h2>
+  <section class="py-24">
+    <div class="main-content">
+      <h2 class="section-header text-3xl font-bold font-mono mb-12" style="color: var(--color-accent-red);">
+        Featured Research
+      </h2>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       {featuredArticles.map(article => (
@@ -143,22 +146,24 @@ const featuredArticles = [
       ))}
     </div>
 
-    <div class="text-center mt-12">
-      <a
-        href="/ai-security"
-        class="inline-block px-6 py-3 font-mono font-semibold rounded border transition-colors hover:bg-[var(--color-accent-red)] hover:border-[var(--color-accent-red)]"
-        style="border-color: var(--color-accent-red); color: var(--color-accent-red);"
-      >
-        View All Research →
-      </a>
+      <div class="text-center mt-12">
+        <a
+          href="/ai-security"
+          class="inline-block px-6 py-3 font-mono font-semibold rounded border transition-colors hover:bg-[var(--color-accent-red)] hover:border-[var(--color-accent-red)]"
+          style="border-color: var(--color-accent-red); color: var(--color-accent-red);"
+        >
+          View All Research →
+        </a>
+      </div>
     </div>
   </section>
 
   <!-- Frameworks Section -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <h2 class="text-3xl font-bold font-mono mb-8" style="color: var(--color-accent-red);">
-      Security Frameworks
-    </h2>
+  <section class="py-24">
+    <div class="main-content">
+      <h2 class="section-header text-3xl font-bold font-mono mb-12" style="color: var(--color-accent-red);">
+        Security Frameworks
+      </h2>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <a
@@ -199,6 +204,7 @@ const featuredArticles = [
           Social Engineering Framework. Structured methodology for SE assessments. Coming soon.
         </p>
       </a>
+    </div>
     </div>
   </section>
 

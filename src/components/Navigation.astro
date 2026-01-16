@@ -33,11 +33,29 @@ const navItems = [
 ---
 
 <nav class="border-b" style="border-color: var(--color-border); background-color: var(--color-surface);">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
+  <div class="header-inner">
+    <div class="flex items-center justify-between h-20">
       <div class="flex items-center">
-        <a href="/" class="flex items-center">
-          <img src="/images/logo.png" alt="SnailSploit - Kai Aizen" height="50" class="h-[50px] w-auto" />
+        <a href="/" class="flex items-center gap-3">
+          <img
+            src="/images/logo.png"
+            srcset="/images/logo.png 1x, /images/logo@2x.png 2x"
+            alt="SnailSploit - Kai Aizen"
+            width="70"
+            height="70"
+            class="h-[70px] w-auto"
+            style="mix-blend-mode: lighten; filter: contrast(1.2) brightness(1.1); background: transparent; image-rendering: -webkit-optimize-contrast;"
+            loading="eager"
+            decoding="async"
+          />
+          <div class="flex flex-col">
+            <span class="font-mono text-xl font-bold" style="color: var(--color-accent-red);">
+              SnailSploit
+            </span>
+            <span class="font-mono text-xs uppercase tracking-[0.1em]" style="color: var(--color-text-muted);">
+              Kai Aizen
+            </span>
+          </div>
         </a>
       </div>
       <div class="hidden md:block">
@@ -46,7 +64,7 @@ const navItems = [
             <div class="relative group">
               <a
                 href={item.href}
-                class="font-mono text-sm px-3 py-2 hover:text-[var(--color-accent-cyan)] transition-colors"
+                class="nav-link font-mono text-sm px-3 py-2 transition-colors"
                 style="color: var(--color-text-secondary);"
               >
                 {item.name}
