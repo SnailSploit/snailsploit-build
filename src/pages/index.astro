@@ -5,27 +5,21 @@ import Footer from '../components/Footer.astro';
 import WebSiteSchema from '../components/schemas/WebSiteSchema.astro';
 import PersonSchema from '../components/schemas/PersonSchema.astro';
 
-const featuredArticles = [
+const featuredCards = [
   {
-    title: 'Context Inheritance Exploit: Jailbroken Conversations Don\'t Die',
-    description: 'Discovering how jailbroken states persist across GPT sessions through context inheritance.',
-    url: '/ai-security/jailbreaking/context-inheritance-exploit',
-    tags: ['jailbreaking', 'GPT', 'original-research'],
-    date: '2025-01-04'
+    label: 'Framework',
+    title: 'AATMF — Adversarial AI Threat Modeling',
+    url: '/frameworks/aatmf/'
   },
   {
-    title: 'The Custom Instruction Backdoor',
-    description: 'Uncovering emergent prompt injection risks through ChatGPT custom instructions.',
-    url: '/ai-security/prompt-injection/custom-instruction-backdoor',
-    tags: ['prompt-injection', 'ChatGPT', 'backdoor'],
-    date: '2025-05-18'
+    label: 'Research',
+    title: 'LLM Jailbreaking & Prompt Injection',
+    url: '/ai-security/'
   },
   {
-    title: 'MCP Security Threat Analysis',
-    description: 'Comprehensive security analysis of the Model Context Protocol vulnerabilities.',
-    url: '/ai-security/prompt-injection/mcp-threat-analysis',
-    tags: ['MCP', 'prompt-injection', 'agentic-AI'],
-    date: '2025-05-18'
+    label: 'Book',
+    title: 'Adversarial Minds — Social Engineering Psychology',
+    url: '/adversarial-minds/'
   }
 ];
 ---
@@ -47,166 +41,246 @@ const featuredArticles = [
   <WebSiteSchema />
   <PersonSchema />
 
-  <!-- Hero Section -->
-  <section class="relative py-20 md:py-32" style="background: linear-gradient(180deg, #0a0a0a 0%, #111 100%);">
-    <div class="main-content fade-in">
-      <div class="mb-6">
-        <span class="terminal-prefix font-mono text-sm">whoami</span>
-      </div>
+  <main class="homepage">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <p class="status-line">Currently researching AI agent security</p>
 
-      <h1 class="text-6xl md:text-8xl font-bold mb-6 leading-tight" style="font-family: var(--font-display); letter-spacing: 0.02em;">
-        <span style="color: var(--color-accent-red);">KAI AIZEN</span><br />
-        <span style="color: var(--color-text-primary);">THE JAILBREAK CHEF</span>
-      </h1>
+        <h1 class="headline">
+          <span class="line1">The <span class="accent">Human</span> Link in</span>
+          <span class="line2">Adversarial Security</span>
+        </h1>
 
-      <p class="text-xl md:text-2xl mb-8 leading-relaxed" style="color: var(--color-text-secondary);">
-        Security Researcher & <span style="color: var(--color-accent-red);">5x CVE Holder</span>. Creator of the <span style="color: var(--color-text-primary);">AATMF</span> and <span style="color: var(--color-text-primary);">P.R.O.M.P.T</span> frameworks.
-        Specializing in LLM jailbreaking, prompt injection, and adversarial AI.
-      </p>
-
-      <div class="flex flex-wrap gap-4">
-        <a
-          href="/about"
-          class="px-6 py-3 font-mono font-semibold rounded hover:opacity-80 transition-all"
-          style="background-color: var(--color-accent-red); color: #ffffff;"
-        >
-          Learn More →
-        </a>
-        <a
-          href="/frameworks"
-          class="px-6 py-3 font-mono font-semibold rounded border transition-all hover:bg-[var(--color-accent-red)] hover:border-[var(--color-accent-red)]"
-          style="border-color: var(--color-accent-red); color: var(--color-accent-red);"
-        >
-          View Frameworks
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Credentials Section -->
-  <section class="py-24">
-    <div class="main-content">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-      <div class="card-hover-glow p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-        <div class="text-3xl font-bold font-mono mb-2" style="color: var(--color-accent-red);">5</div>
-        <div class="text-sm font-mono" style="color: var(--color-text-secondary);">CVE Disclosures</div>
-      </div>
-      <div class="card-hover-glow p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-        <div class="text-3xl font-bold font-mono mb-2" style="color: var(--color-accent-red);">3</div>
-        <div class="text-sm font-mono" style="color: var(--color-text-secondary);">Security Frameworks</div>
-      </div>
-      <div class="card-hover-glow p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-        <div class="text-3xl font-bold font-mono mb-2" style="color: var(--color-accent-red);">20+</div>
-        <div class="text-sm font-mono" style="color: var(--color-text-secondary);">Published Articles</div>
-      </div>
-      <div class="card-hover-glow p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-        <div class="text-3xl font-bold font-mono mb-2" style="color: var(--color-accent-red);">1</div>
-        <div class="text-sm font-mono" style="color: var(--color-text-secondary);">Published Book</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Featured Research -->
-  <section class="py-24">
-    <div class="main-content">
-      <h2 class="section-header text-3xl font-bold font-mono mb-12" style="color: var(--color-accent-red);">
-        Featured Research
-      </h2>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {featuredArticles.map(article => (
-        <a
-          href={article.url}
-          class="card-hover-glow group p-6 rounded-lg transition-all hover:scale-[1.02]"
-          style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
-        >
-          <div class="flex flex-wrap gap-2 mb-4">
-            {article.tags.map(tag => (
-              <span
-                class="px-2 py-1 text-xs font-mono rounded"
-                style="background-color: var(--color-bg); color: var(--color-text-muted);"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          <h3 class="text-xl font-bold font-mono mb-3 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
-            {article.title}
-          </h3>
-
-          <p class="text-sm mb-4" style="color: var(--color-text-secondary);">
-            {article.description}
-          </p>
-
-          <div class="text-xs font-mono" style="color: var(--color-text-muted);">
-            {new Date(article.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-          </div>
-        </a>
-      ))}
-    </div>
-
-      <div class="text-center mt-12">
-        <a
-          href="/ai-security"
-          class="inline-block px-6 py-3 font-mono font-semibold rounded border transition-colors hover:bg-[var(--color-accent-red)] hover:border-[var(--color-accent-red)]"
-          style="border-color: var(--color-accent-red); color: var(--color-accent-red);"
-        >
-          View All Research →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Frameworks Section -->
-  <section class="py-24">
-    <div class="main-content">
-      <h2 class="section-header text-3xl font-bold font-mono mb-12" style="color: var(--color-accent-red);">
-        Security Frameworks
-      </h2>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <a
-        href="/frameworks/aatmf"
-        class="card-hover-glow group p-8 rounded-lg transition-all hover:scale-[1.02]"
-        style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
-      >
-        <h3 class="text-2xl font-bold font-mono mb-3 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
-          AATMF
-        </h3>
-        <p class="text-sm mb-4" style="color: var(--color-text-secondary);">
-          Adversarial AI Threat Modeling Framework. 14 tactics, 40+ techniques, quantitative risk scoring.
+        <p class="subtitle">
+          Bridging technical exploitation and psychological manipulation through adversarial AI research.
         </p>
-      </a>
 
-      <a
-        href="/frameworks/prompt"
-        class="card-hover-glow group p-8 rounded-lg transition-all hover:scale-[1.02]"
-        style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
-      >
-        <h3 class="text-2xl font-bold font-mono mb-3 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
-          P.R.O.M.P.T
-        </h3>
-        <p class="text-sm mb-4" style="color: var(--color-text-secondary);">
-          Systematic prompt engineering methodology. Purpose, Results, Obstacles, Mindset, Preferences, Technical.
+        <p class="credentials">
+          Creator of AATMF <span class="sep">•</span> Author of Adversarial Minds <span class="sep">•</span> 5 CVEs
         </p>
-      </a>
 
-      <a
-        href="/frameworks/sef"
-        class="card-hover-glow group p-8 rounded-lg transition-all hover:scale-[1.02]"
-        style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
-      >
-        <h3 class="text-2xl font-bold font-mono mb-3 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
-          SEF
-        </h3>
-        <p class="text-sm mb-4" style="color: var(--color-text-secondary);">
-          Social Engineering Framework. Structured methodology for SE assessments.
+        <p class="byline">
+          Kai Aizen — SnailSploit / The Jailbreak Chef
         </p>
-      </a>
-    </div>
-    </div>
-  </section>
+
+        <div class="button-row">
+          <a href="/about/" class="btn btn-primary">About Me</a>
+          <a href="/frameworks/" class="btn btn-secondary">View Frameworks</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Section -->
+    <section class="featured">
+      <h2 class="section-header">Recent Work</h2>
+
+      <div class="cards-grid">
+        {featuredCards.map(card => (
+          <a href={card.url} class="card">
+            <span class="card-label">{card.label}</span>
+            <span class="card-title">{card.title}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
 
   <Footer slot="footer" />
 </BaseLayout>
+
+<style>
+  .homepage {
+    background: #0a0a0a;
+    min-height: 100vh;
+  }
+
+  /* Hero Section */
+  .hero {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 4rem;
+  }
+
+  .hero-content {
+    max-width: 900px;
+    text-align: center;
+  }
+
+  .status-line {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: #555555;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+  }
+
+  .headline {
+    font-family: Inter, system-ui, -apple-system, sans-serif;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+
+  .headline .line1 {
+    display: block;
+    color: #ffffff;
+  }
+
+  .headline .line2 {
+    display: block;
+    color: #888888;
+  }
+
+  .headline .accent {
+    color: #dc2626;
+  }
+
+  .subtitle {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 1.125rem;
+    color: #888888;
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .credentials {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: #999999;
+    margin-bottom: 0.75rem;
+  }
+
+  .credentials .sep {
+    color: #555555;
+    margin: 0 0.25em;
+  }
+
+  .byline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: #666666;
+    margin-bottom: 2.5rem;
+  }
+
+  .button-row {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.875rem 1.75rem;
+    border-radius: 4px;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary {
+    background: #dc2626;
+    color: #ffffff;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background: #ef4444;
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: #888888;
+    border: 1px solid #333333;
+  }
+
+  .btn-secondary:hover {
+    border-color: #888888;
+    color: #ffffff;
+  }
+
+  /* Featured Section */
+  .featured {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 6rem 2rem 4rem;
+  }
+
+  .section-header {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #555555;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .card {
+    display: block;
+    background: #111111;
+    border: 1px solid #222222;
+    border-radius: 4px;
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .card:hover {
+    border-color: #dc2626;
+  }
+
+  .card-label {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #dc2626;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-title {
+    display: block;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #ffffff;
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .hero {
+      padding: 2rem;
+    }
+
+    .cards-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .button-row {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .btn {
+      width: 100%;
+      max-width: 280px;
+      text-align: center;
+    }
+  }
+</style>
