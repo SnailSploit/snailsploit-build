@@ -14,17 +14,6 @@ export default defineConfig({
 
   integrations: [
     sitemap({
-      filter: (page) => {
-        // Exclude thin/coming soon pages from sitemap
-        const excludePaths = [
-          '/frameworks/sef/',
-          '/security-research/cves/cve-2025-9776/',
-          '/security-research/cves/cve-2025-11171/',
-          '/security-research/cves/cve-2025-11174/',
-          '/security-research/cves/cve-2025-12163/',
-        ];
-        return !excludePaths.some(path => page.includes(path));
-      },
       serialize: (item) => {
         // Set priority based on page type
         const url = item.url;
