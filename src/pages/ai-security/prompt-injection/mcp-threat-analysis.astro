@@ -19,19 +19,15 @@ import ArticleLayout from '../../../layouts/ArticleLayout.astro';
   readingTime="15 min read"
 >
 
-<h2>Advanced Threat Analysis of the Model Context Protocol (MCP): Vulnerabilities, Attack Chains, and Defensive Strategies</h2>
+<p class="lead"><strong>Advanced threat analysis of MCP vulnerabilities, attack chains, and defensive strategies mapped to Ai-PT-F and OWASP Top 10 for LLM Applications, 2025.</strong></p>
 
-<blockquote>
-Mapped to the Adversarial AI Prompting Framework (Ai-PT-F) and the OWASP Top 10 for LLM Applications, 2025
-</blockquote>
-
-<h3>1. Abstract</h3>
+<h2>1. Abstract</h2>
 
 <p>The Model Context Protocol (MCP) is emerging as a powerful "USB-C for AI," standardizing how Large Language Models (LLMs) connect with external tools, data sources, and other AI agents. This promise comes with a range of critical security risks: prompt injection, Trojan-horse resource data, conversation state exploits, and supply-chain compromises. By mapping these vulnerabilities to the Adversarial AI Prompting Framework (Ai-PT-F) [2,10] — which catalogs 50+ tactics for subverting AI guardrails — and aligning them with the OWASP Top 10 for LLM Applications (2025) [3], this paper analyzes multi-stage threat scenarios. It also illustrates real-world examples, such as cross-model context inheritance (e.g., GPT-4o to GPT-01) [8] and gradual jailbreaking through repeated social engineering or double encoding [9]. In conclusion, a defense-in-depth posture is recommended, encompassing strong input sanitization, conversation state integrity, sandboxed tool design, adversarial training on "jailbroken" transcripts, and continuous red teaming.</p>
 
-<h3>2. Introduction</h3>
+<h2>2. Introduction</h2>
 
-<h4>2.1 The Significance of MCP Security</h4>
+<h3>2.1 The Significance of MCP Security</h3>
 
 <p>Modern AI solutions demand real-time data retrieval, code execution, and multi-agent workflows. The Model Context Protocol (MCP) standardizes these interactions, letting an LLM "host" seamlessly connect with one or more MCP "servers," which advertise "tools" (APIs, processes) and "resources" (data documents) [1]. By exchanging JSON-formatted requests and responses, MCP reduces developer friction but expands the attack surface:</p>
 
@@ -41,7 +37,7 @@ Mapped to the Adversarial AI Prompting Framework (Ai-PT-F) and the OWASP Top 10 
 <li><strong>Excessive Agency:</strong> Tools endowed with full shell or file access risk major system compromise if subverted.</li>
 </ul>
 
-<h4>2.2 Contextual Frameworks: Ai-PT-F and OWASP LLM Top 10</h4>
+<h3>2.2 Contextual Frameworks: Ai-PT-F and OWASP LLM Top 10</h3>
 
 <p>Two frameworks guide the analysis:</p>
 
@@ -60,7 +56,7 @@ Mapped to the Adversarial AI Prompting Framework (Ai-PT-F) and the OWASP Top 10 
 </li>
 </ol>
 
-<h3>3. MCP Architecture and Attack Surface</h3>
+<h2>3. MCP Architecture and Attack Surface</h2>
 
 <p><em>(Figure 1: Illustrative diagram: Host ↔ MCP Client ↔ One or More MCP Servers, highlighting tool/resource definitions as injection vectors.)</em></p>
 
@@ -82,7 +78,7 @@ Mapped to the Adversarial AI Prompting Framework (Ai-PT-F) and the OWASP Top 10 
 <li>Supply Chain Compromise (malicious connectors, updated plugins)</li>
 </ol>
 
-<h3>4. Offensive Attack Chains (Ai-PT-F Model)</h3>
+<h2>4. Offensive Attack Chains (Ai-PT-F Model)</h2>
 
 <p>According to Ai-PT-F [2], LLM-based exploits unfold through four stages:</p>
 
@@ -95,9 +91,9 @@ Mapped to the Adversarial AI Prompting Framework (Ai-PT-F) and the OWASP Top 10 
 
 <p>In MCP, each stage can be magnified via multi-turn dialogues, cross-model "jailbroken" transcripts, or supply-chain "rug pulls" (Sections 5.6–5.7).</p>
 
-<h3>5. MCP Vulnerabilities and Example Exploits</h3>
+<h2>5. MCP Vulnerabilities and Example Exploits</h2>
 
-<h4>5.1 Prompt Injection & Context Manipulation (LLM01)</h4>
+<h3>5.1 Prompt Injection & Context Manipulation (LLM01)</h3>
 
 <p>Prompt injection (OWASP LLM01) is arguably the core LLM threat [3]. Under MCP:</p>
 
@@ -115,7 +111,7 @@ Attackers embed hidden instructions or Trojan text into data the LLM retrieves, 
 
 <p><em>(Mitigations in Section 7.1.)</em></p>
 
-<h4>5.2 Context-Compliance Attacks (CCA)</h4>
+<h3>5.2 Context-Compliance Attacks (CCA)</h3>
 
 <p>Context-Compliance Attacks exploit multi-turn conversation states, forging user/assistant messages that suggest prior approvals [4]. For instance:</p>
 
@@ -131,7 +127,7 @@ Attackers embed hidden instructions or Trojan text into data the LLM retrieves, 
 
 <p><em>(Mitigations: 7.2.)</em></p>
 
-<h4>5.3 Tool / Resource / Supply-Chain Exploits (LLM03, LLM06)</h4>
+<h3>5.3 Tool / Resource / Supply-Chain Exploits (LLM03, LLM06)</h3>
 
 <p>MCP's modular design relies on external connectors, raising supply-chain risks:</p>
 
@@ -143,7 +139,7 @@ Attackers embed hidden instructions or Trojan text into data the LLM retrieves, 
 
 <p><em>(Mitigations: sandboxing, code signing, version pinning; see 7.3.)</em></p>
 
-<h4>5.4 Data Exfiltration & Leakage (LLM02, LLM07)</h4>
+<h3>5.4 Data Exfiltration & Leakage (LLM02, LLM07)</h3>
 
 <p>Data leakage occurs when a compromised LLM returns sensitive info (OWASP LLM02) via:</p>
 
@@ -156,7 +152,7 @@ Attackers embed hidden instructions or Trojan text into data the LLM retrieves, 
 
 <p><em>(Mitigations: 7.4.)</em></p>
 
-<h4>5.5 Advanced Multi-Agent & Denial-of-Service Scenarios (LLM08–10)</h4>
+<h3>5.5 Advanced Multi-Agent & Denial-of-Service Scenarios (LLM08–10)</h3>
 
 <p>When multiple LLMs or multi-agent setups share context [7]:</p>
 
@@ -168,13 +164,13 @@ Attackers embed hidden instructions or Trojan text into data the LLM retrieves, 
 
 <p><em>(Mitigations: cryptographic signing, strict rate limiting, recursion bounds.)</em></p>
 
-<h4>5.6 Cross-Model Context Transfer Exploits (GPT-01 Example)</h4>
+<h3>5.6 Cross-Model Context Transfer Exploits (GPT-01 Example)</h3>
 
 <p>Attackers can import a jailbroken transcript from one model (e.g., GPT-4o) into another (e.g., GPT-01), effectively transferring the compromised state [8]. If an MCP "resource" stores the prior conversation verbatim, any LLM retrieving it can inherit the exploit.</p>
 
 <p><em>(Mitigations: filter user-provided transcripts, train LLMs to detect imported jailbreaks; see Section 6.)</em></p>
 
-<h4>5.7 Jailbreaking Through Gradual Escalation & Double Encoding</h4>
+<h3>5.7 Jailbreaking Through Gradual Escalation & Double Encoding</h3>
 
 <p>Adversaries often use stealthy, stepwise approaches, referencing legitimate "security research" or EDR testing [9]:</p>
 
@@ -186,7 +182,7 @@ Attackers embed hidden instructions or Trojan text into data the LLM retrieves, 
 
 <p><em>(Mitigations: advanced logging, anomaly detection, adversarial training in Section 6.)</em></p>
 
-<h3>6. Data-Driven Defenses: Training on Jailbroken Conversations</h3>
+<h2>6. Data-Driven Defenses: Training on Jailbroken Conversations</h2>
 
 <p>Traditional rule-based filters can be outmaneuvered by multi-turn or encoded exploits. A robust complement is adversarial training (or fine-tuning) on a corpus of known jailbreak transcripts [2,9,10]:</p>
 
@@ -197,9 +193,9 @@ Attackers embed hidden instructions or Trojan text into data the LLM retrieves, 
 <li><strong>Enhanced Multi-Turn Awareness:</strong> Target scenarios where attackers escalate gradually or pose as legitimate security researchers.</li>
 </ol>
 
-<h3>7. Defensive Strategies: A Layered Framework</h3>
+<h2>7. Defensive Strategies: A Layered Framework</h2>
 
-<h4>7.1 Protocol, Server, and Client Hardening</h4>
+<h3>7.1 Protocol, Server, and Client Hardening</h3>
 
 <ul>
 <li><strong>Strict Input Validation:</strong> MCP servers enforce JSON schemas, removing suspicious tokens or hidden directives.</li>
@@ -207,7 +203,7 @@ Attackers embed hidden instructions or Trojan text into data the LLM retrieves, 
 <li><strong>Signed Tool Definitions:</strong> Treat all tool descriptions as hostile unless cryptographically verified.</li>
 </ul>
 
-<h4>7.2 Secure Conversation State Management</h4>
+<h3>7.2 Secure Conversation State Management</h3>
 
 <ul>
 <li><strong>Server-Side Authority:</strong> Keep canonical conversation logs on a trusted server.</li>
@@ -215,7 +211,7 @@ Attackers embed hidden instructions or Trojan text into data the LLM retrieves, 
 <li><strong>Version Compatibility:</strong> Force matching or tested versions of MCP on both sides.</li>
 </ul>
 
-<h4>7.3 Sandboxing & Least Privilege Application</h4>
+<h3>7.3 Sandboxing & Least Privilege Application</h3>
 
 <ul>
 <li><strong>Tool Isolation:</strong> Containerize or WASM-sandbox each tool.</li>
@@ -223,7 +219,7 @@ Attackers embed hidden instructions or Trojan text into data the LLM retrieves, 
 <li><strong>User Consent:</strong> Gate high-impact commands behind explicit confirmations.</li>
 </ul>
 
-<h4>7.4 Monitoring, Auditing, and Adversarial Testing</h4>
+<h3>7.4 Monitoring, Auditing, and Adversarial Testing</h3>
 
 <ul>
 <li><strong>Comprehensive Logging:</strong> Capture requests/responses and partial conversation contexts.</li>
@@ -231,7 +227,7 @@ Attackers embed hidden instructions or Trojan text into data the LLM retrieves, 
 <li><strong>Continuous Red Teaming:</strong> Regularly test MCP deployments against Ai-PT-F scenarios, including cross-model infiltration and double encoding [2,9,10].</li>
 </ul>
 
-<h4>7.5 Data-Driven Defenses (Integration)</h4>
+<h3>7.5 Data-Driven Defenses (Integration)</h3>
 
 <ul>
 <li><strong>Adversarial Corpus:</strong> Build a labeled dataset reflecting real exploit patterns.</li>
@@ -239,7 +235,7 @@ Attackers embed hidden instructions or Trojan text into data the LLM retrieves, 
 <li><strong>Hybrid Security:</strong> Combine learned detection with policy-based gating and sandbox constraints.</li>
 </ul>
 
-<h3>8. Mapping Mitigations to OWASP LLM Top 10</h3>
+<h2>8. Mapping Mitigations to OWASP LLM Top 10</h2>
 
 <table>
 <thead>
@@ -280,7 +276,7 @@ Attackers embed hidden instructions or Trojan text into data the LLM retrieves, 
 </tbody>
 </table>
 
-<h3>9. Conclusion</h3>
+<h2>9. Conclusion</h2>
 
 <p>The Model Context Protocol (MCP) standardizes how LLMs interface with external tools, offering plugin-like extensibility. However, it simultaneously expands adversarial opportunities, from Trojan instructions in resource data to cross-model "context inheritance." Techniques cataloged in the Adversarial AI Prompting Framework (Ai-PT-F) [2,9,10] — aligned with the OWASP LLM Top 10 [3] — illustrate how attackers can stealthily escalate from benign queries to advanced sabotage or data leaks.</p>
 
@@ -296,7 +292,7 @@ Attackers embed hidden instructions or Trojan text into data the LLM retrieves, 
 
 <p>With these layered measures, organizations can harness MCP's benefits — real-time AI augmentation, multi-agent collaboration — while curtailing the sophisticated exploit chains adversaries now employ.</p>
 
-<h3>About the Author</h3>
+<h2>About the Author</h2>
 
 <p>Kai Aizen (aka SnailSploit) is a Red Team Operator and AI Security Engineer who specializes in deep technical research on multi-agent threats, prompt injection, and protocol-level exploitation in AI. He has led high-profile penetration testing engagements and authored the Adversarial AI Prompting Framework (Ai-PT-F) to systematically evaluate LLM security. He frequently publishes offensive security insights and AI exploitation frameworks at The JailBreakChef.</p>
 
@@ -307,7 +303,7 @@ Attackers embed hidden instructions or Trojan text into data the LLM retrieves, 
 <li><a href="http://thejailbreakchef.com">TheJailBreakChef.com</a></li>
 </ul>
 
-<h3>References</h3>
+<h2>References</h2>
 
 <ol>
 <li>Anthropic. (2025). <em>Introducing the Model Context Protocol (MCP)</em>. <a href="https://www.anthropic.com/model-context-protocol">https://www.anthropic.com/model-context-protocol</a></li>
