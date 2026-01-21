@@ -4,6 +4,30 @@ import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import PersonSchema from '../components/schemas/PersonSchema.astro';
 import BreadcrumbSchema from '../components/schemas/BreadcrumbSchema.astro';
+import FAQPageSchema from '../components/schemas/FAQPageSchema.astro';
+
+const aboutFaqs = [
+  {
+    question: "Who is Kai Aizen?",
+    answer: "Kai Aizen, also known as SnailSploit or The Jailbreak Chef, is an AI security researcher specializing in LLM jailbreaking, prompt injection attacks, and adversarial AI. He is a 5x CVE holder and creator of the AATMF and P.R.O.M.P.T frameworks."
+  },
+  {
+    question: "What is SnailSploit?",
+    answer: "SnailSploit is the professional alias and brand of Kai Aizen, used for his AI security research, CVE disclosures, open-source tools, and security publications."
+  },
+  {
+    question: "What CVEs has Kai Aizen discovered?",
+    answer: "Kai Aizen has discovered and responsibly disclosed 5 CVEs in WordPress plugins: CVE-2025-9776, CVE-2025-11171, CVE-2025-11174, CVE-2025-12163, and CVE-2025-12030 (IDOR in ACF to REST API)."
+  },
+  {
+    question: "What is AATMF?",
+    answer: "AATMF (Adversarial AI Threat Modeling Framework) is a comprehensive methodology created by Kai Aizen for threat modeling AI systems. It includes 14 tactics, 40+ techniques, quantitative risk scoring, and integrates with MITRE ATT&CK."
+  },
+  {
+    question: "How can I contact Kai Aizen for security research or speaking engagements?",
+    answer: "You can contact Kai Aizen via email at kai@snailsploit.com, through LinkedIn at linkedin.com/in/kaiaizen, or via GitHub at github.com/SnailSploit."
+  }
+];
 ---
 
 <BaseLayout
@@ -26,6 +50,7 @@ import BreadcrumbSchema from '../components/schemas/BreadcrumbSchema.astro';
     {name: "Home", url: "https://snailsploit.com"},
     {name: "About", url: "https://snailsploit.com/about"}
   ]} />
+  <FAQPageSchema faqs={aboutFaqs} />
 
   <article class="main-content py-12 fade-in">
     <header class="mb-16">

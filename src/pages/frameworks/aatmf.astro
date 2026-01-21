@@ -3,6 +3,30 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navigation from '../../components/Navigation.astro';
 import Footer from '../../components/Footer.astro';
 import BreadcrumbSchema from '../../components/schemas/BreadcrumbSchema.astro';
+import FAQPageSchema from '../../components/schemas/FAQPageSchema.astro';
+
+const aatmfFaqs = [
+  {
+    question: "What is AATMF?",
+    answer: "AATMF (Adversarial AI Threat Modeling Framework) is a comprehensive methodology for assessing and mitigating adversarial AI threats. It includes 14 tactics, 40+ techniques, quantitative risk scoring, and integrates with MITRE ATT&CK."
+  },
+  {
+    question: "How does AATMF calculate risk scores?",
+    answer: "AATMF uses the formula: AATMF-R = L × I × (6 − D) × (6 − R), where L is Likelihood (1-5), I is Impact (1-5), D is Detectability (1-5, lower is stealthier), and R is Recoverability (1-5, lower is harder). Scores above 200 are considered Critical."
+  },
+  {
+    question: "What systems does AATMF cover?",
+    answer: "AATMF covers LLM applications, RAG pipelines (ingest, store, retrieve, re-rank), multimodal models, agentic/orchestrated systems (planner/critic/executor), and MLOps workflows including pretraining, SFT, RLHF/RLAIF, evaluation, and deployment."
+  },
+  {
+    question: "Is AATMF free to use?",
+    answer: "Yes, AATMF is open-source and released under CC BY-SA 4.0 license. It's available on GitHub for anyone to use, modify, and contribute to."
+  },
+  {
+    question: "How does AATMF integrate with other frameworks?",
+    answer: "AATMF provides crosswalks to OWASP LLM Top-10 for public risk language, NIST AI RMF for Govern/Map/Measure/Manage alignment, and MITRE ATLAS for adversary TTP mapping."
+  }
+];
 
 const articleSchema = {
   "@context": "https://schema.org",
@@ -44,6 +68,7 @@ const articleSchema = {
     {name: "Frameworks", url: "https://snailsploit.com/frameworks"},
     {name: "AATMF", url: "https://snailsploit.com/frameworks/aatmf"}
   ]} />
+  <FAQPageSchema faqs={aatmfFaqs} />
 
   <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <header class="mb-12">

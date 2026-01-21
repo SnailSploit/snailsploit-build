@@ -3,6 +3,30 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navigation from '../../components/Navigation.astro';
 import Footer from '../../components/Footer.astro';
 import BreadcrumbSchema from '../../components/schemas/BreadcrumbSchema.astro';
+import FAQPageSchema from '../../components/schemas/FAQPageSchema.astro';
+
+const promptFaqs = [
+  {
+    question: "What does P.R.O.M.P.T stand for?",
+    answer: "P.R.O.M.P.T stands for Purpose, Results, Obstacles, Mindset, Preferences, and Technical. Each letter represents a key principle for crafting effective prompts for AI interactions."
+  },
+  {
+    question: "Why is context important in prompt engineering?",
+    answer: "Context is crucial because LLMs generate responses based on the information provided. Clear context helps the AI understand nuances, tailor responses to your audience, and produce more relevant and accurate outputs."
+  },
+  {
+    question: "How does the P.R.O.M.P.T framework improve AI outputs?",
+    answer: "The framework improves AI outputs by providing a systematic approach that addresses purpose clarity, output structure, risk mitigation through guardrails, contextual background, stylistic preferences, and technical precision."
+  },
+  {
+    question: "Can P.R.O.M.P.T be used for cybersecurity applications?",
+    answer: "Yes, the P.R.O.M.P.T framework is particularly useful in cybersecurity for crafting precise prompts for security analysis, red teaming exercises, and exploring AI vulnerabilities while maintaining ethical guardrails."
+  },
+  {
+    question: "Is the P.R.O.M.P.T framework free to use?",
+    answer: "Yes, the P.R.O.M.P.T framework is freely available. It was created by Kai Aizen (SnailSploit) as an open methodology for effective AI interactions."
+  }
+];
 ---
 
 <BaseLayout
@@ -27,6 +51,7 @@ import BreadcrumbSchema from '../../components/schemas/BreadcrumbSchema.astro';
     {name: "Frameworks", url: "https://snailsploit.com/frameworks"},
     {name: "P.R.O.M.P.T", url: "https://snailsploit.com/frameworks/prompt"}
   ]} />
+  <FAQPageSchema faqs={promptFaqs} />
 
   <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <header class="mb-12">
