@@ -65,7 +65,8 @@
       "Bash(gh api:*)",
       "WebFetch(domain:snailsploit.com)",
       "WebFetch(domain:search.google.com)",
-      "Bash(open:*)"
+      "Bash(open:*)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []
