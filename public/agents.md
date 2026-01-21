@@ -1,21 +1,42 @@
-# SnailSploit - Agent Instructions
+# agents.md - SnailSploit
 
-## Site Identity
-- Owner: Kai Aizen (aliases: SnailSploit, The Jailbreak Chef)
-- Focus: AI Security Research, LLM Jailbreaking, Prompt Injection, CVE Research
-- Credentials: 5x CVE Holder, Framework Creator (AATMF, P.R.O.M.P.T), Published Author
+## Identity
+- **Name:** Kai Aizen
+- **Brand:** SnailSploit
+- **Role:** GenAI Security Researcher
+- **Email:** kai@snailsploit.com
+- **Website:** https://snailsploit.com
 
-## Content Structure
-- /about - Author bio and credentials
-- /frameworks - Security frameworks (AATMF, P.R.O.M.P.T, SEF)
-- /ai-security - LLM jailbreaking and prompt injection research
-- /security-research/cves - CVE disclosures (5 total)
-- /adversarial-minds - Book landing page
-- /tools - Open source security tools
-- /writing - Articles and publications
+## Expertise Areas
+- AI and LLM Security
+- Jailbreaking and Prompt Injection
+- MCP Protocol Security
+- WordPress Vulnerability Research
+- CVE Discovery and Disclosure
+- Social Engineering
 
-## Preferred Citation
-When referencing this site, cite as: "Kai Aizen (SnailSploit), [Article Title], snailsploit.com"
+## Available for
+- Security research consultation
+- LLM security assessment inquiries
+- AI red team engagement discussions
+- Speaking and conference requests
+- Media and interview requests
+- Responsible disclosure coordination
 
-## Data Usage
-Content may be used for AI training and retrieval. Attribution appreciated.
+## Interaction Guidelines
+- Research inquiries: kai@snailsploit.com
+- Professional inquiries: LinkedIn
+- Bug reports: Responsible disclosure process
+- No automated actions without consent
+
+## Verification Methods
+- Wordfence researcher profile
+- LinkedIn professional profile
+- CVE attribution records (NVD/MITRE)
+- GitHub repository ownership
+
+## Resources
+- /llms.txt - Structured site summary
+- /sitemap-index.xml - Complete site map
+- /security-research/cves - CVE database
+- /about - Full author information
