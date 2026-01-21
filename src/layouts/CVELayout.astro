@@ -75,6 +75,48 @@ const breadcrumbSchema = {
     { "@type": "ListItem", "position": 4, "name": cveId }
   ]
 };
+
+// FAQPage schema - auto-generated from CVE details
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": `What is ${cveId}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `${cveId} is a ${severity.toLowerCase()} severity vulnerability${vulnerabilityType ? ` (${vulnerabilityType})` : ''} affecting ${affectedSoftware || 'WordPress plugins'}. It was discovered by security researcher Kai Aizen (SnailSploit).`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `How severe is ${cveId}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `${cveId} is rated as ${severity} severity${cvssScore ? ` with a CVSS score of ${cvssScore}` : ''}. ${severity === 'Critical' || severity === 'High' ? 'Immediate patching is recommended.' : 'Users should update to the patched version when available.'}`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `What software is affected by ${cveId}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `${cveId} affects ${affectedSoftware || 'the affected WordPress plugin'}${affectedVersions ? ` in versions ${affectedVersions}` : ''}.${fixedVersion ? ` The vulnerability has been fixed in version ${fixedVersion}.` : ''}`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `How do I fix ${cveId}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": fixedVersion
+          ? `Update ${affectedSoftware || 'the affected plugin'} to version ${fixedVersion} or later to remediate ${cveId}.`
+          : `Check the official NVD entry or vendor advisory for ${cveId} for the latest patching information. Monitor for updates from the plugin developer.`
+      }
+    }
+  ]
+};
 ---
 
 <BaseLayout
@@ -84,7 +126,7 @@ const breadcrumbSchema = {
   ogType="article"
   ogImage={ogImage || `/images/og-cve-${cveId.toLowerCase().replace('cve-', '')}.png`}
   keywords={[...keywords, cveId, 'CVE', 'vulnerability']}
-  schemaData={[techArticleSchema, breadcrumbSchema]}
+  schemaData={[techArticleSchema, breadcrumbSchema, faqSchema]}
   publishedDate={disclosureDate ? new Date(disclosureDate).toISOString() : undefined}
   noindex={noindex}
 >

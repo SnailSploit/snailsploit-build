@@ -55,7 +55,15 @@
       "Bash(git -C /Users/kai/website/snailsploit-build log --oneline -20)",
       "Bash(git -C /Users/kai/website/snailsploit-build log --oneline -- src/layouts/BaseLayout.astro public/robots.txt astro.config.mjs public/_redirects)",
       "Bash(WordPress Plugin Vulnerability Analysis\"\n\n- Add FAQPageSchema component for structured data rich results\n\n- Add FAQPage schemas to key pages:\n  - AATMF framework \\(5 FAQs about threat modeling\\)\n  - P.R.O.M.P.T framework \\(5 FAQs about prompt engineering\\)\n  - About page \\(5 FAQs about Kai Aizen/SnailSploit\\)\n\nThis enables Google rich results for FAQ snippets in search.\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
-      "Bash(open -a \"GitHub Desktop\")"
+      "Bash(open -a \"GitHub Desktop\")",
+      "Bash(git fetch:*)",
+      "Bash(brew install:*)",
+      "Bash(gh auth login:*)",
+      "Bash(gh auth:*)",
+      "Bash(gh repo view:*)",
+      "Bash(gh repo create:*)",
+      "Bash(gh api:*)",
+      "WebFetch(domain:snailsploit.com)"
     ],
     "deny": [],
     "ask": []
