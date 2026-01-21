@@ -1,169 +1,85 @@
-# SnailSploit.com
+# SnailSploit.com Build Package
 
-AI security researcher website built with Astro + Tailwind CSS. Dark terminal aesthetic, fully SEO-optimized, AI-discoverable.
-
-## 🎉 Build Status: Foundation Complete
-
-**13 pages built** ✅ | **21 articles to add** ⏳ | **4 CVEs to add** ⏳
-
-## 🚀 Quick Start
-
-```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-# Visit http://localhost:4321
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-```
-
-## 📁 Project Structure
+## Contents
 
 ```
 snailsploit-build/
-├── src/
-│   ├── layouts/          # Page templates (Base, Article, CVE, Index)
-│   ├── components/       # Navigation, Footer
-│   ├── pages/           # All site pages
-│   └── styles/          # Global CSS with design tokens
-├── public/              # Static assets
-│   ├── robots.txt       # AI-friendly crawl rules
-│   ├── llms.txt        # LLM discoverability
-│   └── agents.md       # AI agent guidelines
-├── content-raw/         # Medium export (source material)
-├── INSTRUCTIONS.md      # Original build spec
-├── SEO-SPEC.md         # SEO strategy
-└── BUILD-COMPLETE.md   # 📖 COMPLETE DOCUMENTATION
+├── INSTRUCTIONS.md      # Complete build specification (give this to Claude Code)
+├── SEO-SPEC.md          # SEO strategy and keyword targeting
+├── CONTENT-INVENTORY.md # Categorized list of all content
+└── content-raw/         # Medium export with all articles
+    └── medium-export/
+        └── posts/       # 21 published + drafts
 ```
 
-## ✅ What's Built
+## How to Use with Claude Code
 
-### Core Pages
-- ✅ Homepage with hero and featured content
-- ✅ About page with credentials and bio
-- ✅ Tools showcase
-- ✅ Adversarial Minds book landing page
-
-### Framework Pages
-- ✅ AATMF (Adversarial AI Threat Modeling)
-- ✅ P.R.O.M.P.T (Prompt Engineering)
-- ✅ SEF (Social Engineering - coming soon)
-
-### Research Pages
-- ✅ Security Research index
-- ✅ CVE index (lists all 5 CVEs)
-- ✅ CVE-2025-12030 (example)
-- ✅ AI Security index
-
-### SEO & GEO
-- ✅ robots.txt (welcomes AI crawlers)
-- ✅ llms.txt (LLM-optimized)
-- ✅ agents.md (AI agent guidelines)
-- ✅ Sitemap (auto-generated)
-- ✅ Schema markup on all pages
-
-## ⏳ What Needs to Be Added
-
-### Priority 1: Flagship Articles (5)
-1. Context Inheritance Exploit
-2. Custom Instruction Backdoor
-3. MCP Threat Analysis
-4. Memory Manipulation Attacks
-5. ChatGPT Context Jailbreak
-
-### Priority 2: Remaining CVEs (4)
-- CVE-2025-9776
-- CVE-2025-11171
-- CVE-2025-11174
-- CVE-2025-12163
-
-### Priority 3: All Other Articles (16)
-See BUILD-COMPLETE.md for complete list
-
-## 📖 Documentation
-
-**→ [BUILD-COMPLETE.md](./BUILD-COMPLETE.md)** - Complete documentation including:
-- Detailed build status
-- How to add articles and CVEs
-- Deployment instructions
-- SEO checklist
-- Internal linking strategy
-- Testing checklist
-- File structure
-
-## 🚀 Deployment
-
-### Cloudflare Pages
+### 1. Setup
 
 ```bash
-# Method 1: Dashboard
-1. Push to GitHub
-2. Connect repo in Cloudflare Pages
-3. Build command: npm run build
-4. Build output: dist
-
-# Method 2: CLI
-npx wrangler pages deploy dist
+mkdir snailsploit-site
+cd snailsploit-site
+cp -r /path/to/snailsploit-build/* .
 ```
 
-## 🎨 Design System
+### 2. Launch Claude Code
 
-- **Dark terminal/cyberpunk aesthetic**
-- **Colors:** Black backgrounds, cyan accents, terminal green
-- **Fonts:** JetBrains Mono (headings/code), Inter (body)
-- **Responsive:** Mobile-first design
-- **Performance:** Static site, optimized builds
+```bash
+claude
+```
 
-## 📊 SEO Features
+### 3. Give Claude Code this prompt:
 
-- Complete meta tags (title, description, OG, Twitter)
-- Schema.org structured data
-- Semantic HTML
-- Fast load times
-- Mobile responsive
-- AI crawler optimization
-- Internal linking silos
+```
+Read INSTRUCTIONS.md and SEO-SPEC.md completely before starting.
 
-## 🛠 Tech Stack
+Build the complete SnailSploit.com Astro site following the specifications exactly.
 
-- **Framework:** Astro 5.x (static site generator)
-- **Styling:** Tailwind CSS v4
-- **Fonts:** Google Fonts (JetBrains Mono, Inter)
-- **Deployment:** Cloudflare Pages
-- **SEO:** Built-in sitemap, robots.txt, structured data
+Content is in ./content-raw/medium-export/posts/
 
-## 📝 Adding Content
+Parse the HTML files, convert to Markdown, and place in the correct directories as mapped in INSTRUCTIONS.md.
 
-See [BUILD-COMPLETE.md](./BUILD-COMPLETE.md) for detailed instructions on:
-- Converting Medium HTML to articles
-- Creating new CVE pages
-- Adding section index pages
-- Maintaining consistent style
+Create all pages with the exact meta tags specified.
 
-## 🔍 Key Files
+Implement all schema markup.
+
+Create the GEO files (robots.txt, llms.txt, agents.md).
+
+Output a production-ready site that builds with `npm run build`.
+```
+
+### 4. Deploy to Cloudflare Pages
+
+1. Push the built site to GitHub
+2. Connect repo to Cloudflare Pages
+3. Build settings:
+   - Build command: `npm run build`
+   - Build output: `dist`
+4. Add custom domain: snailsploit.com
+
+## Key Files for Claude Code
 
 | File | Purpose |
 |------|---------|
-| BUILD-COMPLETE.md | **📖 Start here** - Complete documentation |
-| INSTRUCTIONS.md | Original build specification |
-| SEO-SPEC.md | Keyword strategy and SEO plan |
-| CONTENT-INVENTORY.md | Content categorization |
+| INSTRUCTIONS.md | Complete build spec with all meta tags, structure, content mapping |
+| SEO-SPEC.md | Keyword strategy, competitive positioning, content priorities |
+| CONTENT-INVENTORY.md | Which files go where, what to publish vs skip |
 
-## 🌐 Live Site
+## Content Summary
 
-- **Domain:** snailsploit.com (to be configured)
-- **Built pages:** 13/45+
-- **Build time:** ~500ms
-- **Status:** Ready for content addition
+- **21 published articles** → categorized into silos
+- **1 draft to publish** → AATMF framework (comprehensive)
+- **5 CVE pages** → fetch details from NVD
+- **3 framework pages** → AATMF, P.R.O.M.P.T, SEF
+- **7 flagship articles** → prioritize for internal linking
 
----
+## Post-Build Checklist
 
-**Author:** Kai Aizen (The Jailbreak Chef)
-**Contact:** kai@snailsploit.com
-**GitHub:** github.com/SnailSploit
+- [ ] All pages render correctly
+- [ ] Meta tags match specifications
+- [ ] Schema markup validates (Rich Results Test)
+- [ ] Internal links work
+- [ ] robots.txt accessible
+- [ ] llms.txt accessible
+- [ ] Sitemap generates
+- [ ] Lighthouse score 90+
