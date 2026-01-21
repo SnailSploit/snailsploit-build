@@ -5,6 +5,46 @@ import Footer from '../components/Footer.astro';
 import WebSiteSchema from '../components/schemas/WebSiteSchema.astro';
 import PersonSchema from '../components/schemas/PersonSchema.astro';
 
+// Homepage FAQ schema for rich results
+const homepageFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Who is Kai Aizen (SnailSploit)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Kai Aizen, known as SnailSploit or The Jailbreak Chef, is a GenAI security researcher specializing in LLM jailbreaking, prompt injection, and adversarial AI. He has discovered 5 CVEs, created the AATMF threat modeling framework, and authored the book Adversarial Minds on social engineering psychology."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the AATMF framework?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AATMF (Adversarial AI Threat Modeling Framework) is an open-source framework for AI red teaming with 14 tactics and 40+ techniques. It provides quantitative risk scoring and integrates with MITRE ATT&CK for comprehensive AI security assessments."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is LLM jailbreaking?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LLM jailbreaking refers to techniques used to bypass safety guardrails and content policies in large language models like ChatGPT. This includes prompt injection, context manipulation, and multi-turn attacks that exploit how AI systems process and respond to inputs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What CVEs has Kai Aizen discovered?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Kai Aizen has discovered 5 CVEs in WordPress plugins including CVE-2025-9776 (SQL Injection in CatFolders), CVE-2025-11171 (Missing Auth in Chartify), CVE-2025-11174 (Missing Auth in Document Library Lite), CVE-2025-12030 (IDOR in ACF to REST API), and CVE-2025-12163 (XSS in OmniPress)."
+      }
+    }
+  ]
+};
+
 const featuredCards = [
   {
     label: 'Framework',
@@ -43,6 +83,7 @@ const featuredCards = [
   <Navigation slot="header" />
   <WebSiteSchema />
   <PersonSchema />
+  <script type="application/ld+json" set:html={JSON.stringify(homepageFaqSchema)} />
 
   <main class="homepage">
     <!-- Hero Section -->

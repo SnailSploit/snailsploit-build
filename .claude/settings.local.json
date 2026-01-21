@@ -63,7 +63,9 @@
       "Bash(gh repo view:*)",
       "Bash(gh repo create:*)",
       "Bash(gh api:*)",
-      "WebFetch(domain:snailsploit.com)"
+      "WebFetch(domain:snailsploit.com)",
+      "WebFetch(domain:search.google.com)",
+      "Bash(open:*)"
     ],
     "deny": [],
     "ask": []
