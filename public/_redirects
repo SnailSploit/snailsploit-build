@@ -1,31 +1,121 @@
-# Deprecated paths
-/following    /  410
-/followers    /  410
-/tagged/*     /  410
+# ============================================
+# SNAILSPLOIT.COM CLOUDFLARE REDIRECTS
+# ============================================
 
-# Medium-style slug redirects to clean URLs
-/how-i-jailbreaked-the-latest-chatgpt-model-using-context-and-social-awareness-techniques-1ca9af02eba9  /ai-security/jailbreaking/chatgpt-context-jailbreak  301
-/the-hidden-risks-of-ai--an-offensive-perspective-on-emerging-threat-vectors-c316f29fcc77  /ai-security/hidden-risks-offensive-perspective  301
-/exploiting-cloud-vulnerabilities--tools-and-techniques-004e7eb4593c  /security-research/general/cloud-vulnerability-exploitation  301
-/how-your-personal-data-is-for-sale--the-new-frontier-of-identity-theft-06c11692b411  /writing/personal-data-identity-theft  301
-/embracing-ai--adapt-or-die-7e0ec91439da  /writing/embracing-ai-adapt-or-die  301
-/is-ai-inherently-vulnerable--bfc81caf0c52  /ai-security/jailbreaking/ai-inherent-vulnerability  301
-/gpt-01-and-the-context-inheritance-exploit--jailbroken-conversations-don-t-die-14c8714a2dfd  /ai-security/jailbreaking/context-inheritance-exploit  301
-/evading-endpoint-detection-and-response--edr--f18cf2da38ed  /security-research/general/edr-evasion-techniques  301
-/inherent-vulnerabilities-in-ai-systems--d0b39dde21b8  /ai-security/jailbreaking/inherent-ai-vulnerabilities  301
-/advanced-container-escapes--a-principle-based-security-deep-dive-96907f6dea7d  /security-research/general/advanced-container-escapes  301
-/the-last-prompt-engineering-guide-you-ll-ever-read---introducing-p-r-o-m-p-t-98ceb33d53e5  /frameworks/prompt  301
-/the-adversarial-ai-prompting-framework--understanding-and-mitigating-ai-safety-vulnerabilities-a2b030fc2d9d  /frameworks/aatmf  301
-/double-ai--triple-mechanism--cloud-based-obfuscator-built-in-2-hours-bypasses-detection-c55db3d2ce01  /writing/ai-obfuscator-detection-bypass  301
-/advanced-threat-analysis-of-the-model-context-protocol--mcp---ec8edcef812c  /ai-security/prompt-injection/mcp-threat-analysis  301
-/the-custom-instruction-backdoor--uncovering-emergent-prompt-injection-risks-in-chatgpt-5fd57f775693  /ai-security/prompt-injection/custom-instruction-backdoor  301
-/adversarial-minds--why-we-re-still-getting-hacked-by-words--a-book-about-human-vulnerabilities--f2069ae4ace7  /adversarial-minds  301
-/ai-driven-social-engineering--detecting-deepfake-voice-attacks-4f6f61aa2cae  /ai-security/ai-social-engineering-deepfake  301
-/revisiting-the-mcp-protocol--deep-security-dive-across-real-world-vulnerabilities-51fa1d1d102f  /ai-security/prompt-injection/mcp-security-deep-dive  301
-/zero-trust-runtime-security--container-runtime-attestation-428c5f05c3d8  /security-research/general/zero-trust-container-runtime  301
-/making-sense-of-rag--agentic-ai--and-the-new-attack-surface-555a22cac4df  /ai-security/rag-agentic-attack-surface  301
-/the-memory-manipulation-problem--poisoning-ai-context-windows-6acf73771f0b  /ai-security/jailbreaking/memory-manipulation-attacks  301
+# -----------------------------------------
+# DEPRECATED MEDIUM SOCIAL PATHS (301 to /about/)
+# -----------------------------------------
+/following /about/ 301
+/following/ /about/ 301
+/followers /about/ 301
+/followers/ /about/ 301
+/tagged/* / 410
 
-# Legacy URL redirects
-/research-custom_instructions_ba*  /ai-security/prompt-injection/custom-instruction-backdoor  301
-/the-adversarial-ai-prompting-fr*  /frameworks/aatmf  301
+# -----------------------------------------
+# MEDIUM LEGACY ARTICLE REDIRECTS (301)
+# All targets have trailing slashes to match trailingSlash: 'always'
+# -----------------------------------------
+
+# ChatGPT Jailbreak
+/how-i-jailbreaked-the-latest-chatgpt-model-using-context-and-social-awareness-techniques-1ca9af02eba9 /ai-security/jailbreaking/chatgpt-context-jailbreak/ 301
+/how-i-jailbreaked-the-latest-chatgpt-model-using-context-and-social-awareness-techniques-1ca9af02eba9/ /ai-security/jailbreaking/chatgpt-context-jailbreak/ 301
+
+# Hidden Risks of AI
+/the-hidden-risks-of-ai--an-offensive-perspective-on-emerging-threat-vectors-c316f29fcc77 /ai-security/hidden-risks-offensive-perspective/ 301
+/the-hidden-risks-of-ai--an-offensive-perspective-on-emerging-threat-vectors-c316f29fcc77/ /ai-security/hidden-risks-offensive-perspective/ 301
+
+# Cloud Vulnerabilities
+/exploiting-cloud-vulnerabilities--tools-and-techniques-004e7eb4593c /security-research/general/cloud-vulnerability-exploitation/ 301
+/exploiting-cloud-vulnerabilities--tools-and-techniques-004e7eb4593c/ /security-research/general/cloud-vulnerability-exploitation/ 301
+
+# Personal Data Identity Theft
+/how-your-personal-data-is-for-sale--the-new-frontier-of-identity-theft-06c11692b411 /writing/personal-data-identity-theft/ 301
+/how-your-personal-data-is-for-sale--the-new-frontier-of-identity-theft-06c11692b411/ /writing/personal-data-identity-theft/ 301
+
+# Embracing AI
+/embracing-ai--adapt-or-die-7e0ec91439da /writing/embracing-ai-adapt-or-die/ 301
+/embracing-ai--adapt-or-die-7e0ec91439da/ /writing/embracing-ai-adapt-or-die/ 301
+
+# AI Inherently Vulnerable
+/is-ai-inherently-vulnerable--bfc81caf0c52 /ai-security/jailbreaking/ai-inherent-vulnerability/ 301
+/is-ai-inherently-vulnerable--bfc81caf0c52/ /ai-security/jailbreaking/ai-inherent-vulnerability/ 301
+
+# Context Inheritance Exploit
+/gpt-01-and-the-context-inheritance-exploit--jailbroken-conversations-don-t-die-14c8714a2dfd /ai-security/jailbreaking/context-inheritance-exploit/ 301
+/gpt-01-and-the-context-inheritance-exploit--jailbroken-conversations-don-t-die-14c8714a2dfd/ /ai-security/jailbreaking/context-inheritance-exploit/ 301
+
+# EDR Evasion
+/evading-endpoint-detection-and-response--edr--f18cf2da38ed /security-research/general/edr-evasion-techniques/ 301
+/evading-endpoint-detection-and-response--edr--f18cf2da38ed/ /security-research/general/edr-evasion-techniques/ 301
+
+# Inherent AI Vulnerabilities
+/inherent-vulnerabilities-in-ai-systems--d0b39dde21b8 /ai-security/jailbreaking/inherent-ai-vulnerabilities/ 301
+/inherent-vulnerabilities-in-ai-systems--d0b39dde21b8/ /ai-security/jailbreaking/inherent-ai-vulnerabilities/ 301
+
+# Advanced Container Escapes
+/advanced-container-escapes--a-principle-based-security-deep-dive-96907f6dea7d /security-research/general/advanced-container-escapes/ 301
+/advanced-container-escapes--a-principle-based-security-deep-dive-96907f6dea7d/ /security-research/general/advanced-container-escapes/ 301
+
+# P.R.O.M.P.T Framework
+/the-last-prompt-engineering-guide-you-ll-ever-read---introducing-p-r-o-m-p-t-98ceb33d53e5 /frameworks/prompt/ 301
+/the-last-prompt-engineering-guide-you-ll-ever-read---introducing-p-r-o-m-p-t-98ceb33d53e5/ /frameworks/prompt/ 301
+
+# AATMF Framework
+/the-adversarial-ai-prompting-framework--understanding-and-mitigating-ai-safety-vulnerabilities-a2b030fc2d9d /frameworks/aatmf/ 301
+/the-adversarial-ai-prompting-framework--understanding-and-mitigating-ai-safety-vulnerabilities-a2b030fc2d9d/ /frameworks/aatmf/ 301
+
+# AI Obfuscator
+/double-ai--triple-mechanism--cloud-based-obfuscator-built-in-2-hours-bypasses-detection-c55db3d2ce01 /writing/ai-obfuscator-detection-bypass/ 301
+/double-ai--triple-mechanism--cloud-based-obfuscator-built-in-2-hours-bypasses-detection-c55db3d2ce01/ /writing/ai-obfuscator-detection-bypass/ 301
+
+# MCP Threat Analysis
+/advanced-threat-analysis-of-the-model-context-protocol--mcp---ec8edcef812c /ai-security/prompt-injection/mcp-threat-analysis/ 301
+/advanced-threat-analysis-of-the-model-context-protocol--mcp---ec8edcef812c/ /ai-security/prompt-injection/mcp-threat-analysis/ 301
+
+# Custom Instruction Backdoor
+/the-custom-instruction-backdoor--uncovering-emergent-prompt-injection-risks-in-chatgpt-5fd57f775693 /ai-security/prompt-injection/custom-instruction-backdoor/ 301
+/the-custom-instruction-backdoor--uncovering-emergent-prompt-injection-risks-in-chatgpt-5fd57f775693/ /ai-security/prompt-injection/custom-instruction-backdoor/ 301
+
+# Adversarial Minds Book
+/adversarial-minds--why-we-re-still-getting-hacked-by-words--a-book-about-human-vulnerabilities--f2069ae4ace7 /adversarial-minds/ 301
+/adversarial-minds--why-we-re-still-getting-hacked-by-words--a-book-about-human-vulnerabilities--f2069ae4ace7/ /adversarial-minds/ 301
+
+# AI Social Engineering Deepfake
+/ai-driven-social-engineering--detecting-deepfake-voice-attacks-4f6f61aa2cae /ai-security/ai-social-engineering-deepfake/ 301
+/ai-driven-social-engineering--detecting-deepfake-voice-attacks-4f6f61aa2cae/ /ai-security/ai-social-engineering-deepfake/ 301
+
+# MCP Security Deep Dive
+/revisiting-the-mcp-protocol--deep-security-dive-across-real-world-vulnerabilities-51fa1d1d102f /ai-security/prompt-injection/mcp-security-deep-dive/ 301
+/revisiting-the-mcp-protocol--deep-security-dive-across-real-world-vulnerabilities-51fa1d1d102f/ /ai-security/prompt-injection/mcp-security-deep-dive/ 301
+
+# Zero Trust Container Runtime
+/zero-trust-runtime-security--container-runtime-attestation-428c5f05c3d8 /security-research/general/zero-trust-container-runtime/ 301
+/zero-trust-runtime-security--container-runtime-attestation-428c5f05c3d8/ /security-research/general/zero-trust-container-runtime/ 301
+
+# RAG Agentic Attack Surface
+/making-sense-of-rag--agentic-ai--and-the-new-attack-surface-555a22cac4df /ai-security/rag-agentic-attack-surface/ 301
+/making-sense-of-rag--agentic-ai--and-the-new-attack-surface-555a22cac4df/ /ai-security/rag-agentic-attack-surface/ 301
+
+# Memory Manipulation
+/the-memory-manipulation-problem--poisoning-ai-context-windows-6acf73771f0b /ai-security/jailbreaking/memory-manipulation-attacks/ 301
+/the-memory-manipulation-problem--poisoning-ai-context-windows-6acf73771f0b/ /ai-security/jailbreaking/memory-manipulation-attacks/ 301
+
+# -----------------------------------------
+# TRAILING SLASH ENFORCEMENT (301)
+# -----------------------------------------
+/about /about/ 301
+/tools /tools/ 301
+/adversarial-minds /adversarial-minds/ 301
+/ai-security /ai-security/ 301
+/frameworks /frameworks/ 301
+/security-research /security-research/ 301
+/writing /writing/ 301
+/frameworks/aatmf /frameworks/aatmf/ 301
+/frameworks/prompt /frameworks/prompt/ 301
+/frameworks/sef /frameworks/sef/ 301
+
+# -----------------------------------------
+# WILDCARD LEGACY PATTERNS
+# -----------------------------------------
+/research-custom_instructions_ba* /ai-security/prompt-injection/custom-instruction-backdoor/ 301
+/the-adversarial-ai-prompting-fr* /frameworks/aatmf/ 301
