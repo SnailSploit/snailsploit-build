@@ -33,8 +33,9 @@ const SITE_URL = 'https://snailsploit.com';
 const SITE_NAME = 'SnailSploit';
 const TWITTER_HANDLE = '@snailsploit';
 
-const currentPath = Astro.url.pathname.replace(/\/+$/, '');
-const canonicalUrl = canonical || `${SITE_URL}${currentPath || '/'}`;
+// Ensure trailing slash for canonical URLs (matches trailingSlash: 'always')
+const currentPath = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const canonicalUrl = canonical || `${SITE_URL}${currentPath}`;
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}`;
 const fullTitle = title.includes('SnailSploit') ? title : `${title} | ${SITE_NAME}`;
 

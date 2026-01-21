@@ -8,7 +8,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://snailsploit.com',
-  trailingSlash: 'never',
+  trailingSlash: 'always',
   vite: {
     plugins: [tailwindcss()]
   },
