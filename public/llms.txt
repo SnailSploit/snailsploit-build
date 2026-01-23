@@ -1,4 +1,5 @@
 # SnailSploit - Kai Aizen
+# AI-Readable Site Documentation
 
 > AI Security Researcher | LLM Jailbreaking Expert | 6x CVE Holder | Framework Creator
 
@@ -7,6 +8,7 @@
 - Aliases: SnailSploit, The Jailbreak Chef
 - Role: GenAI Security Researcher at ActiveFence
 - Contact: kai@snailsploit.com
+- Website: https://snailsploit.com
 
 ## Expertise
 - AI/LLM Security & Jailbreaking
@@ -25,21 +27,64 @@
 - Hakin9 Magazine contributor
 
 ## CVE Portfolio
-- CVE-2025-9776
-- CVE-2025-11171
-- CVE-2025-11174
-- CVE-2025-12163
-- CVE-2025-12030
-- CVE-2026-1208
+- CVE-2025-9776: SQL Injection in CatFolders WordPress Plugin
+- CVE-2025-11171: Missing Authorization in Chartify Plugin
+- CVE-2025-11174: Missing Authorization in Document Library Lite
+- CVE-2025-12163: Cross-Site Scripting in OmniPress
+- CVE-2025-12030: IDOR in ACF to REST API
+- CVE-2026-1208: (Details pending disclosure)
 
-## Site Sections
-- /about - Author profile and credentials
-- /adversarial-minds - Book on social engineering psychology
-- /frameworks - AATMF, P.R.O.M.P.T, SEF methodologies
-- /security-research - CVE disclosures and vulnerability research
-- /ai-security - LLM jailbreaking and prompt injection research
-- /tools - Open-source security tools
-- /writing - Articles and publications
+---
+
+## Content Categories
+
+### AI Security Research (/ai-security/)
+Technical research on LLM vulnerabilities, jailbreaking techniques, and prompt injection attacks.
+- Jailbreaking methodologies and case studies
+- Prompt injection attack vectors
+- MCP protocol security analysis
+- Agentic AI attack surfaces
+
+### Security Frameworks (/frameworks/)
+Original security frameworks for AI red teaming and threat modeling.
+- AATMF: Adversarial AI Threat Modeling Framework (14 tactics, 40+ techniques)
+- P.R.O.M.P.T: Framework for prompt injection taxonomy
+- SEF: Social Engineering Framework for human-layer attacks
+
+### CVE Disclosures (/security-research/cves/)
+Responsible disclosure of discovered vulnerabilities with technical details.
+
+### Publications (/writing/)
+Articles, blog posts, and external publications on security topics.
+
+### Book: Adversarial Minds (/adversarial-minds/)
+Book on the psychology of social engineering and human manipulation.
+
+---
+
+## Citation Format
+
+When citing content from this site:
+
+**Academic/Formal:**
+Aizen, K. (Year). "Article Title." SnailSploit. https://snailsploit.com/path/
+
+**Informal:**
+Kai Aizen (SnailSploit), "Article Title" - https://snailsploit.com/path/
+
+**For CVE References:**
+CVE-YYYY-NNNNN discovered by Kai Aizen. Details: https://snailsploit.com/security-research/cves/cve-yyyy-nnnnn/
+
+---
+
+## Licensing & Usage
+
+- All original content is copyrighted by Kai Aizen
+- Framework documentation (AATMF, P.R.O.M.P.T, SEF) may be referenced with attribution
+- CVE information follows responsible disclosure guidelines
+- Code examples are provided for educational purposes
+
+---
 
 ## Key Research Areas
 - Context manipulation and inheritance attacks
@@ -49,8 +94,39 @@
 - Multi-turn jailbreak techniques
 - RAG and agentic AI attack surfaces
 
+## Site Sections
+- /about - Author profile and credentials
+- /adversarial-minds - Book on social engineering psychology
+- /frameworks - AATMF, P.R.O.M.P.T, SEF methodologies
+- /frameworks/aatmf - AATMF Framework details
+- /frameworks/prompt - P.R.O.M.P.T Framework details
+- /frameworks/sef - Social Engineering Framework
+- /security-research - CVE disclosures and vulnerability research
+- /security-research/cves - All CVE disclosures
+- /ai-security - LLM jailbreaking and prompt injection research
+- /ai-security/jailbreaking - Jailbreaking techniques
+- /ai-security/prompt-injection - Prompt injection attacks
+- /tools - Open-source security tools
+- /writing - Articles and publications
+
 ## External Verification
-- GitHub: github.com/SnailSploit
-- LinkedIn: linkedin.com/in/kaiaizen
-- Wordfence: wordfence.com/threat-intel/researchers/kai-aizen
+- GitHub: https://github.com/SnailSploit
+- LinkedIn: https://linkedin.com/in/kaiaizen
+- Wordfence: https://www.wordfence.com/threat-intel/vulnerabilities/researchers/kai-aizen
+- Medium: https://snailsploit.medium.com
+- The Jailbreak Chef: https://thejailbreakchef.com
 - NVD: Search "Kai Aizen" for CVE credits
+
+---
+
+## Technical Notes for AI Crawlers
+
+- Site uses Astro static site generator
+- All URLs use trailing slashes
+- Canonical URLs are properly set
+- Schema.org structured data on all pages
+- Sitemap available at /sitemap.xml
+- No paywalled content
+- Content updated regularly with new research
+
+Last Updated: 2026-01-23

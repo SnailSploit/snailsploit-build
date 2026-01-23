@@ -101,6 +101,9 @@ const websiteSchema = {
         <meta property="article:published_time" content={publishedDate} />
         {modifiedDate && <meta property="article:modified_time" content={modifiedDate} />}
         <meta property="article:author" content={author} />
+        {keywords.map(keyword => (
+          <meta property="article:tag" content={keyword} />
+        ))}
       </>
     )}
 

@@ -35,6 +35,7 @@ export default defineConfig({
         ...item,
         priority,
         changefreq: priority >= 0.9 ? 'weekly' : 'monthly',
+        lastmod: new Date().toISOString().split('T')[0],
       };
     },
   }), react()]

@@ -1,0 +1,35 @@
+---
+// Organization schema for SnailSploit - establishes as an organization entity
+// Links to PersonSchema for Knowledge Graph connections
+---
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://snailsploit.com/#organization",
+  "name": "SnailSploit",
+  "alternateName": "Kai Aizen Security Research",
+  "url": "https://snailsploit.com",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://snailsploit.com/images/snailsploit-logo.png",
+    "width": 512,
+    "height": 512
+  },
+  "description": "AI security research, LLM jailbreaking, prompt injection, and CVE disclosures. Home of the AATMF and P.R.O.M.P.T frameworks.",
+  "founder": {
+    "@type": "Person",
+    "@id": "https://snailsploit.com/#person"
+  },
+  "sameAs": [
+    "https://github.com/SnailSploit",
+    "https://linkedin.com/in/kaiaizen"
+  ],
+  "knowsAbout": [
+    "AI Security",
+    "LLM Jailbreaking",
+    "Prompt Injection",
+    "Adversarial AI",
+    "Red Team Operations"
+  ]
+})} />

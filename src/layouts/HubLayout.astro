@@ -79,6 +79,24 @@ const {
   {faqs.length > 0 && <FAQPageSchema faqs={faqs} />}
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Visual Breadcrumbs -->
+    {breadcrumbs.length > 0 && (
+      <nav class="mb-8 text-sm font-mono" style="color: var(--color-text-muted);">
+        {breadcrumbs.map((crumb, index) => (
+          <span>
+            {index < breadcrumbs.length - 1 ? (
+              <a href={crumb.url} class="hover:text-[var(--color-accent-red)] transition-colors">
+                {crumb.name}
+              </a>
+            ) : (
+              <span style="color: var(--color-text-secondary);">{crumb.name}</span>
+            )}
+            {index < breadcrumbs.length - 1 && <span class="mx-2">/</span>}
+          </span>
+        ))}
+      </nav>
+    )}
+
     <!-- Section 1: Hero/Intro -->
     <header class="mb-16">
       <h1 class="text-5xl md:text-6xl font-bold mb-6 font-mono text-center" style="color: var(--color-accent-red);">
