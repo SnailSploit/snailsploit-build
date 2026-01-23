@@ -35,31 +35,50 @@ const {
 const urlPath = new URL(canonical).pathname;
 const autoRelatedLinks: Array<{ title: string; url: string; type: string }> = [];
 
-// Add parent hub link
+// Add parent hub link (with trailing slashes)
+let parentHub: { title: string; url: string } | null = null;
+
 if (urlPath.includes('/ai-security/jailbreaking/')) {
+  parentHub = { title: 'AI Security: Jailbreaking', url: '/ai-security/jailbreaking/' };
   autoRelatedLinks.push(
-    { title: 'AI Security: Jailbreaking', url: '/ai-security/jailbreaking', type: 'Hub' },
-    { title: 'AATMF Framework', url: '/frameworks/aatmf', type: 'Framework' }
+    { title: 'AI Security: Jailbreaking', url: '/ai-security/jailbreaking/', type: 'Hub' },
+    { title: 'AATMF Framework', url: '/frameworks/aatmf/', type: 'Framework' }
   );
 } else if (urlPath.includes('/ai-security/prompt-injection/')) {
+  parentHub = { title: 'AI Security: Prompt Injection', url: '/ai-security/prompt-injection/' };
   autoRelatedLinks.push(
-    { title: 'AI Security: Prompt Injection', url: '/ai-security/prompt-injection', type: 'Hub' },
-    { title: 'AATMF Framework', url: '/frameworks/aatmf', type: 'Framework' }
+    { title: 'AI Security: Prompt Injection', url: '/ai-security/prompt-injection/', type: 'Hub' },
+    { title: 'AATMF Framework', url: '/frameworks/aatmf/', type: 'Framework' }
   );
 } else if (urlPath.includes('/ai-security/')) {
+  parentHub = { title: 'AI Security Research', url: '/ai-security/' };
   autoRelatedLinks.push(
-    { title: 'AI Security Research', url: '/ai-security', type: 'Hub' },
-    { title: 'AATMF Framework', url: '/frameworks/aatmf', type: 'Framework' }
+    { title: 'AI Security Research', url: '/ai-security/', type: 'Hub' },
+    { title: 'AATMF Framework', url: '/frameworks/aatmf/', type: 'Framework' }
+  );
+} else if (urlPath.includes('/security-research/cves/')) {
+  parentHub = { title: 'CVE Disclosures', url: '/security-research/cves/' };
+  autoRelatedLinks.push(
+    { title: 'CVE Disclosures', url: '/security-research/cves/', type: 'Hub' },
+    { title: 'Security Research', url: '/security-research/', type: 'Research' }
   );
 } else if (urlPath.includes('/security-research/general/')) {
+  parentHub = { title: 'Security Research', url: '/security-research/' };
   autoRelatedLinks.push(
-    { title: 'Security Research', url: '/security-research', type: 'Hub' },
-    { title: 'CVE Disclosures', url: '/security-research/cves', type: 'Research' }
+    { title: 'Security Research', url: '/security-research/', type: 'Hub' },
+    { title: 'CVE Disclosures', url: '/security-research/cves/', type: 'Research' }
   );
 } else if (urlPath.includes('/writing/')) {
+  parentHub = { title: 'Writing', url: '/writing/' };
   autoRelatedLinks.push(
-    { title: 'All Writing', url: '/writing', type: 'Hub' },
-    { title: 'About Kai Aizen', url: '/about', type: 'Author' }
+    { title: 'All Writing', url: '/writing/', type: 'Hub' },
+    { title: 'About Kai Aizen', url: '/about/', type: 'Author' }
+  );
+} else if (urlPath.includes('/frameworks/')) {
+  parentHub = { title: 'Security Frameworks', url: '/frameworks/' };
+  autoRelatedLinks.push(
+    { title: 'Security Frameworks', url: '/frameworks/', type: 'Hub' },
+    { title: 'AATMF Framework', url: '/frameworks/aatmf/', type: 'Framework' }
   );
 }
 
@@ -91,23 +110,31 @@ pathSegments.forEach((segment, index) => {
   }
 });
 
-// Article schema
+// TechArticle schema - more appropriate for technical security content
 const articleSchema = {
   "@context": "https://schema.org",
-  "@type": "Article",
+  "@type": "TechArticle",
   "headline": title,
+  "description": description,
   "author": {
     "@type": "Person",
+    "@id": "https://snailsploit.com/#person",
     "name": "Kai Aizen",
-    "url": "https://snailsploit.com/about"
+    "url": "https://snailsploit.com/about/",
+    "sameAs": [
+      "https://linkedin.com/in/kaiaizen",
+      "https://github.com/SnailSploit"
+    ]
   },
   "datePublished": new Date(date).toISOString(),
   "dateModified": dateModified ? new Date(dateModified).toISOString() : new Date(date).toISOString(),
   "mainEntityOfPage": canonical,
   "publisher": {
-    "@type": "Person",
-    "name": "Kai Aizen"
+    "@type": "Organization",
+    "name": "SnailSploit",
+    "url": "https://snailsploit.com"
   },
+  "proficiencyLevel": "Expert",
   "keywords": keywords.join(', ')
 };
 
@@ -182,6 +209,20 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
               {tag}
             </span>
           ))}
+        </div>
+      )}
+
+      {/* Part of Hub Link */}
+      {parentHub && (
+        <div class="mt-6 p-4 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+          <span class="text-sm" style="color: var(--color-text-muted);">Part of </span>
+          <a
+            href={parentHub.url}
+            class="text-sm font-mono font-semibold hover:underline"
+            style="color: var(--color-accent-red);"
+          >
+            {parentHub.title} →
+          </a>
         </div>
       )}
     </header>

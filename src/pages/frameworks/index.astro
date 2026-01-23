@@ -1,97 +1,207 @@
 ---
-import IndexLayout from '../../layouts/IndexLayout.astro';
-import BreadcrumbSchema from '../../components/schemas/BreadcrumbSchema.astro';
+import HubLayout from '../../layouts/HubLayout.astro';
 
-const frameworks = [
+const glossary = [
   {
-    name: 'AATMF',
-    fullName: 'Adversarial AI Threat Modeling Framework',
-    description: 'Comprehensive AI threat modeling framework with 14 tactics, 40+ techniques, quantitative risk scoring, and MITRE ATT&CK integration.',
-    url: '/frameworks/aatmf',
-    status: 'published'
+    term: "AATMF",
+    definition: "Adversarial AI Threat Modeling Framework - A comprehensive taxonomy of 14 tactics and 40+ techniques for AI red teaming, with quantitative risk scoring and MITRE ATLAS alignment.",
+    link: "/frameworks/aatmf/"
   },
   {
-    name: 'P.R.O.M.P.T',
-    fullName: 'Purpose, Results, Obstacles, Mindset, Preferences, Technical',
-    description: 'Systematic methodology for effective AI interactions and prompt engineering. A structured approach to achieving consistent results.',
-    url: '/frameworks/prompt',
-    status: 'published'
+    term: "P.R.O.M.P.T",
+    definition: "Purpose, Results, Obstacles, Mindset, Preferences, Technical - A systematic methodology for crafting effective AI prompts based on fundamental communication principles.",
+    link: "/frameworks/prompt/"
   },
   {
-    name: 'SEF',
-    fullName: 'Social Engineering Framework',
-    description: 'Structured methodology for social engineering assessments. Combines psychology principles with practical attack simulations.',
-    url: '/frameworks/sef',
-    status: 'coming-soon'
+    term: "Threat Modeling",
+    definition: "Systematic identification of potential threats and vulnerabilities in a system, enabling prioritized security controls and risk mitigation strategies."
+  },
+  {
+    term: "Red Teaming",
+    definition: "Adversarial security testing that simulates real-world attacks to identify vulnerabilities before malicious actors can exploit them."
+  },
+  {
+    term: "Attack Surface",
+    definition: "The sum of all points where an attacker can attempt to enter or extract data from a system. In AI, this includes prompts, context, tools, and training data."
+  },
+  {
+    term: "Risk Scoring",
+    definition: "Quantitative assessment of threats based on likelihood, impact, detectability, and recoverability. AATMF uses the formula: R = L × I × (6-D) × (6-R)."
   }
+];
+
+const faqs = [
+  {
+    question: "What makes these frameworks different from existing security standards?",
+    answer: "These frameworks are built from hands-on offensive security research, not theoretical compliance requirements. They provide actionable techniques, real-world examples, and measurable evaluation criteria that practitioners can immediately apply to test and harden AI systems."
+  },
+  {
+    question: "Are these frameworks free to use?",
+    answer: "Yes, all frameworks are open-source and freely available. AATMF is released under CC BY-SA 4.0 license. We believe security knowledge should be accessible to defenders everywhere."
+  },
+  {
+    question: "How do these frameworks integrate with existing security programs?",
+    answer: "AATMF provides crosswalks to OWASP LLM Top-10, NIST AI RMF, and MITRE ATLAS, making it easy to map findings to existing risk frameworks. P.R.O.M.P.T complements any AI interaction workflow."
+  },
+  {
+    question: "Can I contribute to these frameworks?",
+    answer: "Absolutely. AATMF is maintained on GitHub and welcomes contributions from the security community. Submit new techniques, suggest improvements, or share real-world case studies."
+  }
+];
+
+const startHere = [
+  {
+    title: "AATMF Overview",
+    href: "/frameworks/aatmf/",
+    description: "The flagship framework for AI threat modeling with 14 tactics, 40+ techniques, and quantitative risk scoring."
+  },
+  {
+    title: "P.R.O.M.P.T Framework",
+    href: "/frameworks/prompt/",
+    description: "Master effective AI interactions with this systematic prompting methodology."
+  },
+  {
+    title: "AI Security Research",
+    href: "/ai-security/",
+    description: "Explore the research that informs these frameworks - real attacks, real defenses."
+  }
+];
+
+const articles = [
+  {
+    title: "AATMF: Adversarial AI Threat Modeling Framework",
+    href: "/frameworks/aatmf/",
+    date: "October 2025",
+    excerpt: "Complete framework with 14 tactics, 40+ techniques, Red-Cards for CI/CD, and crosswalks to OWASP/NIST/MITRE."
+  },
+  {
+    title: "P.R.O.M.P.T: The Last Prompt Engineering Guide",
+    href: "/frameworks/prompt/",
+    date: "September 2025",
+    excerpt: "Systematic methodology for effective AI interactions based on fundamental principles."
+  },
+  {
+    title: "Adversarial AI Prompting Framework",
+    href: "/frameworks/adversarial-prompting-framework/",
+    date: "March 2025",
+    excerpt: "Understanding how adversarial prompting exploits AI safety measures."
+  },
+  {
+    title: "SEF: Social Engineering Framework",
+    href: "/frameworks/sef/",
+    date: "Coming Soon",
+    excerpt: "Structured methodology for social engineering assessments combining psychology and practical attack simulations."
+  }
+];
+
+const breadcrumbs = [
+  { name: "Home", url: "https://snailsploit.com/" },
+  { name: "Frameworks", url: "https://snailsploit.com/frameworks/" }
 ];
 ---
 
-<IndexLayout
+<HubLayout
   title="Security Frameworks | AATMF, P.R.O.M.P.T, SEF"
-  description="Original security frameworks by Kai Aizen: AATMF for AI threat modeling, P.R.O.M.P.T for prompt engineering, and SEF for social engineering."
+  description="Original security frameworks by Kai Aizen: AATMF for AI threat modeling, P.R.O.M.P.T for prompt engineering, and SEF for social engineering assessment."
   canonical="https://snailsploit.com/frameworks/"
   ogImage="/images/og-frameworks.jpg"
   keywords={[
     'AI threat modeling framework',
-    'prompt injection taxonomy',
+    'AATMF',
+    'prompt engineering methodology',
+    'P.R.O.M.P.T framework',
     'social engineering framework',
     'LLM security methodology'
   ]}
   heading="Security Frameworks"
-  subheading="Systematic methodologies for AI security, prompt engineering, and social engineering assessment."
+  intro="Security frameworks transform scattered knowledge into systematic methodologies. The frameworks here emerged from years of hands-on penetration testing, AI red teaming, and security research—distilled into actionable structures that practitioners can immediately apply. AATMF brings the rigor of MITRE ATT&CK to AI security, cataloging adversarial techniques with reproducible evaluations and measurable controls. P.R.O.M.P.T provides a principled approach to AI interactions, whether for security testing or productive use. These aren't theoretical constructs—they're battle-tested tools refined through real-world engagements. All frameworks are open-source because effective security requires shared knowledge."
+  glossary={glossary}
+  faqs={faqs}
+  startHere={startHere}
+  articles={articles}
+  breadcrumbs={breadcrumbs}
 >
-  <BreadcrumbSchema items={[
-    {name: "Home", url: "https://snailsploit.com"},
-    {name: "Frameworks", url: "https://snailsploit.com/frameworks"}
-  ]} />
-
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    {frameworks.map(framework => (
+  <!-- Framework Cards -->
+  <section class="mb-16">
+    <h2 class="text-3xl font-bold font-mono mb-8" style="color: var(--color-accent-red);">
+      Available Frameworks
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <a
-        href={framework.url}
+        href="/frameworks/aatmf/"
+        class="group p-8 rounded-lg transition-all hover:scale-[1.02]"
+        style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+      >
+        <h3 class="text-2xl font-bold font-mono mb-2 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
+          AATMF
+        </h3>
+        <p class="text-sm font-mono mb-4" style="color: var(--color-text-muted);">
+          Adversarial AI Threat Modeling Framework
+        </p>
+        <p class="text-base mb-4" style="color: var(--color-text-secondary);">
+          14 tactics, 40+ techniques, quantitative risk scoring, MITRE ATT&CK integration. The definitive AI red teaming resource.
+        </p>
+        <div class="text-sm font-mono" style="color: var(--color-accent-red);">
+          Explore →
+        </div>
+      </a>
+
+      <a
+        href="/frameworks/prompt/"
+        class="group p-8 rounded-lg transition-all hover:scale-[1.02]"
+        style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+      >
+        <h3 class="text-2xl font-bold font-mono mb-2 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
+          P.R.O.M.P.T
+        </h3>
+        <p class="text-sm font-mono mb-4" style="color: var(--color-text-muted);">
+          Purpose, Results, Obstacles, Mindset, Preferences, Technical
+        </p>
+        <p class="text-base mb-4" style="color: var(--color-text-secondary);">
+          Systematic methodology for effective AI interactions grounded in established communication theory.
+        </p>
+        <div class="text-sm font-mono" style="color: var(--color-accent-red);">
+          Learn →
+        </div>
+      </a>
+
+      <a
+        href="/frameworks/sef/"
         class="group p-8 rounded-lg transition-all hover:scale-[1.02] relative"
         style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
       >
-        {framework.status === 'coming-soon' && (
-          <span
-            class="absolute top-4 right-4 px-3 py-1 text-xs font-mono rounded"
-            style="background-color: var(--color-accent-yellow); color: var(--color-bg);"
-          >
-            Coming Soon
-          </span>
-        )}
-
-        <h2 class="text-3xl font-bold font-mono mb-3 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
-          {framework.name}
-        </h2>
-
-        <h3 class="text-sm font-mono mb-4" style="color: var(--color-text-muted);">
-          {framework.fullName}
+        <span
+          class="absolute top-4 right-4 px-3 py-1 text-xs font-mono rounded"
+          style="background-color: var(--color-accent-yellow); color: var(--color-bg);"
+        >
+          Coming Soon
+        </span>
+        <h3 class="text-2xl font-bold font-mono mb-2 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
+          SEF
         </h3>
-
-        <p class="text-base mb-6" style="color: var(--color-text-secondary);">
-          {framework.description}
+        <p class="text-sm font-mono mb-4" style="color: var(--color-text-muted);">
+          Social Engineering Framework
         </p>
-
+        <p class="text-base mb-4" style="color: var(--color-text-secondary);">
+          Structured methodology combining psychology principles with practical attack simulations.
+        </p>
         <div class="text-sm font-mono" style="color: var(--color-accent-red);">
-          Learn more →
+          Preview →
         </div>
       </a>
-    ))}
-  </div>
+    </div>
+  </section>
 
-  <section class="mt-20 p-8 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+  <!-- Why These Frameworks -->
+  <section class="mb-16 p-8 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
     <h2 class="text-2xl font-bold font-mono mb-4" style="color: var(--color-accent-red);">
       Why These Frameworks?
     </h2>
     <p class="mb-4" style="color: var(--color-text-secondary);">
-      These frameworks were born from practical experience in AI security research and penetration testing.
-      They represent systematic approaches to complex security challenges, built for practitioners by practitioners.
+      These frameworks were born from practical experience in AI security research and penetration testing. They represent systematic approaches to complex security challenges, built for practitioners by practitioners.
     </p>
     <p style="color: var(--color-text-secondary);">
-      All frameworks are open-source and continuously evolving based on real-world testing and community feedback.
-      They integrate with existing security methodologies while addressing the unique challenges of AI systems.
+      All frameworks are open-source and continuously evolving based on real-world testing and community feedback. They integrate with existing security methodologies while addressing the unique challenges of AI systems.
     </p>
   </section>
-</IndexLayout>
+</HubLayout>

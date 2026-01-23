@@ -1,75 +1,197 @@
 ---
-import IndexLayout from '../../layouts/IndexLayout.astro';
+import HubLayout from '../../layouts/HubLayout.astro';
+
+const glossary = [
+  {
+    term: "LLM Jailbreaking",
+    definition: "Techniques to bypass AI safety guardrails and content policies through creative prompting, role-play scenarios, or exploiting model reasoning patterns.",
+    link: "/ai-security/jailbreaking/"
+  },
+  {
+    term: "Prompt Injection",
+    definition: "Attacks where malicious instructions override system behavior. Direct injection targets user inputs; indirect injection hides payloads in external data sources.",
+    link: "/ai-security/prompt-injection/"
+  },
+  {
+    term: "Context Manipulation",
+    definition: "Exploiting how LLMs process conversation history to gradually shift behavior, inherit jailbroken states, or poison session memory."
+  },
+  {
+    term: "Agentic AI Vulnerabilities",
+    definition: "Security weaknesses in autonomous AI systems including plan hijacking, tool-routing poisoning, and delegation loop attacks."
+  },
+  {
+    term: "RAG Poisoning",
+    definition: "Corrupting knowledge bases or retrieval pipelines to inject malicious content that gets retrieved and acted upon by AI systems."
+  },
+  {
+    term: "Guardrail Bypass",
+    definition: "Methods to circumvent content moderation and safety filters using semantic evasion, encoding tricks, or policy loopholes."
+  }
+];
+
+const faqs = [
+  {
+    question: "What is the difference between jailbreaking and prompt injection?",
+    answer: "Jailbreaking bypasses safety guardrails through conversational manipulation without external data. Prompt injection inserts malicious instructions via user input (direct) or external sources like documents and APIs (indirect). Jailbreaking exploits the model's reasoning; injection exploits input processing."
+  },
+  {
+    question: "Why are LLMs inherently vulnerable to these attacks?",
+    answer: "LLMs cannot fundamentally distinguish between instructions and data - they process all text as potential commands. Combined with their training to be helpful and their inability to verify context authenticity, this creates exploitable attack surfaces that current safety measures can only partially address."
+  },
+  {
+    question: "How can organizations defend against AI security threats?",
+    answer: "Defense requires layered controls: input sanitization, output filtering, context isolation, rate limiting, and monitoring for anomalous behavior. The AATMF framework provides comprehensive guidance on controls from foundational to advanced levels."
+  },
+  {
+    question: "Are these vulnerabilities being actively exploited?",
+    answer: "Yes. Prompt injection and jailbreaking are used in the wild for content policy bypass, data exfiltration, and manipulating AI-powered applications. As AI systems handle more sensitive operations, the stakes continue to rise."
+  }
+];
+
+const startHere = [
+  {
+    title: "Why AI Is Inherently Vulnerable",
+    href: "/ai-security/jailbreaking/inherent-ai-vulnerabilities/",
+    description: "Understand the fundamental architectural weaknesses that make LLMs susceptible to adversarial attacks."
+  },
+  {
+    title: "Context Inheritance Exploit",
+    href: "/ai-security/jailbreaking/context-inheritance-exploit/",
+    description: "How jailbroken conversations persist and transfer across sessions - a novel attack vector."
+  },
+  {
+    title: "The Custom Instruction Backdoor",
+    href: "/ai-security/prompt-injection/custom-instruction-backdoor/",
+    description: "Real-world case study of indirect prompt injection through user preferences."
+  },
+  {
+    title: "MCP Security Threat Analysis",
+    href: "/ai-security/prompt-injection/mcp-threat-analysis/",
+    description: "Security implications of the Model Context Protocol for agentic AI systems."
+  },
+  {
+    title: "RAG & Agentic Attack Surface",
+    href: "/ai-security/rag-agentic-attack-surface/",
+    description: "Comprehensive analysis of vulnerabilities in retrieval-augmented and autonomous AI."
+  }
+];
+
+const articles = [
+  {
+    title: "MCP Security Deep Dive: Real-World Vulnerabilities Exposed",
+    href: "/ai-security/prompt-injection/mcp-security-deep-dive/",
+    date: "August 2025",
+    excerpt: "Deep security analysis of MCP protocol vulnerabilities in production environments."
+  },
+  {
+    title: "MCP Security Threat Analysis",
+    href: "/ai-security/prompt-injection/mcp-threat-analysis/",
+    date: "July 2025",
+    excerpt: "Comprehensive threat modeling for Model Context Protocol implementations."
+  },
+  {
+    title: "RAG & Agentic Attack Surface",
+    href: "/ai-security/rag-agentic-attack-surface/",
+    date: "June 2025",
+    excerpt: "Analysis of attack vectors in retrieval-augmented generation and autonomous agents."
+  },
+  {
+    title: "AI Social Engineering & Deepfakes",
+    href: "/ai-security/ai-social-engineering-deepfake/",
+    date: "May 2025",
+    excerpt: "How AI enables new forms of social engineering and identity manipulation."
+  },
+  {
+    title: "The Hidden Risks of AI: An Offensive Perspective",
+    href: "/ai-security/hidden-risks-offensive-perspective/",
+    date: "April 2025",
+    excerpt: "Red team perspective on AI security risks organizations often overlook."
+  }
+];
+
+const breadcrumbs = [
+  { name: "Home", url: "https://snailsploit.com/" },
+  { name: "AI Security", url: "https://snailsploit.com/ai-security/" }
+];
 ---
 
-<IndexLayout
+<HubLayout
   title="AI Security Research | LLM Vulnerabilities & Exploits"
-  description="Original AI security research covering LLM jailbreaking, prompt injection, context manipulation, and agentic AI vulnerabilities."
+  description="Original AI security research covering LLM jailbreaking, prompt injection, context manipulation, and agentic AI vulnerabilities. By Kai Aizen."
   canonical="https://snailsploit.com/ai-security/"
   ogImage="/images/og-ai-security.jpg"
   keywords={[
     'AI security research',
     'LLM vulnerabilities',
+    'prompt injection',
+    'jailbreaking',
     'agentic AI security',
-    'MCP security'
+    'MCP security',
+    'RAG poisoning'
   ]}
   heading="AI Security Research"
-  subheading="Original research on LLM jailbreaking, prompt injection, and adversarial AI."
+  intro="AI systems are transforming every industry, but their rapid deployment has outpaced security research. Large Language Models process instructions and data identically, creating fundamental vulnerabilities that safety training alone cannot eliminate. This research hub documents real-world attack techniques against LLMs, RAG systems, and autonomous agents—not to enable harm, but to help defenders understand and mitigate these threats. From jailbreaking techniques that bypass content policies to indirect prompt injection attacks that compromise entire AI pipelines, this research represents hundreds of hours of hands-on testing against production systems. All findings follow responsible disclosure practices and are shared to advance the field of AI security."
+  glossary={glossary}
+  faqs={faqs}
+  startHere={startHere}
+  articles={articles}
+  breadcrumbs={breadcrumbs}
 >
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-    <a
-      href="/ai-security/jailbreaking"
-      class="group p-8 rounded-lg transition-all hover:scale-[1.02]"
-      style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
-    >
-      <h2 class="text-3xl font-bold font-mono mb-4 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
-        LLM Jailbreaking
-      </h2>
-      <p class="text-base mb-4" style="color: var(--color-text-secondary);">
-        Research on context manipulation, multi-turn attacks, memory poisoning, and novel jailbreak techniques.
-      </p>
-      <div class="text-sm font-mono" style="color: var(--color-accent-red);">
-        View Research →
-      </div>
-    </a>
-
-    <a
-      href="/ai-security/prompt-injection"
-      class="group p-8 rounded-lg transition-all hover:scale-[1.02]"
-      style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
-    >
-      <h2 class="text-3xl font-bold font-mono mb-4 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
-        Prompt Injection
-      </h2>
-      <p class="text-base mb-4" style="color: var(--color-text-secondary);">
-        Indirect injection, custom instruction backdoors, MCP vulnerabilities, and defense analysis.
-      </p>
-      <div class="text-sm font-mono" style="color: var(--color-accent-red);">
-        View Research →
-      </div>
-    </a>
-  </div>
-
-  <section class="p-8 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-    <h2 class="text-2xl font-bold font-mono mb-4" style="color: var(--color-accent-red);">
-      Featured Research
+  <!-- Research Categories -->
+  <section class="mb-16">
+    <h2 class="text-3xl font-bold font-mono mb-8" style="color: var(--color-accent-red);">
+      Research Categories
     </h2>
-    <ul class="space-y-3" style="color: var(--color-text-secondary);">
-      <li>
-        <a href="/ai-security/jailbreaking/context-inheritance-exploit" class="hover:text-[var(--color-accent-red)] transition-colors">
-          Context Inheritance Exploit: Jailbroken Conversations Don't Die
-        </a>
-      </li>
-      <li>
-        <a href="/ai-security/prompt-injection/custom-instruction-backdoor" class="hover:text-[var(--color-accent-red)] transition-colors">
-          The Custom Instruction Backdoor
-        </a>
-      </li>
-      <li>
-        <a href="/ai-security/prompt-injection/mcp-threat-analysis" class="hover:text-[var(--color-accent-red)] transition-colors">
-          MCP Security Threat Analysis
-        </a>
-      </li>
-    </ul>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <a
+        href="/ai-security/jailbreaking/"
+        class="group p-8 rounded-lg transition-all hover:scale-[1.02]"
+        style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+      >
+        <h3 class="text-2xl font-bold font-mono mb-4 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
+          LLM Jailbreaking
+        </h3>
+        <p class="text-base mb-4" style="color: var(--color-text-secondary);">
+          Research on context manipulation, multi-turn attacks, memory poisoning, and novel jailbreak techniques that bypass AI safety measures.
+        </p>
+        <div class="text-sm font-mono" style="color: var(--color-accent-red);">
+          5 articles →
+        </div>
+      </a>
+
+      <a
+        href="/ai-security/prompt-injection/"
+        class="group p-8 rounded-lg transition-all hover:scale-[1.02]"
+        style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+      >
+        <h3 class="text-2xl font-bold font-mono mb-4 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
+          Prompt Injection
+        </h3>
+        <p class="text-base mb-4" style="color: var(--color-text-secondary);">
+          Indirect injection vectors, custom instruction backdoors, MCP vulnerabilities, and defense strategies for AI applications.
+        </p>
+        <div class="text-sm font-mono" style="color: var(--color-accent-red);">
+          4 articles →
+        </div>
+      </a>
+    </div>
   </section>
-</IndexLayout>
+
+  <!-- AATMF Callout -->
+  <section class="mb-16 p-8 rounded-lg" style="background: linear-gradient(135deg, var(--color-surface) 0%, rgba(220, 38, 38, 0.1) 100%); border: 1px solid var(--color-accent-red);">
+    <h2 class="text-2xl font-bold font-mono mb-4" style="color: var(--color-accent-red);">
+      AATMF: Adversarial AI Threat Modeling Framework
+    </h2>
+    <p class="mb-4" style="color: var(--color-text-secondary);">
+      A comprehensive taxonomy of 14 tactics and 40+ techniques for AI red teaming, aligned with MITRE ATLAS and accepted into the OWASP GenAI Security Project roadmap.
+    </p>
+    <a
+      href="/frameworks/aatmf/"
+      class="inline-block px-6 py-3 font-mono font-semibold rounded hover:opacity-80 transition-opacity"
+      style="background-color: var(--color-accent-red); color: var(--color-bg);"
+    >
+      Explore AATMF →
+    </a>
+  </section>
+</HubLayout>

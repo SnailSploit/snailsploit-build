@@ -1,109 +1,141 @@
 ---
-import IndexLayout from '../../layouts/IndexLayout.astro';
+import HubLayout from '../../layouts/HubLayout.astro';
+
+const glossary = [
+  {
+    term: "Technical Writing",
+    definition: "Communicating complex technical concepts in clear, accessible language. Security writing must balance precision with readability."
+  },
+  {
+    term: "Threat Intelligence",
+    definition: "Information about threats and threat actors that helps organizations understand risks and make informed security decisions."
+  },
+  {
+    term: "Security Awareness",
+    definition: "Education and communication that helps people recognize and respond to security threats in their daily work and personal lives."
+  },
+  {
+    term: "Red Team Perspective",
+    definition: "Viewing security from an attacker's mindset to identify vulnerabilities and weaknesses that defenders might overlook."
+  }
+];
+
+const faqs = [
+  {
+    question: "Where else can I read your work?",
+    answer: "My writing appears in Hakin9 Magazine, PenTest Magazine, eForensics, and on Medium. I also maintain TheJailbreakChef.com for AI security content."
+  },
+  {
+    question: "Do you accept guest posts or collaborations?",
+    answer: "I'm open to collaborations on security research and writing projects. Reach out via LinkedIn to discuss opportunities."
+  },
+  {
+    question: "How can I stay updated on new articles?",
+    answer: "Follow me on LinkedIn for announcements, or check back here periodically. Major research is also shared through security community channels."
+  }
+];
+
+const startHere = [
+  {
+    title: "AI Obfuscator Detection Bypass",
+    href: "/writing/ai-obfuscator-detection-bypass/",
+    description: "Technical deep-dive into bypassing AI-powered security controls."
+  },
+  {
+    title: "Embracing AI: Adapt or Die",
+    href: "/writing/embracing-ai-adapt-or-die/",
+    description: "Strategic perspective on AI adoption in security organizations."
+  },
+  {
+    title: "Personal Data & Identity Theft",
+    href: "/writing/personal-data-identity-theft/",
+    description: "Understanding the risks and protecting yourself in a connected world."
+  }
+];
 
 const articles = [
   {
-    title: 'AI-Powered Obfuscator Bypasses Detection in 2 Hours',
-    description: 'Building a cloud-based obfuscator using AI that bypasses security detection. Demonstrating the dual-use nature of AI in security.',
-    url: '/writing/ai-obfuscator-detection-bypass',
-    date: '2025-04-23',
-    tags: ['AI', 'obfuscation', 'detection-bypass'],
-    readingTime: '15 min read'
+    title: "AI Obfuscator Detection Bypass",
+    href: "/writing/ai-obfuscator-detection-bypass/",
+    date: "April 2025",
+    excerpt: "How attackers evade AI-powered security tools and what defenders can do about it."
   },
   {
-    title: 'Embracing AI: Adapt or Die in Cybersecurity',
-    description: 'Why security professionals must embrace AI or risk irrelevance. Adapting skills and mindset for the AI-driven security landscape.',
-    url: '/writing/embracing-ai-adapt-or-die',
-    date: '2024-09-06',
-    tags: ['AI', 'career', 'opinion'],
-    readingTime: '8 min read'
+    title: "Embracing AI: Adapt or Die",
+    href: "/writing/embracing-ai-adapt-or-die/",
+    date: "September 2024",
+    excerpt: "Why security professionals must embrace AI or risk becoming obsolete."
   },
   {
-    title: 'How Your Personal Data Is For Sale: The New Identity Theft',
-    description: 'Investigating the personal data marketplace and its implications for identity theft. What your information is worth and who\'s buying.',
-    url: '/writing/personal-data-identity-theft',
-    date: '2024-09-04',
-    tags: ['privacy', 'identity-theft', 'data-security'],
-    readingTime: '12 min read'
+    title: "Personal Data & Identity Theft",
+    href: "/writing/personal-data-identity-theft/",
+    date: "September 2024",
+    excerpt: "The real risks of data exposure and practical steps to protect yourself."
   }
+];
+
+const breadcrumbs = [
+  { name: "Home", url: "https://snailsploit.com/" },
+  { name: "Writing", url: "https://snailsploit.com/writing/" }
 ];
 ---
 
-<IndexLayout
-  title="Security Writing | Articles & Publications by Kai Aizen"
-  description="Security articles, technical research, and industry analysis. Published in Hakin9 Magazine and PenTest Magazine."
+<HubLayout
+  title="Writing | Security Articles & Analysis by Kai Aizen"
+  description="Security articles, analysis, and commentary by Kai Aizen. Published in Hakin9, PenTest Magazine, and eForensics."
   canonical="https://snailsploit.com/writing/"
   ogImage="/images/og-writing.jpg"
   keywords={[
-    'security blog',
+    'security writing',
     'cybersecurity articles',
-    'Hakin9 author'
+    'AI security analysis',
+    'Kai Aizen',
+    'Hakin9',
+    'PenTest Magazine'
   ]}
-  heading="Security Writing"
-  subheading="Articles, industry analysis, and technical publications."
+  heading="Writing"
+  intro="Security knowledge should be shared, not hoarded. This collection includes articles published in industry magazines, original analysis, and commentary on emerging threats. My writing bridges the gap between technical research and practical application—whether explaining AI security risks to executives or documenting attack techniques for fellow practitioners. Published work appears in Hakin9 Magazine, PenTest Magazine, and eForensics, covering topics from cloud weaponization to social engineering psychology. Everything here aims to make readers more effective at securing systems and understanding threats."
+  glossary={glossary}
+  faqs={faqs}
+  startHere={startHere}
+  articles={articles}
+  breadcrumbs={breadcrumbs}
 >
-  <div class="space-y-6">
-    <p class="text-lg max-w-3xl" style="color: var(--color-text-secondary);">
-      A collection of articles on security, AI, privacy, and the intersection of technology and human behavior.
-      Published independently and featured in leading security publications.
-    </p>
-  </div>
-
-  <section class="mt-12 p-8 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-    <h2 class="text-2xl font-bold font-mono mb-4" style="color: var(--color-accent-red);">
-      Publications
-    </h2>
-    <ul class="space-y-2 text-sm font-mono" style="color: var(--color-text-secondary);">
-      <li>
-        <strong style="color: var(--color-text-primary);">Hakin9 Magazine</strong> - Technical articles on AI security and penetration testing
-      </li>
-      <li>
-        <strong style="color: var(--color-text-primary);">PenTest Magazine</strong> - Contributing author
-      </li>
-      <li>
-        <strong style="color: var(--color-text-primary);">Personal Blog</strong> - Original research and analysis (this site)
-      </li>
-    </ul>
-  </section>
-
-  <section class="mt-12">
+  <!-- Featured Publications -->
+  <section class="mb-16 p-8 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
     <h2 class="text-2xl font-bold font-mono mb-6" style="color: var(--color-accent-red);">
-      Articles
+      Featured Publications
     </h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {articles.map(article => (
-        <a
-          href={article.url}
-          class="card-hover-glow group p-6 rounded-lg transition-all hover:scale-[1.02]"
-          style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
-        >
-          <div class="flex flex-wrap gap-2 mb-3">
-            {article.tags.map(tag => (
-              <span
-                class="px-2 py-1 text-xs font-mono rounded"
-                style="background-color: var(--color-bg); color: var(--color-text-muted);"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          <h3 class="text-lg font-bold font-mono mb-2 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
-            {article.title}
-          </h3>
-
-          <p class="text-sm mb-4" style="color: var(--color-text-secondary);">
-            {article.description}
-          </p>
-
-          <div class="flex justify-between items-center text-xs font-mono" style="color: var(--color-text-muted);">
-            <time datetime={article.date}>
-              {new Date(article.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
-            </time>
-            <span>{article.readingTime}</span>
-          </div>
-        </a>
-      ))}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="p-4 rounded" style="background-color: var(--color-bg); border: 1px solid var(--color-border);">
+        <h3 class="font-mono font-bold mb-2" style="color: var(--color-text-primary);">Hakin9 Magazine</h3>
+        <p class="text-sm" style="color: var(--color-text-secondary);">LLM Mayhem: Hacker's New Anthem, Cloud Weaponization</p>
+      </div>
+      <div class="p-4 rounded" style="background-color: var(--color-bg); border: 1px solid var(--color-border);">
+        <h3 class="font-mono font-bold mb-2" style="color: var(--color-text-primary);">PenTest Magazine</h3>
+        <p class="text-sm" style="color: var(--color-text-secondary);">Design Your Penetration Testing Setup</p>
+      </div>
+      <div class="p-4 rounded" style="background-color: var(--color-bg); border: 1px solid var(--color-border);">
+        <h3 class="font-mono font-bold mb-2" style="color: var(--color-text-primary);">eForensics</h3>
+        <p class="text-sm" style="color: var(--color-text-secondary);">Digital forensics and incident response</p>
+      </div>
     </div>
   </section>
-</IndexLayout>
+
+  <!-- Book Callout -->
+  <section class="mb-16 p-8 rounded-lg" style="background: linear-gradient(135deg, var(--color-surface) 0%, rgba(220, 38, 38, 0.1) 100%); border: 1px solid var(--color-accent-red);">
+    <h2 class="text-2xl font-bold font-mono mb-4" style="color: var(--color-accent-red);">
+      Adversarial Minds: The Anatomy of Social Engineering
+    </h2>
+    <p class="mb-4" style="color: var(--color-text-secondary);">
+      A deep exploration of the psychology behind social engineering attacks—how attackers manipulate human cognition and how defenders can build resilience.
+    </p>
+    <a
+      href="/adversarial-minds/"
+      class="inline-block px-6 py-3 font-mono font-semibold rounded hover:opacity-80 transition-opacity"
+      style="background-color: var(--color-accent-red); color: var(--color-bg);"
+    >
+      Learn More →
+    </a>
+  </section>
+</HubLayout>

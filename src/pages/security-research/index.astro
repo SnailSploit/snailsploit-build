@@ -1,52 +1,175 @@
 ---
-import IndexLayout from '../../layouts/IndexLayout.astro';
+import HubLayout from '../../layouts/HubLayout.astro';
+
+const glossary = [
+  {
+    term: "CVE",
+    definition: "Common Vulnerabilities and Exposures - A standardized identifier for publicly known security vulnerabilities, enabling consistent tracking and communication across the security community.",
+    link: "/security-research/cves/"
+  },
+  {
+    term: "Responsible Disclosure",
+    definition: "The practice of privately reporting security vulnerabilities to affected vendors before public disclosure, allowing time for patches to be developed and deployed."
+  },
+  {
+    term: "CVSS Score",
+    definition: "Common Vulnerability Scoring System - A standardized method for rating the severity of security vulnerabilities on a scale of 0-10, considering factors like attack complexity and impact."
+  },
+  {
+    term: "Penetration Testing",
+    definition: "Authorized simulated attacks on computer systems to evaluate security controls and identify exploitable vulnerabilities before malicious actors discover them."
+  },
+  {
+    term: "Zero-Day",
+    definition: "A vulnerability that is unknown to the vendor and has no available patch. Zero-day exploits are particularly dangerous as defenses don't yet exist."
+  },
+  {
+    term: "Attack Chain",
+    definition: "The sequence of steps an attacker takes to achieve their objective, from initial reconnaissance through exploitation to achieving their goal."
+  }
+];
+
+const faqs = [
+  {
+    question: "How do you discover these vulnerabilities?",
+    answer: "Through systematic security research combining manual code review, automated scanning, and creative attack surface exploration. Each CVE represents significant research time following responsible disclosure practices."
+  },
+  {
+    question: "Are these CVEs currently being exploited?",
+    answer: "All disclosed CVEs have been responsibly reported and patched. We only publish details after vendors have released fixes and users have had reasonable time to update."
+  },
+  {
+    question: "How can I protect my systems from these vulnerabilities?",
+    answer: "Keep software updated, especially WordPress plugins. Subscribe to security advisories, implement Web Application Firewalls, and follow the specific remediation steps provided in each CVE disclosure."
+  },
+  {
+    question: "Do you offer security testing services?",
+    answer: "This research is shared for educational purposes and to improve overall security. For professional penetration testing services, contact through LinkedIn."
+  }
+];
+
+const startHere = [
+  {
+    title: "CVE Disclosures",
+    href: "/security-research/cves/",
+    description: "Browse all CVE discoveries with technical details, CVSS scores, and remediation guidance."
+  },
+  {
+    title: "General Security Research",
+    href: "/security-research/general/",
+    description: "Deep-dive articles on container security, EDR evasion, cloud exploitation, and more."
+  },
+  {
+    title: "AATMF Framework",
+    href: "/frameworks/aatmf/",
+    description: "Apply systematic threat modeling to your security research."
+  }
+];
+
+const articles = [
+  {
+    title: "CVE-2025-12030",
+    href: "/security-research/cves/cve-2025-12030/",
+    date: "2025",
+    excerpt: "High severity WordPress plugin vulnerability with detailed technical analysis."
+  },
+  {
+    title: "Cloud Vulnerability Exploitation",
+    href: "/security-research/general/cloud-vulnerability-exploitation/",
+    date: "2025",
+    excerpt: "Comprehensive analysis of cloud-specific attack vectors and defense strategies."
+  },
+  {
+    title: "Advanced Container Escapes",
+    href: "/security-research/general/advanced-container-escapes/",
+    date: "2025",
+    excerpt: "Techniques for breaking out of containerized environments."
+  },
+  {
+    title: "EDR Evasion Techniques",
+    href: "/security-research/general/edr-evasion-techniques/",
+    date: "2025",
+    excerpt: "Understanding how attackers bypass endpoint detection and response solutions."
+  }
+];
+
+const breadcrumbs = [
+  { name: "Home", url: "https://snailsploit.com/" },
+  { name: "Security Research", url: "https://snailsploit.com/security-research/" }
+];
 ---
 
-<IndexLayout
-  title="Security Research | CVEs & Vulnerability Analysis"
-  description="Original security research including 5 CVE disclosures, WordPress vulnerability analysis, container escapes, and EDR evasion techniques."
+<HubLayout
+  title="Security Research | CVE Disclosures & Vulnerability Analysis"
+  description="Security research by Kai Aizen including CVE disclosures, vulnerability analysis, penetration testing techniques, and defensive security strategies."
   canonical="https://snailsploit.com/security-research/"
   ogImage="/images/og-research.png"
   keywords={[
-    'security research',
-    'CVE researcher',
-    'vulnerability analysis',
-    'WordPress security research'
+    'CVE disclosures',
+    'vulnerability research',
+    'penetration testing',
+    'security analysis',
+    'WordPress vulnerabilities',
+    'container security'
   ]}
   heading="Security Research"
-  subheading="Original vulnerability research, CVE disclosures, and security analysis."
+  intro="Security research is the foundation of effective defense. This hub contains original vulnerability discoveries, technical deep-dives, and practical attack analysis from years of penetration testing and security research. Every CVE disclosure here represents the complete lifecycle: discovery, responsible disclosure, vendor coordination, and public documentation. Beyond individual vulnerabilities, the general research covers systematic approaches to cloud security, container escapes, and endpoint evasion—knowledge that helps both offensive and defensive practitioners. All research follows responsible disclosure practices and aims to improve security for everyone."
+  glossary={glossary}
+  faqs={faqs}
+  startHere={startHere}
+  articles={articles}
+  breadcrumbs={breadcrumbs}
 >
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-    <a
-      href="/security-research/cves"
-      class="group p-8 rounded-lg transition-all hover:scale-[1.02]"
-      style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
-    >
-      <h2 class="text-3xl font-bold font-mono mb-4 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
-        CVE Disclosures
-      </h2>
-      <p class="text-base mb-4" style="color: var(--color-text-secondary);">
-        5 WordPress plugin vulnerabilities responsibly disclosed. Full technical analysis and remediation guidance.
-      </p>
-      <div class="text-sm font-mono" style="color: var(--color-accent-red);">
-        View CVEs →
-      </div>
-    </a>
+  <!-- Research Categories -->
+  <section class="mb-16">
+    <h2 class="text-3xl font-bold font-mono mb-8" style="color: var(--color-accent-red);">
+      Research Categories
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <a
+        href="/security-research/cves/"
+        class="group p-8 rounded-lg transition-all hover:scale-[1.02]"
+        style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+      >
+        <h3 class="text-2xl font-bold font-mono mb-4 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
+          CVE Disclosures
+        </h3>
+        <p class="text-base mb-4" style="color: var(--color-text-secondary);">
+          5x CVE holder with documented WordPress plugin vulnerabilities. Each disclosure includes technical details, CVSS scoring, and remediation steps.
+        </p>
+        <div class="text-sm font-mono" style="color: var(--color-accent-red);">
+          5 CVEs →
+        </div>
+      </a>
 
-    <a
-      href="/security-research/general"
-      class="group p-8 rounded-lg transition-all hover:scale-[1.02]"
-      style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
-    >
-      <h2 class="text-3xl font-bold font-mono mb-4 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
-        General Research
-      </h2>
-      <p class="text-base mb-4" style="color: var(--color-text-secondary);">
-        Security research on container escapes, cloud vulnerabilities, EDR evasion, and zero-trust runtime security.
-      </p>
-      <div class="text-sm font-mono" style="color: var(--color-accent-red);">
-        View Research →
-      </div>
-    </a>
-  </div>
-</IndexLayout>
+      <a
+        href="/security-research/general/"
+        class="group p-8 rounded-lg transition-all hover:scale-[1.02]"
+        style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+      >
+        <h3 class="text-2xl font-bold font-mono mb-4 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
+          General Research
+        </h3>
+        <p class="text-base mb-4" style="color: var(--color-text-secondary);">
+          Deep technical analysis of container security, cloud exploitation, EDR evasion, and zero-trust architectures.
+        </p>
+        <div class="text-sm font-mono" style="color: var(--color-accent-red);">
+          4 articles →
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Credentials -->
+  <section class="mb-16 p-8 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+    <h2 class="text-2xl font-bold font-mono mb-4" style="color: var(--color-accent-red);">
+      Research Credentials
+    </h2>
+    <ul class="space-y-2" style="color: var(--color-text-secondary);">
+      <li>• 5x CVE Holder (CVE-2025-9776, CVE-2025-11171, CVE-2025-11174, CVE-2025-12030, CVE-2025-12163)</li>
+      <li>• Published in Hakin9 Magazine, PenTest Magazine, eForensics</li>
+      <li>• Creator of AATMF (accepted into OWASP GenAI Security Project)</li>
+      <li>• <a href="https://www.wordfence.com/threat-intel/vulnerabilities/researchers/kai-aizen" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-accent-red)]" style="color: var(--color-accent-red);">Wordfence Researcher Profile →</a></li>
+    </ul>
+  </section>
+</HubLayout>

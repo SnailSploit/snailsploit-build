@@ -1,51 +1,111 @@
 ---
-import IndexLayout from '../../../layouts/IndexLayout.astro';
+import HubLayout from '../../../layouts/HubLayout.astro';
+
+const glossary = [
+  {
+    term: "Multi-Turn Jailbreak",
+    definition: "Attack technique that gradually manipulates AI context over multiple conversation turns, building towards guardrail bypass without triggering immediate safety responses."
+  },
+  {
+    term: "Context Inheritance",
+    definition: "The phenomenon where jailbroken states persist or transfer across sessions, allowing attackers to leverage previously compromised conversations.",
+    link: "/ai-security/jailbreaking/context-inheritance-exploit/"
+  },
+  {
+    term: "Memory Poisoning",
+    definition: "Injecting malicious content into AI conversation memory or context windows to influence future responses and bypass safety measures.",
+    link: "/ai-security/jailbreaking/memory-manipulation-attacks/"
+  },
+  {
+    term: "Role Hijacking",
+    definition: "Convincing an AI to adopt an alternative persona that bypasses its normal safety constraints, often through elaborate fictional scenarios."
+  },
+  {
+    term: "Guardrail Bypass",
+    definition: "Any technique that circumvents AI safety filters, content policies, or behavioral constraints to elicit restricted outputs."
+  }
+];
+
+const faqs = [
+  {
+    question: "What is the difference between jailbreaking and prompt injection?",
+    answer: "Jailbreaking manipulates the AI through conversational techniques without external data - it exploits the model's reasoning and role-play capabilities. Prompt injection inserts malicious instructions through user input or external sources. Jailbreaking is about psychological manipulation; injection is about input exploitation."
+  },
+  {
+    question: "Can jailbreaks persist across sessions?",
+    answer: "Yes, through context inheritance. When jailbroken conversation transcripts are pasted into new sessions or when systems lack proper context isolation, the compromised state can transfer. This is documented in our Context Inheritance Exploit research."
+  },
+  {
+    question: "Why do AI safety measures fail against jailbreaks?",
+    answer: "AI models are trained to be helpful and follow instructions. Jailbreaks exploit this by framing harmful requests in ways that appear benign or by gradually shifting context. The fundamental challenge is that models cannot reliably distinguish between legitimate creative requests and adversarial manipulation."
+  },
+  {
+    question: "Is jailbreaking research ethical?",
+    answer: "Responsible jailbreaking research improves AI safety by identifying vulnerabilities before malicious actors exploit them. All research here follows ethical guidelines: findings are disclosed responsibly, techniques are shared to help defenders, and no actual harmful content is produced."
+  }
+];
+
+const startHere = [
+  {
+    title: "Context Inheritance Exploit",
+    href: "/ai-security/jailbreaking/context-inheritance-exploit/",
+    description: "Flagship research on how jailbroken states persist across GPT sessions."
+  },
+  {
+    title: "Memory Manipulation Attacks",
+    href: "/ai-security/jailbreaking/memory-manipulation-attacks/",
+    description: "How attackers poison AI context windows and memory systems."
+  },
+  {
+    title: "Is AI Inherently Vulnerable?",
+    href: "/ai-security/jailbreaking/inherent-ai-vulnerabilities/",
+    description: "Technical analysis of fundamental LLM security limitations."
+  }
+];
 
 const articles = [
   {
-    title: 'Context Inheritance Exploit: Jailbroken Conversations Don\'t Die',
-    description: 'Discovering how jailbroken states persist across GPT sessions through context inheritance.',
-    url: '/ai-security/jailbreaking/context-inheritance-exploit',
-    date: '2025-01-04',
-    tags: ['jailbreaking', 'GPT', 'context-inheritance', 'novel-attack'],
-    flagship: true
+    title: "Context Inheritance Exploit: Jailbroken Conversations Don't Die",
+    href: "/ai-security/jailbreaking/context-inheritance-exploit/",
+    date: "January 2025",
+    excerpt: "Discovering how jailbroken states persist across GPT sessions through context inheritance."
   },
   {
-    title: 'The Memory Manipulation Problem: Poisoning AI Context Windows',
-    description: 'How attackers poison AI context windows and memory systems.',
-    url: '/ai-security/jailbreaking/memory-manipulation-attacks',
-    date: '2026-01-06',
-    tags: ['jailbreaking', 'memory-attacks', 'context-poisoning'],
-    flagship: true
+    title: "The Memory Manipulation Problem",
+    href: "/ai-security/jailbreaking/memory-manipulation-attacks/",
+    date: "January 2026",
+    excerpt: "How attackers poison AI context windows and memory systems."
   },
   {
-    title: 'How I Jailbroke ChatGPT Using Context Manipulation',
-    description: 'Step-by-step walkthrough of jailbreaking ChatGPT using context and social awareness techniques.',
-    url: '/ai-security/jailbreaking/chatgpt-context-jailbreak',
-    date: '2024-05-27',
-    tags: ['jailbreaking', 'ChatGPT', 'context-manipulation'],
-    flagship: true
+    title: "How I Jailbroke ChatGPT Using Context Manipulation",
+    href: "/ai-security/jailbreaking/chatgpt-context-jailbreak/",
+    date: "May 2024",
+    excerpt: "Step-by-step walkthrough of jailbreaking ChatGPT using social awareness techniques."
   },
   {
-    title: 'Inherent Vulnerabilities in AI Systems: Technical Deep Dive',
-    description: 'Technical analysis of structural vulnerabilities in AI systems.',
-    url: '/ai-security/jailbreaking/inherent-ai-vulnerabilities',
-    date: '2025-02-10',
-    tags: ['AI-security', 'vulnerability-research', 'technical-analysis']
+    title: "Inherent Vulnerabilities in AI Systems",
+    href: "/ai-security/jailbreaking/inherent-ai-vulnerabilities/",
+    date: "February 2025",
+    excerpt: "Technical analysis of structural vulnerabilities in AI systems."
   },
   {
-    title: 'Is AI Inherently Vulnerable? An Offensive Analysis',
-    description: 'Examining the fundamental security limitations of large language models.',
-    url: '/ai-security/jailbreaking/ai-inherent-vulnerability',
-    date: '2024-11-19',
-    tags: ['AI-security', 'vulnerability-analysis', 'LLM-limitations']
+    title: "Is AI Inherently Vulnerable?",
+    href: "/ai-security/jailbreaking/ai-inherent-vulnerability/",
+    date: "November 2024",
+    excerpt: "Examining the fundamental security limitations of large language models."
   }
+];
+
+const breadcrumbs = [
+  { name: "Home", url: "https://snailsploit.com/" },
+  { name: "AI Security", url: "https://snailsploit.com/ai-security/" },
+  { name: "Jailbreaking", url: "https://snailsploit.com/ai-security/jailbreaking/" }
 ];
 ---
 
-<IndexLayout
+<HubLayout
   title="LLM Jailbreaking Research | Techniques & Analysis"
-  description="In-depth LLM jailbreaking research by The Jailbreak Chef. Multi-turn attacks, context inheritance, memory manipulation, guardrail bypass."
+  description="In-depth LLM jailbreaking research by The Jailbreak Chef. Multi-turn attacks, context inheritance, memory manipulation, guardrail bypass techniques."
   canonical="https://snailsploit.com/ai-security/jailbreaking/"
   ogImage="/images/og-jailbreaking.jpg"
   keywords={[
@@ -53,67 +113,22 @@ const articles = [
     'jailbreak techniques',
     'AI guardrail bypass',
     'multi-turn jailbreak',
-    'context manipulation attacks'
+    'context manipulation attacks',
+    'memory poisoning'
   ]}
   heading="LLM Jailbreaking Research"
-  subheading="Novel attack techniques, context manipulation, and persistent jailbreak methods."
+  intro="Jailbreaking represents one of the most challenging problems in AI safety. Unlike technical exploits, jailbreaks work by manipulating how AI models reason, role-play, and follow instructions. This research documents novel attack techniques discovered through systematic testing—from context inheritance exploits that persist across sessions to memory poisoning attacks that corrupt AI judgment over time. The goal isn't to enable harm, but to understand these vulnerabilities deeply enough to build better defenses. Each technique here has been responsibly disclosed and is shared to advance the collective understanding of AI security."
+  glossary={glossary}
+  faqs={faqs}
+  startHere={startHere}
+  articles={articles}
+  breadcrumbs={breadcrumbs}
 >
-  <div class="space-y-6">
-    {articles.map(article => (
-      <a
-        href={article.url}
-        class="group block p-6 rounded-lg transition-all hover:scale-[1.01]"
-        style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
-      >
-        <div class="flex items-start justify-between mb-3">
-          <div class="flex-1">
-            <h2 class="text-2xl font-bold font-mono mb-2 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
-              {article.title}
-            </h2>
-            <p class="text-base mb-3" style="color: var(--color-text-secondary);">
-              {article.description}
-            </p>
-          </div>
-          {article.flagship && (
-            <span
-              class="ml-4 px-3 py-1 text-xs font-mono rounded whitespace-nowrap"
-              style="background-color: var(--color-accent-red); color: var(--color-bg);"
-            >
-              Flagship
-            </span>
-          )}
-        </div>
-
-        <div class="flex items-center justify-between">
-          <div class="flex flex-wrap gap-2">
-            {article.tags.slice(0, 3).map(tag => (
-              <span
-                class="px-2 py-1 text-xs font-mono rounded"
-                style="background-color: var(--color-bg); color: var(--color-text-muted);"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          <div class="text-sm font-mono" style="color: var(--color-text-muted);">
-            {new Date(article.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
-          </div>
-        </div>
-      </a>
-    ))}
-  </div>
-
-  <section class="mt-16 p-8 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-    <h2 class="text-2xl font-bold font-mono mb-4" style="color: var(--color-accent-red);">
-      About This Research
-    </h2>
-    <p class="mb-4" style="color: var(--color-text-secondary);">
-      This collection represents original research into LLM jailbreaking techniques, with a focus on
-      persistent attacks, context manipulation, and novel exploitation methods. Each article includes
-      practical demonstrations, technical analysis, and implications for AI security.
-    </p>
+  <!-- Parent Hub Link -->
+  <section class="mb-16 p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
     <p style="color: var(--color-text-secondary);">
-      Research methodology is documented in the <a href="/frameworks/aatmf" style="color: var(--color-accent-red);">AATMF framework</a>.
+      This research is part of the broader <a href="/ai-security/" class="font-semibold hover:underline" style="color: var(--color-accent-red);">AI Security Research</a> hub.
+      Methodology is documented in the <a href="/frameworks/aatmf/" class="font-semibold hover:underline" style="color: var(--color-accent-red);">AATMF framework</a>.
     </p>
   </section>
-</IndexLayout>
+</HubLayout>

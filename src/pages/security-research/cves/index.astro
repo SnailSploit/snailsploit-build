@@ -1,101 +1,133 @@
 ---
-import IndexLayout from '../../../layouts/IndexLayout.astro';
+import HubLayout from '../../../layouts/HubLayout.astro';
 
-const cves = [
+const glossary = [
   {
-    id: 'CVE-2025-12030',
-    title: 'IDOR in ACF to REST API WordPress Plugin',
-    severity: 'High',
-    type: 'Insecure Direct Object Reference',
-    url: '/security-research/cves/cve-2025-12030'
+    term: "CVE",
+    definition: "Common Vulnerabilities and Exposures - A unique identifier assigned to publicly disclosed security vulnerabilities, enabling consistent tracking across security tools and databases."
   },
   {
-    id: 'CVE-2025-12163',
-    title: 'WordPress Plugin Vulnerability',
-    severity: 'Medium',
-    type: 'TBD',
-    url: '/security-research/cves/cve-2025-12163'
+    term: "CVSS",
+    definition: "Common Vulnerability Scoring System - A standardized severity rating from 0-10 based on exploitability, impact, and environmental factors. Scores above 7.0 are considered High severity."
   },
   {
-    id: 'CVE-2025-11174',
-    title: 'WordPress Plugin Vulnerability',
-    severity: 'Medium',
-    type: 'TBD',
-    url: '/security-research/cves/cve-2025-11174'
+    term: "IDOR",
+    definition: "Insecure Direct Object Reference - A vulnerability where applications expose internal object references (like database IDs) without proper authorization checks, allowing attackers to access other users' data."
   },
   {
-    id: 'CVE-2025-11171',
-    title: 'WordPress Plugin Vulnerability',
-    severity: 'Medium',
-    type: 'TBD',
-    url: '/security-research/cves/cve-2025-11171'
+    term: "Responsible Disclosure",
+    definition: "The practice of privately reporting vulnerabilities to vendors before public disclosure, allowing time for patches to be developed. All CVEs here followed this process."
   },
   {
-    id: 'CVE-2025-9776',
-    title: 'WordPress Plugin Vulnerability',
-    severity: 'Medium',
-    type: 'TBD',
-    url: '/security-research/cves/cve-2025-9776'
+    term: "WordPress Plugin Vulnerability",
+    definition: "Security flaws in WordPress extensions that can affect millions of websites. Plugin vulnerabilities are particularly impactful due to WordPress's ~40% market share."
   }
 ];
 
-const severityColors = {
-  'Critical': 'var(--color-accent-red)',
-  'High': '#ff8800',
-  'Medium': 'var(--color-accent-yellow)',
-  'Low': 'var(--color-accent-green)'
-};
+const faqs = [
+  {
+    question: "How are these CVEs verified?",
+    answer: "All CVEs are officially registered through MITRE, documented in the National Vulnerability Database (NVD), and verified through Wordfence's researcher program. External links to official sources are provided for each disclosure."
+  },
+  {
+    question: "Are these vulnerabilities still exploitable?",
+    answer: "No. All disclosed vulnerabilities have been patched by vendors. We only publish details after fixes are available and users have had reasonable time to update. Check each CVE page for specific remediation versions."
+  },
+  {
+    question: "How can I protect my WordPress site?",
+    answer: "Keep all plugins updated, use a Web Application Firewall (Wordfence recommended), regularly audit installed plugins, remove unused plugins, and monitor security advisories for your specific plugins."
+  },
+  {
+    question: "Do you do private security testing?",
+    answer: "This research is published for educational purposes. For professional penetration testing services or private vulnerability assessments, please reach out through LinkedIn."
+  }
+];
+
+const startHere = [
+  {
+    title: "CVE-2025-12030",
+    href: "/security-research/cves/cve-2025-12030/",
+    description: "High severity IDOR vulnerability in ACF to REST API WordPress plugin."
+  },
+  {
+    title: "Security Research Hub",
+    href: "/security-research/",
+    description: "Browse all security research including general articles and methodologies."
+  },
+  {
+    title: "Wordfence Profile",
+    href: "https://www.wordfence.com/threat-intel/vulnerabilities/researchers/kai-aizen",
+    description: "Official researcher profile with verified CVE attributions."
+  }
+];
+
+const articles = [
+  {
+    title: "CVE-2025-12030: IDOR in ACF to REST API",
+    href: "/security-research/cves/cve-2025-12030/",
+    date: "2025",
+    excerpt: "High severity Insecure Direct Object Reference vulnerability allowing unauthorized data access."
+  },
+  {
+    title: "CVE-2025-12163",
+    href: "/security-research/cves/cve-2025-12163/",
+    date: "2025",
+    excerpt: "WordPress plugin vulnerability with medium severity impact."
+  },
+  {
+    title: "CVE-2025-11174",
+    href: "/security-research/cves/cve-2025-11174/",
+    date: "2025",
+    excerpt: "WordPress plugin vulnerability responsibly disclosed and patched."
+  },
+  {
+    title: "CVE-2025-11171",
+    href: "/security-research/cves/cve-2025-11171/",
+    date: "2025",
+    excerpt: "WordPress plugin vulnerability with detailed technical analysis."
+  },
+  {
+    title: "CVE-2025-9776",
+    href: "/security-research/cves/cve-2025-9776/",
+    date: "2025",
+    excerpt: "WordPress plugin vulnerability affecting multiple installations."
+  }
+];
+
+const breadcrumbs = [
+  { name: "Home", url: "https://snailsploit.com/" },
+  { name: "Security Research", url: "https://snailsploit.com/security-research/" },
+  { name: "CVEs", url: "https://snailsploit.com/security-research/cves/" }
+];
 ---
 
-<IndexLayout
+<HubLayout
   title="CVE Disclosures | 5 WordPress Vulnerabilities by Kai Aizen"
-  description="Official CVE disclosures by Kai Aizen. 5 WordPress plugin vulnerabilities responsibly disclosed. Full technical analysis and remediation."
+  description="Official CVE disclosures by Kai Aizen. 5 WordPress plugin vulnerabilities responsibly disclosed with full technical analysis and remediation guidance."
   canonical="https://snailsploit.com/security-research/cves/"
   ogImage="/images/og-cves.png"
   keywords={[
-    'WordPress CVE researcher',
     'CVE disclosures',
-    'WordPress vulnerability researcher'
+    'WordPress vulnerabilities',
+    'security researcher',
+    'Kai Aizen CVE',
+    'WordPress plugin security'
   ]}
   heading="CVE Disclosures"
-  subheading="5 WordPress plugin vulnerabilities discovered and responsibly disclosed."
+  intro="This page documents five WordPress plugin vulnerabilities discovered through systematic security research and responsibly disclosed to vendors. Each CVE represents the complete vulnerability lifecycle: discovery, private disclosure, vendor coordination, patch development, and public documentation. WordPress powers over 40% of the web, making plugin security critical to internet safety. These disclosures aim to improve the ecosystem by identifying flaws before malicious actors can exploit them. All vulnerabilities have been patched—check each CVE for specific remediation versions."
+  glossary={glossary}
+  faqs={faqs}
+  startHere={startHere}
+  articles={articles}
+  breadcrumbs={breadcrumbs}
 >
-  <div class="space-y-6">
-    {cves.map(cve => (
-      <a
-        href={cve.url}
-        class="group block p-6 rounded-lg transition-all hover:scale-[1.01]"
-        style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
-      >
-        <div class="flex items-start justify-between mb-3">
-          <div>
-            <h2 class="text-2xl font-bold font-mono mb-2 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
-              {cve.id}
-            </h2>
-            <p class="text-base" style="color: var(--color-text-secondary);">
-              {cve.title}
-            </p>
-          </div>
-          <span
-            class="px-3 py-1 text-sm font-mono font-bold rounded"
-            style={`background-color: ${severityColors[cve.severity]}; color: var(--color-bg);`}
-          >
-            {cve.severity}
-          </span>
-        </div>
-        <div class="text-sm font-mono" style="color: var(--color-text-muted);">
-          Type: {cve.type}
-        </div>
-      </a>
-    ))}
-  </div>
-
-  <div class="mt-16 p-8 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-    <h3 class="text-2xl font-bold font-mono mb-4" style="color: var(--color-accent-red);">
+  <!-- Verification Section -->
+  <section class="mb-16 p-8 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+    <h2 class="text-2xl font-bold font-mono mb-4" style="color: var(--color-accent-red);">
       External Verification
-    </h3>
+    </h2>
     <p class="mb-4" style="color: var(--color-text-secondary);">
-      All CVE disclosures are officially registered and verified through:
+      All CVE disclosures are officially registered and independently verified:
     </p>
     <ul class="space-y-2 text-sm font-mono">
       <li>
@@ -109,10 +141,10 @@ const severityColors = {
         </a>
       </li>
       <li>
-        <a href="https://www.wordfence.com/threat-intel/vulnerabilities/researchers/kai-aizen" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
+        <a href="https://www.wordfence.com/threat-intel/vulnerabilities/researchers/kai-aizen" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-accent-red);">
           Wordfence Researcher Profile →
         </a>
       </li>
     </ul>
-  </div>
-</IndexLayout>
+  </section>
+</HubLayout>

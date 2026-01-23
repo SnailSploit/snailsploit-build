@@ -1,104 +1,121 @@
 ---
-import IndexLayout from '../../../layouts/IndexLayout.astro';
+import HubLayout from '../../../layouts/HubLayout.astro';
+
+const glossary = [
+  {
+    term: "Direct Prompt Injection",
+    definition: "Attacks where malicious instructions are inserted directly into user input to override system prompts or manipulate AI behavior."
+  },
+  {
+    term: "Indirect Prompt Injection",
+    definition: "Attacks that hide malicious payloads in external data sources (documents, web pages, emails) that the AI processes, triggering unintended actions.",
+    link: "/ai-security/prompt-injection/custom-instruction-backdoor/"
+  },
+  {
+    term: "MCP Vulnerabilities",
+    definition: "Security weaknesses in the Model Context Protocol that enable tool abuse, data exfiltration, or unauthorized system access through AI agents.",
+    link: "/ai-security/prompt-injection/mcp-threat-analysis/"
+  },
+  {
+    term: "System Prompt Extraction",
+    definition: "Techniques to reveal hidden system prompts that define AI behavior, potentially exposing confidential instructions or business logic."
+  },
+  {
+    term: "Tool Abuse",
+    definition: "Manipulating AI systems to misuse their integrated tools (file access, web browsing, code execution) for malicious purposes."
+  }
+];
+
+const faqs = [
+  {
+    question: "How dangerous is prompt injection in production systems?",
+    answer: "Extremely dangerous. Prompt injection can lead to data exfiltration, unauthorized actions, system compromise, and business logic bypass. As AI systems gain more tool access and autonomy, the impact of successful injection attacks increases dramatically."
+  },
+  {
+    question: "Can prompt injection be fully prevented?",
+    answer: "No current solution completely prevents prompt injection because AI models fundamentally cannot distinguish between instructions and data. Defense requires layered controls: input sanitization, output filtering, privilege restriction, and monitoring. The AATMF framework provides comprehensive control guidance."
+  },
+  {
+    question: "What is the Custom Instruction Backdoor?",
+    answer: "A novel attack vector where malicious content injected into ChatGPT's Custom Instructions persists across all conversations. This transforms a user-controlled setting into a persistent backdoor that influences every interaction."
+  },
+  {
+    question: "Why is MCP security important?",
+    answer: "The Model Context Protocol enables AI agents to access external tools and data. Security vulnerabilities in MCP can allow attackers to hijack these capabilities, potentially leading to file system access, credential theft, or lateral movement through connected systems."
+  }
+];
+
+const startHere = [
+  {
+    title: "The Custom Instruction Backdoor",
+    href: "/ai-security/prompt-injection/custom-instruction-backdoor/",
+    description: "Flagship research on persistent prompt injection through ChatGPT settings."
+  },
+  {
+    title: "MCP Security Threat Analysis",
+    href: "/ai-security/prompt-injection/mcp-threat-analysis/",
+    description: "Comprehensive security analysis of Model Context Protocol vulnerabilities."
+  },
+  {
+    title: "MCP Security Deep Dive",
+    href: "/ai-security/prompt-injection/mcp-security-deep-dive/",
+    description: "Real-world MCP vulnerabilities exposed in production environments."
+  }
+];
 
 const articles = [
   {
-    title: 'The Custom Instruction Backdoor: Prompt Injection via ChatGPT Settings',
-    description: 'Uncovering emergent prompt injection risks through ChatGPT custom instructions.',
-    url: '/ai-security/prompt-injection/custom-instruction-backdoor',
-    date: '2025-05-18',
-    tags: ['prompt-injection', 'ChatGPT', 'backdoor'],
-    flagship: true
+    title: "MCP Security Deep Dive: Real-World Vulnerabilities Exposed",
+    href: "/ai-security/prompt-injection/mcp-security-deep-dive/",
+    date: "August 2025",
+    excerpt: "Deep security analysis of MCP protocol vulnerabilities in production environments."
   },
   {
-    title: 'MCP Security Threat Analysis: Model Context Protocol Vulnerabilities',
-    description: 'Comprehensive security analysis of the Model Context Protocol (MCP).',
-    url: '/ai-security/prompt-injection/mcp-threat-analysis',
-    date: '2025-05-18',
-    tags: ['MCP', 'prompt-injection', 'threat-analysis'],
-    flagship: true
+    title: "The Custom Instruction Backdoor",
+    href: "/ai-security/prompt-injection/custom-instruction-backdoor/",
+    date: "May 2025",
+    excerpt: "Uncovering emergent prompt injection risks through ChatGPT custom instructions."
   },
   {
-    title: 'MCP Security Deep Dive: Real-World Vulnerabilities Exposed',
-    description: 'Deep security analysis of MCP protocol vulnerabilities in production.',
-    url: '/ai-security/prompt-injection/mcp-security-deep-dive',
-    date: '2025-08-09',
-    tags: ['MCP', 'security-hardening', 'real-world-vulnerabilities']
+    title: "MCP Security Threat Analysis",
+    href: "/ai-security/prompt-injection/mcp-threat-analysis/",
+    date: "May 2025",
+    excerpt: "Comprehensive security analysis of the Model Context Protocol."
   }
+];
+
+const breadcrumbs = [
+  { name: "Home", url: "https://snailsploit.com/" },
+  { name: "AI Security", url: "https://snailsploit.com/ai-security/" },
+  { name: "Prompt Injection", url: "https://snailsploit.com/ai-security/prompt-injection/" }
 ];
 ---
 
-<IndexLayout
+<HubLayout
   title="Prompt Injection Research | Attacks & Defenses"
-  description="Prompt injection attack research including indirect injection, MCP vulnerabilities, custom instruction backdoors, and defense analysis."
+  description="Prompt injection attack research including indirect injection, MCP vulnerabilities, custom instruction backdoors, and defense analysis by Kai Aizen."
   canonical="https://snailsploit.com/ai-security/prompt-injection/"
   ogImage="/images/og-prompt-injection.jpg"
   keywords={[
     'prompt injection attacks',
     'indirect prompt injection',
     'MCP security vulnerabilities',
-    'prompt injection defense'
+    'prompt injection defense',
+    'custom instruction backdoor'
   ]}
   heading="Prompt Injection Research"
-  subheading="Attack techniques, vulnerability analysis, and defense strategies."
+  intro="Prompt injection is the SQL injection of the AI era—a fundamental vulnerability class that exploits how language models process input. This research explores both direct attacks that manipulate user prompts and indirect attacks that poison external data sources. Special focus is given to emerging vectors in the Model Context Protocol (MCP), where AI agents gain tool access that dramatically expands the attack surface. Understanding these techniques is essential for anyone building or deploying AI systems, as prompt injection vulnerabilities can cascade into data breaches, unauthorized actions, and complete system compromise."
+  glossary={glossary}
+  faqs={faqs}
+  startHere={startHere}
+  articles={articles}
+  breadcrumbs={breadcrumbs}
 >
-  <div class="space-y-6">
-    {articles.map(article => (
-      <a
-        href={article.url}
-        class="group block p-6 rounded-lg transition-all hover:scale-[1.01]"
-        style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
-      >
-        <div class="flex items-start justify-between mb-3">
-          <div class="flex-1">
-            <h2 class="text-2xl font-bold font-mono mb-2 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
-              {article.title}
-            </h2>
-            <p class="text-base mb-3" style="color: var(--color-text-secondary);">
-              {article.description}
-            </p>
-          </div>
-          {article.flagship && (
-            <span
-              class="ml-4 px-3 py-1 text-xs font-mono rounded whitespace-nowrap"
-              style="background-color: var(--color-accent-red); color: var(--color-bg);"
-            >
-              Flagship
-            </span>
-          )}
-        </div>
-
-        <div class="flex items-center justify-between">
-          <div class="flex flex-wrap gap-2">
-            {article.tags.slice(0, 3).map(tag => (
-              <span
-                class="px-2 py-1 text-xs font-mono rounded"
-                style="background-color: var(--color-bg); color: var(--color-text-muted);"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          <div class="text-sm font-mono" style="color: var(--color-text-muted);">
-            {new Date(article.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
-          </div>
-        </div>
-      </a>
-    ))}
-  </div>
-
-  <section class="mt-16 p-8 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-    <h2 class="text-2xl font-bold font-mono mb-4" style="color: var(--color-accent-red);">
-      Research Focus
-    </h2>
-    <p class="mb-4" style="color: var(--color-text-secondary);">
-      Prompt injection represents a fundamental challenge in AI security. This research explores both
-      direct and indirect injection techniques, with special focus on emerging attack vectors in
-      MCP (Model Context Protocol) and settings-based vulnerabilities.
-    </p>
+  <!-- Parent Hub Link -->
+  <section class="mb-16 p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
     <p style="color: var(--color-text-secondary);">
-      Defensive strategies and mitigation techniques are analyzed in depth, with practical recommendations
-      for production deployments.
+      This research is part of the broader <a href="/ai-security/" class="font-semibold hover:underline" style="color: var(--color-accent-red);">AI Security Research</a> hub.
+      Defense strategies are documented in the <a href="/frameworks/aatmf/" class="font-semibold hover:underline" style="color: var(--color-accent-red);">AATMF framework</a>.
     </p>
   </section>
-</IndexLayout>
+</HubLayout>
