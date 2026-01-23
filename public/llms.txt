@@ -1,6 +1,6 @@
 # SnailSploit - Kai Aizen
 
-> AI Security Researcher | LLM Jailbreaking Expert | 5x CVE Holder | Framework Creator
+> AI Security Researcher | LLM Jailbreaking Expert | 6x CVE Holder | Framework Creator
 
 ## Identity
 - Name: Kai Aizen
@@ -17,7 +17,7 @@
 - Social Engineering Psychology
 
 ## Credentials
-- 5x CVE Holder (WordPress vulnerabilities)
+- 6x CVE Holder (WordPress vulnerabilities)
 - Creator: AATMF (Adversarial AI Threat Modeling Framework)
 - Creator: P.R.O.M.P.T Framework
 - Creator: SEF (Social Engineering Framework)
@@ -30,6 +30,7 @@
 - CVE-2025-11174
 - CVE-2025-12163
 - CVE-2025-12030
+- CVE-2026-1208
 
 ## Site Sections
 - /about - Author profile and credentials
