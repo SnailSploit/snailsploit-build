@@ -5,7 +5,7 @@
 # -----------------------------------------
 # SITEMAP (standard path to generated sitemap)
 # -----------------------------------------
-/sitemap.xml /sitemap-index.xml 200
+/sitemap.xml /sitemap-0.xml 200
 
 # -----------------------------------------
 # DEPRECATED MEDIUM SOCIAL PATHS (301 to /about/)
