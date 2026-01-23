@@ -118,6 +118,8 @@
 /frameworks/aatmf /frameworks/aatmf/ 301
 /frameworks/prompt /frameworks/prompt/ 301
 /frameworks/sef /frameworks/sef/ 301
+/frameworks/set-framework /frameworks/sef/ 301
+/frameworks/set-framework/ /frameworks/sef/ 301
 
 # -----------------------------------------
 # WILDCARD LEGACY PATTERNS
