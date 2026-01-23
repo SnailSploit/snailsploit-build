@@ -1,0 +1,40 @@
+---
+// V3SnailLogo.astro - Snail with sunglasses
+interface Props {
+  size?: number;
+}
+
+const { size = 40 } = Astro.props;
+---
+
+<svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="SnailSploit logo">
+  <!-- Shell spiral -->
+  <ellipse cx="62" cy="48" rx="30" ry="26" fill="#c73e3e"/>
+  <ellipse cx="62" cy="48" rx="22" ry="18" fill="#1a1a1a"/>
+  <ellipse cx="62" cy="48" rx="14" ry="11" fill="#c73e3e"/>
+  <ellipse cx="62" cy="48" rx="7" ry="5" fill="#1a1a1a"/>
+  
+  <!-- Body -->
+  <ellipse cx="38" cy="72" rx="28" ry="10" fill="#d4956a"/>
+  
+  <!-- Head -->
+  <circle cx="22" cy="58" r="16" fill="#d4956a"/>
+  
+  <!-- Sunglasses frame -->
+  <rect x="6" y="54" width="32" height="10" rx="3" fill="#1a1a1a"/>
+  
+  <!-- Sunglasses lenses -->
+  <rect x="8" y="55" width="12" height="8" rx="2" fill="#333"/>
+  <rect x="24" y="55" width="12" height="8" rx="2" fill="#333"/>
+  
+  <!-- Sunglasses bridge -->
+  <rect x="20" y="57" width="4" height="4" fill="#1a1a1a"/>
+  
+  <!-- Eye stalks -->
+  <line x1="14" y1="42" x2="14" y2="54" stroke="#d4956a" stroke-width="4" stroke-linecap="round"/>
+  <line x1="30" y1="42" x2="30" y2="54" stroke="#d4956a" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Eye stalk tips -->
+  <circle cx="14" cy="40" r="4" fill="#d4956a"/>
+  <circle cx="30" cy="40" r="4" fill="#d4956a"/>
+</svg>

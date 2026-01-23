@@ -1,0 +1,71 @@
+---
+// V3Nav.astro - Navigation for homepage redesign
+import V3SnailLogo from './V3SnailLogo.astro';
+
+interface Props {
+  variant?: 'hero' | 'section';
+}
+
+const { variant = 'hero' } = Astro.props;
+
+const navItems = [
+  { label: 'About', href: '/about/' },
+  { label: 'Adversarial Minds', href: '/adversarial-minds/' },
+  { label: 'Frameworks', href: '/frameworks/' },
+  { label: 'Security Research', href: '/security-research/' },
+  { label: 'AI Security', href: '/ai-security/' },
+  { label: 'Writing', href: '/blog/', hasDropdown: true },
+];
+
+const isSection = variant === 'section';
+---
+
+<nav class:list={[
+  "flex justify-between items-center",
+  isSection ? "pb-6 mb-8 border-b border-white/10" : "px-8 md:px-12 py-5"
+]}>
+  <!-- Logo -->
+  <a href="/" class="flex items-center gap-3">
+    <V3SnailLogo size={isSection ? 36 : 40} />
+    <div>
+      <div class:list={[
+        "text-white font-semibold",
+        isSection ? "text-base" : "text-lg"
+      ]}>SnailSploit</div>
+      <div class:list={[
+        "text-gray-400",
+        isSection ? "text-[11px]" : "text-xs"
+      ]}>Kai Aizen</div>
+    </div>
+  </a>
+
+  <!-- Desktop Nav -->
+  <div class:list={[
+    "hidden md:flex items-center",
+    isSection ? "gap-6" : "gap-8"
+  ]}>
+    {navItems.map((item) => (
+      <a
+        href={item.href}
+        class:list={[
+          "text-gray-400 hover:text-white transition-colors flex items-center gap-1",
+          isSection ? "text-[13px]" : "text-sm"
+        ]}
+      >
+        {item.label}
+        {item.hasDropdown && (
+          <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M7 10l5 5 5-5z"/>
+          </svg>
+        )}
+      </a>
+    ))}
+  </div>
+
+  <!-- Mobile Toggle -->
+  <button class="md:hidden text-gray-400 hover:text-white" aria-label="Toggle menu">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>
+  </button>
+</nav>
