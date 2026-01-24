@@ -51,12 +51,8 @@ const navItems = [
           </div>
         </a>
       </div>
-      <!-- Terminal Search -->
-      <div class="hidden lg:flex items-center flex-1 max-w-md mx-8">
-        <SearchBar client:load />
-      </div>
 
-      <div class="hidden md:block">
+      <div class="hidden md:flex items-center gap-6">
         <div class="flex items-baseline space-x-4">
           {navItems.map((item) => (
             <div class="relative group">
@@ -85,6 +81,11 @@ const navItems = [
               )}
             </div>
           ))}
+        </div>
+
+        <!-- Terminal Search -->
+        <div class="hidden lg:block w-64">
+          <SearchBar client:load />
         </div>
       </div>
     </div>
