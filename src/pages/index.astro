@@ -604,6 +604,20 @@ const featuredCards = [
       loadingScreen.classList.add('hidden');
     });
 
+    // Force play for mobile browsers that don't autoplay
+    const playVideo = () => {
+      loadingVideo.play().catch(() => {
+        // If autoplay fails, hide loading screen immediately
+        loadingScreen.classList.add('hidden');
+      });
+    };
+
+    // Try to play immediately
+    playVideo();
+
+    // Also try on user interaction for stubborn browsers
+    document.addEventListener('touchstart', playVideo, { once: true });
+
     // Fallback: hide after 4 seconds if video doesn't trigger ended
     setTimeout(() => {
       loadingScreen.classList.add('hidden');
