@@ -49,10 +49,10 @@ const navItems = [
             decoding="async"
           />
           <div class="flex flex-col">
-            <span class="font-mono text-xl font-bold" style="color: var(--color-accent-red);">
+            <span class="text-xl font-bold tracking-tight" style="color: var(--color-accent-red);">
               SnailSploit
             </span>
-            <span class="font-mono text-xs uppercase tracking-[0.1em]" style="color: var(--color-text-muted);">
+            <span class="text-xs uppercase tracking-widest" style="color: var(--color-text-muted);">
               Kai Aizen
             </span>
           </div>
@@ -64,7 +64,7 @@ const navItems = [
             <div class="relative group">
               <a
                 href={item.href}
-                class="nav-link font-mono text-sm px-3 py-2 transition-colors"
+                class="nav-link text-sm font-medium px-3 py-2 transition-colors"
                 style="color: var(--color-text-secondary);"
               >
                 {item.name}
@@ -76,7 +76,7 @@ const navItems = [
                     {item.children.map((child) => (
                       <a
                         href={child.href}
-                        class="block px-4 py-2 text-sm font-mono hover:bg-[var(--color-surface-hover)] transition-colors"
+                        class="block px-4 py-2 text-sm font-medium hover:bg-[var(--color-surface-hover)] transition-colors"
                         style="color: var(--color-text-secondary);"
                       >
                         {child.name}
