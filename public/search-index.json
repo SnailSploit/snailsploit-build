@@ -120,6 +120,12 @@
     "category": "Framework"
   },
   {
+    "title": "AATMF Prompt Bank",
+    "description": "Complete library of adversarial prompts from AATMF v2.1. 14 tactics, 40+ techniques for security researchers.",
+    "url": "/frameworks/aatmf/prompt-bank/",
+    "category": "Framework"
+  },
+  {
     "title": "P.R.O.M.P.T Framework",
     "description": "Framework for systematic prompt injection taxonomy and testing.",
     "url": "/frameworks/prompt/",
