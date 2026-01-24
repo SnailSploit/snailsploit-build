@@ -1,4 +1,6 @@
 ---
+import V3SnailLogo from './V3SnailLogo.astro';
+
 const navItems = [
   { name: 'About', href: '/about' },
   { name: 'Adversarial Minds', href: '/adversarial-minds' },
@@ -36,20 +38,10 @@ const navItems = [
   <div class="header-inner">
     <div class="flex items-center justify-between h-20">
       <div class="flex items-center">
-        <a href="/" class="flex items-center gap-3">
-          <img
-            src="/images/logo.png"
-            srcset="/images/logo.png 1x, /images/logo@2x.png 2x"
-            alt="SnailSploit - Kai Aizen"
-            width="70"
-            height="70"
-            class="h-[70px] w-auto"
-            style="mix-blend-mode: lighten; filter: contrast(1.2) brightness(1.1); background: transparent; image-rendering: -webkit-optimize-contrast;"
-            loading="eager"
-            decoding="async"
-          />
+        <a href="/" class="flex items-center gap-3 group">
+          <V3SnailLogo size={48} />
           <div class="flex flex-col">
-            <span class="text-xl font-bold tracking-tight" style="color: var(--color-accent-red);">
+            <span class="text-xl font-bold tracking-tight group-hover:text-[var(--color-accent-red-hover)] transition-colors" style="color: var(--color-accent-red);">
               SnailSploit
             </span>
             <span class="text-xs uppercase tracking-widest" style="color: var(--color-text-muted);">
@@ -58,8 +50,27 @@ const navItems = [
           </div>
         </a>
       </div>
+      <!-- Terminal Search -->
+      <div class="hidden lg:flex items-center flex-1 max-w-md mx-8">
+        <div class="relative w-full">
+          <div class="terminal-search flex items-center w-full px-4 py-2 rounded-lg" style="background-color: var(--color-bg); border: 1px solid var(--color-border);">
+            <span class="text-sm font-mono mr-2" style="color: var(--color-accent-red);">$</span>
+            <input
+              type="text"
+              placeholder="search snailsploit..."
+              class="flex-1 bg-transparent text-sm font-mono outline-none"
+              style="color: var(--color-text-primary);"
+              id="nav-search"
+            />
+            <kbd class="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 text-xs font-mono rounded" style="background-color: var(--color-surface); color: var(--color-text-muted);">
+              ⌘K
+            </kbd>
+          </div>
+        </div>
+      </div>
+
       <div class="hidden md:block">
-        <div class="ml-10 flex items-baseline space-x-6">
+        <div class="flex items-baseline space-x-4">
           {navItems.map((item) => (
             <div class="relative group">
               <a
@@ -92,3 +103,32 @@ const navItems = [
     </div>
   </div>
 </nav>
+
+<style>
+  .terminal-search {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .terminal-search:focus-within {
+    border-color: var(--color-accent-red) !important;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+  }
+
+  .terminal-search input::placeholder {
+    color: var(--color-text-muted);
+    opacity: 0.7;
+  }
+</style>
+
+<script>
+  // Keyboard shortcut for search (Cmd+K / Ctrl+K)
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      const searchInput = document.getElementById('nav-search');
+      if (searchInput) {
+        searchInput.focus();
+      }
+    }
+  });
+</script>
