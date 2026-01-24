@@ -46,6 +46,18 @@
   --text-secondary: #888888;
   --text-muted: #737373;
 
+  /* Slate palette (SEF-style) */
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --color-slate-text: #94a3b8;
+  --color-slate-border: rgba(148, 163, 184, 0.2);
+  --color-slate-bg: rgba(148, 163, 184, 0.05);
+  --color-slate-bg-hover: rgba(148, 163, 184, 0.1);
+
   /* Fonts */
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   --font-sans: 'Inter', system-ui, sans-serif;
@@ -1176,6 +1188,122 @@ html {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
+}
+
+/* ============================================
+   IMPRESSIVE TITLES (SEF-style)
+   ============================================ */
+
+/* Hero title - for main page headings */
+.title-hero {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+}
+
+/* Title with animated red gradient */
+.title-gradient {
+  background: linear-gradient(135deg,
+    var(--color-accent-red) 0%,
+    #ff6b6b 25%,
+    var(--color-accent-red) 50%,
+    #ff6b6b 75%,
+    var(--color-accent-red) 100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: titleGradient 6s ease-in-out infinite;
+}
+
+@keyframes titleGradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Title with white shimmer effect */
+.title-shimmer {
+  background: linear-gradient(90deg, #ffffff 0%, #e0e0e0 50%, #ffffff 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: titleShimmer 8s ease-in-out infinite;
+}
+
+@keyframes titleShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Title with red glow */
+.title-glow {
+  text-shadow: 0 0 80px rgba(220, 38, 38, 0.4);
+}
+
+/* Section title with accent underline */
+.title-section {
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: #ffffff;
+  position: relative;
+  display: inline-block;
+}
+
+.title-section::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-accent-red), transparent);
+  border-radius: 2px;
+}
+
+/* Category/label badge (slate style) */
+.title-label {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  background: var(--color-slate-bg);
+  color: var(--color-slate-text);
+  border: 1px solid var(--color-slate-border);
+}
+
+/* Hero subtitle */
+.subtitle-hero {
+  font-family: var(--font-sans);
+  font-size: clamp(1.125rem, 3vw, 1.5rem);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  max-width: 48rem;
+}
+
+/* SEF-style card surfaces */
+.surface-slate {
+  background: var(--color-slate-bg);
+  border: 1px solid var(--color-slate-border);
+  border-radius: 12px;
+}
+
+.surface-slate:hover {
+  border-color: var(--slate-400);
+  background: var(--color-slate-bg-hover);
+}
+
+/* Background gradient (SEF hero style) */
+.bg-gradient-slate {
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.3) 0%, rgba(10, 10, 10, 1) 100%);
 }
 
 /* Prevent horizontal overflow on mobile */
