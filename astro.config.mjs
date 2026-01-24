@@ -13,7 +13,12 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   site: 'https://snailsploit.com',
   trailingSlash: 'always',
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    routes: {
+      strategy: 'include',
+      include: ['/api/*'],  // Only route API calls through the worker
+    },
+  }),
   vite: {
     plugins: [tailwindcss()]
   },
