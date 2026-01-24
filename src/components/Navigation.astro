@@ -34,42 +34,40 @@ const navItems = [
 ];
 ---
 
-<nav class="border-b" style="border-color: var(--color-border); background-color: var(--color-surface);">
+<nav class="nav-glass">
   <div class="header-inner">
     <div class="grid grid-cols-[auto_1fr_auto] items-center gap-8 h-20">
       <!-- Logo - Left -->
-      <a href="/" class="flex flex-col items-center group">
+      <a href="/" class="logo-link flex flex-col items-center group">
         <img
           src="/images/logo.png"
           alt="SnailSploit"
-          class="h-9 w-auto invert opacity-90 group-hover:opacity-100 transition-opacity"
+          class="h-9 w-auto invert opacity-90 group-hover:opacity-100 transition-all duration-300"
         />
-        <span class="text-[10px] uppercase tracking-[0.15em] mt-1" style="color: var(--color-text-muted);">
+        <span class="text-[10px] uppercase tracking-[0.15em] mt-1 transition-colors duration-300" style="color: var(--color-text-muted);">
           Kai Aizen
         </span>
       </a>
 
       <!-- Nav Items - Center -->
       <div class="hidden md:flex items-center justify-center">
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1">
           {navItems.map((item) => (
             <div class="relative group">
               <a
                 href={item.href}
-                class="nav-link text-sm font-medium px-4 py-2 transition-colors whitespace-nowrap"
-                style="color: var(--color-text-secondary);"
+                class="nav-item text-sm font-medium px-4 py-2 rounded-lg whitespace-nowrap"
               >
                 {item.name}
-                {item.children && <span class="ml-1 opacity-50 text-xs">▾</span>}
+                {item.children && <span class="ml-1 opacity-50 text-xs transition-transform duration-200 inline-block group-hover:rotate-180">▾</span>}
               </a>
               {item.children && (
-                <div class="absolute left-1/2 -translate-x-1/2 mt-1 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 rounded-lg shadow-xl" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+                <div class="dropdown-menu">
                   <div class="py-2">
                     {item.children.map((child) => (
                       <a
                         href={child.href}
-                        class="block px-4 py-2 text-sm font-medium hover:bg-[var(--color-surface-hover)] transition-colors"
-                        style="color: var(--color-text-secondary);"
+                        class="dropdown-item"
                       >
                         {child.name}
                       </a>
@@ -89,4 +87,106 @@ const navItems = [
     </div>
   </div>
 </nav>
+
+<style>
+  .nav-glass {
+    background: rgba(20, 20, 20, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo-link:hover span {
+    color: var(--color-accent-red);
+  }
+
+  .nav-item {
+    color: var(--color-text-secondary);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+  }
+
+  .nav-item::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-accent-red), var(--color-accent-red-hover));
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateX(-50%);
+    border-radius: 1px;
+  }
+
+  .nav-item:hover {
+    color: var(--color-text-primary);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .nav-item:hover::after {
+    width: 60%;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    margin-top: 4px;
+    width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 50;
+    background: rgba(20, 20, 20, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+  }
+
+  .group:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .dropdown-item {
+    display: block;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    transition: all 0.2s ease;
+    position: relative;
+  }
+
+  .dropdown-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 60%;
+    background: var(--color-accent-red);
+    transition: width 0.2s ease;
+    border-radius: 0 2px 2px 0;
+  }
+
+  .dropdown-item:hover {
+    color: var(--color-text-primary);
+    background: rgba(220, 38, 38, 0.1);
+    padding-left: 1.5rem;
+  }
+
+  .dropdown-item:hover::before {
+    width: 3px;
+  }
+</style>
 
