@@ -4,6 +4,10 @@ import Navigation from '../../components/Navigation.astro';
 import Footer from '../../components/Footer.astro';
 import BreadcrumbSchema from '../../components/schemas/BreadcrumbSchema.astro';
 import FAQPageSchema from '../../components/schemas/FAQPageSchema.astro';
+import FrameworkSchema from '../../components/schemas/FrameworkSchema.astro';
+import PROMPTFramework from '../../components/PROMPTFramework.tsx';
+import PromptBuilder from '../../components/PromptBuilder.tsx';
+import { components, useCases, aatmfRelationship, stats } from '../../data/prompt-data';
 
 const promptFaqs = [
   {
@@ -23,26 +27,24 @@ const promptFaqs = [
     answer: "Yes, the P.R.O.M.P.T framework is particularly useful in cybersecurity for crafting precise prompts for security analysis, red teaming exercises, and exploring AI vulnerabilities while maintaining ethical guardrails."
   },
   {
-    question: "Is the P.R.O.M.P.T framework free to use?",
-    answer: "Yes, the P.R.O.M.P.T framework is freely available. It was created by Kai Aizen (SnailSploit) as an open methodology for effective AI interactions."
+    question: "How does P.R.O.M.P.T relate to AATMF?",
+    answer: "AATMF (Adversarial AI Threat Modeling Framework) focuses on offensive AI security - how attackers exploit LLMs. P.R.O.M.P.T is the defensive complement - how to communicate effectively with LLMs. Together they provide complete AI security understanding."
   }
 ];
 ---
 
 <BaseLayout
-  title="P.R.O.M.P.T Framework: The Last Prompt Engineering Guide You'll Ever Read"
-  description="The P.R.O.M.P.T framework - Purpose, Results, Obstacles, Mindset, Preferences, Technical. A systematic methodology for effective AI interactions grounded in established theories."
+  title="P.R.O.M.P.T Framework: Principle-Based LLM Communication"
+  description="The P.R.O.M.P.T framework - Purpose, Results, Obstacles, Mindset, Preferences, Technical. A systematic methodology for effective AI interactions. Transform prompt engineering from guessing to precision."
   canonical="https://snailsploit.com/frameworks/prompt/"
   ogType="article"
   ogImage="/images/frameworks/prompt/main-framework.png"
   keywords={[
     'P.R.O.M.P.T framework',
     'prompt engineering methodology',
-    'systematic prompting',
-    'LLM interaction framework',
-    'AI prompt engineering',
-    'context-aware prompting',
-    'prompt engineering best practices'
+    'LLM communication',
+    'AI prompt best practices',
+    'systematic prompting'
   ]}
 >
   <Navigation slot="header" />
@@ -52,570 +54,313 @@ const promptFaqs = [
     {name: "P.R.O.M.P.T", url: "https://snailsploit.com/frameworks/prompt/"}
   ]} />
   <FAQPageSchema faqs={promptFaqs} />
+  <FrameworkSchema
+    name="P.R.O.M.P.T Framework"
+    description="A principle-based methodology for effective LLM-human communication. 6 components for crafting precise, reliable AI prompts."
+    url="https://snailsploit.com/frameworks/prompt/"
+    version="1.0"
+    datePublished="2024-06-01"
+    dateModified="2025-01-24"
+    keywords={['P.R.O.M.P.T', 'prompt engineering', 'LLM communication', 'AI prompts', 'context engineering']}
+  />
 
-  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <header class="mb-12">
-      <h1 class="text-5xl md:text-6xl font-bold mb-6" style="color: var(--color-accent-red);">
-        The Last Prompt Engineering Guide You'll Ever Read
-      </h1>
-      <p class="text-3xl mb-4 font-bold" style="color: var(--color-text-primary);">
-        Introducing P.R.O.M.P.T
-      </p>
-      <p class="text-xl" style="color: var(--color-text-secondary);">
-        A systematic framework for crafting effective prompts based on fundamental principles
-      </p>
+  <!-- Hero Section -->
+  <section class="relative py-20 overflow-hidden">
+    <div class="absolute inset-0" style="background: radial-gradient(ellipse at center top, rgba(59, 130, 246, 0.15) 0%, transparent 50%);"></div>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-12">
+        <span class="inline-block px-4 py-2 rounded-full text-xs font-mono mb-6" style="background: rgba(59, 130, 246, 0.2); color: #3b82f6;">
+          Context is King
+        </span>
+        <h1 class="text-5xl md:text-7xl font-bold mb-4" style="color: #3b82f6;">
+          P.R.O.M.P.T.
+        </h1>
+        <p class="text-xl md:text-2xl mb-2" style="color: var(--color-text-primary);">
+          A Principle-Based Approach for LLM-Human Communication
+        </p>
+        <p class="text-lg max-w-2xl mx-auto" style="color: var(--color-text-secondary);">
+          Transform prompt engineering from ad-hoc guessing to systematic methodology.
+          Any pattern can (and should) be broken down to principles.
+        </p>
+      </div>
 
-      <!-- Part of Hub Link -->
-      <div class="mt-6 p-4 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-        <span class="text-sm" style="color: var(--color-text-muted);">Part of </span>
+      <!-- Stats Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+        <div class="stat-card text-center p-6 rounded-xl" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(255,255,255,0.1);">
+          <div class="text-3xl md:text-4xl font-bold mb-1" style="color: #3b82f6;">6</div>
+          <div class="text-sm" style="color: var(--color-text-muted);">Components</div>
+        </div>
+        <div class="stat-card text-center p-6 rounded-xl" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(255,255,255,0.1);">
+          <div class="text-3xl md:text-4xl font-bold mb-1" style="color: #3b82f6;">1</div>
+          <div class="text-sm" style="color: var(--color-text-muted);">Core Principle</div>
+        </div>
+        <div class="stat-card text-center p-6 rounded-xl" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(255,255,255,0.1);">
+          <div class="text-3xl md:text-4xl font-bold mb-1" style="color: #3b82f6;">5+</div>
+          <div class="text-sm" style="color: var(--color-text-muted);">Domains</div>
+        </div>
+        <div class="stat-card text-center p-6 rounded-xl" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(255,255,255,0.1);">
+          <div class="text-3xl md:text-4xl font-bold mb-1" style="color: #3b82f6;">∞</div>
+          <div class="text-sm" style="color: var(--color-text-muted);">Applications</div>
+        </div>
+      </div>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-wrap justify-center gap-4 mt-10">
         <a
-          href="/frameworks/"
-          class="text-sm font-mono font-semibold hover:underline"
-          style="color: var(--color-accent-red);"
+          href="#framework"
+          class="inline-flex items-center gap-2 px-6 py-3 font-semibold rounded-lg transition-all hover:scale-105"
+          style="background: #3b82f6; color: white;"
         >
-          Security Frameworks →
+          Explore Framework
+        </a>
+        <a
+          href="#builder"
+          class="inline-flex items-center gap-2 px-6 py-3 font-semibold rounded-lg transition-all hover:scale-105"
+          style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);"
+        >
+          Try Prompt Builder
         </a>
       </div>
-    </header>
-
-    <div class="prose prose-invert prose-lg max-w-none">
-      <!-- Table of Contents -->
-      <section class="mb-12 p-6 rounded-lg" style="background-color: rgba(255, 255, 255, 0.05); border: 1px solid var(--color-accent-red);">
-        <h2 id="table-of-contents" style="color: var(--color-accent-red); margin-top: 0;">Table of Contents</h2>
-        <nav>
-          <ol class="space-y-2">
-            <li><a href="#introduction">Introduction</a></li>
-            <li><a href="#framework-overview">The P.R.O.M.P.T Framework Explained</a></li>
-            <li><a href="#purpose">2.1. Purpose (P) - Define What You Want to Achieve</a></li>
-            <li><a href="#results">2.2. Results Format (R) - Specify Your Desired Output Structure</a></li>
-            <li><a href="#obstacles">2.3. Obstacles & Guardrails (O) - Set Boundaries to Avoid Pitfalls</a></li>
-            <li><a href="#mindset">2.4. Mindset & Context (M) - Provide Necessary Background</a></li>
-            <li><a href="#preferences">2.5. Particular Preferences (P) - Express Stylistic Requirements</a></li>
-            <li><a href="#technical">2.6. Technical Details (T) - Incorporate Industry-Specific Language</a></li>
-            <li><a href="#why-matters">3. Why These Principles Matter</a></li>
-            <li><a href="#looking-ahead">4. Looking Ahead: Part 2</a></li>
-            <li><a href="#references">5. References</a></li>
-            <li><a href="#featured-writing">Featured Writing and Publications</a></li>
-            <li><a href="#about">About the Author</a></li>
-            <li><a href="#internal-links">Related Content</a></li>
-          </ol>
-        </nav>
-      </section>
-
-      <!-- Introduction -->
-      <section id="introduction" class="mb-12">
-        <p>
-          While I find myself quite engaged with the advancements in agentic Large Language Models (LLMs),
-          I can't help but notice the continuous stream of articles and guides still focused on the basics
-          of prompting. It strikes me as a bit interesting because, from my perspective, even a high-level
-          understanding of how LLMs work points to one fundamental thing: it all comes down to <strong>context</strong>.
-          I'm constantly <strong>prompted</strong> to remember just how crucial it is.
-        </p>
-        <p>
-          <strong>Any pattern can (and should) be broken down to principles, and there you have it.</strong>
-        </p>
-        <p>
-          That said, welcome to the first installment of our comprehensive exploration of prompt engineering.
-          This guide introduces the PROMPT framework — a systematic approach that captures the essential
-          elements of crafting effective prompts for generative AI. While prompt engineering techniques may
-          evolve, the core principles outlined in this framework remain fundamental for achieving precision
-          and innovation in AI interactions.
-        </p>
-      </section>
-
-      <!-- Framework Overview -->
-      <section id="framework-overview" class="mb-12">
-        <h2 style="color: var(--color-accent-red);">The P.R.O.M.P.T Framework Explained</h2>
-        <div class="my-8">
-          <img
-            src="/images/frameworks/prompt/main-framework.png"
-            alt="Kai Aizen's P.R.O.M.P.T Framework Diagram"
-            class="w-full rounded-lg shadow-lg"
-            style="border: 1px solid var(--color-accent-red);"
-          />
-        </div>
-      </section>
-
-      <!-- Purpose (P) -->
-      <section id="purpose" class="mb-12">
-        <h2 style="color: var(--color-accent-red);">2.1. Purpose (P)</h2>
-        <h3 style="color: var(--color-text-primary);">Define What You Want to Achieve</h3>
-        <p>
-          A clear objective is the cornerstone of effective prompt engineering. Whether you're generating
-          a technical report, a creative narrative, or even a cybersecurity analysis, specifying your
-          purpose minimizes ambiguity and ensures that the AI aligns with your intended outcome. This
-          focus not only boosts accuracy but also enhances SEO by targeting specific keywords such as
-          prompt engineering best practices and AI interaction strategies.
-        </p>
-        <div class="my-8">
-          <img
-            src="/images/frameworks/prompt/purpose.png"
-            alt="Purpose principle example"
-            class="w-full rounded-lg shadow-lg"
-            style="border: 1px solid var(--color-accent-red);"
-          />
-        </div>
-      </section>
-
-      <!-- Results Format (R) -->
-      <section id="results" class="mb-12">
-        <h2 style="color: var(--color-accent-red);">2.2. Results Format (R)</h2>
-        <h3 style="color: var(--color-text-primary);">Specify Your Desired Output Structure</h3>
-        <p>
-          Defining the output format — be it bullet points, tables, or narrative paragraphs — enhances
-          readability and clarity. When you set a clear structure, you reduce cognitive load and ensure
-          that the AI delivers organized, digestible, and actionable information. This step is essential
-          for both user engagement and search engine optimization, as structured data is more accessible
-          for indexing.
-        </p>
-        <div class="my-8">
-          <img
-            src="/images/frameworks/prompt/results.png"
-            alt="Results Format principle example"
-            class="w-full rounded-lg shadow-lg"
-            style="border: 1px solid var(--color-accent-red);"
-          />
-        </div>
-      </section>
-
-      <!-- Obstacles & Guardrails (O) -->
-      <section id="obstacles" class="mb-12">
-        <h2 style="color: var(--color-accent-red);">2.3. Obstacles & Guardrails (O)</h2>
-        <h3 style="color: var(--color-text-primary);">Set Boundaries to Avoid Pitfalls</h3>
-        <p>
-          Every AI interaction comes with risks such as bias, inaccuracy, or unintended content. By
-          incorporating obstacles and guardrails into your prompts, you mitigate these risks, ensuring
-          outputs are both accurate and ethically sound. This risk management approach is particularly
-          crucial in high-stakes fields like cybersecurity. For further scientific context, consider
-          exploring studies on AI vulnerability frameworks such as those discussed in
-          <a href="https://arxiv.org/abs/2303.13034" target="_blank" rel="noopener noreferrer">Is AI Inherently Vulnerable?</a>.
-        </p>
-        <div class="my-8">
-          <img
-            src="/images/frameworks/prompt/obstacles.png"
-            alt="Obstacles & Guardrails principle example"
-            class="w-full rounded-lg shadow-lg"
-            style="border: 1px solid var(--color-accent-red);"
-          />
-        </div>
-      </section>
-
-      <!-- Mindset & Context (M) -->
-      <section id="mindset" class="mb-12">
-        <h2 style="color: var(--color-accent-red);">2.4. Mindset & Context (M)</h2>
-        <h3 style="color: var(--color-text-primary);">Provide the Necessary Background and Tailor to Your Audience</h3>
-        <p>
-          Context is king. Whether addressing a technical audience or a broader readership, providing
-          background details ensures that the AI grasps the nuances of your request. Tailoring your
-          prompt not only enhances relevance but also improves SEO by incorporating long-tail keywords
-          and context-rich language.
-        </p>
-        <div class="my-8">
-          <img
-            src="/images/frameworks/prompt/mindset.png"
-            alt="Mindset & Context principle example"
-            class="w-full rounded-lg shadow-lg"
-            style="border: 1px solid var(--color-accent-red);"
-          />
-        </div>
-      </section>
-
-      <!-- Particular Preferences (P) -->
-      <section id="preferences" class="mb-12">
-        <h2 style="color: var(--color-accent-red);">2.5. Particular Preferences (P)</h2>
-        <h3 style="color: var(--color-text-primary);">Express Your Stylistic and Subjective Requirements</h3>
-        <p>
-          Personalization matters. Detailing your stylistic preferences — whether it's the tone, language,
-          or specific formatting — ensures that the output meets your high standards. This customization
-          is key to producing content that resonates with your audience while also aligning with SEO best
-          practices through consistent keyword usage and brand voice.
-        </p>
-        <div class="my-8">
-          <img
-            src="/images/frameworks/prompt/preferences.png"
-            alt="Particular Preferences principle example"
-            class="w-full rounded-lg shadow-lg"
-            style="border: 1px solid var(--color-accent-red);"
-          />
-        </div>
-      </section>
-
-      <!-- Technical Details (T) -->
-      <section id="technical" class="mb-12">
-        <h2 style="color: var(--color-accent-red);">2.6. Technical Details (T)</h2>
-        <h3 style="color: var(--color-text-primary);">Incorporate Industry-Specific Language and Parameters</h3>
-        <p>
-          In technical domains, precision is non-negotiable. Integrating specific terminology, parameters,
-          and detailed instructions bridges the gap between general AI capabilities and specialized industry
-          needs. For professionals in cybersecurity and red teaming, this level of precision is essential.
-        </p>
-        <p>
-          Additional insights can be found on resources such as
-          <a href="https://sec-consult.com/en/blog/2023/10/gpt-01-and-the-context-inheritance-exploit-jailbroken-conversations-dont-die/" target="_blank" rel="noopener noreferrer">GPT-01 and the Context Inheritance Exploit: Jailbroken Conversations Don't Die</a>.
-        </p>
-        <div class="my-8">
-          <img
-            src="/images/frameworks/prompt/technical.png"
-            alt="Technical Details principle example"
-            class="w-full rounded-lg shadow-lg"
-            style="border: 1px solid var(--color-accent-red);"
-          />
-        </div>
-      </section>
-
-      <!-- Why These Principles Matter -->
-      <section id="why-matters" class="mb-12">
-        <h2 style="color: var(--color-accent-red);">3. Why These Principles Matter</h2>
-        <p>
-          The PROMPT framework is more than just a set of guidelines — it's a synthesis of best practices
-          grounded in established theories like goal-setting, cognitive load management, risk mitigation,
-          and contextual analysis. Whether you're delving into the intricacies of cybersecurity or refining
-          digital marketing strategies, these principles ensure every prompt is efficient, resilient, and
-          ethically sound. By integrating both scientific research and my personal experiences, PROMPT
-          empowers you to achieve more reliable AI interactions while enhancing your content's SEO and
-          credibility.
-        </p>
-      </section>
-
-      <!-- Looking Ahead -->
-      <section id="looking-ahead" class="mb-12">
-        <h2 style="color: var(--color-accent-red);">4. Looking Ahead: Part 2</h2>
-        <p>
-          This is just the beginning. In Part 2 of our series, I'll explore real-world use cases that
-          demonstrate how the PROMPT framework translates into tangible results across diverse domains —
-          from digital marketing and cybersecurity to scientific research and legal drafting. Expect
-          detailed technical breakdowns, practical command-line outputs, and actionable insights that
-          underscore consistency, precision, and innovation in AI-driven projects.
-        </p>
-      </section>
-
-      <!-- References -->
-      <section id="references" class="mb-12">
-        <h2 style="color: var(--color-accent-red);">5. References</h2>
-
-        <div class="space-y-4">
-          <div class="reference-group">
-            <h3 style="color: var(--color-text-primary); font-size: 1.25rem;">Core Research & Articles</h3>
-            <ul class="list-none space-y-2 ml-0">
-              <li>
-                <a href="https://medium.com/@sechel/how-i-jailbreaked-the-latest-chatgpt-model-using-context-and-social-awareness-techniques-d446b619209a" target="_blank" rel="noopener noreferrer">
-                  How I Jailbreaked the Latest ChatGPT Model Using Context and Social Awareness Techniques
-                </a>
-              </li>
-              <li>
-                <a href="https://www.linkedin.com/pulse/hidden-risks-ai-offensive-perspective-dr-erfan-shahbazian" target="_blank" rel="noopener noreferrer">
-                  The Hidden Risks of AI: An Offensive Perspective
-                </a>
-              </li>
-              <li>
-                <a href="https://arxiv.org/abs/2303.13034" target="_blank" rel="noopener noreferrer">
-                  Is AI Inherently Vulnerable?
-                </a>
-              </li>
-              <li>
-                <a href="https://sec-consult.com/en/blog/2023/10/gpt-01-and-the-context-inheritance-exploit-jailbroken-conversations-dont-die/" target="_blank" rel="noopener noreferrer">
-                  GPT-01 and the Context Inheritance Exploit: Jailbroken Conversations Don't Die
-                </a>
-              </li>
-              <li>
-                <a href="https://hakin9.org/llm-mayhem-hackers-new-anthem/" target="_blank" rel="noopener noreferrer">
-                  Hakin9 — LLM Mayhem: Hacker's New Anthem
-                </a>
-              </li>
-              <li>
-                <a href="https://pentestmag.com/design-your-penetration-testing-setup/" target="_blank" rel="noopener noreferrer">
-                  Pentest Magazine — Design Your Penetration Testing Setup
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="reference-group">
-            <h3 style="color: var(--color-text-primary); font-size: 1.25rem;">Official Resources & Guides</h3>
-            <ul class="list-none space-y-2 ml-0">
-              <li>
-                <strong>OpenAI Cookbook — Prompt Engineering:</strong> A comprehensive resource offering
-                practical guides and examples for effective prompt creation.
-                (<a href="https://cookbook.openai.com/" target="_blank" rel="noopener noreferrer">https://cookbook.openai.com/</a>)
-              </li>
-              <li>
-                <strong>Prompt Engineering Guide:</strong> An extensive open-source guide detailing
-                techniques and best practices in prompt engineering.
-                (<a href="https://www.promptingguide.ai/" target="_blank" rel="noopener noreferrer">https://www.promptingguide.ai/</a>)
-              </li>
-              <li>
-                <strong>Research Paper: "Pre-train, Prompt, and Predict":</strong> A systematic survey
-                of prompting methods in Natural Language Processing. Available on arXiv:
-                <a href="https://arxiv.org/abs/2107.13586" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2107.13586</a>
-              </li>
-              <li>
-                <strong>Google AI — Prompt Engineering:</strong> Official documentation from Google
-                providing insights and best practices for their AI models.
-                (<a href="https://developers.google.com/learn/prompt-engineering" target="_blank" rel="noopener noreferrer">https://developers.google.com/learn/prompt-engineering</a>)
-              </li>
-              <li>
-                <strong>Harvard Business Review: The Power of Prompts:</strong> An analysis of prompt
-                engineering's strategic importance in business applications.
-                (<a href="https://hbr.org/2023/09/the-power-of-prompts-how-to-get-the-best-results-from-ai-language-models" target="_blank" rel="noopener noreferrer">https://hbr.org/2023/09/the-power-of-prompts-how-to-get-the-best-results-from-ai-language-models</a>)
-              </li>
-            </ul>
-          </div>
-
-          <div class="reference-group">
-            <h3 style="color: var(--color-text-primary); font-size: 1.25rem;">Academic Foundations</h3>
-            <ul class="list-none space-y-2 ml-0">
-              <li>
-                <strong>Purpose (P):</strong> Locke and Latham's research on goal-setting theory
-                demonstrates how clear, specific goals improve outcomes.
-                (<a href="https://psycnet.apa.org/doiLanding?doi=10.1037%2F0033-2909.90.1.125" target="_blank" rel="noopener noreferrer">https://psycnet.apa.org/doiLanding?doi=10.1037%2F0033-2909.90.1.125</a>)
-              </li>
-              <li>
-                <strong>Results Format (R):</strong> Information architecture research shows how
-                structured presentation enhances comprehension.
-                (<a href="https://www.nngroup.com/articles/information-architecture/" target="_blank" rel="noopener noreferrer">https://www.nngroup.com/articles/information-architecture/</a>)
-              </li>
-              <li>
-                <strong>Obstacles & Guardrails (O):</strong> Research on AI safety explores mechanisms
-                for preventing harmful or biased outputs.
-                (<a href="https://arxiv.org/abs/2305.15033" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2305.15033</a>)
-              </li>
-              <li>
-                <strong>Mindset & Context (M):</strong> Communication studies research highlights
-                context's vital role in effective communication.
-                (<a href="https://www.thoughtco.com/what-is-context-in-communication-3026253" target="_blank" rel="noopener noreferrer">https://www.thoughtco.com/what-is-context-in-communication-3026253</a>)
-              </li>
-              <li>
-                <strong>Technical Details (T):</strong> API documentation and community resources
-                demonstrate the importance of precise technical instructions in AI interactions.
-                (Example: <a href="https://platform.openai.com/docs/api-reference" target="_blank" rel="noopener noreferrer">https://platform.openai.com/docs/api-reference</a>)
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- Featured Writing -->
-      <section id="featured-writing" class="mb-12">
-        <h2 style="color: var(--color-accent-red);">Featured Writing and Publications</h2>
-        <ul class="space-y-2">
-          <li>
-            <a href="https://medium.com/@sechel/how-i-jailbreaked-the-latest-chatgpt-model-using-context-and-social-awareness-techniques-d446b619209a" target="_blank" rel="noopener noreferrer">
-              How I Jailbreaked the Latest ChatGPT Model Using Context and Social Awareness Techniques
-            </a>
-          </li>
-          <li>
-            <a href="https://www.linkedin.com/pulse/hidden-risks-ai-offensive-perspective-dr-erfan-shahbazian" target="_blank" rel="noopener noreferrer">
-              The Hidden Risks of AI: An Offensive Perspective
-            </a>
-          </li>
-          <li>
-            <a href="https://arxiv.org/abs/2303.13034" target="_blank" rel="noopener noreferrer">
-              Is AI Inherently Vulnerable?
-            </a>
-          </li>
-          <li>
-            <a href="https://sec-consult.com/en/blog/2023/10/gpt-01-and-the-context-inheritance-exploit-jailbroken-conversations-dont-die/" target="_blank" rel="noopener noreferrer">
-              GPT-01 and the Context Inheritance Exploit: Jailbroken Conversations Don't Die
-            </a>
-          </li>
-          <li>
-            <a href="https://hakin9.org/llm-mayhem-hackers-new-anthem/" target="_blank" rel="noopener noreferrer">
-              Hakin9 — LLM Mayhem: Hacker's New Anthem
-            </a>
-          </li>
-          <li>
-            <a href="https://pentestmag.com/design-your-penetration-testing-setup/" target="_blank" rel="noopener noreferrer">
-              Pentest Magazine — Design Your Penetration Testing Setup
-            </a>
-          </li>
-        </ul>
-      </section>
-
-      <!-- About the Author -->
-      <section id="about" class="mb-12 p-6 rounded-lg" style="background-color: rgba(255, 255, 255, 0.05); border: 1px solid var(--color-accent-red);">
-        <h2 style="color: var(--color-accent-red);">About the Author</h2>
-        <p>
-          <a href="https://linkedin.com/in/kaiaizen" target="_blank" rel="noopener noreferrer">Kai Aizen (SnailSploit)</a>
-          is a cybersecurity specialist, social engineering lecturer, and offensive security analyst. Kai
-          combines academic research with hands-on security experience. As part of <strong>Snailbytes</strong>,
-          he explores the intersection of AI and cybersecurity, examining how emerging technologies shape
-          our digital landscape. His insights are shared across platforms including
-          <a href="https://hakin9.org/llm-mayhem-hackers-new-anthem/" target="_blank" rel="noopener noreferrer">Hakin9</a>,
-          <a href="https://pentestmag.com/design-your-penetration-testing-setup/" target="_blank" rel="noopener noreferrer">Pentest Mag</a>
-          and <a href="http://github.com/snailsploit" target="_blank" rel="noopener noreferrer">GitHub</a>,
-          where he contributes to understanding adversarial AI and cybersecurity vulnerabilities.
-        </p>
-      </section>
-
-      <!-- Internal Links -->
-      <section id="internal-links" class="mb-12">
-        <h2 style="color: var(--color-accent-red);">Related Content</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="p-6 rounded-lg" style="background-color: rgba(255, 255, 255, 0.05); border: 1px solid var(--color-accent-red);">
-            <h3 style="color: var(--color-text-primary); font-size: 1.25rem;">Practical Application</h3>
-            <p style="color: var(--color-text-secondary); margin-bottom: 1rem;">
-              See the P.R.O.M.P.T framework in action through a real-world jailbreak demonstration
-            </p>
-            <a href="/ai-security/jailbreaking/chatgpt-context-jailbreak" class="inline-block px-4 py-2 rounded" style="background-color: var(--color-accent-red); color: white; text-decoration: none;">
-              ChatGPT Context Jailbreak
-            </a>
-          </div>
-          <div class="p-6 rounded-lg" style="background-color: rgba(255, 255, 255, 0.05); border: 1px solid var(--color-accent-red);">
-            <h3 style="color: var(--color-text-primary); font-size: 1.25rem;">Companion Framework</h3>
-            <p style="color: var(--color-text-secondary); margin-bottom: 1rem;">
-              Explore the AATMF framework for comprehensive AI security assessment
-            </p>
-            <a href="/frameworks/aatmf" class="inline-block px-4 py-2 rounded" style="background-color: var(--color-accent-red); color: white; text-decoration: none;">
-              AATMF Framework
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <hr style="margin: 3rem 0; border-color: var(--color-border);" />
-
-      <p style="color: var(--color-text-muted); font-size: 0.875rem;">
-        <em>Also available on <a href="https://snailsploit.medium.com/the-last-prompt-engineering-guide-youll-ever-read-introducing-p-r-o-m-p-t-98ceb33d53e5" target="_blank" rel="noopener noreferrer">Medium</a> and <a href="https://thejailbreakchef.com" target="_blank" rel="noopener noreferrer">The Jailbreak Chef</a>.</em>
-      </p>
     </div>
-  </article>
+  </section>
+
+  <!-- Framework Overview -->
+  <section id="framework" class="py-16" style="background: rgba(10, 10, 10, 0.5);">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-10 text-center">
+        <h2 class="text-3xl font-bold mb-3" style="color: var(--color-text-primary);">
+          The Six Principles
+        </h2>
+        <p class="text-lg max-w-2xl mx-auto" style="color: var(--color-text-secondary);">
+          Click on any component to explore its purpose, examples, and best practices.
+        </p>
+      </div>
+      <PROMPTFramework client:load />
+    </div>
+  </section>
+
+  <!-- Prompt Builder -->
+  <section id="builder" class="py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-10 text-center">
+        <h2 class="text-3xl font-bold mb-3" style="color: var(--color-text-primary);">
+          Interactive Prompt Builder
+        </h2>
+        <p class="text-lg max-w-2xl mx-auto" style="color: var(--color-text-secondary);">
+          Build your prompt step-by-step using all six components. Watch it come together in real-time.
+        </p>
+      </div>
+      <PromptBuilder client:load />
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="py-16" style="background: rgba(10, 10, 10, 0.5);">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-10 text-center">
+        <h2 class="text-3xl font-bold mb-3" style="color: var(--color-text-primary);">
+          Real-World Examples
+        </h2>
+        <p class="text-lg max-w-2xl mx-auto" style="color: var(--color-text-secondary);">
+          See P.R.O.M.P.T. in action across different domains.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {useCases.map((useCase) => (
+          <div class="use-case-card p-6 rounded-xl" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(255,255,255,0.1);">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-3xl">{useCase.icon}</span>
+              <div>
+                <h3 class="font-bold text-lg" style="color: var(--color-text-primary);">{useCase.title}</h3>
+                <span class="text-xs px-2 py-1 rounded-full" style="background: rgba(59, 130, 246, 0.2); color: #3b82f6;">
+                  {useCase.category}
+                </span>
+              </div>
+            </div>
+
+            <!-- Component breakdown -->
+            <div class="space-y-2 mb-4">
+              {Object.entries(useCase.prompt).map(([key, value]) => (
+                <div class="text-sm">
+                  <span class="font-bold uppercase text-xs" style="color: components.find(c => c.name.toLowerCase() === key || (key === 'preferences' && c.name === 'Particular Preferences'))?.color || '#666';">
+                    {key.charAt(0).toUpperCase()}:
+                  </span>
+                  <span class="text-gray-400 ml-2">{value}</span>
+                </div>
+              ))}
+            </div>
+
+            <!-- Assembled prompt -->
+            <details class="group">
+              <summary class="cursor-pointer text-sm font-medium flex items-center gap-2" style="color: #3b82f6;">
+                <span>View assembled prompt</span>
+                <span class="group-open:rotate-180 transition-transform">▾</span>
+              </summary>
+              <pre class="mt-3 p-4 rounded-lg text-xs overflow-x-auto" style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05); color: #a1a1aa;">
+{useCase.assembled}
+              </pre>
+            </details>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- AATMF Relationship -->
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-10 text-center">
+        <h2 class="text-3xl font-bold mb-3" style="color: var(--color-text-primary);">
+          The Complete Picture
+        </h2>
+        <p class="text-lg" style="color: var(--color-text-secondary);">
+          Two frameworks, one comprehensive AI security understanding.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <!-- AATMF Card -->
+        <div class="p-6 rounded-xl" style="background: rgba(220, 38, 38, 0.1); border: 1px solid rgba(220, 38, 38, 0.3);">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: rgba(220, 38, 38, 0.2);">
+              <span class="text-2xl">⚔️</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg" style="color: #dc2626;">AATMF</h3>
+              <p class="text-sm text-gray-400">Offensive Framework</p>
+            </div>
+          </div>
+          <p class="text-gray-300 mb-4">
+            How attackers exploit LLM systems. 14 tactics, 40+ techniques for understanding adversarial AI threats.
+          </p>
+          <a href="/frameworks/aatmf/" class="text-sm font-medium hover:underline" style="color: #dc2626;">
+            Explore AATMF →
+          </a>
+        </div>
+
+        <!-- P.R.O.M.P.T Card -->
+        <div class="p-6 rounded-xl" style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3);">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: rgba(59, 130, 246, 0.2);">
+              <span class="text-2xl">🛡️</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg" style="color: #3b82f6;">P.R.O.M.P.T.</h3>
+              <p class="text-sm text-gray-400">Defensive Framework</p>
+            </div>
+          </div>
+          <p class="text-gray-300 mb-4">
+            How to communicate effectively with LLMs. 6 principles for precise, reliable, and safe AI interactions.
+          </p>
+          <span class="text-sm font-medium" style="color: #3b82f6;">
+            You are here
+          </span>
+        </div>
+      </div>
+
+      <div class="p-6 rounded-xl text-center" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(255,255,255,0.1);">
+        <p class="text-gray-300">
+          <strong class="text-white">Understanding both frameworks creates a complete picture:</strong> knowing how attacks work (AATMF) helps you design prompts that are both effective AND resistant to manipulation (P.R.O.M.P.T.).
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resources & Links -->
+  <section class="py-16" style="background: rgba(10, 10, 10, 0.5);">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Learn More -->
+        <div class="p-6 rounded-xl" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(255,255,255,0.1);">
+          <h3 class="font-bold mb-4" style="color: #3b82f6;">Learn More</h3>
+          <ul class="space-y-3">
+            <li>
+              <a href="https://thejailbreakchef.com/the-last-prompt-engineering-guide-youll-ever-read-introducing-p-r-o-m-p-t-98ceb33d53e5" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <span class="text-gray-500 group-hover:text-blue-400 transition-colors">→</span>
+                <span style="color: var(--color-text-secondary);">Original Medium Article</span>
+              </a>
+            </li>
+            <li>
+              <a href="/ai-security/jailbreaking/chatgpt-context-jailbreak/" class="group flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <span class="text-gray-500 group-hover:text-blue-400 transition-colors">→</span>
+                <span style="color: var(--color-text-secondary);">P.R.O.M.P.T. in Action: ChatGPT Jailbreak</span>
+              </a>
+            </li>
+            <li>
+              <a href="/ai-security/prompt-injection/" class="group flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <span class="text-gray-500 group-hover:text-blue-400 transition-colors">→</span>
+                <span style="color: var(--color-text-secondary);">Prompt Injection Research</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- External Resources -->
+        <div class="p-6 rounded-xl" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(255,255,255,0.1);">
+          <h3 class="font-bold mb-4" style="color: #3b82f6;">External Resources</h3>
+          <ul class="space-y-3">
+            <li>
+              <a href="https://cookbook.openai.com/" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <span class="text-gray-500 group-hover:text-blue-400 transition-colors">→</span>
+                <span style="color: var(--color-text-secondary);">OpenAI Cookbook</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.promptingguide.ai/" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <span class="text-gray-500 group-hover:text-blue-400 transition-colors">→</span>
+                <span style="color: var(--color-text-secondary);">Prompting Guide</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://arxiv.org/abs/2107.13586" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <span class="text-gray-500 group-hover:text-blue-400 transition-colors">→</span>
+                <span style="color: var(--color-text-secondary);">Pre-train, Prompt, Predict (Paper)</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Author Info -->
+      <div class="mt-10 p-6 rounded-xl flex flex-col md:flex-row items-center gap-6" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(255,255,255,0.1);">
+        <div class="text-center md:text-left">
+          <p class="text-sm mb-2" style="color: var(--color-text-muted);">Created by</p>
+          <p class="font-bold text-lg" style="color: var(--color-text-primary);">Kai Aizen (SnailSploit)</p>
+          <p class="text-sm mt-2" style="color: var(--color-text-secondary);">
+            GenAI Security Researcher | Creator of AATMF & P.R.O.M.P.T frameworks
+          </p>
+          <div class="flex items-center gap-4 mt-4 justify-center md:justify-start">
+            <a href="https://www.linkedin.com/in/kaiaizen/" target="_blank" rel="noopener noreferrer" class="text-sm hover:underline" style="color: #3b82f6;">LinkedIn</a>
+            <a href="https://thejailbreakchef.com/" target="_blank" rel="noopener noreferrer" class="text-sm hover:underline" style="color: #3b82f6;">TheJailbreakChef</a>
+            <a href="https://github.com/snailsploit" target="_blank" rel="noopener noreferrer" class="text-sm hover:underline" style="color: #3b82f6;">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <Footer slot="footer" />
 </BaseLayout>
 
 <style>
-  .prose {
-    color: var(--color-text-primary);
+  .stat-card {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 40px rgba(59, 130, 246, 0.1);
   }
 
-  .prose h2 {
-    font-family: var(--font-mono);
-    margin-top: 2em;
-    margin-bottom: 1em;
-    font-size: 2rem;
-    font-weight: 700;
+  .use-case-card {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .use-case-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
   }
 
-  .prose h3 {
-    font-family: var(--font-mono);
-    margin-top: 1.5em;
-    margin-bottom: 0.75em;
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
-
-  .prose a {
-    color: var(--color-accent-red);
-    text-decoration: underline;
-    transition: opacity 0.2s;
-  }
-
-  .prose a:hover {
-    opacity: 0.8;
-  }
-
-  .prose p {
-    margin-bottom: 1.5em;
-    line-height: 1.8;
-  }
-
-  .prose ul {
-    margin-bottom: 1.5em;
-    line-height: 1.8;
-  }
-
-  .prose li {
-    margin-bottom: 0.5em;
-  }
-
-  .prose strong {
-    color: var(--color-accent-red);
-    font-weight: 600;
-  }
-
-  .prose img {
-    margin: 2rem auto;
-    display: block;
-  }
-
-  .reference-group {
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    background-color: rgba(255, 255, 255, 0.03);
-    border-radius: 0.5rem;
-    border-left: 3px solid var(--color-accent-red);
-  }
-
-  .reference-group ul {
-    padding-left: 0;
-  }
-
-  .reference-group li {
-    padding-left: 1.5rem;
-    position: relative;
-  }
-
-  .reference-group li::before {
-    content: "→";
-    position: absolute;
-    left: 0;
-    color: var(--color-accent-red);
-  }
-
-  nav ol {
-    list-style: none;
-    counter-reset: toc-counter;
-    padding-left: 0;
-  }
-
-  nav ol li {
-    counter-increment: toc-counter;
-    padding-left: 2rem;
-    position: relative;
-    margin-bottom: 0.75rem;
-  }
-
-  nav ol li::before {
-    content: counter(toc-counter) ".";
-    position: absolute;
-    left: 0;
-    color: var(--color-accent-red);
-    font-weight: 600;
-  }
-
-  nav a {
-    text-decoration: none;
-    color: var(--color-text-primary);
-    transition: color 0.2s;
-  }
-
-  nav a:hover {
-    color: var(--color-accent-red);
-  }
-
-  .grid {
-    display: grid;
-  }
-
-  .grid-cols-1 {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-  }
-
-  @media (min-width: 768px) {
-    .md\:grid-cols-2 {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  .gap-6 {
-    gap: 1.5rem;
-  }
-
-  .space-y-2 > * + * {
-    margin-top: 0.5rem;
-  }
-
-  .space-y-4 > * + * {
-    margin-top: 1rem;
+  details summary::-webkit-details-marker {
+    display: none;
   }
 </style>
