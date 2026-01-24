@@ -303,9 +303,9 @@ export default function MobileNav({ navItems }: MobileNavProps) {
             onClick={() => setIsOpen(false)}
           >
             <img
-              src="/images/logo.png"
+              src="/images/snailsploit-logo-nav.png"
               alt="SnailSploit"
-              className="h-6 w-auto invert opacity-80"
+              className="h-6 w-auto opacity-90"
             />
             <span
               className="text-xs uppercase tracking-wider"
