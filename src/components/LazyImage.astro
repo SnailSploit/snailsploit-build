@@ -1,0 +1,23 @@
+---
+export interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  width?: number;
+  height?: number;
+  style?: string;
+}
+
+const { src, alt, class: className = '', width, height, style } = Astro.props;
+---
+
+<img
+  src={src}
+  alt={alt}
+  class={className}
+  width={width}
+  height={height}
+  style={style}
+  loading="lazy"
+  decoding="async"
+/>

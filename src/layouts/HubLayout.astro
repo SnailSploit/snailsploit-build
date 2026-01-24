@@ -99,11 +99,11 @@ const {
 
     <!-- Section 1: Hero/Intro -->
     <header class="mb-16">
-      <h1 class="text-5xl md:text-6xl font-bold mb-6 font-mono text-center" style="color: var(--color-accent-red);">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6 text-center" style="color: var(--color-accent-red);">
         {heading}
       </h1>
-      <div class="prose prose-lg max-w-4xl mx-auto" style="color: var(--color-text-secondary);">
-        <p class="text-xl leading-relaxed">{intro}</p>
+      <div class="max-w-3xl mx-auto" style="color: var(--color-prose, #c8c8c8);">
+        <p class="text-lg leading-relaxed" style="line-height: 1.85;">{intro}</p>
       </div>
     </header>
 
@@ -111,7 +111,7 @@ const {
       <!-- Start Here Section -->
       {startHere.length > 0 && (
         <section class="mb-16">
-          <h2 class="text-3xl font-bold font-mono mb-8" style="color: var(--color-accent-red);">
+          <h2 class="text-3xl font-bold mb-8" style="color: var(--color-accent-red);">
             Start Here
           </h2>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -121,7 +121,7 @@ const {
                 class="group p-6 rounded-lg transition-all hover:scale-[1.02]"
                 style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
               >
-                <h3 class="text-lg font-bold font-mono mb-2 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
+                <h3 class="text-lg font-bold mb-2 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
                   {item.title}
                 </h3>
                 <p class="text-sm" style="color: var(--color-text-secondary);">
@@ -139,13 +139,13 @@ const {
       <!-- Section 2: Key Concepts / Glossary -->
       {glossary.length > 0 && (
         <section class="mb-16 p-8 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-          <h2 class="text-3xl font-bold font-mono mb-8" style="color: var(--color-accent-red);">
+          <h2 class="text-3xl font-bold mb-8" style="color: var(--color-accent-red);">
             Key Concepts
           </h2>
           <dl class="space-y-6">
             {glossary.map(item => (
               <div class="border-b pb-4" style="border-color: var(--color-border);">
-                <dt class="text-lg font-bold font-mono mb-2" style="color: var(--color-text-primary);">
+                <dt class="text-lg font-bold mb-2" style="color: var(--color-text-primary);">
                   {item.term}
                 </dt>
                 <dd style="color: var(--color-text-secondary);">
@@ -165,13 +165,13 @@ const {
       <!-- Section 3: FAQ Accordion -->
       {faqs.length > 0 && (
         <section class="mb-16">
-          <h2 class="text-3xl font-bold font-mono mb-8" style="color: var(--color-accent-red);">
+          <h2 class="text-3xl font-bold mb-8" style="color: var(--color-accent-red);">
             Frequently Asked Questions
           </h2>
           <div class="space-y-4">
             {faqs.map(faq => (
               <details class="group p-6 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-                <summary class="cursor-pointer font-bold font-mono list-none flex justify-between items-center" style="color: var(--color-text-primary);">
+                <summary class="cursor-pointer font-bold list-none flex justify-between items-center" style="color: var(--color-text-primary);">
                   {faq.question}
                   <span class="ml-4 transition-transform group-open:rotate-180" style="color: var(--color-accent-red);">
                     ▼
@@ -189,7 +189,7 @@ const {
       <!-- Section 4: Article Feed -->
       {articles.length > 0 && (
         <section class="mb-16">
-          <h2 class="text-3xl font-bold font-mono mb-8" style="color: var(--color-accent-red);">
+          <h2 class="text-3xl font-bold mb-8" style="color: var(--color-accent-red);">
             All Articles
           </h2>
           <div class="space-y-6">
@@ -200,7 +200,7 @@ const {
                 style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
               >
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
-                  <h3 class="text-xl font-bold font-mono group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
+                  <h3 class="text-xl font-bold group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
                     {article.title}
                   </h3>
                   <time class="text-sm font-mono" style="color: var(--color-text-muted);">

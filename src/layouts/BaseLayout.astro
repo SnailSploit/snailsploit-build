@@ -140,5 +140,29 @@ const websiteSchema = {
       <slot />
     </main>
     <slot name="footer" />
+
+    <!-- Lazy loading for images -->
+    <script>
+      // Add lazy loading to all images that don't have it
+      document.addEventListener('DOMContentLoaded', () => {
+        const images = document.querySelectorAll('img:not([loading])');
+        images.forEach(img => {
+          img.setAttribute('loading', 'lazy');
+          img.setAttribute('decoding', 'async');
+        });
+
+        // Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { rootMargin: '50px', threshold: 0.1 });
+
+        document.querySelectorAll('.fade-on-scroll').forEach(el => observer.observe(el));
+      });
+    </script>
   </body>
 </html>
