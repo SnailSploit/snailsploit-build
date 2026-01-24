@@ -25,7 +25,13 @@ export default defineConfig({
         priority = 1.0;
       } else if (url.match(/^https:\/\/snailsploit\.com\/(ai-security|frameworks|security-research|tools|writing|about|adversarial-minds)\/$/)) {
         priority = 0.9; // hub pages
-      } else if (url.includes('/frameworks/aatmf') || url.includes('/frameworks/prompt')) {
+      } else if (url === 'https://snailsploit.com/ai-security/wiki/') {
+        priority = 0.85; // wiki main index
+      } else if (url.match(/\/ai-security\/wiki\/(concepts|attacks|defenses)\/$/)) {
+        priority = 0.8; // wiki category hubs
+      } else if (url.includes('/ai-security/wiki/')) {
+        priority = 0.75; // wiki entry pages
+      } else if (url.includes('/frameworks/aatmf') || url.includes('/frameworks/prompt') || url.includes('/frameworks/sef')) {
         priority = 0.8; // framework detail pages
       } else if (url.includes('/security-research/cves/cve-')) {
         priority = 0.6; // CVE pages

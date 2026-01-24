@@ -9,9 +9,26 @@ const entries = [
   { title: "Adversarial AI", description: "The study and practice of manipulating AI systems through carefully crafted inputs and exploiting learned behaviors.", url: "/ai-security/wiki/concepts/adversarial-ai/", category: "concepts" },
   { title: "AI Red Teaming", description: "Systematic adversarial testing of AI systems to identify vulnerabilities before malicious actors do.", url: "/ai-security/wiki/concepts/ai-red-teaming/", category: "concepts" },
 ];
+
+const faqs = [
+  {
+    question: "What is the difference between prompt injection and jailbreaking?",
+    answer: "Prompt injection involves manipulating an LLM through crafted inputs to override instructions, while jailbreaking specifically targets safety training to bypass content policies. Prompt injection is a broader vulnerability class; jailbreaking is a specific attack goal."
+  },
+  {
+    question: "Why can't prompt injection be patched like traditional vulnerabilities?",
+    answer: "LLMs process text holistically without distinguishing instructions from data. There's no equivalent to parameterized queries or input escaping because the model interprets everything as potential instructions. This makes prompt injection an architectural challenge, not a fixable bug."
+  },
+  {
+    question: "What skills are needed for AI red teaming?",
+    answer: "AI red teaming requires understanding of machine learning fundamentals, LLM architectures, prompt engineering, traditional security concepts, and creative thinking. Knowledge of frameworks like MITRE ATLAS and OWASP LLM Top 10 helps structure assessments."
+  }
+];
+
+const keywords = ['AI security concepts', 'prompt injection definition', 'adversarial AI', 'LLM vulnerabilities', 'AI red teaming', 'machine learning security'];
 ---
 
-<WikiHubLayout title={title} description={description} category="concepts" entries={entries}>
+<WikiHubLayout title={title} description={description} category="concepts" entries={entries} faqs={faqs} keywords={keywords}>
   <!-- Understanding the Foundations -->
   <section class="mb-16">
     <h2 class="text-2xl font-bold text-white mb-6">Understanding the Foundations</h2>

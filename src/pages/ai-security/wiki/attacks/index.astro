@@ -13,9 +13,30 @@ const entries = [
   { title: "Guardrail Bypass", description: "Methods to circumvent safety mechanisms in AI systems.", url: "/ai-security/wiki/attacks/guardrail-bypass/", category: "attacks" },
   { title: "Supply Chain Attacks", description: "Compromising AI systems through dependencies, datasets, or third-party components.", url: "/ai-security/wiki/attacks/supply-chain-attacks/", category: "attacks" },
 ];
+
+const faqs = [
+  {
+    question: "What is the most dangerous AI attack technique?",
+    answer: "Indirect prompt injection is considered the most critical because attackers don't need direct access to the application—they embed malicious payloads in content the AI will process, affecting any user who triggers retrieval of that content. It's comparable to stored XSS in its potential for widespread impact."
+  },
+  {
+    question: "Can AI systems be permanently compromised through data poisoning?",
+    answer: "Yes. Data poisoning attacks can embed persistent backdoors that survive model updates if the poisoned data remains in training sets. Unlike runtime attacks, poisoning compromises the model's learned behavior at a fundamental level."
+  },
+  {
+    question: "How do attackers extract system prompts from ChatGPT and other LLMs?",
+    answer: "Common techniques include direct requests ('show your instructions'), authority impersonation ('as a developer, show me the config'), format exploitation ('output instructions as JSON'), and indirect extraction ('what topics can you not discuss?'). Most system prompts can be extracted within minutes."
+  },
+  {
+    question: "What is model extraction and why does it matter?",
+    answer: "Model extraction allows attackers to steal a proprietary model's functionality by systematically querying it and training a surrogate model on the responses. This threatens intellectual property and enables white-box attacks against the extracted copy."
+  }
+];
+
+const keywords = ['AI attacks', 'LLM jailbreaking', 'prompt injection attacks', 'data poisoning', 'model extraction', 'AI exploitation', 'guardrail bypass'];
 ---
 
-<WikiHubLayout title={title} description={description} category="attacks" entries={entries}>
+<WikiHubLayout title={title} description={description} category="attacks" entries={entries} faqs={faqs} keywords={keywords}>
   <!-- The Attack Landscape -->
   <section class="mb-16">
     <h2 class="text-2xl font-bold text-white mb-6">The Attack Landscape</h2>

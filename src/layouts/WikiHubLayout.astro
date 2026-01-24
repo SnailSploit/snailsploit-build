@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
+import FAQPageSchema from '../components/schemas/FAQPageSchema.astro';
 
 export interface WikiEntry {
   title: string;
@@ -10,12 +11,19 @@ export interface WikiEntry {
   category?: string;
 }
 
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
 export interface Props {
   title: string;
   description: string;
   category?: 'concepts' | 'attacks' | 'defenses' | 'vulnerabilities' | 'frameworks' | 'tools' | 'cases';
   entries?: WikiEntry[];
   isMainIndex?: boolean;
+  faqs?: FAQItem[];
+  keywords?: string[];
 }
 
 const {
@@ -24,6 +32,8 @@ const {
   category,
   entries = [],
   isMainIndex = false,
+  faqs = [],
+  keywords = [],
 } = Astro.props;
 
 const basePath = '/ai-security/wiki';
@@ -90,11 +100,12 @@ const collectionSchema = {
   description={description}
   canonical={canonical}
   ogType="website"
-  keywords={['ai security wiki', category || 'ai security', 'llm security', 'adversarial ai']}
+  keywords={keywords.length > 0 ? keywords : ['ai security wiki', category || 'ai security', 'llm security', 'adversarial ai']}
 >
   <Navigation slot="header" />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
+  {faqs.length > 0 && <FAQPageSchema faqs={faqs} />}
 
   <article class="bg-[#0a0a0a] min-h-screen">
     <!-- Hero Section -->

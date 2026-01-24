@@ -6,9 +6,30 @@ const description = "Countermeasures, controls, and architectural patterns for p
 
 // Defenses entries will be added as they're created
 const entries: any[] = [];
+
+const faqs = [
+  {
+    question: "Can prompt injection be completely prevented?",
+    answer: "No single defense eliminates prompt injection. It's an architectural challenge, not a bug to patch. Effective defense requires layering: input validation, privilege separation, output filtering, and human-in-the-loop for high-impact actions. The goal is raising attack cost while maintaining utility."
+  },
+  {
+    question: "What is defense in depth for AI systems?",
+    answer: "Defense in depth layers multiple controls: perimeter defenses (rate limiting, authentication), input filtering (pattern detection, normalization), model-layer controls (guardrails, safety training), output filtering (content scanning, PII detection), and monitoring (logging, anomaly detection)."
+  },
+  {
+    question: "Are AI guardrails effective against sophisticated attacks?",
+    answer: "Guardrails raise the bar but aren't foolproof. They're probabilistic controls that create preferences, not absolute constraints. Sophisticated attackers can often bypass them through context manipulation, encoding tricks, or multi-turn attacks. Guardrails should be one layer in a defense-in-depth strategy."
+  },
+  {
+    question: "How do organizations detect AI attacks in production?",
+    answer: "Detection combines input monitoring (instruction-like language, role-playing attempts), output monitoring (policy violations, system prompt disclosure), behavioral baselines (unusual response patterns), and canary tokens (markers that reveal data exfiltration attempts)."
+  }
+];
+
+const keywords = ['AI security defenses', 'LLM guardrails', 'prompt injection prevention', 'AI input validation', 'output filtering', 'defense in depth AI'];
 ---
 
-<WikiHubLayout title={title} description={description} category="defenses" entries={entries}>
+<WikiHubLayout title={title} description={description} category="defenses" entries={entries} faqs={faqs} keywords={keywords}>
   <!-- The Defense Challenge -->
   <section class="mb-16">
     <h2 class="text-2xl font-bold text-white mb-6">The Defense Challenge</h2>

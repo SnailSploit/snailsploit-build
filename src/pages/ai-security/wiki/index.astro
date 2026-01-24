@@ -3,7 +3,28 @@ import WikiHubLayout from '../../../layouts/WikiHubLayout.astro';
 import V3DownloadGate from '../../../components/V3DownloadGate';
 
 const title = "AI Security Wiki";
-const description = "The comprehensive reference for adversarial artificial intelligence, LLM security, and AI red teaming.";
+const description = "The comprehensive reference for adversarial artificial intelligence, LLM security vulnerabilities, prompt injection attacks, and AI red teaming methodologies.";
+
+const faqs = [
+  {
+    question: "What is AI security?",
+    answer: "AI security encompasses practices, methodologies, and technologies used to protect artificial intelligence systems from adversarial manipulation, unauthorized access, and malicious exploitation. It differs from traditional security because AI systems learn from data rather than following explicit programming."
+  },
+  {
+    question: "What are the main AI security threats in 2025?",
+    answer: "The primary threats are prompt injection (manipulating LLM behavior through crafted inputs), data poisoning (corrupting training data), model extraction (stealing model functionality), supply chain attacks (compromising third-party components), and AI-powered social engineering."
+  },
+  {
+    question: "How is AI security different from traditional cybersecurity?",
+    answer: "Traditional security deals with discrete flaws—a vulnerability exists or doesn't. AI security operates probabilistically where vulnerabilities emerge from learned behaviors and statistical patterns. You can't patch a vulnerability when the 'vulnerability' is how the model learned from data."
+  },
+  {
+    question: "What frameworks exist for AI security assessment?",
+    answer: "Key frameworks include MITRE ATLAS (adversarial threat landscape), OWASP LLM Top 10 (common LLM vulnerabilities), NIST AI RMF (risk management), and AATMF (adversarial AI threat modeling). These provide structured approaches to identifying and addressing AI risks."
+  }
+];
+
+const keywords = ['AI security', 'LLM security', 'prompt injection', 'adversarial AI', 'AI red teaming', 'machine learning security', 'AI vulnerabilities', 'MITRE ATLAS', 'OWASP LLM Top 10'];
 
 // All wiki entries for the index
 const allEntries = [
@@ -52,7 +73,7 @@ const categories = [
 ];
 ---
 
-<WikiHubLayout title={title} description={description} isMainIndex={true}>
+<WikiHubLayout title={title} description={description} isMainIndex={true} faqs={faqs} keywords={keywords}>
   <!-- What Is AI Security -->
   <section class="mb-16">
     <h2 class="text-2xl font-bold text-white mb-6">What Is AI Security?</h2>
