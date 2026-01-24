@@ -1,5 +1,6 @@
 ---
 import V3SnailLogo from './V3SnailLogo.astro';
+import SearchBar from './SearchBar.tsx';
 
 const navItems = [
   { name: 'About', href: '/about' },
@@ -52,21 +53,7 @@ const navItems = [
       </div>
       <!-- Terminal Search -->
       <div class="hidden lg:flex items-center flex-1 max-w-md mx-8">
-        <div class="relative w-full">
-          <div class="terminal-search flex items-center w-full px-4 py-2 rounded-lg" style="background-color: var(--color-bg); border: 1px solid var(--color-border);">
-            <span class="text-sm font-mono mr-2" style="color: var(--color-accent-red);">$</span>
-            <input
-              type="text"
-              placeholder="search snailsploit..."
-              class="flex-1 bg-transparent text-sm font-mono outline-none"
-              style="color: var(--color-text-primary);"
-              id="nav-search"
-            />
-            <kbd class="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 text-xs font-mono rounded" style="background-color: var(--color-surface); color: var(--color-text-muted);">
-              ⌘K
-            </kbd>
-          </div>
-        </div>
+        <SearchBar client:load />
       </div>
 
       <div class="hidden md:block">
@@ -104,31 +91,3 @@ const navItems = [
   </div>
 </nav>
 
-<style>
-  .terminal-search {
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .terminal-search:focus-within {
-    border-color: var(--color-accent-red) !important;
-    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
-  }
-
-  .terminal-search input::placeholder {
-    color: var(--color-text-muted);
-    opacity: 0.7;
-  }
-</style>
-
-<script>
-  // Keyboard shortcut for search (Cmd+K / Ctrl+K)
-  document.addEventListener('keydown', (e) => {
-    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-      e.preventDefault();
-      const searchInput = document.getElementById('nav-search');
-      if (searchInput) {
-        searchInput.focus();
-      }
-    }
-  });
-</script>

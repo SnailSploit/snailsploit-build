@@ -1,0 +1,236 @@
+[
+  {
+    "title": "Home",
+    "description": "Security research on AI vulnerabilities, LLM jailbreaking, and adversarial AI. Creator of AATMF framework.",
+    "url": "/",
+    "category": "Main"
+  },
+  {
+    "title": "About Kai Aizen",
+    "description": "GenAI Security Researcher, 6x CVE holder, creator of AATMF and P.R.O.M.P.T frameworks. Known as The Jailbreak Chef.",
+    "url": "/about/",
+    "category": "Main"
+  },
+  {
+    "title": "Adversarial Minds",
+    "description": "The definitive book on social engineering psychology and human manipulation techniques.",
+    "url": "/adversarial-minds/",
+    "category": "Book"
+  },
+  {
+    "title": "Tools",
+    "description": "Open-source security tools and utilities for penetration testing and red team operations.",
+    "url": "/tools/",
+    "category": "Main"
+  },
+  {
+    "title": "AI Security Research",
+    "description": "Research on AI vulnerabilities, LLM jailbreaking, prompt injection, and adversarial AI techniques.",
+    "url": "/ai-security/",
+    "category": "Research"
+  },
+  {
+    "title": "LLM Jailbreaking",
+    "description": "Techniques and research on bypassing AI safety guardrails and content policies.",
+    "url": "/ai-security/jailbreaking/",
+    "category": "Research"
+  },
+  {
+    "title": "ChatGPT Context Jailbreak",
+    "description": "Exploiting context windows and conversation history to bypass ChatGPT restrictions.",
+    "url": "/ai-security/jailbreaking/chatgpt-context-jailbreak/",
+    "category": "Article"
+  },
+  {
+    "title": "Memory Manipulation Attacks",
+    "description": "Poisoning conversational AI memory to achieve persistent jailbreaks.",
+    "url": "/ai-security/jailbreaking/memory-manipulation-attacks/",
+    "category": "Article"
+  },
+  {
+    "title": "Context Inheritance Exploit",
+    "description": "How LLMs inherit and trust context from previous conversations.",
+    "url": "/ai-security/jailbreaking/context-inheritance-exploit/",
+    "category": "Article"
+  },
+  {
+    "title": "AI Inherent Vulnerability",
+    "description": "Why AI systems are fundamentally vulnerable to adversarial attacks.",
+    "url": "/ai-security/jailbreaking/ai-inherent-vulnerability/",
+    "category": "Article"
+  },
+  {
+    "title": "Inherent AI Vulnerabilities",
+    "description": "Deep dive into the architectural weaknesses of large language models.",
+    "url": "/ai-security/jailbreaking/inherent-ai-vulnerabilities/",
+    "category": "Article"
+  },
+  {
+    "title": "Prompt Injection",
+    "description": "Research on prompt injection attacks and defense mechanisms for LLMs.",
+    "url": "/ai-security/prompt-injection/",
+    "category": "Research"
+  },
+  {
+    "title": "MCP Threat Analysis",
+    "description": "Security analysis of Model Context Protocol and its attack surface.",
+    "url": "/ai-security/prompt-injection/mcp-threat-analysis/",
+    "category": "Article"
+  },
+  {
+    "title": "MCP Security Deep Dive",
+    "description": "Comprehensive security assessment of MCP protocol vulnerabilities.",
+    "url": "/ai-security/prompt-injection/mcp-security-deep-dive/",
+    "category": "Article"
+  },
+  {
+    "title": "Custom Instruction Backdoor",
+    "description": "Exploiting custom instructions to create persistent AI backdoors.",
+    "url": "/ai-security/prompt-injection/custom-instruction-backdoor/",
+    "category": "Article"
+  },
+  {
+    "title": "AI Social Engineering & Deepfakes",
+    "description": "How AI amplifies social engineering attacks through deepfakes and synthetic media.",
+    "url": "/ai-security/ai-social-engineering-deepfake/",
+    "category": "Article"
+  },
+  {
+    "title": "Hidden Risks of AI: Offensive Perspective",
+    "description": "Emerging AI threat vectors from an offensive security perspective.",
+    "url": "/ai-security/hidden-risks-offensive-perspective/",
+    "category": "Article"
+  },
+  {
+    "title": "RAG & Agentic Attack Surface",
+    "description": "Security analysis of RAG systems and agentic AI architectures.",
+    "url": "/ai-security/rag-agentic-attack-surface/",
+    "category": "Article"
+  },
+  {
+    "title": "Security Frameworks",
+    "description": "Security frameworks for AI red teaming, threat modeling, and social engineering.",
+    "url": "/frameworks/",
+    "category": "Framework"
+  },
+  {
+    "title": "AATMF Framework",
+    "description": "Adversarial AI Threat Modeling Framework - 14 tactics, 40+ techniques for AI red teaming.",
+    "url": "/frameworks/aatmf/",
+    "category": "Framework"
+  },
+  {
+    "title": "P.R.O.M.P.T Framework",
+    "description": "Framework for systematic prompt injection taxonomy and testing.",
+    "url": "/frameworks/prompt/",
+    "category": "Framework"
+  },
+  {
+    "title": "SEF - Social Engineering Framework",
+    "description": "Comprehensive framework for social engineering attacks and defenses.",
+    "url": "/frameworks/sef/",
+    "category": "Framework"
+  },
+  {
+    "title": "Adversarial Prompting Framework",
+    "description": "Framework for adversarial prompt engineering and LLM manipulation.",
+    "url": "/frameworks/adversarial-prompting-framework/",
+    "category": "Framework"
+  },
+  {
+    "title": "Security Research",
+    "description": "CVE disclosures, vulnerability research, and security analysis.",
+    "url": "/security-research/",
+    "category": "Research"
+  },
+  {
+    "title": "CVE Disclosures",
+    "description": "Responsible disclosure of discovered vulnerabilities in WordPress plugins.",
+    "url": "/security-research/cves/",
+    "category": "Research"
+  },
+  {
+    "title": "CVE-2025-9776",
+    "description": "SQL Injection vulnerability in CatFolders WordPress plugin.",
+    "url": "/security-research/cves/cve-2025-9776/",
+    "category": "CVE"
+  },
+  {
+    "title": "CVE-2025-11171",
+    "description": "Missing Authorization vulnerability in Chartify WordPress plugin.",
+    "url": "/security-research/cves/cve-2025-11171/",
+    "category": "CVE"
+  },
+  {
+    "title": "CVE-2025-11174",
+    "description": "Missing Authorization vulnerability in Document Library Lite plugin.",
+    "url": "/security-research/cves/cve-2025-11174/",
+    "category": "CVE"
+  },
+  {
+    "title": "CVE-2025-12163",
+    "description": "Cross-Site Scripting vulnerability in OmniPress WordPress plugin.",
+    "url": "/security-research/cves/cve-2025-12163/",
+    "category": "CVE"
+  },
+  {
+    "title": "CVE-2025-12030",
+    "description": "IDOR vulnerability in ACF to REST API WordPress plugin.",
+    "url": "/security-research/cves/cve-2025-12030/",
+    "category": "CVE"
+  },
+  {
+    "title": "General Security Research",
+    "description": "Security research articles on various topics including containers, cloud, and EDR.",
+    "url": "/security-research/general/",
+    "category": "Research"
+  },
+  {
+    "title": "Advanced Container Escapes",
+    "description": "Techniques for escaping containerized environments and Kubernetes pods.",
+    "url": "/security-research/general/advanced-container-escapes/",
+    "category": "Article"
+  },
+  {
+    "title": "Cloud Vulnerability Exploitation",
+    "description": "Exploiting misconfigurations and vulnerabilities in cloud environments.",
+    "url": "/security-research/general/cloud-vulnerability-exploitation/",
+    "category": "Article"
+  },
+  {
+    "title": "EDR Evasion Techniques",
+    "description": "Methods for evading Endpoint Detection and Response solutions.",
+    "url": "/security-research/general/edr-evasion-techniques/",
+    "category": "Article"
+  },
+  {
+    "title": "Zero Trust Container Runtime",
+    "description": "Implementing zero trust security in container runtime environments.",
+    "url": "/security-research/general/zero-trust-container-runtime/",
+    "category": "Article"
+  },
+  {
+    "title": "Writing",
+    "description": "Articles, publications, and thoughts on security and technology.",
+    "url": "/writing/",
+    "category": "Writing"
+  },
+  {
+    "title": "AI Obfuscator Detection Bypass",
+    "description": "Bypassing AI-based code obfuscation detection systems.",
+    "url": "/writing/ai-obfuscator-detection-bypass/",
+    "category": "Article"
+  },
+  {
+    "title": "Embracing AI: Adapt or Die",
+    "description": "Why security professionals must embrace AI or become obsolete.",
+    "url": "/writing/embracing-ai-adapt-or-die/",
+    "category": "Article"
+  },
+  {
+    "title": "Personal Data & Identity Theft",
+    "description": "How personal data exposure leads to identity theft and fraud.",
+    "url": "/writing/personal-data-identity-theft/",
+    "category": "Article"
+  }
+]

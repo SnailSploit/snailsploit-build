@@ -1,85 +1,96 @@
-# SnailSploit.com Build Package
+# SnailSploit SEO Remediation Playbook
 
-## Contents
+## Package Contents
 
-```
-snailsploit-build/
-├── INSTRUCTIONS.md      # Complete build specification (give this to Claude Code)
-├── SEO-SPEC.md          # SEO strategy and keyword targeting
-├── CONTENT-INVENTORY.md # Categorized list of all content
-└── content-raw/         # Medium export with all articles
-    └── medium-export/
-        └── posts/       # 21 published + drafts
-```
+This package contains everything Claude Code needs to execute the SEO remediation for snailsploit.com without errors.
 
-## How to Use with Claude Code
-
-### 1. Setup
-
-```bash
-mkdir snailsploit-site
-cd snailsploit-site
-cp -r /path/to/snailsploit-build/* .
-```
-
-### 2. Launch Claude Code
-
-```bash
-claude
-```
-
-### 3. Give Claude Code this prompt:
-
-```
-Read INSTRUCTIONS.md and SEO-SPEC.md completely before starting.
-
-Build the complete SnailSploit.com Astro site following the specifications exactly.
-
-Content is in ./content-raw/medium-export/posts/
-
-Parse the HTML files, convert to Markdown, and place in the correct directories as mapped in INSTRUCTIONS.md.
-
-Create all pages with the exact meta tags specified.
-
-Implement all schema markup.
-
-Create the GEO files (robots.txt, llms.txt, agents.md).
-
-Output a production-ready site that builds with `npm run build`.
-```
-
-### 4. Deploy to Cloudflare Pages
-
-1. Push the built site to GitHub
-2. Connect repo to Cloudflare Pages
-3. Build settings:
-   - Build command: `npm run build`
-   - Build output: `dist`
-4. Add custom domain: snailsploit.com
-
-## Key Files for Claude Code
+### Core Documents
 
 | File | Purpose |
 |------|---------|
-| INSTRUCTIONS.md | Complete build spec with all meta tags, structure, content mapping |
-| SEO-SPEC.md | Keyword strategy, competitive positioning, content priorities |
-| CONTENT-INVENTORY.md | Which files go where, what to publish vs skip |
+| `CLAUDE_CODE_MASTER_PROMPT.md` | **START HERE** - Master prompt with execution rules and sequence |
+| `SnailSploit_SEO_Master_Mapping.md` | State mapping document - 7 sections covering all configurations, URLs, schemas, and tasks |
+| `SnailSploit_Atomic_Task_Cards.md` | Detailed task cards with exact commands, validation steps, and phase gates |
 
-## Content Summary
+### Ready-to-Deploy Assets
 
-- **21 published articles** → categorized into silos
-- **1 draft to publish** → AATMF framework (comprehensive)
-- **5 CVE pages** → fetch details from NVD
-- **3 framework pages** → AATMF, P.R.O.M.P.T, SEF
-- **7 flagship articles** → prioritize for internal linking
+| File | Purpose |
+|------|---------|
+| `llms.txt` | Deploy to `/public/llms.txt` - AI crawler summary |
+| `components/TechArticleSchema.tsx` | TechArticle schema for blog posts |
+| `components/FAQSchema.tsx` | FAQPage schema for hub pages (includes pre-written AATMF FAQs) |
+| `components/PersonSchema.tsx` | Person schema for About page (includes Organization and WebSite schemas) |
 
-## Post-Build Checklist
+---
 
-- [ ] All pages render correctly
-- [ ] Meta tags match specifications
-- [ ] Schema markup validates (Rich Results Test)
-- [ ] Internal links work
-- [ ] robots.txt accessible
-- [ ] llms.txt accessible
-- [ ] Sitemap generates
-- [ ] Lighthouse score 90+
+## Execution Protocol
+
+### For Claude Code
+
+1. **Read `CLAUDE_CODE_MASTER_PROMPT.md` first** - Contains non-negotiable rules
+2. **Open the mapping document** - Use Sheet 7 (Execution Checklist) to track progress
+3. **Follow the task cards** - Execute tasks in sequence, never skip validation
+4. **Respect phase gates** - All P1 tasks must pass before P2
+
+### Phases
+
+| Phase | Focus | Tasks |
+|-------|-------|-------|
+| P1-STABILIZE | Trailing slash + canonicals | T1.0 - T1.5 |
+| P2-CONTENT | Hub enrichment + linking | T2.0 - T2.3 |
+| P3-GEO | Schema + llms.txt | T3.1 - T3.4 |
+
+---
+
+## Critical Fixes
+
+### Problem 1: "Alternative page with proper canonical tag" (26 pages)
+**Root Cause**: Trailing slash inconsistency between Next.js and sitemap
+**Fix**: Tasks T1.1-T1.3 - Set `trailingSlash: true` everywhere
+
+### Problem 2: "Discovered – currently not indexed" (31 pages)
+**Root Cause**: Thin content + orphan pages + low crawl priority
+**Fix**: Tasks T2.1-T2.3 - Enrich hubs + fix internal linking
+
+### Problem 3: Missing GEO signals
+**Root Cause**: No llms.txt, generic Article schema, weak Person schema
+**Fix**: Tasks T3.1-T3.4 - Full schema implementation
+
+---
+
+## Validation Commands
+
+Quick checks Claude Code should run:
+
+```bash
+# Check trailing slash redirects
+curl -sI https://snailsploit.com/about | grep -E "(HTTP|Location)"
+
+# Check canonicals have trailing slash  
+curl -s https://snailsploit.com/about/ | grep canonical
+
+# Check sitemap URLs
+curl -s https://snailsploit.com/sitemap.xml | head -20
+
+# Check llms.txt
+curl -sI https://snailsploit.com/llms.txt
+
+# Check schema
+curl -s https://snailsploit.com/about/ | grep '@type'
+```
+
+---
+
+## Emergency Rollback
+
+If things go wrong:
+1. Task T1.0 creates `audit_baseline.txt` - use it to restore original configs
+2. Git history is your friend - `git checkout HEAD~1 -- <file>`
+3. Do NOT deploy if local build fails
+
+---
+
+## Contact
+
+Created for Kai Aizen / SnailSploit
+January 2026
