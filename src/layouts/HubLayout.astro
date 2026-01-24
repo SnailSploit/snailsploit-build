@@ -4,6 +4,7 @@ import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import FAQPageSchema from '../components/schemas/FAQPageSchema.astro';
 import BreadcrumbSchema from '../components/schemas/BreadcrumbSchema.astro';
+import PersonSchema from '../components/schemas/PersonSchema.astro';
 
 interface GlossaryItem {
   term: string;
@@ -74,6 +75,7 @@ const {
   keywords={keywords}
 >
   <Navigation slot="header" />
+  <PersonSchema />
 
   {breadcrumbs.length > 0 && <BreadcrumbSchema items={breadcrumbs} />}
   {faqs.length > 0 && <FAQPageSchema faqs={faqs} />}

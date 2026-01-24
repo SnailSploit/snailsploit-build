@@ -3,6 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import FAQPageSchema from '../components/schemas/FAQPageSchema.astro';
+import PersonSchema from '../components/schemas/PersonSchema.astro';
 
 export interface WikiEntry {
   title: string;
@@ -103,6 +104,7 @@ const collectionSchema = {
   keywords={keywords.length > 0 ? keywords : ['ai security wiki', category || 'ai security', 'llm security', 'adversarial ai']}
 >
   <Navigation slot="header" />
+  <PersonSchema />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
   {faqs.length > 0 && <FAQPageSchema faqs={faqs} />}
