@@ -2,10 +2,23 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navigation from '../../components/Navigation.astro';
 import Footer from '../../components/Footer.astro';
+import FrameworkSchema from '../../components/schemas/FrameworkSchema.astro';
 import V3DownloadGate from '../../components/V3DownloadGate';
+import SEFTaxonomy from '../../components/SEFTaxonomy';
+import SESACalculator from '../../components/SESACalculator';
+import SEFPhases from '../../components/SEFPhases';
+import {
+  gapModel,
+  psychologicalLevers,
+  threatActorTiers,
+  operationalModes,
+  hltmIntegration,
+  bookReference,
+  stats
+} from '../../data/sef-data';
 
 const title = "SEF - Social Engineering Framework";
-const description = "A comprehensive methodology for assessing organizational defenses against social engineering attacks through simulated attacks, AI-driven analysis, and continuous improvement cycles.";
+const description = "A systematic methodology for assessing and improving organizational resilience against social engineering attacks. Featuring the SESA scoring system, HLTM integration, and MITRE-aligned technique taxonomy.";
 const canonical = "https://snailsploit.com/frameworks/sef/";
 
 // Breadcrumb schema
@@ -18,30 +31,6 @@ const breadcrumbSchema = {
     { "@type": "ListItem", "position": 3, "name": "SEF" }
   ]
 };
-
-// TechArticle schema
-const articleSchema = {
-  "@context": "https://schema.org",
-  "@type": "TechArticle",
-  "headline": title,
-  "description": description,
-  "author": {
-    "@type": "Person",
-    "@id": "https://snailsploit.com/#person",
-    "name": "Kai Aizen",
-    "url": "https://snailsploit.com/about/"
-  },
-  "datePublished": "2025-01-23",
-  "dateModified": "2025-01-23",
-  "mainEntityOfPage": canonical,
-  "publisher": {
-    "@type": "Organization",
-    "name": "SnailSploit",
-    "url": "https://snailsploit.com"
-  },
-  "proficiencyLevel": "Expert",
-  "keywords": "social engineering framework, SEF, phishing simulation, security awareness training, red team assessment"
-};
 ---
 
 <BaseLayout
@@ -49,175 +38,399 @@ const articleSchema = {
   description={description}
   canonical={canonical}
   ogType="article"
-  keywords={['social engineering', 'SEF', 'phishing simulation', 'security awareness', 'red team']}
+  keywords={['social engineering framework', 'SEF', 'SESA', 'human layer threat modeling', 'red team', 'phishing assessment']}
 >
   <Navigation slot="header" />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
-  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <FrameworkSchema
+    name="Social Engineering Framework (SEF)"
+    description={description}
+    url={canonical}
+    version="1.0"
+    datePublished="2025-01-23"
+    dateModified="2025-01-24"
+    keywords={['social engineering', 'SEF', 'SESA', 'human layer threat modeling', 'red team assessment', 'phishing simulation']}
+  />
 
   <article class="bg-[#0a0a0a] min-h-screen">
-    <div class="max-w-4xl mx-auto px-6 py-16">
-      <!-- Breadcrumb -->
-      <nav class="mb-8 text-sm font-mono" style="color: var(--color-text-muted);">
-        <a href="/" class="hover:text-[#dc2626] transition-colors">Home</a>
-        <span class="mx-2">/</span>
-        <a href="/frameworks/" class="hover:text-[#dc2626] transition-colors">Frameworks</a>
-        <span class="mx-2">/</span>
-        <span>SEF</span>
-      </nav>
+    <!-- Hero Section -->
+    <section class="relative py-20 overflow-hidden" style="background: linear-gradient(180deg, rgba(15, 23, 42, 0.3) 0%, rgba(10, 10, 10, 1) 100%);">
+      <div class="max-w-6xl mx-auto px-6">
+        <!-- Breadcrumb -->
+        <nav class="mb-8 text-sm font-mono text-slate-500">
+          <a href="/" class="hover:text-slate-300 transition-colors">Home</a>
+          <span class="mx-2">/</span>
+          <a href="/frameworks/" class="hover:text-slate-300 transition-colors">Frameworks</a>
+          <span class="mx-2">/</span>
+          <span class="text-slate-400">SEF</span>
+        </nav>
 
-      <!-- Header -->
-      <header class="mb-12">
-        <span class="inline-block px-3 py-1 text-xs font-mono rounded mb-4" style="background: rgba(220, 38, 38, 0.1); color: #dc2626; border: 1px solid rgba(220, 38, 38, 0.2);">
-          Framework
-        </span>
-        <h1 class="text-4xl md:text-5xl font-bold mb-4 text-white">
-          Social Engineering Framework (SEF)
-        </h1>
-        <p class="text-xl text-gray-400 mb-6">
-          Tactical Assessment & Resilience Blueprint
-        </p>
-        <div class="flex flex-wrap items-center gap-4 text-sm font-mono text-gray-500">
-          <span>By Kai Aizen</span>
-          <span>•</span>
-          <span>35 min read</span>
-          <span>•</span>
-          <span>January 2025</span>
+        <div class="flex items-start gap-4 mb-6">
+          <span class="inline-block px-3 py-1 text-xs font-mono rounded" style="background: rgba(148, 163, 184, 0.1); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.2);">
+            Framework v1.0
+          </span>
+          <span class="inline-block px-3 py-1 text-xs font-mono rounded" style="background: rgba(148, 163, 184, 0.05); color: #64748b;">
+            Human Security
+          </span>
         </div>
-      </header>
 
-      <!-- Download Gate -->
-      <div class="mb-16">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 text-white leading-tight">
+          Social Engineering<br/>
+          <span class="text-slate-400">Framework</span>
+        </h1>
+
+        <p class="text-xl text-gray-400 max-w-3xl mb-8 leading-relaxed">
+          A systematic methodology for assessing organizational resilience against social engineering attacks through structured threat modeling, quantitative scoring, and evidence-based remediation.
+        </p>
+
+        <!-- Stats Bar -->
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          <div class="p-4 rounded-lg text-center" style="background: rgba(148, 163, 184, 0.05); border: 1px solid rgba(148, 163, 184, 0.1);">
+            <div class="text-2xl font-bold text-slate-400">{stats.techniques}</div>
+            <div class="text-xs text-gray-500">Techniques</div>
+          </div>
+          <div class="p-4 rounded-lg text-center" style="background: rgba(148, 163, 184, 0.05); border: 1px solid rgba(148, 163, 184, 0.1);">
+            <div class="text-2xl font-bold text-slate-400">{stats.phases}</div>
+            <div class="text-xs text-gray-500">Phases</div>
+          </div>
+          <div class="p-4 rounded-lg text-center" style="background: rgba(148, 163, 184, 0.05); border: 1px solid rgba(148, 163, 184, 0.1);">
+            <div class="text-2xl font-bold text-slate-400">{stats.sesaDimensions}</div>
+            <div class="text-xs text-gray-500">SESA Dimensions</div>
+          </div>
+          <div class="p-4 rounded-lg text-center" style="background: rgba(148, 163, 184, 0.05); border: 1px solid rgba(148, 163, 184, 0.1);">
+            <div class="text-2xl font-bold text-slate-400">{stats.categories}</div>
+            <div class="text-xs text-gray-500">Categories</div>
+          </div>
+          <div class="p-4 rounded-lg text-center" style="background: rgba(148, 163, 184, 0.05); border: 1px solid rgba(148, 163, 184, 0.1);">
+            <div class="text-2xl font-bold text-slate-400">{stats.psychologicalLevers}</div>
+            <div class="text-xs text-gray-500">Psych Levers</div>
+          </div>
+          <div class="p-4 rounded-lg text-center" style="background: rgba(148, 163, 184, 0.05); border: 1px solid rgba(148, 163, 184, 0.1);">
+            <div class="text-2xl font-bold text-slate-400">{stats.threatTiers}</div>
+            <div class="text-xs text-gray-500">Threat Tiers</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gap Model Section -->
+    <section class="py-16" style="background: rgba(15, 23, 42, 0.2);">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-12">
+          <span class="text-sm font-mono text-slate-500 uppercase tracking-wider">Core Concept</span>
+          <h2 class="text-3xl font-bold text-white mt-2">{gapModel.title}</h2>
+          <p class="text-gray-400 mt-4 max-w-2xl mx-auto">{gapModel.description}</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {gapModel.gaps.map((gap) => (
+            <div
+              class="p-6 rounded-xl"
+              style={`background: ${gap.color}15; border: 1px solid ${gap.color}30;`}
+            >
+              <h3 class="text-lg font-semibold text-white mb-3">{gap.name}</h3>
+              <p class="text-sm text-gray-400 mb-4">{gap.description}</p>
+              <div class="space-y-1">
+                {gap.indicators.map((indicator) => (
+                  <div class="text-xs text-slate-500 flex items-center gap-2">
+                    <span style={`color: ${gap.color}`}>•</span>
+                    {indicator}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Framework Phases -->
+    <section class="py-16">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-12">
+          <span class="text-sm font-mono text-slate-500 uppercase tracking-wider">Methodology</span>
+          <h2 class="text-3xl font-bold text-white mt-2">Framework Phases</h2>
+          <p class="text-gray-400 mt-4 max-w-2xl mx-auto">
+            Seven structured phases from initial threat modeling through remediation and continuous improvement.
+          </p>
+        </div>
+
+        <SEFPhases client:load />
+      </div>
+    </section>
+
+    <!-- SESA Calculator -->
+    <section class="py-16" style="background: rgba(15, 23, 42, 0.2);">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-12">
+          <span class="text-sm font-mono text-slate-500 uppercase tracking-wider">Assessment Tool</span>
+          <h2 class="text-3xl font-bold text-white mt-2">SESA Scoring System</h2>
+          <p class="text-gray-400 mt-4 max-w-2xl mx-auto">
+            Social Engineering Susceptibility Assessment (SESA) provides quantitative measurement across six key dimensions of organizational resilience.
+          </p>
+        </div>
+
+        <SESACalculator client:load />
+      </div>
+    </section>
+
+    <!-- Technique Taxonomy -->
+    <section class="py-16">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-12">
+          <span class="text-sm font-mono text-slate-500 uppercase tracking-wider">Attack Library</span>
+          <h2 class="text-3xl font-bold text-white mt-2">Technique Taxonomy</h2>
+          <p class="text-gray-400 mt-4 max-w-2xl mx-auto">
+            MITRE-aligned categorization of social engineering techniques with psychological levers, indicators, and mitigations.
+          </p>
+        </div>
+
+        <SEFTaxonomy client:load />
+      </div>
+    </section>
+
+    <!-- Psychological Levers -->
+    <section class="py-16" style="background: rgba(15, 23, 42, 0.2);">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-12">
+          <span class="text-sm font-mono text-slate-500 uppercase tracking-wider">Human Factors</span>
+          <h2 class="text-3xl font-bold text-white mt-2">Psychological Levers</h2>
+          <p class="text-gray-400 mt-4 max-w-2xl mx-auto">
+            Understanding the cognitive biases and psychological principles that social engineers exploit.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {psychologicalLevers.map((lever) => (
+            <div class="p-6 rounded-xl" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(148, 163, 184, 0.15);">
+              <h3 class="text-lg font-semibold text-slate-300 mb-2">{lever.name}</h3>
+              <p class="text-sm text-gray-500 mb-4">{lever.description}</p>
+              <div class="space-y-3">
+                <div>
+                  <span class="text-xs text-red-400 uppercase tracking-wide">Exploitation</span>
+                  <p class="text-xs text-gray-400 mt-1">{lever.exploitation}</p>
+                </div>
+                <div>
+                  <span class="text-xs text-green-400 uppercase tracking-wide">Defense</span>
+                  <p class="text-xs text-gray-400 mt-1">{lever.defense}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Threat Actor Tiers -->
+    <section class="py-16">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-12">
+          <span class="text-sm font-mono text-slate-500 uppercase tracking-wider">Adversary Classification</span>
+          <h2 class="text-3xl font-bold text-white mt-2">Threat Actor Tiers</h2>
+          <p class="text-gray-400 mt-4 max-w-2xl mx-auto">
+            Understanding adversary capabilities helps calibrate defensive investments and assessment rigor.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {threatActorTiers.map((tier) => (
+            <div
+              class="p-6 rounded-xl relative overflow-hidden"
+              style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(148, 163, 184, 0.15);"
+            >
+              <div class="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold" style="background: rgba(148, 163, 184, 0.1); color: #94a3b8;">
+                {tier.tier}
+              </div>
+              <h3 class="text-lg font-semibold text-white mb-2">{tier.name}</h3>
+              <p class="text-sm text-gray-500 mb-4">{tier.description}</p>
+              <div class="space-y-2 text-xs">
+                <div>
+                  <span class="text-slate-500">Resources:</span>
+                  <span class="text-gray-400 ml-2">{tier.resources}</span>
+                </div>
+                <div>
+                  <span class="text-slate-500">Sophistication:</span>
+                  <span class="text-gray-400 ml-2">{tier.sophistication}</span>
+                </div>
+              </div>
+              <div class="mt-4 flex flex-wrap gap-1">
+                {tier.examples.map((example) => (
+                  <span class="px-2 py-0.5 rounded text-xs" style="background: rgba(148, 163, 184, 0.1); color: #64748b;">
+                    {example}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Operational Modes -->
+    <section class="py-16" style="background: rgba(15, 23, 42, 0.2);">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-12">
+          <span class="text-sm font-mono text-slate-500 uppercase tracking-wider">Engagement Types</span>
+          <h2 class="text-3xl font-bold text-white mt-2">Operational Modes</h2>
+          <p class="text-gray-400 mt-4 max-w-2xl mx-auto">
+            SEF supports two distinct operational modes based on organizational objectives and risk tolerance.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {operationalModes.map((mode) => (
+            <div
+              class="p-8 rounded-xl"
+              style={`background: rgba(30, 30, 30, 0.8); border: 1px solid ${mode.riskLevel === 'Low' ? 'rgba(34, 197, 94, 0.3)' : 'rgba(239, 68, 68, 0.3)'};`}
+            >
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xl font-semibold text-white">{mode.name}</h3>
+                <span
+                  class="px-3 py-1 rounded-full text-xs font-medium"
+                  style={`background: ${mode.riskLevel === 'Low' ? 'rgba(34, 197, 94, 0.15)' : 'rgba(239, 68, 68, 0.15)'}; color: ${mode.riskLevel === 'Low' ? '#22c55e' : '#ef4444'};`}
+                >
+                  {mode.riskLevel} Risk
+                </span>
+              </div>
+              <p class="text-gray-400 mb-6">{mode.description}</p>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <h4 class="text-sm font-medium text-slate-500 mb-2">Scope</h4>
+                  <ul class="space-y-1">
+                    {mode.scope.map((item) => (
+                      <li class="text-sm text-gray-400 flex items-center gap-2">
+                        <span class="text-slate-600">•</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="text-sm font-medium text-slate-500 mb-2">Deliverables</h4>
+                  <ul class="space-y-1">
+                    {mode.deliverables.map((item) => (
+                      <li class="text-sm text-gray-400 flex items-center gap-2">
+                        <span class="text-green-600">→</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- HLTM Integration -->
+    <section class="py-16">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-12">
+          <span class="text-sm font-mono text-slate-500 uppercase tracking-wider">Foundation</span>
+          <h2 class="text-3xl font-bold text-white mt-2">{hltmIntegration.title}</h2>
+          <p class="text-gray-400 mt-4 max-w-2xl mx-auto">{hltmIntegration.description}</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {hltmIntegration.components.map((component, i) => (
+            <div class="p-6 rounded-xl" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(148, 163, 184, 0.15);">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold" style="background: rgba(148, 163, 184, 0.2); color: #94a3b8;">
+                  {i + 1}
+                </div>
+                <h3 class="font-semibold text-white">{component.name}</h3>
+              </div>
+              <p class="text-sm text-gray-500 mb-4">{component.description}</p>
+              <div class="space-y-1">
+                {component.outputs.map((output) => (
+                  <div class="text-xs text-slate-500 flex items-center gap-2">
+                    <span class="text-slate-600">→</span>
+                    {output}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Book Reference -->
+    <section class="py-16" style="background: rgba(15, 23, 42, 0.3);">
+      <div class="max-w-4xl mx-auto px-6">
+        <div class="p-8 rounded-xl text-center" style="background: rgba(20, 20, 20, 0.9); border: 1px solid rgba(148, 163, 184, 0.2);">
+          <span class="inline-block px-3 py-1 text-xs font-mono rounded mb-4" style="background: rgba(148, 163, 184, 0.1); color: #64748b;">
+            {bookReference.status}
+          </span>
+          <h3 class="text-2xl font-bold text-white mb-2">{bookReference.title}</h3>
+          <p class="text-slate-400 italic mb-4">{bookReference.subtitle}</p>
+          <p class="text-gray-500 mb-8 max-w-xl mx-auto">{bookReference.description}</p>
+
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-left">
+            {bookReference.chapters.map((chapter, i) => (
+              <div class="p-3 rounded-lg text-xs" style="background: rgba(148, 163, 184, 0.05);">
+                <span class="text-slate-600 font-mono mr-2">{String(i + 1).padStart(2, '0')}</span>
+                <span class="text-gray-400">{chapter}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Download Gate -->
+    <section class="py-16">
+      <div class="max-w-4xl mx-auto px-6">
         <V3DownloadGate
           client:load
           title="Download the Complete SEF (PDF)"
-          description="Get the full 22-page tactical blueprint including threat matrices, assessment checklists, and implementation guides."
+          description="Get the full tactical blueprint including threat matrices, SESA worksheets, assessment checklists, and implementation guides."
           file="/downloads/SEF-Kai-Aizen.pdf"
           buttonText="Download Free PDF"
           features={[
-            "Comprehensive threat matrix with success rates",
-            "AI-era tactics (deepfakes, adaptive phishing)",
-            "Assessment frequency guidelines by role",
-            "Quantifiable metrics and benchmarks"
+            "Complete SESA scoring worksheets",
+            "Technique taxonomy with mitigations",
+            "Phase-by-phase implementation guide",
+            "Threat actor response matrix"
           ]}
         />
       </div>
+    </section>
 
-      <!-- Content -->
-      <div class="prose prose-invert prose-lg max-w-none">
-        <h2 class="text-2xl font-bold text-white mt-12 mb-6">Introduction</h2>
-        <p class="text-gray-300 leading-relaxed mb-6">
-          Social engineering attacks continue to rank as some of the most effective and insidious tactics used by adversaries in today's digital landscape. With the emergence of AI-driven phishing, deepfake impersonations, and the increasing adoption of IoT devices, attackers now have access to a broader array of tools to exploit human vulnerabilities.
-        </p>
-        <p class="text-gray-300 leading-relaxed mb-6">
-          To mitigate these threats, organizations must adopt a holistic approach to assessing and improving their defenses, with a particular emphasis on human factors. The <strong class="text-white">Social Engineering Framework (SEF)</strong> is designed to simulate, test, and improve the resilience of employees and organizations against a wide range of social engineering tactics.
-        </p>
+    <!-- Author & Related -->
+    <section class="py-16" style="background: rgba(15, 23, 42, 0.2);">
+      <div class="max-w-4xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Author Box -->
+          <div class="p-6 rounded-xl" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(148, 163, 184, 0.15);">
+            <h3 class="font-mono text-lg font-bold mb-3 text-slate-400">About the Author</h3>
+            <p class="text-sm mb-4 text-gray-400">
+              <strong class="text-white">Kai Aizen</strong> is a GenAI Security Researcher specializing in adversarial AI, social engineering, and human-layer security. He is the creator of the AATMF and SEF frameworks and author of <em>Adversarial Minds</em>.
+            </p>
+            <div class="flex gap-4">
+              <a href="/about/" class="text-sm font-mono hover:text-slate-300 transition-colors text-slate-500">About Kai →</a>
+            </div>
+          </div>
 
-        <h2 class="text-2xl font-bold text-white mt-12 mb-6">What is the SEF?</h2>
-        <p class="text-gray-300 leading-relaxed mb-6">
-          The SEF is a strategic methodology for assessing and addressing human vulnerabilities through simulated social engineering attacks. These attacks mimic real-world adversarial tactics, such as phishing, vishing, impersonation, and more recent threats driven by AI, such as deepfake-based impersonations and AI-generated phishing campaigns.
-        </p>
-
-        <h2 class="text-2xl font-bold text-white mt-12 mb-6">Core Components</h2>
-        <div class="grid gap-6 mb-8">
-          <div class="p-6 rounded-lg" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);">
-            <h3 class="text-lg font-bold text-white mb-2">Scope Definition & Objective Setting</h3>
-            <p class="text-gray-400">Define simulation scope including departments, roles, and attack vectors. Set clear objectives for measuring effectiveness.</p>
-          </div>
-          <div class="p-6 rounded-lg" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);">
-            <h3 class="text-lg font-bold text-white mb-2">Scenario Development & Customization</h3>
-            <p class="text-gray-400">Design attack scenarios based on organizational risk profile and real-world threats including AI-driven spear-phishing and deepfakes.</p>
-          </div>
-          <div class="p-6 rounded-lg" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);">
-            <h3 class="text-lg font-bold text-white mb-2">Automated Execution with AI Integration</h3>
-            <p class="text-gray-400">AI tools automate and scale social engineering attacks with adaptive capabilities that evolve based on employee responses.</p>
-          </div>
-          <div class="p-6 rounded-lg" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);">
-            <h3 class="text-lg font-bold text-white mb-2">Data Collection & Analysis</h3>
-            <p class="text-gray-400">Collect detailed metrics like time-to-report and credential submission rates to assess vulnerabilities.</p>
-          </div>
-        </div>
-
-        <h2 class="text-2xl font-bold text-white mt-12 mb-6">SEF Tactics Overview</h2>
-        <div class="overflow-x-auto mb-8">
-          <table class="w-full text-sm">
-            <thead>
-              <tr class="border-b border-gray-800">
-                <th class="text-left py-3 px-4 text-gray-400 font-mono">ID</th>
-                <th class="text-left py-3 px-4 text-gray-400 font-mono">Tactic</th>
-                <th class="text-left py-3 px-4 text-gray-400 font-mono">Success Rate</th>
-              </tr>
-            </thead>
-            <tbody class="text-gray-300">
-              <tr class="border-b border-gray-800/50"><td class="py-3 px-4 font-mono text-[#dc2626]">SEF-001</td><td class="py-3 px-4">Pretexting</td><td class="py-3 px-4">70%</td></tr>
-              <tr class="border-b border-gray-800/50"><td class="py-3 px-4 font-mono text-[#dc2626]">SEF-006</td><td class="py-3 px-4">Phishing</td><td class="py-3 px-4">75%</td></tr>
-              <tr class="border-b border-gray-800/50"><td class="py-3 px-4 font-mono text-[#dc2626]">SEF-007</td><td class="py-3 px-4">Vishing</td><td class="py-3 px-4">60%</td></tr>
-              <tr class="border-b border-gray-800/50"><td class="py-3 px-4 font-mono text-[#dc2626]">SEF-015</td><td class="py-3 px-4">Deepfake Impersonation</td><td class="py-3 px-4">60%</td></tr>
-              <tr class="border-b border-gray-800/50"><td class="py-3 px-4 font-mono text-[#dc2626]">SEF-016</td><td class="py-3 px-4">AI-Powered Phishing</td><td class="py-3 px-4">75%</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h2 class="text-2xl font-bold text-white mt-12 mb-6">Key Metrics</h2>
-        <div class="grid md:grid-cols-2 gap-4 mb-8">
-          <div class="p-4 rounded-lg" style="background: rgba(220, 38, 38, 0.1); border: 1px solid rgba(220, 38, 38, 0.2);">
-            <div class="text-2xl font-bold text-[#dc2626] mb-1">&lt; 5%</div>
-            <div class="text-sm text-gray-400">Target Click-Through Rate</div>
-          </div>
-          <div class="p-4 rounded-lg" style="background: rgba(220, 38, 38, 0.1); border: 1px solid rgba(220, 38, 38, 0.2);">
-            <div class="text-2xl font-bold text-[#dc2626] mb-1">&lt; 2%</div>
-            <div class="text-sm text-gray-400">Credential Submission Rate</div>
-          </div>
-          <div class="p-4 rounded-lg" style="background: rgba(220, 38, 38, 0.1); border: 1px solid rgba(220, 38, 38, 0.2);">
-            <div class="text-2xl font-bold text-[#dc2626] mb-1">&lt; 5 min</div>
-            <div class="text-sm text-gray-400">Time-to-Report Target</div>
-          </div>
-          <div class="p-4 rounded-lg" style="background: rgba(220, 38, 38, 0.1); border: 1px solid rgba(220, 38, 38, 0.2);">
-            <div class="text-2xl font-bold text-[#dc2626] mb-1">&gt; 90%</div>
-            <div class="text-sm text-gray-400">Challenge Rate Target</div>
-          </div>
-        </div>
-
-        <div class="mt-16 p-6 rounded-lg" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);">
-          <p class="text-gray-400 text-center mb-4">
-            Download the complete 22-page PDF for the full framework including all tactics, sub-tactics, threat matrices, and implementation guides.
-          </p>
-          <div class="text-center">
-            <a href="#" onclick="document.querySelector('.download-gate')?.scrollIntoView({behavior: 'smooth'}); return false;" class="inline-flex items-center gap-2 px-6 py-3 bg-[#dc2626] text-white rounded-lg font-medium hover:bg-[#ef4444] transition-colors">
-              Get the Full PDF
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-            </a>
+          <!-- Related Frameworks -->
+          <div class="p-6 rounded-xl" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(148, 163, 184, 0.15);">
+            <h3 class="font-mono text-lg font-bold mb-4 text-slate-400">Related Frameworks</h3>
+            <div class="space-y-3">
+              <a href="/frameworks/aatmf/" class="group flex items-center gap-3 p-3 rounded-lg transition-all hover:bg-white/5" style="border: 1px solid rgba(255,255,255,0.05);">
+                <span class="px-2 py-0.5 text-xs font-mono rounded" style="background: rgba(220, 38, 38, 0.1); color: #dc2626;">AI</span>
+                <span class="text-sm font-mono group-hover:text-white transition-colors text-gray-400">AATMF - Adversarial AI Threat Modeling</span>
+              </a>
+              <a href="/frameworks/prompt/" class="group flex items-center gap-3 p-3 rounded-lg transition-all hover:bg-white/5" style="border: 1px solid rgba(255,255,255,0.05);">
+                <span class="px-2 py-0.5 text-xs font-mono rounded" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">LLM</span>
+                <span class="text-sm font-mono group-hover:text-white transition-colors text-gray-400">P.R.O.M.P.T. - Prompt Engineering</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
-
-      <!-- Author Box -->
-      <div class="mt-16 p-6 rounded-lg" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);">
-        <h3 class="font-mono text-lg font-bold mb-2 text-[#dc2626]">About the Author</h3>
-        <p class="text-sm mb-4 text-gray-400">
-          <strong class="text-white">Kai Aizen</strong> is a GenAI Security Researcher specializing in adversarial AI, LLM jailbreaking, and social engineering. He is the creator of the AATMF framework and author of <em>Adversarial Minds</em>.
-        </p>
-        <div class="flex space-x-4">
-          <a href="/about/" class="text-sm font-mono hover:text-[#dc2626] transition-colors text-gray-500">More about Kai &rarr;</a>
-          <a href="/frameworks/aatmf/" class="text-sm font-mono hover:text-[#dc2626] transition-colors text-gray-500">View AATMF &rarr;</a>
-        </div>
-      </div>
-
-      <!-- Related -->
-      <div class="mt-8 p-6 rounded-lg" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);">
-        <h3 class="font-mono text-lg font-bold mb-4 text-[#dc2626]">Related Frameworks</h3>
-        <div class="grid sm:grid-cols-2 gap-3">
-          <a href="/frameworks/aatmf/" class="group flex items-center gap-3 p-3 rounded transition-all hover:bg-[#0a0a0a]" style="border: 1px solid rgba(255,255,255,0.1);">
-            <span class="px-2 py-0.5 text-xs font-mono rounded" style="background: rgba(255,255,255,0.05); color: #888;">Framework</span>
-            <span class="text-sm font-mono group-hover:text-[#dc2626] transition-colors text-gray-400">AATMF</span>
-          </a>
-          <a href="/frameworks/" class="group flex items-center gap-3 p-3 rounded transition-all hover:bg-[#0a0a0a]" style="border: 1px solid rgba(255,255,255,0.1);">
-            <span class="px-2 py-0.5 text-xs font-mono rounded" style="background: rgba(255,255,255,0.05); color: #888;">Hub</span>
-            <span class="text-sm font-mono group-hover:text-[#dc2626] transition-colors text-gray-400">All Frameworks</span>
-          </a>
-        </div>
-      </div>
-    </div>
+    </section>
   </article>
 
   <Footer slot="footer" />
