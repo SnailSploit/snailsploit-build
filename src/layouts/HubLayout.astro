@@ -103,6 +103,7 @@ const {
     <header class="hub-header mb-16 relative">
       <div class="hub-glow"></div>
       <h1 class="hub-title">
+        <img src="/images/snailsploit-icon.png" alt="" class="hub-icon" />
         <span class="hub-title-text">{heading}</span>
       </h1>
       <div class="hub-intro">
@@ -250,6 +251,28 @@ const {
     line-height: 1.1;
     letter-spacing: -0.03em;
     margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .hub-icon {
+    width: clamp(3rem, 8vw, 5rem);
+    height: auto;
+    filter: drop-shadow(0 0 20px rgba(220, 38, 38, 0.5));
+    animation: iconPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes iconPulse {
+    0%, 100% {
+      filter: drop-shadow(0 0 20px rgba(220, 38, 38, 0.5));
+      transform: scale(1);
+    }
+    50% {
+      filter: drop-shadow(0 0 30px rgba(220, 38, 38, 0.7));
+      transform: scale(1.05);
+    }
   }
 
   .hub-title-text {
