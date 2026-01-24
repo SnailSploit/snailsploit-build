@@ -4,6 +4,9 @@
 
 import type { APIRoute } from 'astro';
 
+// Required for API routes to work at runtime (not prerendered)
+export const prerender = false;
+
 // =============================================================================
 // SECURITY: Rate Limiting (in-memory - consider Redis for production)
 // =============================================================================
