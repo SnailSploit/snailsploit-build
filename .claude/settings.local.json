@@ -92,7 +92,12 @@
       "Bash(lsof:*)",
       "Bash(npm run dev:*)",
       "Bash(npx wrangler:*)",
-      "WebFetch(domain:5903ab1e.snailsploit-build.pages.dev)"
+      "WebFetch(domain:5903ab1e.snailsploit-build.pages.dev)",
+      "Bash(npm audit:*)",
+      "Bash(xargs:*)",
+      "Bash(git restore:*)",
+      "Bash(for i in 1 2 3 4 5 6)",
+      "Bash(do echo \"Request $i:\")"
     ],
     "deny": [],
     "ask": []
