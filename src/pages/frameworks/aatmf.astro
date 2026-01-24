@@ -72,7 +72,7 @@ const articleSchema = {
 
   <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <header class="mb-12">
-      <h1 class="text-5xl md:text-6xl font-bold mb-6 font-mono" style="color: var(--color-accent-cyan);">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6" style="color: var(--color-accent-cyan);">
         AATMF
       </h1>
       <p class="text-2xl mb-4" style="color: var(--color-text-primary);">
@@ -85,7 +85,7 @@ const articleSchema = {
 
     <!-- Start Here Section -->
     <section class="mb-12 p-8 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-      <h2 class="text-2xl font-bold font-mono mb-6" style="color: var(--color-accent-red);">
+      <h2 class="text-2xl font-bold mb-6" style="color: var(--color-accent-red);">
         Start Here
       </h2>
       <p class="mb-6" style="color: var(--color-text-secondary);">
@@ -93,23 +93,23 @@ const articleSchema = {
       </p>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <a href="/ai-security/jailbreaking/inherent-ai-vulnerabilities/" class="group p-4 rounded-lg hover:scale-[1.02] transition-all" style="background-color: var(--color-bg); border: 1px solid var(--color-border);">
-          <h3 class="font-bold font-mono mb-2 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">Why AI Systems Are Inherently Vulnerable</h3>
+          <h3 class="font-bold mb-2 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">Why AI Systems Are Inherently Vulnerable</h3>
           <p class="text-sm" style="color: var(--color-text-muted);">Understand the fundamental weaknesses in LLM architecture</p>
         </a>
         <a href="/ai-security/prompt-injection/custom-instruction-backdoor/" class="group p-4 rounded-lg hover:scale-[1.02] transition-all" style="background-color: var(--color-bg); border: 1px solid var(--color-border);">
-          <h3 class="font-bold font-mono mb-2 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">The Custom Instruction Backdoor</h3>
+          <h3 class="font-bold mb-2 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">The Custom Instruction Backdoor</h3>
           <p class="text-sm" style="color: var(--color-text-muted);">Real-world prompt injection case study</p>
         </a>
         <a href="/ai-security/jailbreaking/context-inheritance-exploit/" class="group p-4 rounded-lg hover:scale-[1.02] transition-all" style="background-color: var(--color-bg); border: 1px solid var(--color-border);">
-          <h3 class="font-bold font-mono mb-2 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">Context Inheritance Exploit</h3>
+          <h3 class="font-bold mb-2 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">Context Inheritance Exploit</h3>
           <p class="text-sm" style="color: var(--color-text-muted);">How jailbroken conversations persist across sessions</p>
         </a>
         <a href="/ai-security/rag-agentic-attack-surface/" class="group p-4 rounded-lg hover:scale-[1.02] transition-all" style="background-color: var(--color-bg); border: 1px solid var(--color-border);">
-          <h3 class="font-bold font-mono mb-2 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">RAG & Agentic Attack Surface</h3>
+          <h3 class="font-bold mb-2 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">RAG & Agentic Attack Surface</h3>
           <p class="text-sm" style="color: var(--color-text-muted);">Vulnerabilities in retrieval and agent systems</p>
         </a>
         <a href="/ai-security/prompt-injection/mcp-threat-analysis/" class="group p-4 rounded-lg hover:scale-[1.02] transition-all" style="background-color: var(--color-bg); border: 1px solid var(--color-border);">
-          <h3 class="font-bold font-mono mb-2 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">MCP Security Threat Analysis</h3>
+          <h3 class="font-bold mb-2 group-hover:text-[var(--color-accent-cyan)] transition-colors" style="color: var(--color-text-primary);">MCP Security Threat Analysis</h3>
           <p class="text-sm" style="color: var(--color-text-muted);">Emerging threats in Model Context Protocol</p>
         </a>
       </div>
@@ -117,48 +117,48 @@ const articleSchema = {
 
     <!-- Key Concepts Glossary -->
     <section class="mb-12 p-8 rounded-lg" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
-      <h2 class="text-2xl font-bold font-mono mb-6" style="color: var(--color-accent-red);">
+      <h2 class="text-2xl font-bold mb-6" style="color: var(--color-accent-red);">
         Key Concepts
       </h2>
       <dl class="space-y-4">
         <div class="border-b pb-4" style="border-color: var(--color-border);">
-          <dt class="font-bold font-mono" style="color: var(--color-text-primary);">Prompt Injection</dt>
+          <dt class="font-bold" style="color: var(--color-text-primary);">Prompt Injection</dt>
           <dd style="color: var(--color-text-secondary);">An attack where malicious instructions are inserted into AI input to override system behavior. <strong>Direct injection</strong> targets user inputs; <strong>indirect injection</strong> hides payloads in external data sources like documents or web pages. <a href="/ai-security/prompt-injection/" class="text-sm hover:underline" style="color: var(--color-accent-cyan);">Learn more →</a></dd>
         </div>
         <div class="border-b pb-4" style="border-color: var(--color-border);">
-          <dt class="font-bold font-mono" style="color: var(--color-text-primary);">Jailbreaking</dt>
+          <dt class="font-bold" style="color: var(--color-text-primary);">Jailbreaking</dt>
           <dd style="color: var(--color-text-secondary);">Techniques to bypass AI safety guardrails and content policies, typically through creative prompting, role-play scenarios, or exploiting model reasoning. Unlike prompt injection, jailbreaking doesn't require external data poisoning. <a href="/ai-security/jailbreaking/" class="text-sm hover:underline" style="color: var(--color-accent-cyan);">Learn more →</a></dd>
         </div>
         <div class="border-b pb-4" style="border-color: var(--color-border);">
-          <dt class="font-bold font-mono" style="color: var(--color-text-primary);">RAG Poisoning</dt>
+          <dt class="font-bold" style="color: var(--color-text-primary);">RAG Poisoning</dt>
           <dd style="color: var(--color-text-secondary);">Corrupting the knowledge base or retrieval pipeline in Retrieval-Augmented Generation systems. Attackers inject malicious documents that get retrieved and acted upon by the AI, enabling indirect prompt injection at scale.</dd>
         </div>
         <div class="border-b pb-4" style="border-color: var(--color-border);">
-          <dt class="font-bold font-mono" style="color: var(--color-text-primary);">Agent Manipulation</dt>
+          <dt class="font-bold" style="color: var(--color-text-primary);">Agent Manipulation</dt>
           <dd style="color: var(--color-text-secondary);">Exploiting autonomous AI agents by hijacking their planning, tool selection, or execution phases. Includes plan hijacking, tool-routing poisoning, and creating delegation loops between agents.</dd>
         </div>
         <div class="border-b pb-4" style="border-color: var(--color-border);">
-          <dt class="font-bold font-mono" style="color: var(--color-text-primary);">Memory Manipulation</dt>
+          <dt class="font-bold" style="color: var(--color-text-primary);">Memory Manipulation</dt>
           <dd style="color: var(--color-text-secondary);">Attacks targeting AI session state or persistent memory. Includes poisoning conversation history, exploiting context windows, and transferring jailbroken states across sessions. <a href="/ai-security/jailbreaking/memory-manipulation-attacks/" class="text-sm hover:underline" style="color: var(--color-accent-cyan);">Learn more →</a></dd>
         </div>
         <div class="border-b pb-4" style="border-color: var(--color-border);">
-          <dt class="font-bold font-mono" style="color: var(--color-text-primary);">Guardrail Bypass</dt>
+          <dt class="font-bold" style="color: var(--color-text-primary);">Guardrail Bypass</dt>
           <dd style="color: var(--color-text-secondary);">Methods to circumvent content moderation, safety filters, and output constraints. Techniques include semantic evasion, multilingual switching, encoding obfuscation, and exploiting policy loopholes.</dd>
         </div>
         <div class="border-b pb-4" style="border-color: var(--color-border);">
-          <dt class="font-bold font-mono" style="color: var(--color-text-primary);">Model Extraction</dt>
+          <dt class="font-bold" style="color: var(--color-text-primary);">Model Extraction</dt>
           <dd style="color: var(--color-text-secondary);">Stealing proprietary model weights, architecture, or training data through extensive querying. Attackers reconstruct models or infer sensitive information about training datasets through membership inference attacks.</dd>
         </div>
         <div class="border-b pb-4" style="border-color: var(--color-border);">
-          <dt class="font-bold font-mono" style="color: var(--color-text-primary);">Training Data Poisoning</dt>
+          <dt class="font-bold" style="color: var(--color-text-primary);">Training Data Poisoning</dt>
           <dd style="color: var(--color-text-secondary);">Corrupting datasets used for model training, fine-tuning, or RLHF. Includes inserting backdoor triggers, poisoning public data sources, and manipulating feedback signals to degrade safety alignment.</dd>
         </div>
         <div class="border-b pb-4" style="border-color: var(--color-border);">
-          <dt class="font-bold font-mono" style="color: var(--color-text-primary);">Adversarial Examples</dt>
+          <dt class="font-bold" style="color: var(--color-text-primary);">Adversarial Examples</dt>
           <dd style="color: var(--color-text-secondary);">Carefully crafted inputs designed to cause AI misclassification or unexpected behavior. In multimodal systems, this includes hiding text in images (steganography) or audio spectrograms.</dd>
         </div>
         <div style="border-color: var(--color-border);">
-          <dt class="font-bold font-mono" style="color: var(--color-text-primary);">Denial-of-Wallet (DoW)</dt>
+          <dt class="font-bold" style="color: var(--color-text-primary);">Denial-of-Wallet (DoW)</dt>
           <dd style="color: var(--color-text-secondary);">Economic attacks that drain API credits or computing budgets through expensive operations, infinite loops, or resource-intensive queries. A form of financial denial-of-service against AI systems.</dd>
         </div>
       </dl>
@@ -505,7 +505,7 @@ canary_egress:"== 0"</code></pre>
             href="https://github.com/SnailSploit/AATMF"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-block px-6 py-3 font-mono font-semibold rounded hover:opacity-80 transition-opacity"
+            class="inline-block px-6 py-3 font-semibold rounded hover:opacity-80 transition-opacity"
             style="background-color: var(--color-accent-cyan); color: var(--color-bg);"
           >
             View on GitHub →
