@@ -1,0 +1,198 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import BreadcrumbSchema from '../components/schemas/BreadcrumbSchema.astro';
+
+const lastUpdated = "January 24, 2025";
+---
+
+<BaseLayout
+  title="Cookie Policy | SnailSploit"
+  description="Cookie policy for snailsploit.com. Learn about the cookies and similar technologies we use."
+  canonical="https://snailsploit.com/cookies/"
+  ogType="website"
+  keywords={['cookie policy', 'cookies', 'tracking', 'snailsploit']}
+>
+  <Navigation slot="header" />
+  <BreadcrumbSchema items={[
+    {name: "Home", url: "https://snailsploit.com"},
+    {name: "Cookie Policy", url: "https://snailsploit.com/cookies/"}
+  ]} />
+
+  <article class="bg-[#0a0a0a] min-h-screen">
+    <div class="max-w-3xl mx-auto px-6 py-16">
+      <header class="mb-12">
+        <h1 class="text-4xl font-bold text-white mb-4">Cookie Policy</h1>
+        <p class="text-gray-500 text-sm">Last updated: {lastUpdated}</p>
+      </header>
+
+      <div class="prose prose-invert prose-lg max-w-none legal-content">
+        <h2>What Are Cookies?</h2>
+        <p>
+          Cookies are small text files stored on your device when you visit a website. They help websites remember your preferences and understand how you interact with the site. Similar technologies include local storage, session storage, and tracking pixels.
+        </p>
+
+        <h2>Our Approach to Cookies</h2>
+        <p>
+          SnailSploit takes a privacy-first approach. We minimize the use of cookies and tracking technologies. We use <strong>Cloudflare Analytics</strong>, which is a privacy-focused, cookieless analytics solution that does not track individual users or use cookies.
+        </p>
+
+        <h2>Cookies We Use</h2>
+
+        <h3>Essential Cookies</h3>
+        <p>These cookies are necessary for the website to function properly:</p>
+        <table class="w-full text-sm my-4">
+          <thead>
+            <tr class="border-b border-gray-700">
+              <th class="text-left py-2 text-gray-400">Cookie</th>
+              <th class="text-left py-2 text-gray-400">Purpose</th>
+              <th class="text-left py-2 text-gray-400">Duration</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-400">
+            <tr class="border-b border-gray-800">
+              <td class="py-2 font-mono text-xs">__cf_bm</td>
+              <td class="py-2">Cloudflare bot management</td>
+              <td class="py-2">30 minutes</td>
+            </tr>
+            <tr class="border-b border-gray-800">
+              <td class="py-2 font-mono text-xs">cf_clearance</td>
+              <td class="py-2">Cloudflare security challenge</td>
+              <td class="py-2">1 year</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Functional Cookies</h3>
+        <p>These cookies remember your preferences:</p>
+        <table class="w-full text-sm my-4">
+          <thead>
+            <tr class="border-b border-gray-700">
+              <th class="text-left py-2 text-gray-400">Cookie</th>
+              <th class="text-left py-2 text-gray-400">Purpose</th>
+              <th class="text-left py-2 text-gray-400">Duration</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-400">
+            <tr class="border-b border-gray-800">
+              <td class="py-2 font-mono text-xs">theme</td>
+              <td class="py-2">Stores dark/light mode preference</td>
+              <td class="py-2">1 year</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Analytics</h3>
+        <p>
+          We use <strong>Cloudflare Web Analytics</strong>, which does not use cookies or collect personal data. It provides aggregated, anonymized metrics about site usage without tracking individual visitors.
+        </p>
+
+        <h2>Third-Party Cookies</h2>
+        <p>
+          We do not use third-party advertising cookies. If you interact with embedded content (such as YouTube videos or social media embeds), those third parties may set their own cookies according to their privacy policies.
+        </p>
+
+        <h2>Managing Cookies</h2>
+        <p>
+          You can control cookies through your browser settings:
+        </p>
+        <ul>
+          <li><strong>Chrome:</strong> Settings → Privacy and security → Cookies</li>
+          <li><strong>Firefox:</strong> Settings → Privacy & Security → Cookies</li>
+          <li><strong>Safari:</strong> Preferences → Privacy → Cookies</li>
+          <li><strong>Edge:</strong> Settings → Cookies and site permissions</li>
+        </ul>
+        <p>
+          Note that blocking essential cookies may affect site functionality.
+        </p>
+
+        <h2>Do Not Track</h2>
+        <p>
+          We respect Do Not Track (DNT) browser signals. Since we use cookieless analytics, your browsing is not individually tracked regardless of your DNT setting.
+        </p>
+
+        <h2>Changes to This Policy</h2>
+        <p>
+          We may update this Cookie Policy as our practices or legal requirements change. Updates will be posted on this page with a revised date.
+        </p>
+
+        <h2>Contact Us</h2>
+        <p>
+          For questions about our use of cookies, contact us at:
+        </p>
+        <p>
+          <strong>Email:</strong> <a href="mailto:kai@snailsploit.com">kai@snailsploit.com</a>
+        </p>
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-gray-800">
+        <a href="/" class="text-sm text-gray-500 hover:text-white transition-colors">
+          ← Back to Home
+        </a>
+      </div>
+    </div>
+  </article>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .legal-content h2 {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .legal-content h3 {
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .legal-content p {
+    color: #a0a0a0;
+    margin-bottom: 1rem;
+    line-height: 1.75;
+  }
+
+  .legal-content ul {
+    color: #a0a0a0;
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .legal-content li {
+    margin-bottom: 0.5rem;
+  }
+
+  .legal-content strong {
+    color: #d4d4d4;
+  }
+
+  .legal-content a {
+    color: #dc2626;
+  }
+
+  .legal-content a:hover {
+    text-decoration: underline;
+  }
+
+  .legal-content table {
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .legal-content th {
+    background: rgba(255,255,255,0.03);
+  }
+
+  .legal-content td, .legal-content th {
+    padding: 0.75rem 1rem;
+  }
+</style>

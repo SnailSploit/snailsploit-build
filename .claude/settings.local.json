@@ -87,7 +87,12 @@
       "Bash(__NEW_LINE_67237ee2233b07a8__ echo -e \"\\\\n/security-research/general/:\")",
       "Bash(for path in \"/about\" \"/frameworks\" \"/frameworks/aatmf\" \"/ai-security/jailbreaking\")",
       "Bash(do echo -n \"$path -> \")",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(lsof:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npx wrangler:*)",
+      "WebFetch(domain:5903ab1e.snailsploit-build.pages.dev)"
     ],
     "deny": [],
     "ask": []
