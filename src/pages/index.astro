@@ -140,9 +140,10 @@ const latestArticles = [
     <section class="hero">
       <!-- Grid background -->
       <div class="hero-grid"></div>
-      <!-- Gradient orb -->
+      <!-- Gradient orbs -->
       <div class="hero-orb"></div>
       <div class="hero-orb-secondary"></div>
+      <div class="hero-orb-tertiary"></div>
 
       <div class="hero-content">
         <h1 class="headline">
@@ -156,20 +157,20 @@ const latestArticles = [
 
         <!-- Credentials as badges -->
         <div class="credentials-badges">
-          <span class="badge badge-green">
+          <span class="badge badge-green" style="animation-delay: 0s">
             <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
             </svg>
             Creator of AATMF
           </span>
-          <span class="badge badge-default">
+          <span class="badge badge-default" style="animation-delay: 0.2s">
             <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
               <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
             </svg>
             Author of Adversarial Minds
           </span>
-          <span class="badge badge-purple">
+          <span class="badge badge-purple" style="animation-delay: 0.4s">
             <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="10"/>
               <path d="M12 16v-4M12 8h.01"/>
@@ -283,11 +284,15 @@ const latestArticles = [
 
     <!-- Trust Bar -->
     <section class="trust-bar">
+      <div class="trust-bar-glow"></div>
       <p class="trust-label">Featured & Recognized By</p>
       <div class="trust-logos">
         <span class="trust-item">Wordfence</span>
+        <span class="trust-separator"></span>
         <span class="trust-item">Hakin9 Magazine</span>
+        <span class="trust-separator"></span>
         <span class="trust-item">PenTest Magazine</span>
+        <span class="trust-separator"></span>
         <span class="trust-item">MITRE CVE</span>
       </div>
     </section>
@@ -377,14 +382,66 @@ const latestArticles = [
     right: 20%;
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, rgba(189, 52, 254, 0.08) 0%, transparent 60%);
+    background: radial-gradient(circle, rgba(189, 52, 254, 0.12) 0%, transparent 60%);
     pointer-events: none;
     animation: float 10s ease-in-out infinite reverse;
+  }
+
+  .hero-orb-tertiary {
+    position: absolute;
+    bottom: 25%;
+    left: 15%;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(189, 52, 254, 0.1) 0%, transparent 60%);
+    pointer-events: none;
+    animation: floatTertiary 12s ease-in-out infinite;
   }
 
   @keyframes float {
     0%, 100% { transform: translate(-50%, -50%) scale(1); }
     50% { transform: translate(-50%, -48%) scale(1.05); }
+  }
+
+  @keyframes floatTertiary {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+    33% { transform: translate(20px, -15px) scale(1.1); opacity: 1; }
+    66% { transform: translate(-10px, 10px) scale(0.95); opacity: 0.7; }
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.12; }
+    50% { opacity: 0.18; }
+  }
+
+  @keyframes accentShimmer {
+    0% { background-position: 200% 50%; }
+    100% { background-position: -200% 50%; }
+  }
+
+  @keyframes glowPulse {
+    0%, 100% { filter: drop-shadow(0 0 0 rgba(57, 255, 20, 0)); }
+    50% { filter: drop-shadow(0 0 8px rgba(57, 255, 20, 0.5)); }
+  }
+
+  @keyframes lineReveal {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  @keyframes badgeFadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes ctaPulse {
+    0%, 100% { box-shadow: 0 4px 20px rgba(57, 255, 20, 0.3); }
+    50% { box-shadow: 0 4px 30px rgba(57, 255, 20, 0.5); }
+  }
+
+  @keyframes iconBreathe {
+    0%, 100% { box-shadow: 0 0 0 rgba(57, 255, 20, 0); }
+    50% { box-shadow: 0 0 20px rgba(57, 255, 20, 0.3); }
   }
 
   .hero-content {
@@ -447,11 +504,13 @@ const latestArticles = [
   }
 
   .headline .accent {
-    background: linear-gradient(135deg, #39FF14, #7dff5e);
+    background: linear-gradient(90deg, #39FF14, #7dff5e, #39FF14, #7dff5e);
+    background-size: 200% 100%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     position: relative;
+    animation: accentShimmer 4s ease-in-out infinite;
   }
 
   .subtitle {
@@ -468,7 +527,7 @@ const latestArticles = [
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.75rem;
+    gap: 1rem;
     margin-bottom: 1.5rem;
   }
 
@@ -481,7 +540,8 @@ const latestArticles = [
     font-family: 'Inter', var(--font-sans), sans-serif;
     font-size: 0.85rem;
     font-weight: 500;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: badgeFadeIn 0.6s ease-out backwards;
   }
 
   .badge-icon {
@@ -498,6 +558,8 @@ const latestArticles = [
   .badge-green:hover {
     background: rgba(57, 255, 20, 0.15);
     border-color: rgba(57, 255, 20, 0.5);
+    box-shadow: inset 0 0 20px rgba(57, 255, 20, 0.15);
+    transform: scale(1.02);
   }
 
   .badge-default {
@@ -506,10 +568,24 @@ const latestArticles = [
     color: #E6EDF3;
   }
 
+  .badge-default:hover {
+    background: rgba(139, 148, 158, 0.15);
+    border-color: rgba(139, 148, 158, 0.5);
+    box-shadow: inset 0 0 20px rgba(139, 148, 158, 0.1);
+    transform: scale(1.02);
+  }
+
   .badge-purple {
     background: rgba(189, 52, 254, 0.1);
     border: 1px solid rgba(189, 52, 254, 0.3);
     color: #BD34FE;
+  }
+
+  .badge-purple:hover {
+    background: rgba(189, 52, 254, 0.15);
+    border-color: rgba(189, 52, 254, 0.5);
+    box-shadow: inset 0 0 20px rgba(189, 52, 254, 0.15);
+    transform: scale(1.02);
   }
 
   .byline {
@@ -517,6 +593,20 @@ const latestArticles = [
     font-size: 0.875rem;
     color: #6e7681;
     margin-bottom: 2.5rem;
+    position: relative;
+    display: inline-block;
+  }
+
+  .byline::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(57, 255, 20, 0.4), rgba(189, 52, 254, 0.4), transparent);
+    border-radius: 2px;
   }
 
   .button-row {
@@ -548,12 +638,14 @@ const latestArticles = [
     color: #0D1117;
     border: none;
     box-shadow: 0 4px 20px rgba(57, 255, 20, 0.3);
+    animation: ctaPulse 3s ease-in-out infinite;
   }
 
   .btn-primary:hover {
     background: #4dff33;
     box-shadow: 0 8px 30px rgba(57, 255, 20, 0.4);
     transform: translateY(-2px);
+    animation: none;
   }
 
   .btn-primary:hover .btn-arrow {
@@ -586,7 +678,7 @@ const latestArticles = [
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    animation: bounce 2s ease-in-out infinite;
+    animation: bounce 2s ease-in-out infinite, glowPulse 2s ease-in-out infinite;
   }
 
   @keyframes bounce {
@@ -616,6 +708,12 @@ const latestArticles = [
     max-width: 150px;
     height: 1px;
     background: linear-gradient(90deg, transparent, #30363D, transparent);
+    transform-origin: center;
+    transform: scaleX(0);
+  }
+
+  .featured.revealed .section-line {
+    animation: lineReveal 0.8s ease-out forwards;
   }
 
   .section-header {
@@ -638,26 +736,49 @@ const latestArticles = [
     display: block;
     position: relative;
     background: rgba(22, 27, 34, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: 1px solid #30363D;
     border-radius: 16px;
     text-decoration: none;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     overflow: hidden;
-    animation: fadeInUp 0.6s ease-out backwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .card.revealed {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .card-glow {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(57, 255, 20, 0.08) 0%, transparent 50%);
+    background:
+      radial-gradient(ellipse 200px 150px at 10% 10%, rgba(57, 255, 20, 0.1) 0%, transparent 70%),
+      linear-gradient(135deg, rgba(57, 255, 20, 0.08) 0%, transparent 50%);
     opacity: 0;
     transition: opacity 0.4s ease;
   }
 
   .card:hover {
-    border-color: rgba(57, 255, 20, 0.5);
+    border-color: transparent;
     transform: translateY(-6px);
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 0 40px rgba(57, 255, 20, 0.1);
+  }
+
+  .card:hover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(57, 255, 20, 0.6), rgba(189, 52, 254, 0.6));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
   }
 
   .card:hover .card-glow {
@@ -665,7 +786,7 @@ const latestArticles = [
   }
 
   .card-inner {
-    padding: 2rem;
+    padding: 2.25rem;
     position: relative;
     z-index: 1;
   }
@@ -702,6 +823,32 @@ const latestArticles = [
   .card:hover .card-icon {
     background: rgba(57, 255, 20, 0.15);
     transform: scale(1.05);
+    animation: iconBreathe 2s ease-in-out infinite;
+  }
+
+  /* Purple accent for Research card */
+  .card:nth-child(2) .card-label {
+    color: #BD34FE;
+    background: rgba(189, 52, 254, 0.1);
+  }
+
+  .card:nth-child(2) .card-icon {
+    background: rgba(189, 52, 254, 0.1);
+    color: #BD34FE;
+  }
+
+  .card:nth-child(2):hover .card-icon {
+    background: rgba(189, 52, 254, 0.15);
+    animation: iconBreathePurple 2s ease-in-out infinite;
+  }
+
+  .card:nth-child(2):hover .card-title {
+    color: #BD34FE;
+  }
+
+  @keyframes iconBreathePurple {
+    0%, 100% { box-shadow: 0 0 0 rgba(189, 52, 254, 0); }
+    50% { box-shadow: 0 0 20px rgba(189, 52, 254, 0.3); }
   }
 
   .card-title {
@@ -726,6 +873,11 @@ const latestArticles = [
     color: #8B949E;
     line-height: 1.6;
     margin-bottom: 1.25rem;
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover .card-description {
+    transform: translateY(-2px);
   }
 
   .card-stats {
@@ -741,15 +893,19 @@ const latestArticles = [
 
   .card-arrow {
     position: absolute;
-    top: 2rem;
-    right: 2rem;
+    top: 2.25rem;
+    right: 2.25rem;
     color: #484f58;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   .card:hover .card-arrow {
     color: #39FF14;
-    transform: translate(4px, -4px);
+    transform: translate(4px, -4px) rotate(0deg);
+  }
+
+  .card:nth-child(2):hover .card-arrow {
+    color: #BD34FE;
   }
 
   /* CVE Section */
@@ -849,9 +1005,18 @@ const latestArticles = [
 
   /* Trust Bar */
   .trust-bar {
-    padding: 3rem 2rem;
+    padding: 4rem 2rem;
     border-top: 1px solid #21262d;
     border-bottom: 1px solid #21262d;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .trust-bar-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 50% at 50% 50%, rgba(57, 255, 20, 0.03) 0%, transparent 70%);
+    pointer-events: none;
   }
 
   .trust-label {
@@ -862,6 +1027,7 @@ const latestArticles = [
     margin-bottom: 1.5rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    position: relative;
   }
 
   .trust-logos {
@@ -869,7 +1035,15 @@ const latestArticles = [
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 3rem;
+    gap: 4rem;
+    position: relative;
+  }
+
+  .trust-separator {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #30363D;
   }
 
   .trust-item {
@@ -877,11 +1051,36 @@ const latestArticles = [
     font-size: 1rem;
     font-weight: 500;
     color: #484f58;
-    transition: color 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    cursor: default;
+  }
+
+  .trust-item::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #39FF14, #7dff5e);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 0 rgba(57, 255, 20, 0);
   }
 
   .trust-item:hover {
-    color: #8B949E;
+    color: transparent;
+    background: linear-gradient(135deg, #39FF14, #7dff5e);
+    -webkit-background-clip: text;
+    background-clip: text;
+    transform: translateY(-2px) scale(1.05);
+  }
+
+  .trust-item:hover::after {
+    width: 100%;
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
   }
 
   /* Articles Section */
@@ -1072,8 +1271,25 @@ const latestArticles = [
       gap: 1.5rem;
     }
 
+    .trust-separator {
+      display: none;
+    }
+
     .trust-item {
       font-size: 0.85rem;
+    }
+
+    .trust-bar {
+      padding: 3rem 2rem;
+    }
+
+    .card-inner {
+      padding: 1.75rem;
+    }
+
+    .card-arrow {
+      top: 1.75rem;
+      right: 1.75rem;
     }
   }
 </style>
@@ -1099,5 +1315,32 @@ const latestArticles = [
     setTimeout(() => {
       loadingScreen.classList.add('hidden');
     }, 4000);
+  }
+
+  // Scroll-triggered reveal for cards
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+  };
+
+  const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const cards = entry.target.querySelectorAll('.card');
+        cards.forEach((card, index) => {
+          setTimeout(() => {
+            card.classList.add('revealed');
+          }, index * 150);
+        });
+        entry.target.classList.add('revealed');
+        cardObserver.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  const featuredSection = document.querySelector('.featured');
+  if (featuredSection) {
+    cardObserver.observe(featuredSection);
   }
 </script>
