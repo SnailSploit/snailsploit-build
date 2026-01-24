@@ -161,23 +161,28 @@ const faqSchema = {
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <!-- Main Content -->
       <div class="lg:col-span-2">
-        <header class="mb-8">
-          <div class="mb-4">
+        <header class="cve-header mb-10 relative">
+          <div class="cve-glow"></div>
+
+          <div class="severity-badge-container mb-4">
             <span
-              class="inline-block px-3 py-1 text-sm font-mono font-bold rounded"
-              style={`background-color: ${severityColors[severity]}; color: var(--color-bg);`}
+              class="severity-badge"
+              style={`background: linear-gradient(135deg, ${severityColors[severity]}, ${severityColors[severity]}88); box-shadow: 0 0 20px ${severityColors[severity]}40;`}
             >
+              <span class="severity-icon">⚠</span>
               {severity}
             </span>
           </div>
 
-          <h1 class="text-4xl md:text-5xl font-bold mb-4 font-mono" style="color: var(--color-accent-red);">
-            {cveId}
+          <h1 class="cve-title">
+            <span class="cve-id">{cveId}</span>
           </h1>
 
-          <p class="text-xl mb-4" style="color: var(--color-text-secondary);">
+          <p class="cve-subtitle">
             {title}
           </p>
+
+          <div class="cve-divider"></div>
         </header>
 
         <!-- Article Content -->
@@ -301,7 +306,89 @@ const faqSchema = {
 </BaseLayout>
 
 <style is:global>
-  /* CVE Layout Prose Styles - Applied globally for slotted content */
+  /* ============================================
+     CVE HEADER STYLES
+     ============================================ */
+
+  .cve-header {
+    padding-bottom: 1.5rem;
+  }
+
+  .cve-glow {
+    position: absolute;
+    top: -30px;
+    left: -50px;
+    width: 300px;
+    height: 150px;
+    background: radial-gradient(ellipse, rgba(220, 38, 38, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .severity-badge-container {
+    display: inline-block;
+  }
+
+  .severity-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #000000;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .severity-icon {
+    font-size: 1rem;
+  }
+
+  .cve-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .cve-id {
+    background: linear-gradient(135deg, var(--color-accent-red) 0%, #ff6b6b 50%, var(--color-accent-red) 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: cveGlow 4s ease-in-out infinite;
+    text-shadow: 0 0 60px rgba(220, 38, 38, 0.4);
+  }
+
+  @keyframes cveGlow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .cve-subtitle {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #a0a0a0;
+    line-height: 1.5;
+  }
+
+  .cve-divider {
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-accent-red), transparent);
+    margin-top: 1.5rem;
+    border-radius: 2px;
+    box-shadow: 0 0 15px rgba(220, 38, 38, 0.3);
+  }
+
+  /* ============================================
+     CVE Layout Prose Styles
+     ============================================ */
   .prose {
     font-family: 'Source Serif 4', Georgia, serif;
     color: #e0e0e0;
