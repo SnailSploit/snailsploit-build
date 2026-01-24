@@ -259,7 +259,9 @@ const {
 
   .hub-icon {
     width: clamp(3rem, 8vw, 5rem);
-    height: auto;
+    height: clamp(3rem, 8vw, 5rem);
+    object-fit: contain;
+    object-position: center;
     filter: drop-shadow(0 0 20px rgba(220, 38, 38, 0.5));
     animation: iconPulse 3s ease-in-out infinite;
   }
