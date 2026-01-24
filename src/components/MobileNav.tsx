@@ -227,7 +227,7 @@ export default function MobileNav({ navItems }: MobileNavProps) {
                     <button
                       onClick={() => toggleExpanded(item.name)}
                       className="w-full flex items-center justify-between px-4 py-3 text-left"
-                      style={{ color: 'var(--color-text-secondary)' }}
+                      style={{ color: 'var(--color-text-primary)' }}
                     >
                       <span className="text-base font-medium">{item.name}</span>
                       <svg
@@ -254,7 +254,7 @@ export default function MobileNav({ navItems }: MobileNavProps) {
                         <a
                           href={item.href}
                           className="block px-6 py-2.5 text-sm"
-                          style={{ color: 'var(--color-text-muted)' }}
+                          style={{ color: 'var(--color-text-primary)' }}
                           onClick={() => setIsOpen(false)}
                         >
                           Overview
@@ -265,7 +265,7 @@ export default function MobileNav({ navItems }: MobileNavProps) {
                           <a
                             href={child.href}
                             className="block px-6 py-2.5 text-sm"
-                            style={{ color: 'var(--color-text-muted)' }}
+                            style={{ color: 'var(--color-text-primary)' }}
                             onClick={() => setIsOpen(false)}
                           >
                             {child.name}
@@ -278,7 +278,7 @@ export default function MobileNav({ navItems }: MobileNavProps) {
                   <a
                     href={item.href}
                     className="block px-4 py-3 text-base font-medium"
-                    style={{ color: 'var(--color-text-secondary)' }}
+                    style={{ color: 'var(--color-text-primary)' }}
                     onClick={() => setIsOpen(false)}
                   >
                     {item.name}
@@ -303,13 +303,13 @@ export default function MobileNav({ navItems }: MobileNavProps) {
             onClick={() => setIsOpen(false)}
           >
             <img
-              src="/images/snailsploit-logo-nav.png"
+              src="/images/navbar.png"
               alt="SnailSploit"
-              className="h-6 w-auto opacity-90"
+              className="h-24 w-auto opacity-90"
             />
             <span
               className="text-xs uppercase tracking-wider"
-              style={{ color: 'var(--color-text-muted)' }}
+              style={{ color: 'var(--color-text-primary)' }}
             >
               SnailSploit
             </span>
