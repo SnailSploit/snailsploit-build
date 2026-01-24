@@ -36,31 +36,34 @@ const navItems = [
 
 <nav class="border-b" style="border-color: var(--color-border); background-color: var(--color-surface);">
   <div class="header-inner">
-    <div class="flex items-center justify-between h-20">
-      <div class="flex items-center">
-        <a href="/" class="flex items-center group">
-          <img
-            src="/images/logo.png"
-            alt="SnailSploit"
-            class="h-12 w-auto invert opacity-90 group-hover:opacity-100 transition-opacity"
-          />
-        </a>
-      </div>
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href="/" class="flex flex-col items-center group shrink-0">
+        <img
+          src="/images/logo.png"
+          alt="SnailSploit"
+          class="h-8 w-auto invert opacity-90 group-hover:opacity-100 transition-opacity"
+        />
+        <span class="text-[10px] uppercase tracking-[0.2em] mt-0.5" style="color: var(--color-text-muted);">
+          Kai Aizen
+        </span>
+      </a>
 
-      <div class="hidden md:flex items-center gap-6">
-        <div class="flex items-baseline space-x-4">
+      <!-- Nav Items -->
+      <div class="hidden md:flex items-center justify-center flex-1 px-8">
+        <div class="flex items-center space-x-1">
           {navItems.map((item) => (
             <div class="relative group">
               <a
                 href={item.href}
-                class="nav-link text-sm font-medium px-3 py-2 transition-colors"
+                class="nav-link text-sm font-medium px-3 py-2 transition-colors whitespace-nowrap"
                 style="color: var(--color-text-secondary);"
               >
                 {item.name}
-                {item.children && <span class="ml-1">▾</span>}
+                {item.children && <span class="ml-1 opacity-50">▾</span>}
               </a>
               {item.children && (
-                <div class="absolute left-0 mt-0 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
+                <div class="absolute left-0 mt-0 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 rounded-lg shadow-xl" style="background-color: var(--color-surface); border: 1px solid var(--color-border);">
                   <div class="py-2">
                     {item.children.map((child) => (
                       <a
@@ -77,11 +80,11 @@ const navItems = [
             </div>
           ))}
         </div>
+      </div>
 
-        <!-- Terminal Search -->
-        <div class="hidden lg:block w-64">
-          <SearchBar client:load />
-        </div>
+      <!-- Terminal Search -->
+      <div class="hidden lg:block w-56 shrink-0">
+        <SearchBar client:load />
       </div>
     </div>
   </div>
