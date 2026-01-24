@@ -104,11 +104,11 @@ export default function SearchBar() {
 
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case 'Framework': return '#dc2626';
-      case 'CVE': return '#f59e0b';
+      case 'Framework': return '#39FF14';
+      case 'CVE': return '#BD34FE';
       case 'Article': return '#10b981';
       case 'Research': return '#3b82f6';
-      default: return '#737373';
+      default: return '#8B949E';
     }
   };
 
@@ -119,11 +119,11 @@ export default function SearchBar() {
         style={{
           backgroundColor: 'var(--color-bg)',
           border: '1px solid var(--color-border)',
-          boxShadow: isOpen ? '0 0 0 3px rgba(220, 38, 38, 0.1)' : 'none',
-          borderColor: isOpen ? 'var(--color-accent-red)' : 'var(--color-border)'
+          boxShadow: isOpen ? '0 0 0 3px rgba(57, 255, 20, 0.15), 0 0 20px rgba(57, 255, 20, 0.1)' : 'none',
+          borderColor: isOpen ? 'var(--color-accent)' : 'var(--color-border)'
         }}
       >
-        <span className="text-sm mr-2" style={{ color: 'var(--color-accent-red)', fontFamily: 'var(--font-mono)' }}>$</span>
+        <span className="text-sm mr-2" style={{ color: 'var(--color-accent)', fontFamily: 'var(--font-mono)' }}>$</span>
         <input
           ref={inputRef}
           type="text"

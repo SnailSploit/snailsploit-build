@@ -1,69 +1,75 @@
-/* Fonts - Modern, readable choices */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Bebas+Neue&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-
+/* Toxic Evolution Theme - SnailSploit */
 @import "tailwindcss";
 
 :root {
-  /* Colors - softer for reading comfort */
-  --color-bg: #0a0a0a;
-  --color-surface: #141414;
-  --color-surface-hover: #1e1e1e;
-  --color-border: #2a2a2a;
-  --color-text-primary: #d4d4d4;
-  --color-text-secondary: #9a9a9a;
-  --color-text-muted: #6b6b6b;
+  /* Shell (Background) - Abyssal Carapace */
+  --color-bg: #0D1117;
+  --color-surface: #161B22;
+  --color-surface-hover: #1c2128;
+  --color-border: #30363D;
 
-  /* Reading-optimized text colors */
-  --color-prose: #c8c8c8;
-  --color-prose-muted: #a0a0a0;
-  --color-accent-red: #dc2626;
-  --color-accent-red-hover: #ef4444;
-  --color-accent-green: #00ff00;
+  /* Text - Ghost White & Muted */
+  --color-text-primary: #E6EDF3;
+  --color-text-secondary: #8B949E;
+  --color-text-muted: #6e7681;
+  --color-prose: #E6EDF3;
+  --color-prose-muted: #8B949E;
+
+  /* Toxic (Primary Accent) - Radioactive Green */
+  --color-accent-red: #39FF14;
+  --color-accent-red-hover: #4dff33;
+  --color-accent-green: #39FF14;
   --color-accent-yellow: #ffff00;
-  --color-glow-red: rgba(220, 38, 38, 0.3);
+  --color-glow-red: rgba(57, 255, 20, 0.3);
+
+  /* Biolume (Secondary Accent) - GenAI Purple */
+  --color-biolume: #BD34FE;
 
   /* Additional colors */
-  --bg-gradient: linear-gradient(180deg, #0a0a0a 0%, #0f0f0f 50%, #0a0a0a 100%);
-  --glow-red: 0 0 30px rgba(220, 38, 38, 0.15);
-  --glow-red-strong: 0 0 40px rgba(220, 38, 38, 0.25);
+  --bg-gradient: linear-gradient(180deg, #0D1117 0%, #161B22 50%, #0D1117 100%);
+  --glow-red: 0 0 30px rgba(57, 255, 20, 0.15);
+  --glow-red-strong: 0 0 40px rgba(57, 255, 20, 0.25);
+  --toxic-glow: 0 0 15px -3px rgba(57, 255, 20, 0.5);
 
   /* Modern effects */
-  --glass-bg: rgba(20, 20, 20, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.05);
-  --gradient-border: linear-gradient(135deg, rgba(220, 38, 38, 0.5), rgba(220, 38, 38, 0.1));
-  --shimmer: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+  --glass-bg: rgba(13, 17, 23, 0.8);
+  --glass-border: rgba(57, 255, 20, 0.1);
+  --gradient-border: linear-gradient(135deg, rgba(57, 255, 20, 0.5), rgba(57, 255, 20, 0.1));
+  --shimmer: linear-gradient(90deg, transparent, rgba(57, 255, 20, 0.03), transparent);
 
   /* Timing functions */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.1);
-  --bg-primary: #0a0a0a;
-  --accent-primary: #dc2626;
-  --accent-hover: #ef4444;
-  --accent-dim: #991b1b;
-  --border-color: #333333;
-  --text-primary: #e0e0e0;
-  --text-secondary: #888888;
-  --text-muted: #737373;
 
-  /* Slate palette (SEF-style) */
-  --slate-300: #cbd5e1;
-  --slate-400: #94a3b8;
-  --slate-500: #64748b;
-  --slate-600: #475569;
-  --slate-700: #334155;
-  --slate-800: #1e293b;
-  --color-slate-text: #94a3b8;
-  --color-slate-border: rgba(148, 163, 184, 0.2);
-  --color-slate-bg: rgba(148, 163, 184, 0.05);
-  --color-slate-bg-hover: rgba(148, 163, 184, 0.1);
+  /* Legacy compat mappings */
+  --bg-primary: #0D1117;
+  --accent-primary: #39FF14;
+  --accent-hover: #4dff33;
+  --accent-dim: rgba(57, 255, 20, 0.1);
+  --border-color: #30363D;
+  --text-primary: #E6EDF3;
+  --text-secondary: #8B949E;
+  --text-muted: #6e7681;
 
-  /* Fonts */
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-display: 'Bebas Neue', sans-serif;
-  --font-heading: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-  --font-prose: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  /* Slate palette - updated for Toxic theme */
+  --slate-300: #8B949E;
+  --slate-400: #6e7681;
+  --slate-500: #484f58;
+  --slate-600: #30363D;
+  --slate-700: #21262d;
+  --slate-800: #161B22;
+  --color-slate-text: #8B949E;
+  --color-slate-border: rgba(48, 54, 61, 0.6);
+  --color-slate-bg: rgba(22, 27, 34, 0.5);
+  --color-slate-bg-hover: rgba(22, 27, 34, 0.8);
+
+  /* Fonts - Toxic Evolution */
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-prose: 'Inter', sans-serif;
 
   /* Typography Scale - slightly larger for readability */
   --text-xs: 0.8rem;
@@ -332,8 +338,8 @@ a, button, .interactive {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-  color: white;
+  background: linear-gradient(135deg, #39FF14 0%, #2ad10f 100%);
+  color: #0D1117;
   padding: 0.875rem 1.75rem;
   border-radius: 8px;
   font-weight: 600;
@@ -342,7 +348,7 @@ a, button, .interactive {
   transition: all 0.3s var(--ease-out-expo);
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+  box-shadow: 0 4px 15px rgba(57, 255, 20, 0.3);
   position: relative;
   overflow: hidden;
 }
@@ -357,8 +363,8 @@ a, button, .interactive {
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-  box-shadow: 0 8px 30px rgba(220, 38, 38, 0.5);
+  background: linear-gradient(135deg, #4dff33 0%, #39FF14 100%);
+  box-shadow: 0 8px 30px rgba(57, 255, 20, 0.5);
   transform: translateY(-2px);
 }
 
@@ -1204,14 +1210,14 @@ html {
   color: #ffffff;
 }
 
-/* Title with animated red gradient */
+/* Title with animated toxic gradient */
 .title-gradient {
   background: linear-gradient(135deg,
-    var(--color-accent-red) 0%,
-    #ff6b6b 25%,
-    var(--color-accent-red) 50%,
-    #ff6b6b 75%,
-    var(--color-accent-red) 100%
+    var(--color-accent) 0%,
+    #7dff5e 25%,
+    var(--color-accent) 50%,
+    #7dff5e 75%,
+    var(--color-accent) 100%
   );
   background-size: 200% 200%;
   -webkit-background-clip: text;
@@ -1240,9 +1246,9 @@ html {
   50% { background-position: 100% 50%; }
 }
 
-/* Title with red glow */
+/* Title with toxic glow */
 .title-glow {
-  text-shadow: 0 0 80px rgba(220, 38, 38, 0.4);
+  text-shadow: 0 0 80px rgba(57, 255, 20, 0.4);
 }
 
 /* Section title with accent underline */

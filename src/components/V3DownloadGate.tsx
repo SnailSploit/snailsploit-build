@@ -164,7 +164,7 @@ export default function V3DownloadGate({
               <button
                 type="submit"
                 disabled={status === 'loading'}
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#dc2626] px-4 py-3 font-semibold text-white transition-colors hover:bg-[#ef4444] disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#39FF14] px-4 py-3 font-semibold text-white transition-colors hover:bg-[#4dff33] disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {status === 'loading' ? (
                   <>

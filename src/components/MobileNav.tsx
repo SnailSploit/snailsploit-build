@@ -75,11 +75,11 @@ export default function MobileNav({ navItems }: MobileNavProps) {
 
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case 'Framework': return '#dc2626';
-      case 'CVE': return '#f59e0b';
+      case 'Framework': return '#39FF14';
+      case 'CVE': return '#BD34FE';
       case 'Article': return '#10b981';
       case 'Research': return '#3b82f6';
-      default: return '#737373';
+      default: return '#8B949E';
     }
   };
 
@@ -89,7 +89,7 @@ export default function MobileNav({ navItems }: MobileNavProps) {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="md:hidden flex flex-col justify-center items-center w-10 h-10 rounded-lg transition-colors"
-        style={{ backgroundColor: isOpen ? 'rgba(220, 38, 38, 0.1)' : 'transparent' }}
+        style={{ backgroundColor: isOpen ? 'rgba(57, 255, 20, 0.1)' : 'transparent' }}
         aria-label={isOpen ? 'Close menu' : 'Open menu'}
         aria-expanded={isOpen}
       >

@@ -239,7 +239,7 @@ const {
     transform: translateX(-50%);
     width: 600px;
     height: 300px;
-    background: radial-gradient(ellipse, rgba(220, 38, 38, 0.12) 0%, transparent 70%);
+    background: radial-gradient(ellipse, rgba(57, 255, 20, 0.12) 0%, transparent 70%);
     pointer-events: none;
     z-index: -1;
   }
@@ -261,17 +261,17 @@ const {
     width: clamp(3rem, 8vw, 5rem);
     height: clamp(3rem, 8vw, 5rem);
     object-fit: contain;
-    filter: drop-shadow(0 0 20px rgba(220, 38, 38, 0.5));
+    filter: drop-shadow(0 0 20px rgba(57, 255, 20, 0.5));
     animation: iconPulse 3s ease-in-out infinite;
   }
 
   @keyframes iconPulse {
     0%, 100% {
-      filter: drop-shadow(0 0 20px rgba(220, 38, 38, 0.5));
+      filter: drop-shadow(0 0 20px rgba(57, 255, 20, 0.5));
       transform: scale(1);
     }
     50% {
-      filter: drop-shadow(0 0 30px rgba(220, 38, 38, 0.7));
+      filter: drop-shadow(0 0 30px rgba(57, 255, 20, 0.7));
       transform: scale(1.05);
     }
   }
@@ -279,9 +279,9 @@ const {
   .hub-title-text {
     background: linear-gradient(135deg,
       var(--color-accent-red) 0%,
-      #ff6b6b 25%,
+      #7dff5e 25%,
       var(--color-accent-red) 50%,
-      #ff6b6b 75%,
+      #7dff5e 75%,
       var(--color-accent-red) 100%
     );
     background-size: 200% 200%;
@@ -289,7 +289,7 @@ const {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     animation: hubTitleGlow 6s ease-in-out infinite;
-    text-shadow: 0 0 80px rgba(220, 38, 38, 0.4);
+    text-shadow: 0 0 80px rgba(57, 255, 20, 0.4);
   }
 
   @keyframes hubTitleGlow {
@@ -312,6 +312,6 @@ const {
     margin: 2.5rem auto 0;
     background: linear-gradient(90deg, transparent, var(--color-accent-red), transparent);
     border-radius: 2px;
-    box-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
   }
 </style>

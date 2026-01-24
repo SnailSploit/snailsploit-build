@@ -21,7 +21,7 @@ export default function AATMFRiskCalculator() {
   }, [values]);
 
   const getRiskLevel = (score: number) => {
-    if (score > 200) return { level: 'Critical', color: '#dc2626', bg: 'rgba(220, 38, 38, 0.2)' };
+    if (score > 200) return { level: 'Critical', color: '#39FF14', bg: 'rgba(57, 255, 20, 0.2)' };
     if (score >= 100) return { level: 'High', color: '#f97316', bg: 'rgba(249, 115, 22, 0.2)' };
     if (score >= 50) return { level: 'Medium', color: '#eab308', bg: 'rgba(234, 179, 8, 0.2)' };
     return { level: 'Low', color: '#22c55e', bg: 'rgba(34, 197, 94, 0.2)' };
@@ -95,7 +95,7 @@ export default function AATMFRiskCalculator() {
                   })}
                   className="w-full h-2 rounded-lg appearance-none cursor-pointer"
                   style={{
-                    background: `linear-gradient(to right, ${slider.inverted ? '#22c55e' : '#dc2626'} 0%, ${slider.inverted ? '#dc2626' : '#22c55e'} 100%)`
+                    background: `linear-gradient(to right, ${slider.inverted ? '#22c55e' : '#39FF14'} 0%, ${slider.inverted ? '#39FF14' : '#22c55e'} 100%)`
                   }}
                 />
                 <div className="flex justify-between text-[10px] text-gray-600 mt-1">
@@ -137,7 +137,7 @@ export default function AATMFRiskCalculator() {
           <div className="w-full max-w-xs space-y-2">
             <div className="flex items-center justify-between text-xs">
               <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded" style={{ backgroundColor: '#dc2626' }} />
+                <span className="w-3 h-3 rounded" style={{ backgroundColor: '#39FF14' }} />
                 <span className="text-gray-400">Critical</span>
               </div>
               <span className="text-gray-500">&gt; 200</span>
@@ -185,7 +185,7 @@ export default function AATMFRiskCalculator() {
           background: white;
           cursor: pointer;
           box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-          border: 2px solid #dc2626;
+          border: 2px solid #39FF14;
         }
         input[type="range"]::-moz-range-thumb {
           width: 20px;
@@ -194,7 +194,7 @@ export default function AATMFRiskCalculator() {
           background: white;
           cursor: pointer;
           box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-          border: 2px solid #dc2626;
+          border: 2px solid #39FF14;
         }
       `}</style>
     </div>

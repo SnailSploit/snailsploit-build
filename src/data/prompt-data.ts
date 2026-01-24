@@ -259,7 +259,7 @@ export const aatmfRelationship = {
     name: 'AATMF',
     description: 'Adversarial AI Threat Modeling Framework',
     focus: 'How attackers exploit LLM systems',
-    color: '#dc2626'
+    color: '#39FF14'
   },
   defensive: {
     name: 'P.R.O.M.P.T.',

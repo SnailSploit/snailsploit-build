@@ -712,7 +712,7 @@ export const crosswalks = {
 
 // Risk thresholds
 export const riskThresholds = {
-  critical: { min: 200, color: '#dc2626', label: 'Critical' },
+  critical: { min: 200, color: '#39FF14', label: 'Critical' },
   high: { min: 100, max: 200, color: '#f97316', label: 'High' },
   medium: { min: 50, max: 100, color: '#eab308', label: 'Medium' },
   low: { max: 50, color: '#22c55e', label: 'Low' }

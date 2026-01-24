@@ -8,7 +8,7 @@ export default function AATMFMatrix() {
 
   const getRiskColor = (level: string) => {
     switch (level) {
-      case 'Critical': return '#dc2626';
+      case 'Critical': return '#39FF14';
       case 'High': return '#f97316';
       case 'Medium': return '#eab308';
       default: return '#22c55e';
