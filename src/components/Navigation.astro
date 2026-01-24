@@ -1,5 +1,4 @@
 ---
-import V3SnailLogo from './V3SnailLogo.astro';
 import SearchBar from './SearchBar.tsx';
 
 const navItems = [
@@ -39,16 +38,12 @@ const navItems = [
   <div class="header-inner">
     <div class="flex items-center justify-between h-20">
       <div class="flex items-center">
-        <a href="/" class="flex items-center gap-3 group">
-          <V3SnailLogo size={48} />
-          <div class="flex flex-col">
-            <span class="text-xl font-bold tracking-tight group-hover:text-[var(--color-accent-red-hover)] transition-colors" style="color: var(--color-accent-red);">
-              SnailSploit
-            </span>
-            <span class="text-xs uppercase tracking-widest" style="color: var(--color-text-muted);">
-              Kai Aizen
-            </span>
-          </div>
+        <a href="/" class="flex items-center group">
+          <img
+            src="/images/logo.png"
+            alt="SnailSploit"
+            class="h-12 w-auto invert opacity-90 group-hover:opacity-100 transition-opacity"
+          />
         </a>
       </div>
 
