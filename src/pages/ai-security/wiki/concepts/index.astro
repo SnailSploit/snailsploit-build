@@ -1,0 +1,131 @@
+---
+import WikiHubLayout from '../../../../layouts/WikiHubLayout.astro';
+
+const title = "AI Security Concepts";
+const description = "Foundational definitions and theoretical frameworks for understanding adversarial AI, LLM security, and machine learning vulnerabilities.";
+
+const entries = [
+  { title: "Prompt Injection", description: "A vulnerability class where untrusted input causes LLMs to deviate from intended instructions, executing attacker-controlled directives.", url: "/ai-security/wiki/concepts/prompt-injection/", category: "concepts" },
+  { title: "Adversarial AI", description: "The study and practice of manipulating AI systems through carefully crafted inputs and exploiting learned behaviors.", url: "/ai-security/wiki/concepts/adversarial-ai/", category: "concepts" },
+  { title: "AI Red Teaming", description: "Systematic adversarial testing of AI systems to identify vulnerabilities before malicious actors do.", url: "/ai-security/wiki/concepts/ai-red-teaming/", category: "concepts" },
+];
+---
+
+<WikiHubLayout title={title} description={description} category="concepts" entries={entries}>
+  <!-- Understanding the Foundations -->
+  <section class="mb-16">
+    <h2 class="text-2xl font-bold text-white mb-6">Understanding the Foundations</h2>
+    <div class="prose prose-invert prose-lg max-w-none">
+      <p class="text-gray-300 leading-relaxed mb-6">
+        AI security concepts differ fundamentally from traditional cybersecurity terminology. In conventional security, we discuss vulnerabilities as discrete flaws—a buffer overflow exists or it doesn't, a misconfiguration is present or absent. AI security operates in a more probabilistic space where vulnerabilities emerge from learned behaviors, statistical patterns, and architectural decisions that don't map cleanly to binary categories.
+      </p>
+      <p class="text-gray-300 leading-relaxed">
+        This section establishes precise definitions for the field's core terminology. These aren't just academic distinctions—they're operational requirements. When a security team assesses an AI system, when a red team scopes an engagement, when a vendor communicates risk to customers, shared vocabulary prevents costly misunderstandings.
+      </p>
+    </div>
+  </section>
+
+  <!-- Core Concepts Index -->
+  <section class="mb-16">
+    <h2 class="text-2xl font-bold text-white mb-6">Core Concepts Index</h2>
+
+    <!-- Foundational -->
+    <div class="mb-8">
+      <h3 class="text-lg font-semibold text-blue-400 mb-4">Foundational</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-800">
+              <th class="text-left py-3 px-4 text-gray-400 font-mono">Concept</th>
+              <th class="text-left py-3 px-4 text-gray-400 font-mono">Definition</th>
+              <th class="text-left py-3 px-4 text-gray-400 font-mono">Relevance</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-300">
+            <tr class="border-b border-gray-800/50">
+              <td class="py-3 px-4"><a href="/ai-security/wiki/concepts/adversarial-ai/" class="text-blue-400 hover:underline">Adversarial AI</a></td>
+              <td class="py-3 px-4">The study and practice of attacking and defending AI systems</td>
+              <td class="py-3 px-4 text-gray-500">Defines the entire field</td>
+            </tr>
+            <tr class="border-b border-gray-800/50">
+              <td class="py-3 px-4"><a href="/ai-security/wiki/concepts/prompt-injection/" class="text-blue-400 hover:underline">Prompt Injection</a></td>
+              <td class="py-3 px-4">Manipulating LLM behavior through crafted inputs</td>
+              <td class="py-3 px-4 text-gray-500">Primary LLM vulnerability class</td>
+            </tr>
+            <tr class="border-b border-gray-800/50">
+              <td class="py-3 px-4"><a href="/ai-security/wiki/concepts/ai-red-teaming/" class="text-blue-400 hover:underline">AI Red Teaming</a></td>
+              <td class="py-3 px-4">Adversarial testing methodologies for AI systems</td>
+              <td class="py-3 px-4 text-gray-500">Practical application of concepts</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- The AI Attack Surface -->
+  <section class="mb-16 p-8 rounded-xl" style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.2);">
+    <h2 class="text-2xl font-bold text-white mb-6">The AI Attack Surface</h2>
+    <p class="text-gray-300 mb-6">
+      Understanding AI security concepts requires a mental model of where attacks can occur:
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="p-4 rounded-lg" style="background: rgba(255,255,255,0.02);">
+        <h4 class="text-blue-400 font-semibold mb-2">Training Time Attacks</h4>
+        <p class="text-sm text-gray-400 mb-2">Attacks during model creation—poisoning the well.</p>
+        <ul class="text-xs text-gray-500 space-y-1">
+          <li>• <a href="/ai-security/wiki/attacks/data-poisoning/" class="hover:text-gray-300">Data Poisoning</a></li>
+          <li>• <a href="/ai-security/wiki/attacks/supply-chain-attacks/" class="hover:text-gray-300">Supply Chain Compromise</a></li>
+        </ul>
+      </div>
+      <div class="p-4 rounded-lg" style="background: rgba(255,255,255,0.02);">
+        <h4 class="text-blue-400 font-semibold mb-2">Inference Time Attacks</h4>
+        <p class="text-sm text-gray-400 mb-2">Attacks against deployed models through user interaction.</p>
+        <ul class="text-xs text-gray-500 space-y-1">
+          <li>• <a href="/ai-security/wiki/concepts/prompt-injection/" class="hover:text-gray-300">Prompt Injection</a></li>
+          <li>• <a href="/ai-security/wiki/attacks/jailbreaking/" class="hover:text-gray-300">Jailbreaking</a></li>
+        </ul>
+      </div>
+      <div class="p-4 rounded-lg" style="background: rgba(255,255,255,0.02);">
+        <h4 class="text-blue-400 font-semibold mb-2">Extraction Attacks</h4>
+        <p class="text-sm text-gray-400 mb-2">Stealing information from the model or its training data.</p>
+        <ul class="text-xs text-gray-500 space-y-1">
+          <li>• <a href="/ai-security/wiki/attacks/model-extraction/" class="hover:text-gray-300">Model Extraction</a></li>
+          <li>• <a href="/ai-security/wiki/attacks/system-prompt-extraction/" class="hover:text-gray-300">System Prompt Extraction</a></li>
+        </ul>
+      </div>
+      <div class="p-4 rounded-lg" style="background: rgba(255,255,255,0.02);">
+        <h4 class="text-blue-400 font-semibold mb-2">System-Level Attacks</h4>
+        <p class="text-sm text-gray-400 mb-2">Targeting infrastructure and integrations around the model.</p>
+        <ul class="text-xs text-gray-500 space-y-1">
+          <li>• <a href="/ai-security/wiki/attacks/indirect-prompt-injection/" class="hover:text-gray-300">Indirect Prompt Injection</a></li>
+          <li>• <a href="/ai-security/wiki/attacks/guardrail-bypass/" class="hover:text-gray-300">Guardrail Bypass</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Start Learning -->
+  <section class="p-8 rounded-xl" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(255,255,255,0.1);">
+    <h2 class="text-xl font-bold text-white mb-4">Start Learning</h2>
+    <p class="text-gray-400 mb-4">New to AI security? Begin with these foundational entries in order:</p>
+    <ol class="space-y-2">
+      <li class="flex items-center gap-3">
+        <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm flex items-center justify-center">1</span>
+        <a href="/ai-security/wiki/concepts/adversarial-ai/" class="text-blue-400 hover:underline">Adversarial AI</a>
+        <span class="text-gray-600">— The field overview</span>
+      </li>
+      <li class="flex items-center gap-3">
+        <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm flex items-center justify-center">2</span>
+        <a href="/ai-security/wiki/concepts/prompt-injection/" class="text-blue-400 hover:underline">Prompt Injection</a>
+        <span class="text-gray-600">— The defining vulnerability</span>
+      </li>
+      <li class="flex items-center gap-3">
+        <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm flex items-center justify-center">3</span>
+        <a href="/ai-security/wiki/concepts/ai-red-teaming/" class="text-blue-400 hover:underline">AI Red Teaming</a>
+        <span class="text-gray-600">— Putting concepts into practice</span>
+      </li>
+    </ol>
+  </section>
+</WikiHubLayout>

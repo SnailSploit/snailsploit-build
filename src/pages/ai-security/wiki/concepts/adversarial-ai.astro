@@ -1,0 +1,170 @@
+---
+import WikiEntryLayout from '../../../../layouts/WikiEntryLayout.astro';
+
+const title = "Adversarial AI";
+const description = "The discipline focused on understanding, executing, and defending against attacks on artificial intelligence systems.";
+
+const relatedEntries = [
+  { title: "AI Red Teaming", url: "/ai-security/wiki/concepts/ai-red-teaming/" },
+  { title: "Prompt Injection", url: "/ai-security/wiki/concepts/prompt-injection/" },
+  { title: "Jailbreaking", url: "/ai-security/wiki/attacks/jailbreaking/" },
+  { title: "Data Poisoning", url: "/ai-security/wiki/attacks/data-poisoning/" },
+];
+
+const frameworkMappings = {
+  "MITRE ATLAS": "Adversarial Threat Landscape for AI Systems",
+  "NIST AI RMF": "AI Risk Management Framework",
+  "AATMF": "Adversarial AI Threat Modeling Framework",
+};
+---
+
+<WikiEntryLayout
+  title={title}
+  description={description}
+  category="concepts"
+  relatedEntries={relatedEntries}
+  frameworkMappings={frameworkMappings}
+>
+  <h2>Definition</h2>
+  <p>
+    <strong>Adversarial AI</strong> encompasses the study and practice of attacking and defending artificial intelligence systems. It spans the full lifecycle of AI systems—from training data to deployment—and addresses the unique security challenges that emerge when systems learn from data rather than following explicit programming.
+  </p>
+  <p>
+    The field sits at the intersection of machine learning research, cybersecurity practice, and adversarial thinking. Practitioners must understand both how AI systems work internally and how attackers approach exploitation.
+  </p>
+
+  <hr />
+
+  <h2>Scope and Boundaries</h2>
+  <p>Adversarial AI includes:</p>
+
+  <h3>Offensive Research</h3>
+  <ul>
+    <li>Discovering vulnerabilities in AI systems</li>
+    <li>Developing attack techniques and exploits</li>
+    <li>Red teaming AI deployments</li>
+    <li>Building adversarial tools and frameworks</li>
+  </ul>
+
+  <h3>Defensive Research</h3>
+  <ul>
+    <li>Designing robust AI architectures</li>
+    <li>Developing detection and mitigation techniques</li>
+    <li>Hardening models against known attacks</li>
+    <li>Building security tooling for AI systems</li>
+  </ul>
+
+  <h3>Policy and Governance</h3>
+  <ul>
+    <li>Risk assessment frameworks for AI</li>
+    <li>Compliance and regulatory considerations</li>
+    <li>Responsible disclosure practices</li>
+    <li>Industry standards development</li>
+  </ul>
+
+  <hr />
+
+  <h2>Historical Context</h2>
+
+  <h3>Pre-LLM Era (2013-2020)</h3>
+  <p>Adversarial AI emerged from academic research on neural network robustness:</p>
+  <p>
+    <strong>2013-2014:</strong> Szegedy et al. discovered that imperceptible perturbations to images could cause neural networks to misclassify with high confidence. These "adversarial examples" demonstrated that ML models were brittle in unexpected ways.
+  </p>
+  <p>
+    <strong>2015-2017:</strong> Research expanded to physical-world attacks. Researchers demonstrated adversarial patches that caused stop signs to be misread, faces to evade recognition, and objects to become invisible to detectors.
+  </p>
+  <p>
+    <strong>2018-2020:</strong> Focus broadened to training-time attacks (data poisoning, backdoors) and privacy attacks (membership inference, model extraction).
+  </p>
+
+  <h3>LLM Era (2020-Present)</h3>
+  <p>Large language models introduced fundamentally new attack surfaces:</p>
+  <p>
+    <strong>2022-2023:</strong> The release of ChatGPT and rapid adoption of LLM-integrated applications created urgent security needs. Prompt injection, jailbreaking, and agent security became primary concerns.
+  </p>
+  <p>
+    <strong>2024-Present:</strong> AI agents with tool access, multi-modal models, and enterprise AI deployments have created complex attack surfaces. Adversarial AI has become a critical discipline within enterprise security.
+  </p>
+
+  <hr />
+
+  <h2>Core Concepts</h2>
+
+  <h3>Attack Surface</h3>
+  <p>The potential entry points for attacking an AI system:</p>
+  <ul>
+    <li><strong>Training data</strong> — Poisoning, backdoors</li>
+    <li><strong>Model weights</strong> — Theft, tampering, supply chain</li>
+    <li><strong>Inference inputs</strong> — Adversarial examples, prompt injection</li>
+    <li><strong>System integration</strong> — Agent hijacking, tool abuse</li>
+  </ul>
+
+  <h3>Threat Models</h3>
+  <p>The assumptions about attacker capabilities:</p>
+  <ul>
+    <li><strong>Black-box</strong> — Attacker has query access only</li>
+    <li><strong>White-box</strong> — Attacker has full model access</li>
+    <li><strong>Gray-box</strong> — Attacker has partial information</li>
+  </ul>
+
+  <h3>The Defender's Dilemma</h3>
+  <p>AI security faces asymmetric challenges:</p>
+  <ul>
+    <li>Attacks only need to succeed once; defenses must succeed always</li>
+    <li>Attack techniques transfer across models; defenses are model-specific</li>
+    <li>Attacks can be automated at scale; defense requires ongoing effort</li>
+  </ul>
+
+  <hr />
+
+  <h2>Attack Taxonomy</h2>
+  <p>Attacks are typically categorized by when they occur in the AI lifecycle:</p>
+
+  <h3>Training-Time Attacks</h3>
+  <ul>
+    <li><a href="/ai-security/wiki/attacks/data-poisoning/">Data Poisoning</a> — Corrupting training data</li>
+    <li>Backdoor Insertion — Hidden triggers in models</li>
+    <li><a href="/ai-security/wiki/attacks/supply-chain-attacks/">Supply Chain</a> — Compromised dependencies</li>
+  </ul>
+
+  <h3>Inference-Time Attacks</h3>
+  <ul>
+    <li><a href="/ai-security/wiki/concepts/prompt-injection/">Prompt Injection</a> — Hijacking LLM behavior</li>
+    <li><a href="/ai-security/wiki/attacks/jailbreaking/">Jailbreaking</a> — Bypassing safety controls</li>
+    <li>Adversarial Examples — Malicious inputs causing misclassification</li>
+  </ul>
+
+  <h3>Extraction Attacks</h3>
+  <ul>
+    <li><a href="/ai-security/wiki/attacks/model-extraction/">Model Extraction</a> — Stealing model functionality</li>
+    <li><a href="/ai-security/wiki/attacks/system-prompt-extraction/">System Prompt Extraction</a> — Revealing confidential instructions</li>
+    <li>Training Data Extraction — Recovering private training data</li>
+  </ul>
+
+  <hr />
+
+  <h2>Current State of the Field</h2>
+  <p>
+    As of 2025, adversarial AI has matured from academic research into operational security practice. Key developments include:
+  </p>
+  <ul>
+    <li>Established frameworks (MITRE ATLAS, OWASP LLM Top 10) providing structured guidance</li>
+    <li>Commercial AI security vendors offering testing and monitoring tools</li>
+    <li>Bug bounty programs specifically for AI vulnerabilities</li>
+    <li>Regulatory attention on AI safety and security requirements</li>
+  </ul>
+  <p>
+    The field continues to evolve rapidly as new model architectures, deployment patterns, and attack techniques emerge.
+  </p>
+
+  <hr />
+
+  <h2>References</h2>
+  <ul>
+    <li>Szegedy, C. et al. (2014). "Intriguing properties of neural networks." ICLR</li>
+    <li>Goodfellow, I. et al. (2015). "Explaining and Harnessing Adversarial Examples." ICLR</li>
+    <li>MITRE. (2023). "ATLAS: Adversarial Threat Landscape for AI Systems."</li>
+    <li>NIST. (2024). "AI Risk Management Framework."</li>
+  </ul>
+</WikiEntryLayout>

@@ -1,0 +1,205 @@
+---
+import WikiHubLayout from '../../../layouts/WikiHubLayout.astro';
+import V3DownloadGate from '../../../components/V3DownloadGate';
+
+const title = "AI Security Wiki";
+const description = "The comprehensive reference for adversarial artificial intelligence, LLM security, and AI red teaming.";
+
+// All wiki entries for the index
+const allEntries = [
+  // Concepts
+  { title: "Prompt Injection", description: "A vulnerability class where untrusted input causes LLMs to deviate from intended instructions.", url: "/ai-security/wiki/concepts/prompt-injection/", category: "concepts" },
+  { title: "Adversarial AI", description: "The study and practice of manipulating AI systems through carefully crafted inputs.", url: "/ai-security/wiki/concepts/adversarial-ai/", category: "concepts" },
+  { title: "AI Red Teaming", description: "Systematic adversarial testing of AI systems to identify vulnerabilities.", url: "/ai-security/wiki/concepts/ai-red-teaming/", category: "concepts" },
+  // Attacks
+  { title: "Jailbreaking", description: "Techniques to bypass safety training and guardrails in language models.", url: "/ai-security/wiki/attacks/jailbreaking/", category: "attacks" },
+  { title: "Indirect Prompt Injection", description: "Embedding malicious instructions in content processed by LLM applications.", url: "/ai-security/wiki/attacks/indirect-prompt-injection/", category: "attacks" },
+  { title: "Data Poisoning", description: "Corrupting training data to manipulate model behavior.", url: "/ai-security/wiki/attacks/data-poisoning/", category: "attacks" },
+  { title: "Model Extraction", description: "Stealing model functionality through systematic querying.", url: "/ai-security/wiki/attacks/model-extraction/", category: "attacks" },
+  { title: "System Prompt Extraction", description: "Techniques to extract confidential system prompts from LLM applications.", url: "/ai-security/wiki/attacks/system-prompt-extraction/", category: "attacks" },
+  { title: "Guardrail Bypass", description: "Methods to circumvent safety mechanisms in AI systems.", url: "/ai-security/wiki/attacks/guardrail-bypass/", category: "attacks" },
+  { title: "Supply Chain Attacks", description: "Compromising AI systems through dependencies, datasets, or third-party components.", url: "/ai-security/wiki/attacks/supply-chain-attacks/", category: "attacks" },
+];
+
+const categories = [
+  {
+    id: 'concepts',
+    name: 'Concepts',
+    icon: '📚',
+    color: '#3b82f6',
+    description: 'Foundational definitions and theoretical frameworks. Start here if you\'re new to AI security.',
+    url: '/ai-security/wiki/concepts/',
+    keyEntries: ['Prompt Injection', 'Adversarial AI', 'AI Red Teaming']
+  },
+  {
+    id: 'attacks',
+    name: 'Attacks',
+    icon: '⚔️',
+    color: '#ef4444',
+    description: 'Tactical techniques used to compromise AI systems. Each entry covers mechanism, detection, and examples.',
+    url: '/ai-security/wiki/attacks/',
+    keyEntries: ['Indirect Prompt Injection', 'Jailbreaking', 'Model Extraction', 'Data Poisoning']
+  },
+  {
+    id: 'defenses',
+    name: 'Defenses',
+    icon: '🛡️',
+    color: '#22c55e',
+    description: 'Countermeasures, controls, and architectural patterns for securing AI systems.',
+    url: '/ai-security/wiki/defenses/',
+    keyEntries: ['Input Validation', 'Output Filtering', 'Guardrails', 'Red Team Testing']
+  },
+];
+---
+
+<WikiHubLayout title={title} description={description} isMainIndex={true}>
+  <!-- What Is AI Security -->
+  <section class="mb-16">
+    <h2 class="text-2xl font-bold text-white mb-6">What Is AI Security?</h2>
+    <div class="prose prose-invert prose-lg max-w-none">
+      <p class="text-gray-300 leading-relaxed mb-6">
+        AI security encompasses the practices, methodologies, and technologies used to protect artificial intelligence systems from adversarial manipulation, unauthorized access, and malicious exploitation. As AI systems become deeply embedded in critical infrastructure, financial services, healthcare, and national security applications, securing these systems has evolved from an academic curiosity into an operational imperative.
+      </p>
+      <p class="text-gray-300 leading-relaxed mb-6">
+        Unlike traditional software security, AI security must contend with systems that learn, adapt, and make decisions based on patterns in data rather than explicit programming logic. This fundamental difference creates entirely new attack surfaces. An attacker doesn't need to find a buffer overflow or SQL injection vulnerability—they can manipulate the model's behavior through carefully crafted inputs, poisoned training data, or exploitation of the model's learned assumptions.
+      </p>
+      <p class="text-gray-300 leading-relaxed">
+        The field sits at the intersection of machine learning, cybersecurity, and adversarial research. Practitioners must understand both how AI systems work internally and how attackers think about exploiting them.
+      </p>
+    </div>
+  </section>
+
+  <!-- Why This Wiki Exists -->
+  <section class="mb-16 p-8 rounded-xl" style="background: rgba(148, 163, 184, 0.05); border: 1px solid rgba(148, 163, 184, 0.15);">
+    <h2 class="text-2xl font-bold text-white mb-6">Why This Wiki Exists</h2>
+    <p class="text-gray-300 leading-relaxed mb-6">
+      The AI security landscape is fragmented. Research papers are locked behind academic paywalls. Vendor documentation focuses on their specific tools. Blog posts vary wildly in quality and accuracy. Security teams trying to assess AI risks find themselves piecing together information from dozens of sources, many of which contradict each other.
+    </p>
+    <p class="text-gray-300 leading-relaxed mb-6">
+      This wiki provides a single authoritative reference—built by practitioners, grounded in real-world testing, and continuously updated as the threat landscape evolves.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+      <div class="p-4 rounded-lg" style="background: rgba(255,255,255,0.02);">
+        <div class="text-blue-400 font-semibold mb-2">Clear Definitions</div>
+        <div class="text-sm text-gray-500">Suitable for citation in reports and documentation</div>
+      </div>
+      <div class="p-4 rounded-lg" style="background: rgba(255,255,255,0.02);">
+        <div class="text-blue-400 font-semibold mb-2">Technical Depth</div>
+        <div class="text-sm text-gray-500">Detailed coverage for security practitioners</div>
+      </div>
+      <div class="p-4 rounded-lg" style="background: rgba(255,255,255,0.02);">
+        <div class="text-blue-400 font-semibold mb-2">Practical Examples</div>
+        <div class="text-sm text-gray-500">Real-world scenarios from production systems</div>
+      </div>
+      <div class="p-4 rounded-lg" style="background: rgba(255,255,255,0.02);">
+        <div class="text-blue-400 font-semibold mb-2">Framework Mappings</div>
+        <div class="text-sm text-gray-500">Cross-references to MITRE ATLAS, OWASP</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Navigation -->
+  <section class="mb-16">
+    <h2 class="text-2xl font-bold text-white mb-8">Navigating the Wiki</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {categories.map(cat => (
+        <a
+          href={cat.url}
+          class="group p-6 rounded-xl transition-all hover:scale-[1.02]"
+          style={`background: ${cat.color}08; border: 1px solid ${cat.color}30;`}
+        >
+          <div class="text-3xl mb-3">{cat.icon}</div>
+          <h3 class="text-xl font-bold mb-2" style={`color: ${cat.color};`}>
+            {cat.name}
+          </h3>
+          <p class="text-sm text-gray-400 mb-4">{cat.description}</p>
+          <div class="space-y-1">
+            {cat.keyEntries.map(entry => (
+              <div class="text-xs text-gray-500">• {entry}</div>
+            ))}
+          </div>
+          <span class="inline-block mt-4 text-sm font-medium transition-colors" style={`color: ${cat.color};`}>
+            Explore {cat.name} →
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Threat Landscape -->
+  <section class="mb-16">
+    <h2 class="text-2xl font-bold text-white mb-6">The Threat Landscape in 2025</h2>
+    <div class="prose prose-invert prose-lg max-w-none">
+      <p class="text-gray-300 leading-relaxed mb-6">
+        AI security threats have matured rapidly. What began as researchers demonstrating theoretical attacks has evolved into documented exploitation in production systems.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="p-6 rounded-lg" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2);">
+          <h4 class="text-lg font-semibold text-red-400 mb-3">Prompt Injection</h4>
+          <p class="text-sm text-gray-400">The defining vulnerability class for LLM-integrated applications. When applications pass untrusted content to language models, attackers can embed instructions that hijack model behavior. This isn't a bug that can be patched; it's an architectural challenge.</p>
+        </div>
+        <div class="p-6 rounded-lg" style="background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.2);">
+          <h4 class="text-lg font-semibold text-amber-400 mb-3">Supply Chain Attacks</h4>
+          <p class="text-sm text-gray-400">Targeting AI systems through third-party models, datasets, and fine-tuning services. A compromised training dataset or backdoored model weights can persist through multiple downstream deployments.</p>
+        </div>
+        <div class="p-6 rounded-lg" style="background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.2);">
+          <h4 class="text-lg font-semibold text-purple-400 mb-3">Model Extraction</h4>
+          <p class="text-sm text-gray-400">Threatens intellectual property of organizations with proprietary AI capabilities. Attackers can reconstruct model functionality through systematic querying, stealing months of training work through API access alone.</p>
+        </div>
+        <div class="p-6 rounded-lg" style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.2);">
+          <h4 class="text-lg font-semibold text-blue-400 mb-3">AI-Powered Attacks</h4>
+          <p class="text-sm text-gray-400">Attackers now use AI systems to generate phishing content, discover vulnerabilities, and adapt attack strategies in real-time. The defender's challenge has grown exponentially.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download Gate -->
+  <section class="mb-16">
+    <V3DownloadGate
+      client:load
+      title="AI Security Taxonomy Poster (PDF)"
+      description="A comprehensive visual reference of AI attack vectors, defense patterns, and framework mappings."
+      file="/downloads/AI-Security-Taxonomy.pdf"
+      buttonText="Download Free PDF"
+      features={[
+        "Complete attack taxonomy visualization",
+        "Defense pattern quick reference",
+        "MITRE ATLAS mapping chart",
+        "OWASP LLM Top 10 crosswalk"
+      ]}
+    />
+  </section>
+
+  <!-- About & Citation -->
+  <section class="grid md:grid-cols-2 gap-6">
+    <div class="p-6 rounded-xl" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(255,255,255,0.1);">
+      <h3 class="text-lg font-semibold text-white mb-4">About the Author</h3>
+      <p class="text-sm text-gray-400 mb-4">
+        This wiki is maintained by <strong class="text-white">Kai Aizen</strong>, a GenAI Security Researcher specializing in adversarial AI and LLM security.
+      </p>
+      <ul class="text-sm text-gray-500 space-y-1">
+        <li>• 5 published CVEs in AI/ML systems</li>
+        <li>• Creator of the AATMF Framework</li>
+        <li>• Developer of the P.R.O.M.P.T Framework</li>
+        <li>• Author of <em>Adversarial Minds</em> (forthcoming)</li>
+      </ul>
+      <a href="/about/" class="inline-block mt-4 text-sm text-blue-400 hover:text-blue-300">
+        More about Kai →
+      </a>
+    </div>
+
+    <div class="p-6 rounded-xl" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(255,255,255,0.1);">
+      <h3 class="text-lg font-semibold text-white mb-4">Citation</h3>
+      <p class="text-sm text-gray-400 mb-4">
+        When referencing this wiki in academic papers, reports, or documentation:
+      </p>
+      <blockquote class="text-sm text-gray-500 italic border-l-2 border-gray-700 pl-4">
+        Aizen, K. (2025). AI Security Wiki. snailsploit.com. Retrieved from https://snailsploit.com/ai-security/wiki/
+      </blockquote>
+      <p class="text-xs text-gray-600 mt-4">
+        Individual entries include specific citation formats.
+      </p>
+    </div>
+  </section>
+</WikiHubLayout>

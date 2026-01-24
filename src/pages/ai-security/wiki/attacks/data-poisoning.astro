@@ -1,0 +1,101 @@
+---
+import WikiEntryLayout from '../../../../layouts/WikiEntryLayout.astro';
+
+const title = "Data Poisoning";
+const description = "An attack that corrupts training data to manipulate model behavior, potentially inserting backdoors, biases, or targeted misbehavior that persists through deployment.";
+
+const relatedEntries = [
+  { title: "Supply Chain Attacks", url: "/ai-security/wiki/attacks/supply-chain-attacks/" },
+  { title: "Adversarial AI", url: "/ai-security/wiki/concepts/adversarial-ai/" },
+];
+
+const frameworkMappings = {
+  "MITRE ATLAS": "AML.T0020: Poison Training Data",
+  "OWASP LLM Top 10": "LLM03: Training Data Poisoning",
+  "AATMF": "DP-* (Data Poisoning category)",
+};
+---
+
+<WikiEntryLayout
+  title={title}
+  description={description}
+  category="attacks"
+  relatedEntries={relatedEntries}
+  frameworkMappings={frameworkMappings}
+>
+  <h2>Definition</h2>
+  <p>
+    <strong>Data poisoning</strong> attacks corrupt the training data used to build machine learning models. By injecting malicious samples into training datasets, attackers can cause models to learn incorrect patterns, exhibit biased behavior, or contain hidden backdoors that activate under specific conditions.
+  </p>
+
+  <hr />
+
+  <h2>Attack Variants</h2>
+
+  <h3>Backdoor Insertion</h3>
+  <p>Training models to exhibit specific behavior when triggered:</p>
+  <ul>
+    <li>Model behaves normally until a specific trigger is present</li>
+    <li>Trigger activates attacker-chosen behavior (misclassification, specific output)</li>
+    <li>Examples: specific phrases, pixel patterns, metadata</li>
+  </ul>
+
+  <h3>Targeted Poisoning</h3>
+  <p>Causing misclassification of specific inputs while maintaining general accuracy.</p>
+
+  <h3>Model Degradation</h3>
+  <p>Reducing overall model performance through noise injection.</p>
+
+  <h3>Bias Amplification</h3>
+  <p>Exaggerating or introducing biases in model outputs.</p>
+
+  <hr />
+
+  <h2>Attack Vectors</h2>
+  <ul>
+    <li><strong>Web scraping</strong> — Attacker-controlled content in crawled datasets</li>
+    <li><strong>Crowdsourced data</strong> — Malicious contributions to labeling platforms</li>
+    <li><strong>Public datasets</strong> — Compromised widely-used training corpora</li>
+    <li><strong>Fine-tuning data</strong> — Poisoning adaptation datasets</li>
+    <li><strong>Federated learning</strong> — Malicious participant contributions</li>
+  </ul>
+
+  <hr />
+
+  <h2>Why It's Dangerous</h2>
+  <ul>
+    <li><strong>Persistence</strong> — Backdoors survive through deployment and updates</li>
+    <li><strong>Stealth</strong> — Poisoned models may pass standard evaluations</li>
+    <li><strong>Scale</strong> — Popular datasets affect many downstream models</li>
+    <li><strong>Supply chain impact</strong> — Foundational models spread poison</li>
+  </ul>
+
+  <hr />
+
+  <h2>Detection</h2>
+  <ul>
+    <li>Statistical analysis of training data distributions</li>
+    <li>Trigger detection through activation analysis</li>
+    <li>Model behavior testing on holdout datasets</li>
+    <li>Provenance tracking for training data</li>
+  </ul>
+
+  <hr />
+
+  <h2>Defenses</h2>
+  <ul>
+    <li><strong>Data sanitization</strong> — Filter anomalous samples</li>
+    <li><strong>Robust training</strong> — Use techniques resistant to poisoning</li>
+    <li><strong>Differential privacy</strong> — Limit influence of individual samples</li>
+    <li><strong>Model verification</strong> — Test for backdoors before deployment</li>
+    <li><strong>Supply chain security</strong> — Verify data and model provenance</li>
+  </ul>
+
+  <hr />
+
+  <h2>References</h2>
+  <ul>
+    <li>Gu, T. et al. (2017). "BadNets: Identifying Vulnerabilities in the Machine Learning Model Supply Chain."</li>
+    <li>Carlini, N. et al. (2023). "Poisoning Web-Scale Training Datasets is Practical."</li>
+  </ul>
+</WikiEntryLayout>

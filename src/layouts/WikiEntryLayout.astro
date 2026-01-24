@@ -1,0 +1,353 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import PersonSchema from '../components/schemas/PersonSchema.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  category: 'concepts' | 'attacks' | 'defenses' | 'vulnerabilities' | 'frameworks' | 'tools' | 'cases';
+  datePublished?: string;
+  dateModified?: string;
+  relatedEntries?: Array<{ title: string; url: string }>;
+  frameworkMappings?: Record<string, string>;
+}
+
+const {
+  title,
+  description,
+  category,
+  datePublished = '2025-01-24',
+  dateModified,
+  relatedEntries = [],
+  frameworkMappings = {},
+} = Astro.props;
+
+const canonical = `https://snailsploit.com/ai-security/wiki/${category}/${title.toLowerCase().replace(/\s+/g, '-')}/`;
+
+// Category display names
+const categoryNames: Record<string, string> = {
+  concepts: 'Concepts',
+  attacks: 'Attacks',
+  defenses: 'Defenses',
+  vulnerabilities: 'Vulnerabilities',
+  frameworks: 'Frameworks',
+  tools: 'Tools',
+  cases: 'Case Studies',
+};
+
+// Category colors (muted palette for wiki)
+const categoryColors: Record<string, string> = {
+  concepts: '#3b82f6',
+  attacks: '#ef4444',
+  defenses: '#22c55e',
+  vulnerabilities: '#f59e0b',
+  frameworks: '#a855f7',
+  tools: '#06b6d4',
+  cases: '#ec4899',
+};
+
+const categoryColor = categoryColors[category] || '#94a3b8';
+
+// Breadcrumb schema
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://snailsploit.com" },
+    { "@type": "ListItem", "position": 2, "name": "AI Security", "item": "https://snailsploit.com/ai-security/" },
+    { "@type": "ListItem", "position": 3, "name": "Wiki", "item": "https://snailsploit.com/ai-security/wiki/" },
+    { "@type": "ListItem", "position": 4, "name": categoryNames[category], "item": `https://snailsploit.com/ai-security/wiki/${category}/` },
+    { "@type": "ListItem", "position": 5, "name": title }
+  ]
+};
+
+// TechArticle schema
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": title,
+  "description": description,
+  "author": {
+    "@type": "Person",
+    "@id": "https://snailsploit.com/#person",
+    "name": "Kai Aizen",
+    "url": "https://snailsploit.com/about/"
+  },
+  "datePublished": datePublished,
+  "dateModified": dateModified || datePublished,
+  "mainEntityOfPage": canonical,
+  "publisher": {
+    "@type": "Organization",
+    "name": "SnailSploit",
+    "url": "https://snailsploit.com"
+  },
+  "proficiencyLevel": "Expert",
+  "keywords": `${title}, AI security, ${category}, LLM security`
+};
+---
+
+<BaseLayout
+  title={`${title} | AI Security Wiki`}
+  description={description}
+  canonical={canonical}
+  ogType="article"
+  keywords={[title.toLowerCase(), 'ai security', category, 'llm security', 'adversarial ai']}
+>
+  <Navigation slot="header" />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <PersonSchema />
+
+  <article class="bg-[#0a0a0a] min-h-screen">
+    <div class="max-w-4xl mx-auto px-6 py-16">
+      <!-- Breadcrumb -->
+      <nav class="mb-8 text-sm font-mono text-gray-500">
+        <a href="/" class="hover:text-gray-300 transition-colors">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/ai-security/" class="hover:text-gray-300 transition-colors">AI Security</a>
+        <span class="mx-2">/</span>
+        <a href="/ai-security/wiki/" class="hover:text-gray-300 transition-colors">Wiki</a>
+        <span class="mx-2">/</span>
+        <a href={`/ai-security/wiki/${category}/`} class="hover:text-gray-300 transition-colors">{categoryNames[category]}</a>
+        <span class="mx-2">/</span>
+        <span class="text-gray-400">{title}</span>
+      </nav>
+
+      <!-- Header -->
+      <header class="mb-12">
+        <div class="flex items-center gap-3 mb-4">
+          <span
+            class="px-3 py-1 text-xs font-mono rounded"
+            style={`background: ${categoryColor}15; color: ${categoryColor}; border: 1px solid ${categoryColor}30;`}
+          >
+            {categoryNames[category]}
+          </span>
+          <span class="px-3 py-1 text-xs font-mono rounded" style="background: rgba(148, 163, 184, 0.1); color: #64748b;">
+            Wiki Entry
+          </span>
+        </div>
+
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 text-white">
+          {title}
+        </h1>
+
+        <p class="text-xl text-gray-400 leading-relaxed">
+          {description}
+        </p>
+
+        <div class="mt-6 flex items-center gap-4 text-sm text-gray-500">
+          <span>Last updated: {new Date(dateModified || datePublished).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="wiki-content prose prose-invert prose-lg max-w-none">
+        <slot />
+      </div>
+
+      <!-- Framework Mappings -->
+      {Object.keys(frameworkMappings).length > 0 && (
+        <div class="mt-12 p-6 rounded-xl" style="background: rgba(148, 163, 184, 0.05); border: 1px solid rgba(148, 163, 184, 0.15);">
+          <h3 class="text-lg font-semibold text-white mb-4">Framework Mappings</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-gray-800">
+                  <th class="text-left py-2 px-3 text-gray-400 font-mono">Framework</th>
+                  <th class="text-left py-2 px-3 text-gray-400 font-mono">Reference</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.entries(frameworkMappings).map(([framework, reference]) => (
+                  <tr class="border-b border-gray-800/50">
+                    <td class="py-2 px-3 text-gray-300">{framework}</td>
+                    <td class="py-2 px-3 font-mono" style={`color: ${categoryColor};`}>{reference}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      <!-- Related Entries -->
+      {relatedEntries.length > 0 && (
+        <div class="mt-8 p-6 rounded-xl" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(255,255,255,0.1);">
+          <h3 class="text-lg font-semibold text-white mb-4">Related Entries</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {relatedEntries.map(entry => (
+              <a
+                href={entry.url}
+                class="group flex items-center gap-3 p-3 rounded-lg transition-all hover:bg-white/5"
+                style="border: 1px solid rgba(255,255,255,0.05);"
+              >
+                <span class="text-sm font-mono group-hover:text-white transition-colors text-gray-400">
+                  {entry.title}
+                </span>
+                <span class="text-gray-600 ml-auto">→</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- Citation -->
+      <div class="mt-8 p-6 rounded-xl" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(255,255,255,0.1);">
+        <h3 class="text-sm font-mono text-gray-500 uppercase tracking-wide mb-3">Citation</h3>
+        <blockquote class="text-sm text-gray-400 italic border-l-2 border-gray-700 pl-4">
+          Aizen, K. (2025). "{title}." AI Security Wiki, snailsploit.com. Retrieved from {canonical}
+        </blockquote>
+      </div>
+
+      <!-- Navigation -->
+      <div class="mt-8 flex justify-between">
+        <a
+          href={`/ai-security/wiki/${category}/`}
+          class="px-4 py-2 rounded-lg text-sm font-medium transition-all"
+          style="background: rgba(148, 163, 184, 0.1); color: #94a3b8;"
+        >
+          ← Back to {categoryNames[category]}
+        </a>
+        <a
+          href="/ai-security/wiki/"
+          class="px-4 py-2 rounded-lg text-sm font-medium transition-all"
+          style="background: rgba(148, 163, 184, 0.1); color: #94a3b8;"
+        >
+          Wiki Index
+        </a>
+      </div>
+    </div>
+  </article>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .wiki-content {
+    color: #c8c8c8;
+    font-size: 1.125rem;
+    line-height: 1.85;
+  }
+
+  .wiki-content :global(h2) {
+    color: white;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-top: 3rem;
+    margin-bottom: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(148, 163, 184, 0.1);
+  }
+
+  .wiki-content :global(h3) {
+    color: white;
+    font-size: 1.375rem;
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .wiki-content :global(h4) {
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .wiki-content :global(p) {
+    margin-bottom: 1.75em;
+    line-height: 1.85;
+  }
+
+  .wiki-content :global(a) {
+    color: #3b82f6;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .wiki-content :global(a:hover) {
+    color: #60a5fa;
+  }
+
+  .wiki-content :global(strong) {
+    color: white;
+    font-weight: 600;
+  }
+
+  .wiki-content :global(code) {
+    background-color: rgba(148, 163, 184, 0.1);
+    padding: 0.2em 0.5em;
+    border-radius: 4px;
+    font-size: 0.875em;
+    color: #94a3b8;
+  }
+
+  .wiki-content :global(pre) {
+    background-color: rgba(20, 20, 20, 0.9);
+    padding: 1.5em;
+    border-radius: 8px;
+    overflow-x: auto;
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    margin: 2rem 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .wiki-content :global(pre code) {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+  }
+
+  .wiki-content :global(ul), .wiki-content :global(ol) {
+    margin: 1.75em 0;
+    padding-left: 1.75em;
+  }
+
+  .wiki-content :global(li) {
+    margin-bottom: 0.75em;
+    line-height: 1.75;
+  }
+
+  .wiki-content :global(li::marker) {
+    color: #64748b;
+  }
+
+  .wiki-content :global(blockquote) {
+    border-left: 3px solid #64748b;
+    padding: 1rem 1.5rem;
+    margin: 2rem 0;
+    background: rgba(148, 163, 184, 0.05);
+    border-radius: 0 8px 8px 0;
+    color: #a0a0a0;
+    font-style: italic;
+  }
+
+  .wiki-content :global(hr) {
+    border: none;
+    border-top: 1px solid rgba(148, 163, 184, 0.15);
+    margin: 3rem 0;
+  }
+
+  .wiki-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 0.95rem;
+  }
+
+  .wiki-content :global(th), .wiki-content :global(td) {
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    text-align: left;
+  }
+
+  .wiki-content :global(th) {
+    background: rgba(148, 163, 184, 0.05);
+    font-weight: 600;
+    color: white;
+  }
+</style>

@@ -1,0 +1,105 @@
+---
+import WikiEntryLayout from '../../../../layouts/WikiEntryLayout.astro';
+
+const title = "Guardrail Bypass";
+const description = "Techniques to circumvent safety mechanisms, content filters, and policy enforcement systems in AI applications, allowing restricted outputs or actions.";
+
+const relatedEntries = [
+  { title: "Jailbreaking", url: "/ai-security/wiki/attacks/jailbreaking/" },
+  { title: "Prompt Injection", url: "/ai-security/wiki/concepts/prompt-injection/" },
+  { title: "Indirect Prompt Injection", url: "/ai-security/wiki/attacks/indirect-prompt-injection/" },
+];
+
+const frameworkMappings = {
+  "OWASP LLM Top 10": "LLM01: Prompt Injection",
+  "MITRE ATLAS": "AML.T0054: Evade ML Model",
+  "AATMF": "GB-* (Guardrail Bypass category)",
+};
+---
+
+<WikiEntryLayout
+  title={title}
+  description={description}
+  category="attacks"
+  relatedEntries={relatedEntries}
+  frameworkMappings={frameworkMappings}
+>
+  <h2>Definition</h2>
+  <p>
+    <strong>Guardrail bypass</strong> attacks circumvent the safety mechanisms that AI applications use to enforce policies—content filters, output validators, tool restrictions, and other controls. Unlike jailbreaking (which targets model training), guardrail bypass targets application-layer defenses.
+  </p>
+
+  <hr />
+
+  <h2>Types of Guardrails</h2>
+  <ul>
+    <li><strong>Input filters</strong> — Block harmful prompts before processing</li>
+    <li><strong>Output filters</strong> — Scan and block harmful responses</li>
+    <li><strong>Content classifiers</strong> — ML models detecting policy violations</li>
+    <li><strong>Tool restrictions</strong> — Limiting available actions</li>
+    <li><strong>Response validators</strong> — Schema and policy enforcement</li>
+  </ul>
+
+  <hr />
+
+  <h2>Bypass Techniques</h2>
+
+  <h3>Encoding and Obfuscation</h3>
+  <pre><code>Base64: "aG93IHRvIG1ha2UgYSBib21i" decodes to harmful content
+Unicode tricks: Using lookalike characters
+Leetspeak: "h0w t0 m4ke" evading keyword filters</code></pre>
+
+  <h3>Semantic Evasion</h3>
+  <p>Rephrasing requests to avoid detection while preserving meaning:</p>
+  <pre><code>Instead of "how to hack"
+→ "security testing methodology for unauthorized access"</code></pre>
+
+  <h3>Split Requests</h3>
+  <p>Breaking harmful requests across multiple turns to avoid detection.</p>
+
+  <h3>Context Manipulation</h3>
+  <p>Establishing context that makes harmful outputs seem appropriate:</p>
+  <pre><code>"In this fiction writing exercise about cybersecurity..."</code></pre>
+
+  <h3>Classifier Adversarial Attacks</h3>
+  <p>Crafting inputs that evade ML-based content classifiers while remaining harmful.</p>
+
+  <hr />
+
+  <h2>Why Guardrails Fail</h2>
+  <ul>
+    <li><strong>Natural language variability</strong> — Infinite ways to express concepts</li>
+    <li><strong>Context dependence</strong> — Same content may be appropriate or harmful</li>
+    <li><strong>Adversarial robustness</strong> — ML classifiers have known weaknesses</li>
+    <li><strong>Performance trade-offs</strong> — Strict filters impact usability</li>
+  </ul>
+
+  <hr />
+
+  <h2>Detection</h2>
+  <ul>
+    <li>Ensemble multiple classifiers with different architectures</li>
+    <li>Decode and normalize inputs before classification</li>
+    <li>Monitor for evasion indicators (encoding, unusual patterns)</li>
+    <li>Track successful bypasses for pattern analysis</li>
+  </ul>
+
+  <hr />
+
+  <h2>Defenses</h2>
+  <ul>
+    <li><strong>Defense in depth</strong> — Multiple layers of filtering</li>
+    <li><strong>Input normalization</strong> — Decode/normalize before filtering</li>
+    <li><strong>Semantic analysis</strong> — Understand intent, not just keywords</li>
+    <li><strong>Adversarial training</strong> — Include bypass attempts in training</li>
+    <li><strong>Human review</strong> — Escalate uncertain cases</li>
+  </ul>
+
+  <hr />
+
+  <h2>References</h2>
+  <ul>
+    <li>Ribeiro, M. et al. (2020). "Beyond Accuracy: Behavioral Testing of NLP Models."</li>
+    <li>OWASP. (2023). "OWASP Top 10 for LLM Applications."</li>
+  </ul>
+</WikiEntryLayout>

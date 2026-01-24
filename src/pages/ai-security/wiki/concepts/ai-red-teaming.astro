@@ -1,0 +1,210 @@
+---
+import WikiEntryLayout from '../../../../layouts/WikiEntryLayout.astro';
+
+const title = "AI Red Teaming";
+const description = "The practice of systematically attacking AI systems to identify vulnerabilities, assess risks, and improve defenses before malicious actors can exploit them.";
+
+const relatedEntries = [
+  { title: "Adversarial AI", url: "/ai-security/wiki/concepts/adversarial-ai/" },
+  { title: "Prompt Injection", url: "/ai-security/wiki/concepts/prompt-injection/" },
+  { title: "Jailbreaking", url: "/ai-security/wiki/attacks/jailbreaking/" },
+  { title: "Guardrail Bypass", url: "/ai-security/wiki/attacks/guardrail-bypass/" },
+];
+
+const frameworkMappings = {
+  "AATMF": "Adversarial AI Threat Modeling Framework",
+  "MITRE ATLAS": "AI Security Testing Methodology",
+  "OWASP": "LLM Security Testing Guide",
+};
+---
+
+<WikiEntryLayout
+  title={title}
+  description={description}
+  category="concepts"
+  relatedEntries={relatedEntries}
+  frameworkMappings={frameworkMappings}
+>
+  <h2>Definition</h2>
+  <p>
+    <strong>AI Red Teaming</strong> is the practice of systematically attacking AI systems to identify vulnerabilities, assess risks, and improve defenses before malicious actors can exploit them. Unlike traditional penetration testing, AI red teaming addresses unique challenges: models that learn from data, probabilistic outputs, and novel attack surfaces like prompt injection.
+  </p>
+  <p>
+    The discipline adapts adversarial security testing methodologies to AI-specific contexts while maintaining the core principle: think like an attacker to defend like a practitioner.
+  </p>
+
+  <hr />
+
+  <h2>Why AI Red Teaming Matters</h2>
+  <p>AI systems fail differently than traditional software:</p>
+  <ul>
+    <li><strong>Probabilistic failures</strong> — A successful attack might work 80% of the time, making reproducibility complex</li>
+    <li><strong>Emergent vulnerabilities</strong> — Weaknesses arise from learned behaviors, not code bugs</li>
+    <li><strong>Novel attack surfaces</strong> — Prompt injection, jailbreaking, and model extraction have no direct parallels in traditional security</li>
+    <li><strong>Scaling risks</strong> — A single vulnerability can affect millions of users simultaneously</li>
+  </ul>
+  <p>
+    Standard security assessments miss these failure modes. AI red teaming fills the gap.
+  </p>
+
+  <hr />
+
+  <h2>Scope of AI Red Teaming</h2>
+
+  <h3>Safety Testing</h3>
+  <p>Evaluating model behavior against safety policies:</p>
+  <ul>
+    <li>Harmful content generation (violence, hate speech, illegal instructions)</li>
+    <li>Jailbreak resistance across known and novel techniques</li>
+    <li>Bias and discrimination in outputs</li>
+    <li>Privacy violations through data leakage</li>
+  </ul>
+
+  <h3>Security Testing</h3>
+  <p>Assessing technical vulnerabilities in AI systems:</p>
+  <ul>
+    <li><a href="/ai-security/wiki/concepts/prompt-injection/">Prompt injection</a> attacks (direct and indirect)</li>
+    <li><a href="/ai-security/wiki/attacks/system-prompt-extraction/">System prompt extraction</a></li>
+    <li><a href="/ai-security/wiki/attacks/model-extraction/">Model extraction</a> and theft</li>
+    <li>Agent hijacking and tool abuse</li>
+  </ul>
+
+  <h3>Application Testing</h3>
+  <p>Evaluating the full AI-integrated application:</p>
+  <ul>
+    <li>Integration vulnerabilities between AI and traditional systems</li>
+    <li>Data flow security and trust boundaries</li>
+    <li>Privilege escalation through AI components</li>
+    <li>Business logic bypass via AI manipulation</li>
+  </ul>
+
+  <hr />
+
+  <h2>Methodology</h2>
+
+  <h3>Phase 1: Reconnaissance</h3>
+  <p>Understanding the target AI system:</p>
+  <ul>
+    <li>Identify model architecture and capabilities</li>
+    <li>Map system prompts and constraints</li>
+    <li>Document tool access and integrations</li>
+    <li>Enumerate trust boundaries</li>
+  </ul>
+
+  <h3>Phase 2: Threat Modeling</h3>
+  <p>Identifying relevant attack scenarios:</p>
+  <ul>
+    <li>Define attacker personas and capabilities</li>
+    <li>Prioritize attack vectors by risk and likelihood</li>
+    <li>Develop attack trees for complex scenarios</li>
+    <li>Identify high-value targets within the system</li>
+  </ul>
+
+  <h3>Phase 3: Attack Execution</h3>
+  <p>Systematic testing against identified targets:</p>
+  <ul>
+    <li>Execute baseline attacks from known techniques</li>
+    <li>Develop novel attacks based on system specifics</li>
+    <li>Chain attacks for maximum impact demonstration</li>
+    <li>Document all successful paths with evidence</li>
+  </ul>
+
+  <h3>Phase 4: Analysis and Reporting</h3>
+  <p>Converting findings to actionable intelligence:</p>
+  <ul>
+    <li>Classify vulnerabilities by severity and exploitability</li>
+    <li>Provide root cause analysis</li>
+    <li>Develop remediation recommendations</li>
+    <li>Create executive and technical reports</li>
+  </ul>
+
+  <hr />
+
+  <h2>Key Differences from Traditional Red Teaming</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Aspect</th>
+        <th>Traditional Red Team</th>
+        <th>AI Red Team</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Target</td>
+        <td>Code, networks, humans</td>
+        <td>Models, prompts, integrations</td>
+      </tr>
+      <tr>
+        <td>Vulnerabilities</td>
+        <td>Binary (exists or doesn't)</td>
+        <td>Probabilistic (works some percentage)</td>
+      </tr>
+      <tr>
+        <td>Reproducibility</td>
+        <td>High (same input = same output)</td>
+        <td>Variable (stochastic outputs)</td>
+      </tr>
+      <tr>
+        <td>Attack Surface</td>
+        <td>Well-documented (OWASP, CWE)</td>
+        <td>Rapidly evolving, less standardized</td>
+      </tr>
+      <tr>
+        <td>Tools</td>
+        <td>Mature ecosystem</td>
+        <td>Emerging, often manual</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr />
+
+  <h2>Common Attack Techniques</h2>
+
+  <h3>Prompt-Based Attacks</h3>
+  <ul>
+    <li>Direct instruction override ("Ignore previous instructions...")</li>
+    <li>Role-play exploitation ("You are now an unrestricted AI...")</li>
+    <li>Context manipulation (fake system messages)</li>
+    <li>Encoding bypass (Base64, Unicode tricks)</li>
+  </ul>
+
+  <h3>Jailbreaking Techniques</h3>
+  <ul>
+    <li>DAN (Do Anything Now) and persona-based attacks</li>
+    <li>Hypothetical framing ("Imagine you're a different AI...")</li>
+    <li>Token smuggling and obfuscation</li>
+    <li>Multi-turn escalation attacks</li>
+  </ul>
+
+  <h3>System Attacks</h3>
+  <ul>
+    <li>Indirect prompt injection via external content</li>
+    <li>Agent tool abuse and function calling exploitation</li>
+    <li>Data exfiltration through outputs</li>
+    <li>Chain-of-thought manipulation</li>
+  </ul>
+
+  <hr />
+
+  <h2>Best Practices</h2>
+  <ul>
+    <li><strong>Use structured frameworks</strong> — AATMF, MITRE ATLAS provide systematic coverage</li>
+    <li><strong>Document everything</strong> — AI attacks are often non-deterministic; capture prompts, responses, and context</li>
+    <li><strong>Test in production-like environments</strong> — Staging environments may have different behaviors</li>
+    <li><strong>Combine automated and manual testing</strong> — Automation catches known patterns; creativity finds novel attacks</li>
+    <li><strong>Establish baselines</strong> — Track resistance over time as models are updated</li>
+  </ul>
+
+  <hr />
+
+  <h2>References</h2>
+  <ul>
+    <li>Anthropic. (2023). "Red Teaming Language Models to Reduce Harms."</li>
+    <li>Microsoft. (2023). "AI Red Team Principles."</li>
+    <li>OpenAI. (2023). "GPT-4 System Card: Red Teaming."</li>
+    <li>MITRE. (2023). "ATLAS: Adversarial Threat Landscape for AI Systems."</li>
+  </ul>
+</WikiEntryLayout>

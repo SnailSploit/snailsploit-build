@@ -1,0 +1,201 @@
+---
+import WikiHubLayout from '../../../../layouts/WikiHubLayout.astro';
+
+const title = "AI Security Defenses";
+const description = "Countermeasures, controls, and architectural patterns for protecting AI systems against adversarial attacks, data theft, and misuse.";
+
+// Defenses entries will be added as they're created
+const entries: any[] = [];
+---
+
+<WikiHubLayout title={title} description={description} category="defenses" entries={entries}>
+  <!-- The Defense Challenge -->
+  <section class="mb-16">
+    <h2 class="text-2xl font-bold text-white mb-6">The Defense Challenge</h2>
+    <div class="prose prose-invert prose-lg max-w-none">
+      <p class="text-gray-300 leading-relaxed mb-6">
+        Defending AI systems is fundamentally harder than defending traditional software. You can't patch a vulnerability when the "vulnerability" is an emergent property of how the model learned from data. You can't write a regex to filter malicious prompts when the attack surface is natural language itself.
+      </p>
+      <p class="text-gray-300 leading-relaxed">
+        This creates a defensive posture that relies heavily on defense in depth, probabilistic detection, and graceful degradation rather than hard security boundaries. Every defense documented here can be bypassed under some conditions. The goal isn't perfect security—it's raising the cost of attack while maintaining system utility.
+      </p>
+    </div>
+  </section>
+
+  <!-- Defense Categories -->
+  <section class="mb-16">
+    <h2 class="text-2xl font-bold text-white mb-8">Defense Categories</h2>
+
+    <!-- Input Controls -->
+    <div class="mb-8 p-6 rounded-xl" style="background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.2);">
+      <h3 class="text-lg font-semibold text-green-400 mb-4">Input Controls</h3>
+      <p class="text-sm text-gray-400 mb-4">Defenses that filter, validate, or transform inputs before they reach the AI model.</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-green-900/30">
+              <th class="text-left py-2 px-3 text-gray-400">Defense</th>
+              <th class="text-left py-2 px-3 text-gray-400">Mechanism</th>
+              <th class="text-left py-2 px-3 text-gray-400">Effectiveness</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-300">
+            <tr class="border-b border-green-900/20">
+              <td class="py-2 px-3 text-green-400">Input Validation</td>
+              <td class="py-2 px-3">Pattern matching, length limits</td>
+              <td class="py-2 px-3 text-gray-500">Blocks naive attacks</td>
+            </tr>
+            <tr class="border-b border-green-900/20">
+              <td class="py-2 px-3 text-green-400">Prompt Filtering</td>
+              <td class="py-2 px-3">Classifier-based detection</td>
+              <td class="py-2 px-3 text-gray-500">Moderate against known patterns</td>
+            </tr>
+            <tr class="border-b border-green-900/20">
+              <td class="py-2 px-3 text-green-400">Rate Limiting</td>
+              <td class="py-2 px-3">Request throttling</td>
+              <td class="py-2 px-3 text-gray-500">Slows extraction attacks</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Output Controls -->
+    <div class="mb-8 p-6 rounded-xl" style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.2);">
+      <h3 class="text-lg font-semibold text-blue-400 mb-4">Output Controls</h3>
+      <p class="text-sm text-gray-400 mb-4">Defenses that filter, validate, or modify AI outputs before delivery.</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-blue-900/30">
+              <th class="text-left py-2 px-3 text-gray-400">Defense</th>
+              <th class="text-left py-2 px-3 text-gray-400">Mechanism</th>
+              <th class="text-left py-2 px-3 text-gray-400">Effectiveness</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-300">
+            <tr class="border-b border-blue-900/20">
+              <td class="py-2 px-3 text-blue-400">Output Filtering</td>
+              <td class="py-2 px-3">Content classifiers</td>
+              <td class="py-2 px-3 text-gray-500">Catches policy violations</td>
+            </tr>
+            <tr class="border-b border-blue-900/20">
+              <td class="py-2 px-3 text-blue-400">Response Validation</td>
+              <td class="py-2 px-3">Schema/format enforcement</td>
+              <td class="py-2 px-3 text-gray-500">Prevents data leakage</td>
+            </tr>
+            <tr class="border-b border-blue-900/20">
+              <td class="py-2 px-3 text-blue-400">Sensitive Data Detection</td>
+              <td class="py-2 px-3">PII/secret scanning</td>
+              <td class="py-2 px-3 text-gray-500">Blocks data exfiltration</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Architectural Controls -->
+    <div class="mb-8 p-6 rounded-xl" style="background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.2);">
+      <h3 class="text-lg font-semibold text-purple-400 mb-4">Architectural Controls</h3>
+      <p class="text-sm text-gray-400 mb-4">Defenses built into how the AI system is designed and deployed.</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-purple-900/30">
+              <th class="text-left py-2 px-3 text-gray-400">Defense</th>
+              <th class="text-left py-2 px-3 text-gray-400">Mechanism</th>
+              <th class="text-left py-2 px-3 text-gray-400">Effectiveness</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-300">
+            <tr class="border-b border-purple-900/20">
+              <td class="py-2 px-3 text-purple-400">Guardrails</td>
+              <td class="py-2 px-3">Behavioral constraints</td>
+              <td class="py-2 px-3 text-gray-500">Foundation of LLM safety</td>
+            </tr>
+            <tr class="border-b border-purple-900/20">
+              <td class="py-2 px-3 text-purple-400">Privilege Separation</td>
+              <td class="py-2 px-3">Limit model capabilities</td>
+              <td class="py-2 px-3 text-gray-500">Contains compromise impact</td>
+            </tr>
+            <tr class="border-b border-purple-900/20">
+              <td class="py-2 px-3 text-purple-400">Trust Boundaries</td>
+              <td class="py-2 px-3">Isolate untrusted content</td>
+              <td class="py-2 px-3 text-gray-500">Core architectural defense</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Detection and Monitoring -->
+    <div class="p-6 rounded-xl" style="background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.2);">
+      <h3 class="text-lg font-semibold text-amber-400 mb-4">Detection and Monitoring</h3>
+      <p class="text-sm text-gray-400 mb-4">Defenses focused on identifying attacks in progress or after the fact.</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-amber-900/30">
+              <th class="text-left py-2 px-3 text-gray-400">Defense</th>
+              <th class="text-left py-2 px-3 text-gray-400">Mechanism</th>
+              <th class="text-left py-2 px-3 text-gray-400">Effectiveness</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-300">
+            <tr class="border-b border-amber-900/20">
+              <td class="py-2 px-3 text-amber-400">Prompt Logging</td>
+              <td class="py-2 px-3">Comprehensive input capture</td>
+              <td class="py-2 px-3 text-gray-500">Enables forensics</td>
+            </tr>
+            <tr class="border-b border-amber-900/20">
+              <td class="py-2 px-3 text-amber-400">Anomaly Detection</td>
+              <td class="py-2 px-3">Behavioral baselines</td>
+              <td class="py-2 px-3 text-gray-500">Catches novel attacks</td>
+            </tr>
+            <tr class="border-b border-amber-900/20">
+              <td class="py-2 px-3 text-amber-400">Red Team Testing</td>
+              <td class="py-2 px-3">Adversarial assessment</td>
+              <td class="py-2 px-3 text-gray-500">Finds gaps proactively</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Defense in Depth -->
+  <section class="p-8 rounded-xl" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(255,255,255,0.1);">
+    <h2 class="text-xl font-bold text-white mb-6">Defense in Depth Architecture</h2>
+    <p class="text-gray-400 mb-6">No single defense stops all attacks. Effective AI security layers multiple controls:</p>
+
+    <div class="space-y-4 font-mono text-sm">
+      <div class="p-4 rounded-lg" style="background: rgba(34, 197, 94, 0.1); border-left: 4px solid #22c55e;">
+        <div class="text-green-400 font-semibold mb-1">PERIMETER LAYER</div>
+        <div class="text-gray-400">Rate limiting • Authentication • Input length limits</div>
+      </div>
+      <div class="p-4 rounded-lg" style="background: rgba(59, 130, 246, 0.1); border-left: 4px solid #3b82f6;">
+        <div class="text-blue-400 font-semibold mb-1">INPUT FILTERING</div>
+        <div class="text-gray-400">Pattern detection • Content classification • Input normalization</div>
+      </div>
+      <div class="p-4 rounded-lg" style="background: rgba(168, 85, 247, 0.1); border-left: 4px solid #a855f7;">
+        <div class="text-purple-400 font-semibold mb-1">MODEL LAYER</div>
+        <div class="text-gray-400">Safety training • Guardrails • Privilege separation</div>
+      </div>
+      <div class="p-4 rounded-lg" style="background: rgba(245, 158, 11, 0.1); border-left: 4px solid #f59e0b;">
+        <div class="text-amber-400 font-semibold mb-1">OUTPUT FILTERING</div>
+        <div class="text-gray-400">Content scanning • PII detection • Response validation</div>
+      </div>
+      <div class="p-4 rounded-lg" style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444;">
+        <div class="text-red-400 font-semibold mb-1">MONITORING LAYER</div>
+        <div class="text-gray-400">Logging • Anomaly detection • Incident response</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Coming Soon -->
+  <section class="mt-16 text-center">
+    <p class="text-gray-500 italic">
+      Individual defense entries are being developed. Check back for detailed implementation guides.
+    </p>
+  </section>
+</WikiHubLayout>

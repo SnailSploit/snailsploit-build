@@ -1,0 +1,243 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+
+export interface WikiEntry {
+  title: string;
+  description: string;
+  url: string;
+  category?: string;
+}
+
+export interface Props {
+  title: string;
+  description: string;
+  category?: 'concepts' | 'attacks' | 'defenses' | 'vulnerabilities' | 'frameworks' | 'tools' | 'cases';
+  entries?: WikiEntry[];
+  isMainIndex?: boolean;
+}
+
+const {
+  title,
+  description,
+  category,
+  entries = [],
+  isMainIndex = false,
+} = Astro.props;
+
+const basePath = '/ai-security/wiki';
+const canonical = category
+  ? `https://snailsploit.com${basePath}/${category}/`
+  : `https://snailsploit.com${basePath}/`;
+
+// Category display names and colors
+const categoryInfo: Record<string, { name: string; color: string; icon: string }> = {
+  concepts: { name: 'Concepts', color: '#3b82f6', icon: '📚' },
+  attacks: { name: 'Attacks', color: '#ef4444', icon: '⚔️' },
+  defenses: { name: 'Defenses', color: '#22c55e', icon: '🛡️' },
+  vulnerabilities: { name: 'Vulnerabilities', color: '#f59e0b', icon: '⚠️' },
+  frameworks: { name: 'Frameworks', color: '#a855f7', icon: '📐' },
+  tools: { name: 'Tools', color: '#06b6d4', icon: '🔧' },
+  cases: { name: 'Case Studies', color: '#ec4899', icon: '📋' },
+};
+
+const currentCategory = category ? categoryInfo[category] : null;
+
+// Breadcrumb schema
+const breadcrumbItems = [
+  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://snailsploit.com" },
+  { "@type": "ListItem", "position": 2, "name": "AI Security", "item": "https://snailsploit.com/ai-security/" },
+  { "@type": "ListItem", "position": 3, "name": "Wiki", "item": `https://snailsploit.com${basePath}/` },
+];
+
+if (category && currentCategory) {
+  breadcrumbItems.push({
+    "@type": "ListItem",
+    "position": 4,
+    "name": currentCategory.name
+  });
+}
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": breadcrumbItems
+};
+
+// CollectionPage schema
+const collectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": title,
+  "description": description,
+  "url": canonical,
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": entries.length,
+    "itemListElement": entries.map((entry, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": entry.title,
+      "url": `https://snailsploit.com${entry.url}`
+    }))
+  }
+};
+---
+
+<BaseLayout
+  title={`${title} | AI Security Wiki`}
+  description={description}
+  canonical={canonical}
+  ogType="website"
+  keywords={['ai security wiki', category || 'ai security', 'llm security', 'adversarial ai']}
+>
+  <Navigation slot="header" />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
+
+  <article class="bg-[#0a0a0a] min-h-screen">
+    <!-- Hero Section -->
+    <section class="relative py-20" style="background: linear-gradient(180deg, rgba(15, 23, 42, 0.3) 0%, rgba(10, 10, 10, 1) 100%);">
+      <div class="max-w-6xl mx-auto px-6">
+        <!-- Breadcrumb -->
+        <nav class="mb-8 text-sm font-mono text-gray-500">
+          <a href="/" class="hover:text-gray-300 transition-colors">Home</a>
+          <span class="mx-2">/</span>
+          <a href="/ai-security/" class="hover:text-gray-300 transition-colors">AI Security</a>
+          <span class="mx-2">/</span>
+          {isMainIndex ? (
+            <span class="text-gray-400">Wiki</span>
+          ) : (
+            <>
+              <a href="/ai-security/wiki/" class="hover:text-gray-300 transition-colors">Wiki</a>
+              <span class="mx-2">/</span>
+              <span class="text-gray-400">{currentCategory?.name}</span>
+            </>
+          )}
+        </nav>
+
+        <div class="flex items-center gap-4 mb-6">
+          {currentCategory && (
+            <span
+              class="px-3 py-1 text-xs font-mono rounded"
+              style={`background: ${currentCategory.color}15; color: ${currentCategory.color}; border: 1px solid ${currentCategory.color}30;`}
+            >
+              {currentCategory.icon} {currentCategory.name}
+            </span>
+          )}
+          {isMainIndex && (
+            <span class="px-3 py-1 text-xs font-mono rounded" style="background: rgba(148, 163, 184, 0.1); color: #94a3b8;">
+              Reference
+            </span>
+          )}
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 text-white">
+          {title}
+        </h1>
+
+        <p class="text-xl text-gray-400 max-w-3xl leading-relaxed">
+          {description}
+        </p>
+
+        {/* Stats for main index */}
+        {isMainIndex && (
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+            {Object.entries(categoryInfo).slice(0, 4).map(([key, info]) => (
+              <a
+                href={`${basePath}/${key}/`}
+                class="p-4 rounded-lg text-center transition-all hover:scale-105"
+                style={`background: ${info.color}10; border: 1px solid ${info.color}30;`}
+              >
+                <div class="text-2xl mb-2">{info.icon}</div>
+                <div class="text-sm font-medium" style={`color: ${info.color};`}>{info.name}</div>
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="py-16">
+      <div class="max-w-6xl mx-auto px-6">
+        <slot />
+      </div>
+    </section>
+
+    <!-- Entries Grid (if provided) -->
+    {entries.length > 0 && (
+      <section class="py-16" style="background: rgba(15, 23, 42, 0.2);">
+        <div class="max-w-6xl mx-auto px-6">
+          <h2 class="text-2xl font-bold text-white mb-8">
+            {category ? `${currentCategory?.name} Entries` : 'All Entries'}
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {entries.map(entry => (
+              <a
+                href={entry.url}
+                class="group p-6 rounded-xl transition-all hover:scale-[1.02]"
+                style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(148, 163, 184, 0.15);"
+              >
+                {entry.category && (
+                  <span
+                    class="inline-block px-2 py-0.5 text-xs font-mono rounded mb-3"
+                    style={`background: ${categoryInfo[entry.category]?.color || '#94a3b8'}15; color: ${categoryInfo[entry.category]?.color || '#94a3b8'};`}
+                  >
+                    {categoryInfo[entry.category]?.name || entry.category}
+                  </span>
+                )}
+                <h3 class="text-lg font-semibold text-white group-hover:text-blue-400 transition-colors mb-2">
+                  {entry.title}
+                </h3>
+                <p class="text-sm text-gray-500 line-clamp-2">
+                  {entry.description}
+                </p>
+                <span class="inline-block mt-3 text-sm text-gray-600 group-hover:text-gray-400 transition-colors">
+                  Read more →
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Back Navigation -->
+    <section class="py-8">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex justify-between">
+          {!isMainIndex && (
+            <a
+              href="/ai-security/wiki/"
+              class="px-4 py-2 rounded-lg text-sm font-medium transition-all"
+              style="background: rgba(148, 163, 184, 0.1); color: #94a3b8;"
+            >
+              ← Wiki Index
+            </a>
+          )}
+          <a
+            href="/ai-security/"
+            class="px-4 py-2 rounded-lg text-sm font-medium transition-all ml-auto"
+            style="background: rgba(148, 163, 184, 0.1); color: #94a3b8;"
+          >
+            AI Security Hub →
+          </a>
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

@@ -1,0 +1,111 @@
+---
+import WikiEntryLayout from '../../../../layouts/WikiEntryLayout.astro';
+
+const title = "Supply Chain Attacks";
+const description = "Attacks that compromise AI systems through their dependencies, including third-party models, training datasets, libraries, and fine-tuning services.";
+
+const relatedEntries = [
+  { title: "Data Poisoning", url: "/ai-security/wiki/attacks/data-poisoning/" },
+  { title: "Model Extraction", url: "/ai-security/wiki/attacks/model-extraction/" },
+  { title: "Adversarial AI", url: "/ai-security/wiki/concepts/adversarial-ai/" },
+];
+
+const frameworkMappings = {
+  "MITRE ATLAS": "AML.T0010: ML Supply Chain Compromise",
+  "OWASP LLM Top 10": "LLM05: Supply Chain Vulnerabilities",
+  "AATMF": "SC-* (Supply Chain category)",
+};
+---
+
+<WikiEntryLayout
+  title={title}
+  description={description}
+  category="attacks"
+  relatedEntries={relatedEntries}
+  frameworkMappings={frameworkMappings}
+>
+  <h2>Definition</h2>
+  <p>
+    <strong>AI supply chain attacks</strong> compromise machine learning systems through their dependencies—third-party models, training datasets, ML libraries, fine-tuning services, and deployment infrastructure. A single compromised component can affect thousands of downstream applications.
+  </p>
+
+  <hr />
+
+  <h2>Attack Surface</h2>
+
+  <h3>Pre-trained Models</h3>
+  <ul>
+    <li>Backdoored models distributed through hubs (Hugging Face, etc.)</li>
+    <li>Compromised model weights in popular repositories</li>
+    <li>Typosquatting on model names</li>
+  </ul>
+
+  <h3>Training Datasets</h3>
+  <ul>
+    <li>Poisoned public datasets (Common Crawl, Wikipedia dumps)</li>
+    <li>Compromised crowdsourced labeling</li>
+    <li>Malicious contributions to open datasets</li>
+  </ul>
+
+  <h3>ML Libraries and Frameworks</h3>
+  <ul>
+    <li>Malicious packages in PyPI, npm (ML dependencies)</li>
+    <li>Compromised model serialization (pickle vulnerabilities)</li>
+    <li>Backdoored training frameworks</li>
+  </ul>
+
+  <h3>Fine-tuning and MLOps Services</h3>
+  <ul>
+    <li>Compromised fine-tuning platforms</li>
+    <li>Malicious adapters and LoRA weights</li>
+    <li>Attacked model registries</li>
+  </ul>
+
+  <hr />
+
+  <h2>Why It's Critical</h2>
+  <ul>
+    <li><strong>Wide impact</strong> — Popular models/datasets affect many applications</li>
+    <li><strong>Trust exploitation</strong> — Users trust established sources</li>
+    <li><strong>Persistence</strong> — Backdoors survive through model updates</li>
+    <li><strong>Detection difficulty</strong> — Compromised components may pass testing</li>
+  </ul>
+
+  <hr />
+
+  <h2>Real-World Examples</h2>
+  <p><strong>Model Serialization Attacks</strong> — Malicious pickle files executing code on model load.</p>
+  <p><strong>Hugging Face Compromise</strong> — Researchers demonstrating backdoored model uploads.</p>
+  <p><strong>Dataset Poisoning</strong> — Documented poisoning of web-scraped training corpora.</p>
+
+  <hr />
+
+  <h2>Detection</h2>
+  <ul>
+    <li>Verify model/data provenance and signatures</li>
+    <li>Scan for known malicious patterns in dependencies</li>
+    <li>Test models for backdoor behaviors</li>
+    <li>Monitor for unexpected model behaviors in production</li>
+  </ul>
+
+  <hr />
+
+  <h2>Defenses</h2>
+  <ul>
+    <li><strong>Provenance verification</strong> — Verify sources and signatures</li>
+    <li><strong>Sandboxed loading</strong> — Isolate model deserialization</li>
+    <li><strong>Dependency scanning</strong> — Audit ML supply chain</li>
+    <li><strong>Model testing</strong> — Backdoor detection before deployment</li>
+    <li><strong>Internal model registry</strong> — Control approved artifacts</li>
+    <li><strong>Use safe serialization</strong> — Avoid pickle, use safetensors</li>
+  </ul>
+
+  <hr />
+
+  <h2>References</h2>
+  <ul>
+    <li>Gu, T. et al. (2017). "BadNets: Identifying Vulnerabilities in the Machine Learning Model Supply Chain."</li>
+    <li>MITRE. (2023). "ATLAS: ML Supply Chain Compromise."</li>
+    <li>OWASP. (2023). "LLM05: Supply Chain Vulnerabilities."</li>
+  </ul>
+</WikiEntryLayout>

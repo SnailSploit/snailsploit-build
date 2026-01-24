@@ -1,0 +1,172 @@
+---
+import WikiHubLayout from '../../../../layouts/WikiHubLayout.astro';
+
+const title = "AI Security Attacks";
+const description = "Tactical techniques used to compromise AI systems, manipulate model behavior, extract sensitive information, and bypass safety controls.";
+
+const entries = [
+  { title: "Jailbreaking", description: "Techniques to bypass safety training and guardrails in language models.", url: "/ai-security/wiki/attacks/jailbreaking/", category: "attacks" },
+  { title: "Indirect Prompt Injection", description: "Embedding malicious instructions in content processed by LLM applications.", url: "/ai-security/wiki/attacks/indirect-prompt-injection/", category: "attacks" },
+  { title: "Data Poisoning", description: "Corrupting training data to manipulate model behavior.", url: "/ai-security/wiki/attacks/data-poisoning/", category: "attacks" },
+  { title: "Model Extraction", description: "Stealing model functionality through systematic querying.", url: "/ai-security/wiki/attacks/model-extraction/", category: "attacks" },
+  { title: "System Prompt Extraction", description: "Techniques to extract confidential system prompts from LLM applications.", url: "/ai-security/wiki/attacks/system-prompt-extraction/", category: "attacks" },
+  { title: "Guardrail Bypass", description: "Methods to circumvent safety mechanisms in AI systems.", url: "/ai-security/wiki/attacks/guardrail-bypass/", category: "attacks" },
+  { title: "Supply Chain Attacks", description: "Compromising AI systems through dependencies, datasets, or third-party components.", url: "/ai-security/wiki/attacks/supply-chain-attacks/", category: "attacks" },
+];
+---
+
+<WikiHubLayout title={title} description={description} category="attacks" entries={entries}>
+  <!-- The Attack Landscape -->
+  <section class="mb-16">
+    <h2 class="text-2xl font-bold text-white mb-6">The Attack Landscape</h2>
+    <div class="prose prose-invert prose-lg max-w-none">
+      <p class="text-gray-300 leading-relaxed mb-6">
+        Attacks against AI systems differ fundamentally from traditional software exploitation. You're not looking for memory corruption or logic flaws in code—you're exploiting the learned behavior of statistical models, the assumptions embedded in training data, and the architectural decisions that connect AI capabilities to real-world actions.
+      </p>
+      <p class="text-gray-300 leading-relaxed">
+        This section documents attack techniques with the depth required for both red team operators and defensive security teams. Each entry covers not just what the attack does, but how to execute it, how to detect it, and how organizations have defended against it in practice.
+      </p>
+    </div>
+  </section>
+
+  <!-- Attack Categories -->
+  <section class="mb-16">
+    <h2 class="text-2xl font-bold text-white mb-8">Attack Categories</h2>
+
+    <!-- Prompt-Based Attacks -->
+    <div class="mb-8 p-6 rounded-xl" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2);">
+      <h3 class="text-lg font-semibold text-red-400 mb-4">Prompt-Based Attacks</h3>
+      <p class="text-sm text-gray-400 mb-4">Attacks that manipulate LLM behavior through crafted text inputs.</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-red-900/30">
+              <th class="text-left py-2 px-3 text-gray-400">Attack</th>
+              <th class="text-left py-2 px-3 text-gray-400">Target</th>
+              <th class="text-left py-2 px-3 text-gray-400">Impact</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-300">
+            <tr class="border-b border-red-900/20">
+              <td class="py-2 px-3"><a href="/ai-security/wiki/attacks/indirect-prompt-injection/" class="text-red-400 hover:underline">Indirect Prompt Injection</a></td>
+              <td class="py-2 px-3">External content</td>
+              <td class="py-2 px-3">Remote code execution equivalent</td>
+            </tr>
+            <tr class="border-b border-red-900/20">
+              <td class="py-2 px-3"><a href="/ai-security/wiki/attacks/jailbreaking/" class="text-red-400 hover:underline">Jailbreaking</a></td>
+              <td class="py-2 px-3">Safety training</td>
+              <td class="py-2 px-3">Policy bypass</td>
+            </tr>
+            <tr class="border-b border-red-900/20">
+              <td class="py-2 px-3"><a href="/ai-security/wiki/attacks/system-prompt-extraction/" class="text-red-400 hover:underline">System Prompt Extraction</a></td>
+              <td class="py-2 px-3">Confidential instructions</td>
+              <td class="py-2 px-3">Information disclosure</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Model Integrity Attacks -->
+    <div class="mb-8 p-6 rounded-xl" style="background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.2);">
+      <h3 class="text-lg font-semibold text-amber-400 mb-4">Model Integrity Attacks</h3>
+      <p class="text-sm text-gray-400 mb-4">Attacks that compromise the model during training or through manipulation of artifacts.</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-amber-900/30">
+              <th class="text-left py-2 px-3 text-gray-400">Attack</th>
+              <th class="text-left py-2 px-3 text-gray-400">Target</th>
+              <th class="text-left py-2 px-3 text-gray-400">Impact</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-300">
+            <tr class="border-b border-amber-900/20">
+              <td class="py-2 px-3"><a href="/ai-security/wiki/attacks/data-poisoning/" class="text-amber-400 hover:underline">Data Poisoning</a></td>
+              <td class="py-2 px-3">Training data</td>
+              <td class="py-2 px-3">Persistent backdoors</td>
+            </tr>
+            <tr class="border-b border-amber-900/20">
+              <td class="py-2 px-3"><a href="/ai-security/wiki/attacks/supply-chain-attacks/" class="text-amber-400 hover:underline">Supply Chain Attacks</a></td>
+              <td class="py-2 px-3">Model distribution</td>
+              <td class="py-2 px-3">Widespread compromise</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Extraction Attacks -->
+    <div class="mb-8 p-6 rounded-xl" style="background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.2);">
+      <h3 class="text-lg font-semibold text-purple-400 mb-4">Extraction Attacks</h3>
+      <p class="text-sm text-gray-400 mb-4">Attacks that steal information from AI systems.</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-purple-900/30">
+              <th class="text-left py-2 px-3 text-gray-400">Attack</th>
+              <th class="text-left py-2 px-3 text-gray-400">Target</th>
+              <th class="text-left py-2 px-3 text-gray-400">Impact</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-300">
+            <tr class="border-b border-purple-900/20">
+              <td class="py-2 px-3"><a href="/ai-security/wiki/attacks/model-extraction/" class="text-purple-400 hover:underline">Model Extraction</a></td>
+              <td class="py-2 px-3">Model functionality</td>
+              <td class="py-2 px-3">IP theft</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Evasion Attacks -->
+    <div class="p-6 rounded-xl" style="background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.2);">
+      <h3 class="text-lg font-semibold text-green-400 mb-4">Evasion Attacks</h3>
+      <p class="text-sm text-gray-400 mb-4">Attacks that cause AI systems to miss or incorrectly process inputs.</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-green-900/30">
+              <th class="text-left py-2 px-3 text-gray-400">Attack</th>
+              <th class="text-left py-2 px-3 text-gray-400">Target</th>
+              <th class="text-left py-2 px-3 text-gray-400">Impact</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-300">
+            <tr class="border-b border-green-900/20">
+              <td class="py-2 px-3"><a href="/ai-security/wiki/attacks/guardrail-bypass/" class="text-green-400 hover:underline">Guardrail Bypass</a></td>
+              <td class="py-2 px-3">Content filters</td>
+              <td class="py-2 px-3">Policy evasion</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Attack Chain Patterns -->
+  <section class="p-8 rounded-xl" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(255,255,255,0.1);">
+    <h2 class="text-xl font-bold text-white mb-6">Attack Chain Patterns</h2>
+    <p class="text-gray-400 mb-6">Real-world AI exploitation typically chains multiple techniques:</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="p-4 rounded-lg" style="background: rgba(255,255,255,0.02);">
+        <h4 class="text-red-400 font-semibold mb-2">Pattern 1: Reconnaissance → Injection → Exfiltration</h4>
+        <ol class="text-sm text-gray-400 space-y-1 list-decimal list-inside">
+          <li>Extract system prompt to understand application context</li>
+          <li>Craft injection payload based on discovered capabilities</li>
+          <li>Exfiltrate data through available output channels</li>
+        </ol>
+      </div>
+      <div class="p-4 rounded-lg" style="background: rgba(255,255,255,0.02);">
+        <h4 class="text-red-400 font-semibold mb-2">Pattern 2: Jailbreak → Capability Unlock → Abuse</h4>
+        <ol class="text-sm text-gray-400 space-y-1 list-decimal list-inside">
+          <li>Bypass safety training through jailbreak technique</li>
+          <li>Unlock restricted capabilities (code execution, tool use)</li>
+          <li>Abuse unlocked capabilities for attacker goals</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+</WikiHubLayout>
