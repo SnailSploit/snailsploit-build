@@ -1,5 +1,5 @@
 // AATMF v2.1 Complete Data
-// 14 Tactics, 36 Core Techniques
+// 14 Tactics, 40 Core Techniques
 
 export interface Technique {
   id: string;

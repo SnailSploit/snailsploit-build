@@ -4,6 +4,7 @@ import Navigation from '../../components/Navigation.astro';
 import Footer from '../../components/Footer.astro';
 import BreadcrumbSchema from '../../components/schemas/BreadcrumbSchema.astro';
 import FAQPageSchema from '../../components/schemas/FAQPageSchema.astro';
+import FrameworkSchema from '../../components/schemas/FrameworkSchema.astro';
 import AATMFMatrix from '../../components/AATMFMatrix.tsx';
 import AATMFRiskCalculator from '../../components/AATMFRiskCalculator.tsx';
 import { tactics, stats, crosswalks } from '../../data/aatmf-data';
@@ -109,6 +110,18 @@ const roadmapPhases = [
     {name: "AATMF", url: "https://snailsploit.com/frameworks/aatmf"}
   ]} />
   <FAQPageSchema faqs={aatmfFaqs} />
+  <FrameworkSchema
+    name="AATMF: Adversarial AI Threat Modeling Framework"
+    description="Comprehensive AI threat modeling framework with 14 tactics, 40+ techniques, quantitative risk scoring (AATMF-R), and crosswalks to OWASP, NIST, and MITRE ATLAS."
+    url="https://snailsploit.com/frameworks/aatmf/"
+    version="2.1"
+    datePublished="2024-10-01"
+    dateModified="2025-01-24"
+    repositoryUrl="https://github.com/SnailSploit/Aversarial-AI-Threat-Modeling-Framwork"
+    keywords={['AATMF', 'AI threat modeling', 'LLM security', 'adversarial AI', 'red team', 'prompt injection', 'jailbreaking']}
+    tactics={14}
+    techniques={40}
+  />
 
   <!-- Hero Section -->
   <section class="relative py-20 overflow-hidden">
@@ -136,7 +149,7 @@ const roadmapPhases = [
           <div class="text-sm" style="color: var(--color-text-muted);">Tactics</div>
         </div>
         <div class="stat-card text-center p-6 rounded-xl" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(255,255,255,0.1);">
-          <div class="text-3xl md:text-4xl font-bold mb-1" style="color: var(--color-accent-red);">36</div>
+          <div class="text-3xl md:text-4xl font-bold mb-1" style="color: var(--color-accent-red);">40</div>
           <div class="text-sm" style="color: var(--color-text-muted);">Techniques</div>
         </div>
         <div class="stat-card text-center p-6 rounded-xl" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(255,255,255,0.1);">

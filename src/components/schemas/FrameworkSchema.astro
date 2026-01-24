@@ -1,0 +1,106 @@
+---
+// For security frameworks like AATMF, P.R.O.M.P.T, SEF
+interface Props {
+  name: string;
+  description: string;
+  url: string;
+  version?: string;
+  datePublished: string;
+  dateModified?: string;
+  license?: string;
+  repositoryUrl?: string;
+  keywords?: string[];
+  tactics?: number;
+  techniques?: number;
+}
+
+const {
+  name,
+  description,
+  url,
+  version,
+  datePublished,
+  dateModified,
+  license = "CC BY-SA 4.0",
+  repositoryUrl,
+  keywords = [],
+  tactics,
+  techniques
+} = Astro.props;
+
+// Main CreativeWork schema for the framework
+const frameworkSchema = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "@id": `${url}#framework`,
+  "name": name,
+  "description": description,
+  "url": url,
+  "version": version,
+  "datePublished": datePublished,
+  "dateModified": dateModified || datePublished,
+  "author": {
+    "@id": "https://snailsploit.com/#person"
+  },
+  "publisher": {
+    "@id": "https://snailsploit.com/#organization"
+  },
+  "license": `https://creativecommons.org/licenses/by-sa/4.0/`,
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "keywords": keywords.join(", "),
+  "genre": "Security Framework",
+  "educationalLevel": "Expert",
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Security Researchers, Red Team Operators, AI Engineers"
+  }
+};
+
+// SoftwareSourceCode schema for the GitHub repo
+const sourceCodeSchema = repositoryUrl ? {
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": `${name} Source`,
+  "description": `Open-source repository for ${name}`,
+  "codeRepository": repositoryUrl,
+  "programmingLanguage": "Markdown",
+  "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "author": {
+    "@id": "https://snailsploit.com/#person"
+  },
+  "isPartOf": {
+    "@id": `${url}#framework`
+  }
+} : null;
+
+// TechArticle schema for the documentation page
+const techArticleSchema = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": name,
+  "description": description,
+  "url": url,
+  "datePublished": datePublished,
+  "dateModified": dateModified || datePublished,
+  "author": {
+    "@id": "https://snailsploit.com/#person"
+  },
+  "publisher": {
+    "@id": "https://snailsploit.com/#organization"
+  },
+  "proficiencyLevel": "Expert",
+  "about": {
+    "@id": `${url}#framework`
+  },
+  "mainEntity": {
+    "@id": `${url}#framework`
+  }
+};
+
+const schemas = [frameworkSchema, techArticleSchema, sourceCodeSchema].filter(Boolean);
+---
+
+{schemas.map(schema => (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+))}
