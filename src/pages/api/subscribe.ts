@@ -39,15 +39,8 @@ function isRateLimited(key: string): boolean {
   return false;
 }
 
-// Clean up old entries periodically
-setInterval(() => {
-  const now = Date.now();
-  for (const [key, value] of rateLimitMap.entries()) {
-    if (now > value.resetTime) {
-      rateLimitMap.delete(key);
-    }
-  }
-}, RATE_LIMIT_WINDOW);
+// Note: In Cloudflare Workers, the Map resets between requests anyway
+// so we don't need periodic cleanup. Entries naturally expire via resetTime check.
 
 // =============================================================================
 // SECURITY: Input Validation
