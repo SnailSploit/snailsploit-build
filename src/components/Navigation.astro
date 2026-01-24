@@ -1,5 +1,6 @@
 ---
 import SearchBar from './SearchBar.tsx';
+import MobileNav from './MobileNav.tsx';
 
 const navItems = [
   { name: 'About', href: '/about' },
@@ -81,9 +82,14 @@ const navItems = [
         </div>
       </div>
 
-      <!-- Terminal Search - Right -->
+      <!-- Terminal Search - Right (Desktop) -->
       <div class="hidden lg:block w-52">
         <SearchBar client:load />
+      </div>
+
+      <!-- Mobile Nav Button -->
+      <div class="md:hidden">
+        <MobileNav client:load navItems={navItems} />
       </div>
     </div>
   </div>

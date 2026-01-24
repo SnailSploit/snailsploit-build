@@ -1039,3 +1039,175 @@ html {
   pointer-events: none;
   mix-blend-mode: overlay;
 }
+
+/* ============================================
+   MOBILE OPTIMIZATIONS
+   ============================================ */
+
+/* Ensure minimum touch target size (44px) */
+@media (max-width: 768px) {
+  button,
+  a,
+  [role="button"],
+  .btn-primary,
+  .btn-outline,
+  .nav-link,
+  .dropdown-item {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Reduce padding on mobile */
+  .main-content {
+    padding: 1rem;
+  }
+
+  .header-inner {
+    padding: 0 1rem;
+  }
+
+  .footer-inner {
+    padding: 1.5rem 1rem;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .container-narrow {
+    padding: 0 1rem;
+  }
+
+  /* Smaller typography on mobile */
+  h1 {
+    font-size: var(--text-4xl);
+  }
+
+  h2 {
+    font-size: var(--text-3xl);
+  }
+
+  h3 {
+    font-size: var(--text-xl);
+  }
+
+  /* Article content adjustments */
+  .article-content {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  .article-content h1 {
+    font-size: 2rem;
+  }
+
+  .article-content h2 {
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .article-content h3 {
+    font-size: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  /* Card adjustments */
+  .card {
+    padding: 1.25rem;
+  }
+
+  /* Stat card adjustments */
+  .stat-number {
+    font-size: 2.5rem;
+  }
+
+  .stat-card {
+    padding: 1.5rem;
+  }
+
+  /* Button adjustments */
+  .btn-primary,
+  .btn-outline {
+    padding: 0.75rem 1.25rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Code blocks */
+  pre {
+    padding: 1rem;
+    font-size: 0.8125rem;
+  }
+
+  code {
+    font-size: 0.8125em;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .main-content {
+    padding: 0.75rem;
+  }
+
+  .article-content {
+    padding: 0.75rem;
+  }
+
+  .card {
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .stat-number {
+    font-size: 2rem;
+  }
+
+  /* Ensure images don't overflow */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Prevent horizontal scroll */
+  pre {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Prevent horizontal overflow on mobile */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .site-wrapper {
+    overflow-x: hidden;
+  }
+}
+
+/* Improve tap feedback on mobile */
+@media (hover: none) and (pointer: coarse) {
+  .card:active,
+  .btn-primary:active,
+  .btn-outline:active,
+  a:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+
+  /* Disable hover effects that don't work well on touch */
+  .card:hover {
+    transform: none;
+  }
+
+  .lift:hover {
+    transform: none;
+  }
+
+  .card:hover::before {
+    opacity: 0;
+  }
+}
