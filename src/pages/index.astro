@@ -88,6 +88,20 @@ const featuredCards = [
   <script type="application/ld+json" set:html={JSON.stringify(homepageFaqSchema)} />
 
   <main class="homepage">
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+      <video
+        id="loading-video"
+        class="loading-video"
+        autoplay
+        muted
+        playsinline
+        preload="auto"
+      >
+        <source src="/videos/logo-transition.mp4" type="video/mp4" />
+      </video>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero">
       <div class="hero-bg"></div>
@@ -206,6 +220,30 @@ const featuredCards = [
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  /* Loading Screen */
+  .loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #050505;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+
+  .loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .loading-video {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
   }
 
   .status-wrapper {
@@ -555,3 +593,20 @@ const featuredCards = [
     }
   }
 </style>
+
+<script>
+  const loadingScreen = document.getElementById('loading-screen');
+  const loadingVideo = document.getElementById('loading-video') as HTMLVideoElement;
+
+  if (loadingVideo && loadingScreen) {
+    // Hide loading screen when video ends
+    loadingVideo.addEventListener('ended', () => {
+      loadingScreen.classList.add('hidden');
+    });
+
+    // Fallback: hide after 4 seconds if video doesn't trigger ended
+    setTimeout(() => {
+      loadingScreen.classList.add('hidden');
+    }, 4000);
+  }
+</script>

@@ -97,7 +97,8 @@
       "Bash(xargs:*)",
       "Bash(git restore:*)",
       "Bash(for i in 1 2 3 4 5 6)",
-      "Bash(do echo \"Request $i:\")"
+      "Bash(do echo \"Request $i:\")",
+      "Bash(pkill:*)"
     ],
     "deny": [],
     "ask": []
