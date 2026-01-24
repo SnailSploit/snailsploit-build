@@ -2,149 +2,169 @@
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="border-t mt-20" style="border-top: 1px solid rgba(57, 255, 20, 0.3); background-color: var(--color-surface);">
+<footer class="footer-glass">
+  <div class="footer-glow"></div>
   <div class="footer-inner">
+    <!-- Logo and tagline -->
+    <div class="footer-brand mb-10 md:mb-12">
+      <a href="/" class="inline-block">
+        <img
+          src="/images/snailsploit-logo-nav.png"
+          alt="SnailSploit"
+          class="h-10 md:h-12 opacity-90 hover:opacity-100 transition-opacity"
+        />
+      </a>
+      <p class="mt-3 text-sm max-w-sm" style="color: var(--color-text-secondary); font-family: 'Inter', sans-serif;">
+        AI Security Research & Adversarial Machine Learning
+      </p>
+    </div>
+
     <div class="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8">
       <div>
-        <h4 class="font-mono text-sm font-semibold mb-3" style="color: var(--color-text-primary);">
-          Research
-        </h4>
+        <h4 class="footer-heading">Research</h4>
         <ul class="space-y-2">
-          <li>
-            <a href="/ai-security" class="text-sm hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
-              AI Security
-            </a>
-          </li>
-          <li>
-            <a href="/security-research/cves" class="text-sm hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
-              CVEs
-            </a>
-          </li>
-          <li>
-            <a href="/frameworks" class="text-sm hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
-              Frameworks
-            </a>
-          </li>
-          <li>
-            <a href="/writing" class="text-sm hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
-              Writing
-            </a>
-          </li>
+          <li><a href="/ai-security" class="footer-link">AI Security</a></li>
+          <li><a href="/security-research/cves" class="footer-link">CVEs</a></li>
+          <li><a href="/frameworks" class="footer-link">Frameworks</a></li>
+          <li><a href="/writing" class="footer-link">Writing</a></li>
         </ul>
       </div>
 
       <div>
-        <h4 class="font-mono text-sm font-semibold mb-3" style="color: var(--color-text-primary);">
-          Frameworks
-        </h4>
+        <h4 class="footer-heading">Frameworks</h4>
         <ul class="space-y-2">
-          <li>
-            <a href="/frameworks/aatmf" class="text-sm hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
-              AATMF
-            </a>
-          </li>
-          <li>
-            <a href="/frameworks/prompt" class="text-sm hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
-              P.R.O.M.P.T
-            </a>
-          </li>
-          <li>
-            <a href="/frameworks/sef" class="text-sm hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
-              SEF
-            </a>
-          </li>
+          <li><a href="/frameworks/aatmf" class="footer-link">AATMF</a></li>
+          <li><a href="/frameworks/prompt" class="footer-link">P.R.O.M.P.T</a></li>
+          <li><a href="/frameworks/sef" class="footer-link">SEF</a></li>
         </ul>
       </div>
 
       <div>
-        <h4 class="font-mono text-sm font-semibold mb-3" style="color: var(--color-text-primary);">
-          Publications
-        </h4>
+        <h4 class="footer-heading">Publications</h4>
         <ul class="space-y-2">
-          <li>
-            <a href="https://snailsploit.medium.com" target="_blank" rel="noopener noreferrer" class="text-sm hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
-              Medium
-            </a>
-          </li>
-          <li>
-            <a href="https://thejailbreakchef.com" target="_blank" rel="noopener noreferrer" class="text-sm hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
-              Jailbreak Chef
-            </a>
-          </li>
-          <li>
-            <a href="https://hakin9.org/weaponization-in-the-cloud-unmasking-the-threats-and-tools/" target="_blank" rel="noopener noreferrer" class="text-sm hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
-              Hakin9
-            </a>
-          </li>
-          <li>
-            <a href="https://pentestmag.com/design-your-penetration-testing-setup/" target="_blank" rel="noopener noreferrer" class="text-sm hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
-              PenTest Mag
-            </a>
-          </li>
+          <li><a href="https://snailsploit.medium.com" target="_blank" rel="noopener noreferrer" class="footer-link">Medium</a></li>
+          <li><a href="https://thejailbreakchef.com" target="_blank" rel="noopener noreferrer" class="footer-link">Jailbreak Chef</a></li>
+          <li><a href="https://hakin9.org/weaponization-in-the-cloud-unmasking-the-threats-and-tools/" target="_blank" rel="noopener noreferrer" class="footer-link">Hakin9</a></li>
+          <li><a href="https://pentestmag.com/design-your-penetration-testing-setup/" target="_blank" rel="noopener noreferrer" class="footer-link">PenTest Mag</a></li>
         </ul>
       </div>
 
       <div>
-        <h4 class="font-mono text-sm font-semibold mb-3" style="color: var(--color-text-primary);">
-          Profiles
-        </h4>
+        <h4 class="footer-heading">Connect</h4>
         <ul class="space-y-2">
           <li>
-            <a href="https://github.com/SnailSploit" target="_blank" rel="noopener noreferrer" class="text-sm hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
+            <a href="https://github.com/SnailSploit" target="_blank" rel="noopener noreferrer" class="footer-link footer-link-icon">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
               GitHub
             </a>
           </li>
           <li>
-            <a href="https://www.wordfence.com/threat-intel/vulnerabilities/researchers/kai-aizen" target="_blank" rel="noopener noreferrer" class="text-sm hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
-              Wordfence
+            <a href="https://linkedin.com/in/kaiaizen" target="_blank" rel="noopener noreferrer" class="footer-link footer-link-icon">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
             </a>
           </li>
           <li>
-            <a href="https://linkedin.com/in/kaiaizen" target="_blank" rel="noopener noreferrer" class="text-sm hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
-              LinkedIn
+            <a href="https://x.com/SnailSploit" target="_blank" rel="noopener noreferrer" class="footer-link footer-link-icon">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              X (Twitter)
+            </a>
+          </li>
+          <li>
+            <a href="https://www.wordfence.com/threat-intel/vulnerabilities/researchers/kai-aizen" target="_blank" rel="noopener noreferrer" class="footer-link footer-link-icon">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              Wordfence
             </a>
           </li>
         </ul>
       </div>
 
       <div>
-        <h4 class="font-mono text-sm font-semibold mb-3" style="color: var(--color-text-primary);">
-          Site
-        </h4>
+        <h4 class="footer-heading">Site</h4>
         <ul class="space-y-2">
-          <li>
-            <a href="/about" class="text-sm hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
-              About
-            </a>
-          </li>
-          <li>
-            <a href="/adversarial-minds" class="text-sm hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
-              Book
-            </a>
-          </li>
-          <li>
-            <a href="mailto:kai@snailsploit.com" class="text-sm hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
-              Contact
-            </a>
-          </li>
-          <li>
-            <a href="/privacy" class="text-sm hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
-              Privacy Policy
-            </a>
-          </li>
-          <li>
-            <a href="/cookies" class="text-sm hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-secondary);">
-              Cookie Policy
-            </a>
-          </li>
+          <li><a href="/about" class="footer-link">About</a></li>
+          <li><a href="/adversarial-minds" class="footer-link">Book</a></li>
+          <li><a href="mailto:kai@snailsploit.com" class="footer-link">Contact</a></li>
+          <li><a href="/privacy" class="footer-link">Privacy Policy</a></li>
+          <li><a href="/cookies" class="footer-link">Cookie Policy</a></li>
         </ul>
       </div>
     </div>
 
-    <div class="mt-8 pt-8 border-t text-center" style="border-color: var(--color-border);">
+    <div class="footer-bottom">
       <p class="text-sm font-mono" style="color: var(--color-text-muted);">
         © {currentYear} Kai Aizen (SnailSploit). All rights reserved.
+      </p>
+      <p class="text-xs mt-2" style="color: var(--color-text-muted); opacity: 0.7;">
+        Breaking AI systems to make them safer.
       </p>
     </div>
   </div>
 </footer>
+
+<style>
+  .footer-glass {
+    background: rgba(13, 17, 23, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(57, 255, 20, 0.15);
+    padding: 4rem 0 2rem;
+    margin-top: 6rem;
+    position: relative;
+  }
+
+  .footer-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(57, 255, 20, 0.3) 20%,
+      rgba(57, 255, 20, 0.6) 50%,
+      rgba(57, 255, 20, 0.3) 80%,
+      transparent 100%
+    );
+  }
+
+  .footer-heading {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.02em;
+  }
+
+  .footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    transition: all 0.2s ease;
+  }
+
+  .footer-link:hover {
+    color: #39FF14;
+    transform: translateX(2px);
+  }
+
+  .footer-link-icon svg {
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+  }
+
+  .footer-link-icon:hover svg {
+    opacity: 1;
+  }
+
+  .footer-bottom {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+  }
+</style>
