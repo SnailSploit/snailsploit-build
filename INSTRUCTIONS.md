@@ -1242,10 +1242,10 @@ Fetch from GitHub API and display as cards:
 |------------|-------------|
 | AATMF | Adversarial AI Threat Modeling Framework |
 | Kuberoast | Kubernetes security assessment tool |
-| ZenFlood | Network stress testing utility |
+| Burp-MCP-Security-Analysis-Toolkit | MCP server integration for Burp Suite security testing |
 | AwesomeSnailsOsint | Curated OSINT resource collection |
 | Xposure | Attack surface discovery tool |
-| Autowrack | Security automation framework |
+| SnailHunter | Automated vulnerability hunting and reconnaissance tool |
 | SnailSploit-Recon | Reconnaissance toolkit |
 
 **Card display:**
