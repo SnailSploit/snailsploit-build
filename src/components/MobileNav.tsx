@@ -118,7 +118,7 @@ export default function MobileNav({ navItems }: MobileNavProps) {
 
       {/* Backdrop */}
       <div
-        className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-[200] md:hidden transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-[249] md:hidden transition-opacity duration-300 ${
           isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
         onClick={() => setIsOpen(false)}
@@ -126,7 +126,7 @@ export default function MobileNav({ navItems }: MobileNavProps) {
 
       {/* Mobile Menu Drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-[85%] max-w-sm z-[201] md:hidden transition-transform duration-300 ease-out ${
+        className={`fixed top-0 right-0 h-full w-[85%] max-w-sm z-[250] md:hidden transition-transform duration-300 ease-out flex flex-col ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
         style={{
@@ -136,7 +136,7 @@ export default function MobileNav({ navItems }: MobileNavProps) {
       >
         {/* Header */}
         <div
-          className="flex items-center justify-between px-4 h-16 border-b"
+          className="flex items-center justify-between px-4 h-16 border-b flex-shrink-0"
           style={{ borderColor: 'var(--color-border)' }}
         >
           <span
@@ -158,7 +158,7 @@ export default function MobileNav({ navItems }: MobileNavProps) {
         </div>
 
         {/* Search Bar */}
-        <div className="p-4 border-b" style={{ borderColor: 'var(--color-border)' }}>
+        <div className="p-4 border-b flex-shrink-0" style={{ borderColor: 'var(--color-border)' }}>
           <div
             className="flex items-center px-3 py-2 rounded-lg"
             style={{
@@ -218,7 +218,7 @@ export default function MobileNav({ navItems }: MobileNavProps) {
         </div>
 
         {/* Navigation Items */}
-        <nav className="overflow-y-auto" style={{ height: 'calc(100% - 180px)' }}>
+        <nav className="flex-1 overflow-y-auto">
           <ul className="py-2">
             {navItems.map((item) => (
               <li key={item.name}>
@@ -291,7 +291,7 @@ export default function MobileNav({ navItems }: MobileNavProps) {
 
         {/* Footer */}
         <div
-          className="absolute bottom-0 left-0 right-0 px-4 py-4 border-t"
+          className="px-4 py-4 border-t flex-shrink-0"
           style={{
             borderColor: 'var(--color-border)',
             backgroundColor: 'var(--color-bg)',

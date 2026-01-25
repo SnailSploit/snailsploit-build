@@ -475,7 +475,7 @@ const latestArticles = [
   .loading-screen {
     position: fixed;
     inset: 0;
-    z-index: 9999;
+    z-index: 150;
     background: #0D1117;
     display: flex;
     align-items: center;
@@ -527,8 +527,13 @@ const latestArticles = [
 
   @media (max-width: 768px) {
     .loading-video {
-      width: 200px;
-      height: 200px;
+      width: 140px;
+      height: 140px;
+    }
+
+    .loading-spinner {
+      width: 36px;
+      height: 36px;
     }
   }
 
