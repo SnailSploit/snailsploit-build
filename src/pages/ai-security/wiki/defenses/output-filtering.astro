@@ -1,0 +1,229 @@
+---
+import WikiEntryLayout from '../../../../layouts/WikiEntryLayout.astro';
+
+const title = "Output Filtering";
+const description = "Defense mechanism that inspects and sanitizes AI model outputs to prevent data leakage, harmful content delivery, and policy violations before responses reach users.";
+
+const relatedEntries = [
+  { title: "Input Validation", url: "/ai-security/wiki/defenses/input-validation/" },
+  { title: "Guardrails", url: "/ai-security/wiki/defenses/guardrails/" },
+  { title: "System Prompt Extraction", url: "/ai-security/wiki/attacks/system-prompt-extraction/" },
+  { title: "Jailbreaking", url: "/ai-security/wiki/attacks/jailbreaking/" },
+];
+
+const frameworkMappings = {
+  "OWASP LLM Top 10": "LLM02: Insecure Output Handling",
+  "NIST AI RMF": "MEASURE 2.7, MANAGE 2.2",
+  "MITRE ATLAS": "AML.M0004: Restrict Number of ML Model Queries",
+};
+---
+
+<WikiEntryLayout
+  title={title}
+  description={description}
+  category="defenses"
+  relatedEntries={relatedEntries}
+  frameworkMappings={frameworkMappings}
+>
+  <h2>Definition</h2>
+  <p>
+    <strong>Output filtering</strong> is a defense mechanism that inspects AI model responses before delivering them to users or downstream systems. It serves as the last line of defense when input validation and model-level guardrails fail to prevent harmful or sensitive content generation.
+  </p>
+  <p>
+    Unlike input filtering (which blocks bad requests), output filtering catches bad responses—whether from successful attacks, model errors, or edge cases in the model's training.
+  </p>
+
+  <hr />
+
+  <h2>What Output Filtering Catches</h2>
+  <ul>
+    <li><strong>Data leakage</strong> — PII, API keys, credentials, internal system information</li>
+    <li><strong>System prompt disclosure</strong> — Confidential instructions extracted by attackers</li>
+    <li><strong>Policy violations</strong> — Content that violates usage policies (harmful, illegal, etc.)</li>
+    <li><strong>Hallucinated sensitive data</strong> — Fabricated but realistic-looking credentials or PII</li>
+    <li><strong>Injection payloads</strong> — SQL, XSS, or command injection in generated code</li>
+    <li><strong>Formatting attacks</strong> — Markdown/HTML injection that could affect downstream rendering</li>
+  </ul>
+
+  <hr />
+
+  <h2>Implementation Approaches</h2>
+
+  <h3>PII Detection and Redaction</h3>
+  <pre><code>import re
+from presidio_analyzer import AnalyzerEngine
+from presidio_anonymizer import AnonymizerEngine
+
+analyzer = AnalyzerEngine()
+anonymizer = AnonymizerEngine()
+
+def filter_pii(text: str) -> str:
+    results = analyzer.analyze(text=text, language='en')
+    anonymized = anonymizer.anonymize(
+        text=text,
+        analyzer_results=results
+    )
+    return anonymized.text
+
+# Output: "Contact [EMAIL] or call [PHONE]"</code></pre>
+
+  <h3>Content Classification</h3>
+  <p>Using classifiers to detect policy-violating content:</p>
+  <pre><code>{`from openai import OpenAI
+
+client = OpenAI()
+
+def check_content_policy(text: str) -> dict:
+    response = client.moderations.create(input=text)
+    results = response.results[0]
+
+    return {
+        "flagged": results.flagged,
+        "categories": {
+            k: v for k, v in results.categories
+            if v is True
+        }
+    }`}</code></pre>
+
+  <h3>Pattern-Based Detection</h3>
+  <p>Regex patterns for sensitive data types:</p>
+  <pre><code>{`SENSITIVE_PATTERNS = {
+    "api_key": r"(sk-|pk_|api[_-]?key)[a-zA-Z0-9]{20,}",
+    "aws_key": r"AKIA[0-9A-Z]{16}",
+    "jwt": r"eyJ[a-zA-Z0-9_-]+\\.eyJ[a-zA-Z0-9_-]+\\.",
+    "credit_card": r"\\b\\d{4}[\\s-]?\\d{4}[\\s-]?\\d{4}[\\s-]?\\d{4}\\b",
+    "ssn": r"\\b\\d{3}-\\d{2}-\\d{4}\\b",
+}
+
+def detect_secrets(text: str) -> list:
+    findings = []
+    for name, pattern in SENSITIVE_PATTERNS.items():
+        if re.search(pattern, text):
+            findings.append(name)
+    return findings`}</code></pre>
+
+  <h3>System Prompt Leakage Detection</h3>
+  <p>Detecting when the model has disclosed system instructions:</p>
+  <pre><code>SYSTEM_PROMPT_INDICATORS = [
+    "my instructions",
+    "i was told to",
+    "my system prompt",
+    "i am configured to",
+    "my guidelines state",
+]
+
+def check_prompt_leakage(output: str, system_prompt: str) -> bool:
+    # Check for indicator phrases
+    lower_output = output.lower()
+    for indicator in SYSTEM_PROMPT_INDICATORS:
+        if indicator in lower_output:
+            return True
+
+    # Check for direct inclusion of system prompt text
+    if len(system_prompt) > 50:
+        # Fuzzy matching for substantial overlap
+        from difflib import SequenceMatcher
+        ratio = SequenceMatcher(None, output, system_prompt).ratio()
+        if ratio > 0.3:
+            return True
+
+    return False</code></pre>
+
+  <hr />
+
+  <h2>Output Filtering Pipeline</h2>
+  <p>A complete output filtering pipeline chains multiple checks:</p>
+  <pre><code>{`class OutputFilter:
+    def __init__(self, system_prompt: str):
+        self.system_prompt = system_prompt
+        self.pii_analyzer = AnalyzerEngine()
+
+    def filter(self, output: str) -> tuple[str, list]:
+        issues = []
+        filtered = output
+
+        # 1. Check for policy violations
+        moderation = check_content_policy(output)
+        if moderation["flagged"]:
+            issues.append(("policy_violation", moderation["categories"]))
+            return "[Content blocked by policy]", issues
+
+        # 2. Check for system prompt leakage
+        if check_prompt_leakage(output, self.system_prompt):
+            issues.append(("prompt_leakage", None))
+            return "[Response blocked: potential disclosure]", issues
+
+        # 3. Redact PII
+        filtered = filter_pii(filtered)
+        if filtered != output:
+            issues.append(("pii_redacted", None))
+
+        # 4. Check for secrets
+        secrets = detect_secrets(filtered)
+        if secrets:
+            issues.append(("secrets_detected", secrets))
+            # Redact detected patterns
+            for secret_type in secrets:
+                pattern = SENSITIVE_PATTERNS[secret_type]
+                filtered = re.sub(pattern, "[REDACTED]", filtered)
+
+        return filtered, issues`}</code></pre>
+
+  <hr />
+
+  <h2>Downstream Output Handling</h2>
+  <p>
+    Output filtering also prevents injection attacks when LLM outputs are passed to other systems:
+  </p>
+  <ul>
+    <li><strong>SQL injection</strong> — Sanitize before database queries</li>
+    <li><strong>Command injection</strong> — Never pass raw output to shells</li>
+    <li><strong>XSS</strong> — Escape HTML before rendering in browsers</li>
+    <li><strong>Path traversal</strong> — Validate file paths in generated output</li>
+  </ul>
+  <pre><code>{`# DANGEROUS: Direct output to shell
+os.system(f"echo {llm_output}")
+
+# SAFER: Escape and validate
+import shlex
+safe_output = shlex.quote(llm_output)
+os.system(f"echo {safe_output}")`}</code></pre>
+
+  <hr />
+
+  <h2>Limitations</h2>
+  <ul>
+    <li><strong>False positives</strong> — Overly aggressive filtering blocks legitimate content</li>
+    <li><strong>Encoding evasion</strong> — Base64, Unicode, and obfuscation can bypass pattern matching</li>
+    <li><strong>Semantic attacks</strong> — Paraphrased sensitive information may not match patterns</li>
+    <li><strong>Performance overhead</strong> — Multiple classification passes add latency</li>
+    <li><strong>Context blindness</strong> — Filters can't always distinguish legitimate from malicious context</li>
+  </ul>
+
+  <hr />
+
+  <h2>Best Practices</h2>
+  <ul>
+    <li><strong>Defense in depth</strong> — Output filtering complements, not replaces, input validation</li>
+    <li><strong>Log blocked content</strong> — Capture filtered outputs for security analysis</li>
+    <li><strong>Graceful degradation</strong> — Provide useful error messages when content is blocked</li>
+    <li><strong>Regular testing</strong> — Red team your filters with bypass attempts</li>
+    <li><strong>Tune thresholds</strong> — Balance security against usability based on risk profile</li>
+  </ul>
+
+  <hr />
+
+  <h2>Real-World Examples</h2>
+  <p><strong>Microsoft Presidio</strong> — Open-source PII detection and anonymization library widely used in AI applications.</p>
+  <p><strong>AWS Comprehend</strong> — Managed PII detection service that can filter AI outputs before storage or transmission.</p>
+  <p><strong>LlamaGuard</strong> — Meta's content safety classifier specifically designed for LLM output moderation.</p>
+
+  <hr />
+
+  <h2>References</h2>
+  <ul>
+    <li>OWASP (2023). "LLM02: Insecure Output Handling." OWASP Top 10 for LLM Applications.</li>
+    <li>Microsoft (2023). "Presidio: Data Protection and Anonymization SDK."</li>
+    <li>Meta AI (2023). "Llama Guard: LLM-based Input-Output Safeguard for Human-AI Conversations."</li>
+  </ul>
+</WikiEntryLayout>

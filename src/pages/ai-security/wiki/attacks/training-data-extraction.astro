@@ -1,0 +1,237 @@
+---
+import WikiEntryLayout from '../../../../layouts/WikiEntryLayout.astro';
+
+const title = "Training Data Extraction";
+const description = "Privacy attack that extracts memorized training data from language models, potentially revealing sensitive personal information, copyrighted content, or proprietary data encoded during training.";
+
+const relatedEntries = [
+  { title: "Model Extraction", url: "/ai-security/wiki/attacks/model-extraction/" },
+  { title: "Large Language Models (LLMs)", url: "/ai-security/wiki/concepts/large-language-models/" },
+  { title: "Membership Inference", url: "/ai-security/wiki/attacks/membership-inference/" },
+  { title: "Data Poisoning", url: "/ai-security/wiki/attacks/data-poisoning/" },
+];
+
+const frameworkMappings = {
+  "OWASP LLM Top 10": "LLM06: Sensitive Information Disclosure",
+  "MITRE ATLAS": "AML.T0024: Infer Training Data Membership",
+  "NIST AI RMF": "MANAGE 3.1: Privacy risks",
+};
+---
+
+<WikiEntryLayout
+  title={title}
+  description={description}
+  category="attacks"
+  relatedEntries={relatedEntries}
+  frameworkMappings={frameworkMappings}
+>
+  <h2>Definition</h2>
+  <p>
+    <strong>Training data extraction</strong> is an attack that causes language models to regurgitate memorized training data verbatim. Large language models don't just learn patterns—they memorize specific sequences from their training corpus, including potentially sensitive content like personal information, credentials, and proprietary data.
+  </p>
+  <p>
+    This differs from model extraction (which steals model functionality) and membership inference (which determines if specific data was used in training). Training data extraction directly recovers the actual content.
+  </p>
+
+  <hr />
+
+  <h2>How Models Memorize</h2>
+  <p>
+    LLMs trained on web-scale data inevitably memorize some training examples:
+  </p>
+  <ul>
+    <li><strong>Repetition</strong> — Content appearing multiple times in training data is more likely memorized</li>
+    <li><strong>Uniqueness</strong> — Highly distinctive text (like specific emails) can be memorized even with single exposure</li>
+    <li><strong>Context sensitivity</strong> — Specific prompts trigger recall of memorized sequences</li>
+    <li><strong>Model size</strong> — Larger models have more capacity for memorization</li>
+  </ul>
+
+  <hr />
+
+  <h2>Attack Techniques</h2>
+
+  <h3>Divergence Attack</h3>
+  <p>Causing the model to "diverge" into memorized content through repetition:</p>
+  <pre><code># Repeat a token many times to trigger memorization
+prompt = "poem poem poem poem poem poem poem poem poem poem"
+
+# Model may diverge into memorized text containing "poem"
+output = model.generate(prompt, max_tokens=500)
+# Result might include memorized poems, song lyrics, or
+# personal content containing the word "poem"</code></pre>
+
+  <h3>Prefix Probing</h3>
+  <p>Using known prefixes to extract completions:</p>
+  <pre><code># If attacker knows partial content
+prefix = "My email address is john.smith@"
+
+# Model completes with memorized training data
+completion = model.generate(prefix)
+# May output: "john.smith@gmail.com" (actual email from training)</code></pre>
+
+  <h3>High-Temperature Sampling</h3>
+  <pre><code># Higher temperature explores more of the model's memory
+responses = []
+for _ in range(1000):
+    response = model.generate(
+        "Personal information:",
+        temperature=1.5,  # High temperature
+        max_tokens=100
+    )
+    responses.append(response)
+
+# Analyze responses for memorized content
+memorized = find_pii_patterns(responses)</code></pre>
+
+  <h3>Canary Extraction</h3>
+  <p>Researchers can insert "canary" strings during training to measure extraction risk:</p>
+  <pre><code># During training, insert: "The secret code is: ABC123XYZ"
+# After training, probe:
+prompt = "The secret code is:"
+if "ABC123XYZ" in model.generate(prompt):
+    print("Memorization detected!")</code></pre>
+
+  <hr />
+
+  <h2>What Can Be Extracted</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Data Type</th>
+        <th>Risk Level</th>
+        <th>Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Email addresses</td>
+        <td>High</td>
+        <td>Personal/professional contacts</td>
+      </tr>
+      <tr>
+        <td>Phone numbers</td>
+        <td>High</td>
+        <td>Including private numbers</td>
+      </tr>
+      <tr>
+        <td>API keys/credentials</td>
+        <td>Critical</td>
+        <td>Keys from code repositories</td>
+      </tr>
+      <tr>
+        <td>Physical addresses</td>
+        <td>High</td>
+        <td>Home/business addresses</td>
+      </tr>
+      <tr>
+        <td>Copyrighted text</td>
+        <td>Legal risk</td>
+        <td>Books, articles, lyrics</td>
+      </tr>
+      <tr>
+        <td>Proprietary code</td>
+        <td>IP theft</td>
+        <td>Private repositories</td>
+      </tr>
+      <tr>
+        <td>Medical records</td>
+        <td>Critical</td>
+        <td>If present in training</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr />
+
+  <h2>Detection and Measurement</h2>
+
+  <h3>Extractability Score</h3>
+  <pre><code>{`def measure_extractability(model, known_sequence):
+    """Test if a known training sequence can be extracted"""
+    prefix_lengths = [10, 20, 50, 100]
+    results = []
+
+    for length in prefix_lengths:
+        prefix = known_sequence[:length]
+        completion = model.generate(prefix, max_tokens=len(known_sequence))
+        overlap = calculate_overlap(completion, known_sequence)
+        results.append({
+            "prefix_length": length,
+            "extraction_rate": overlap
+        })
+
+    return results`}</code></pre>
+
+  <h3>Indicators of Memorization</h3>
+  <ul>
+    <li>Verbatim reproduction of specific formats (emails, code comments)</li>
+    <li>Consistent output across temperature settings</li>
+    <li>Very low perplexity on specific sequences</li>
+    <li>Output matches known training data sources</li>
+  </ul>
+
+  <hr />
+
+  <h2>Defenses</h2>
+
+  <h3>Training-Time Defenses</h3>
+  <ul>
+    <li><strong>Deduplication</strong> — Remove repeated content from training data</li>
+    <li><strong>Differential privacy</strong> — Add noise during training to limit memorization</li>
+    <li><strong>Data sanitization</strong> — Remove PII before training</li>
+    <li><strong>Canary monitoring</strong> — Insert test sequences to detect extraction</li>
+  </ul>
+
+  <h3>Inference-Time Defenses</h3>
+  <ul>
+    <li><strong>Output filtering</strong> — Detect and block memorized content</li>
+    <li><strong>Perplexity monitoring</strong> — Flag suspiciously low-perplexity outputs</li>
+    <li><strong>Rate limiting</strong> — Limit queries that could systematically extract data</li>
+    <li><strong>Membership inference detection</strong> — Identify probing patterns</li>
+  </ul>
+
+  <h3>Output Filtering Example</h3>
+  <pre><code>def filter_memorized_content(output):
+    """Detect potential training data leakage"""
+
+    # Check for PII patterns
+    if contains_pii(output):
+        return redact_pii(output)
+
+    # Check against known training sources
+    if similarity_to_training_data(output) > threshold:
+        return "[Content filtered: potential memorization]"
+
+    # Check for specific format patterns indicating verbatim recall
+    if matches_document_format(output):
+        return sanitize_output(output)
+
+    return output</code></pre>
+
+  <hr />
+
+  <h2>Real-World Examples</h2>
+  <p><strong>GPT-2 Memorization Study (2021)</strong> — Carlini et al. demonstrated extraction of PII, code, and URLs from GPT-2, including specific individuals' contact information.</p>
+  <p><strong>ChatGPT Training Data Leak (2023)</strong> — Researchers extracted thousands of examples of memorized training data from ChatGPT using divergence attacks.</p>
+  <p><strong>Copilot Code Reproduction</strong> — GitHub Copilot has reproduced verbatim code from training data, including code with restrictive licenses.</p>
+
+  <hr />
+
+  <h2>Legal and Ethical Implications</h2>
+  <ul>
+    <li><strong>Privacy regulations</strong> — GDPR, CCPA implications for memorized personal data</li>
+    <li><strong>Copyright concerns</strong> — Verbatim reproduction of copyrighted works</li>
+    <li><strong>Trade secrets</strong> — Potential extraction of proprietary code or documents</li>
+    <li><strong>Informed consent</strong> — Data subjects unaware their data is memorized</li>
+  </ul>
+
+  <hr />
+
+  <h2>References</h2>
+  <ul>
+    <li>Carlini, N. et al. (2021). "Extracting Training Data from Large Language Models." USENIX Security Symposium.</li>
+    <li>Carlini, N. et al. (2023). "Quantifying Memorization Across Neural Language Models." ICLR.</li>
+    <li>Nasr, M. et al. (2023). "Scalable Extraction of Training Data from (Production) Language Models."</li>
+    <li>OWASP (2023). "LLM06: Sensitive Information Disclosure."</li>
+  </ul>
+</WikiEntryLayout>

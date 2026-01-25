@@ -1,0 +1,291 @@
+---
+import WikiEntryLayout from '../../../../layouts/WikiEntryLayout.astro';
+
+const title = "Rate Limiting";
+const description = "Perimeter defense that controls the frequency of requests to AI systems, protecting against model extraction, denial of service, credential stuffing, and systematic exploitation attempts.";
+
+const relatedEntries = [
+  { title: "Model Extraction", url: "/ai-security/wiki/attacks/model-extraction/" },
+  { title: "Input Validation", url: "/ai-security/wiki/defenses/input-validation/" },
+  { title: "Training Data Extraction", url: "/ai-security/wiki/attacks/training-data-extraction/" },
+  { title: "Guardrails", url: "/ai-security/wiki/defenses/guardrails/" },
+];
+
+const frameworkMappings = {
+  "MITRE ATLAS": "AML.M0004: Restrict Number of ML Model Queries",
+  "OWASP LLM Top 10": "LLM04: Model Denial of Service (Mitigation)",
+  "NIST CSF": "PR.PT-4: Communications protection",
+};
+---
+
+<WikiEntryLayout
+  title={title}
+  description={description}
+  category="defenses"
+  relatedEntries={relatedEntries}
+  frameworkMappings={frameworkMappings}
+>
+  <h2>Definition</h2>
+  <p>
+    <strong>Rate limiting</strong> for AI systems controls how frequently users or applications can query the model, preventing abuse through excessive requests. While conceptually similar to traditional API rate limiting, AI-specific rate limiting must account for the unique threats against ML systems, including extraction attacks that require many queries to succeed.
+  </p>
+  <p>
+    Effective rate limiting doesn't just prevent denial of service—it raises the economic cost of attacks that rely on systematic querying, making model extraction and training data extraction significantly harder.
+  </p>
+
+  <hr />
+
+  <h2>AI-Specific Threats Addressed</h2>
+
+  <h3>Model Extraction</h3>
+  <p>
+    Stealing model functionality requires thousands to millions of queries to build a surrogate model. Rate limiting makes this:
+  </p>
+  <ul>
+    <li>Time-consuming (weeks/months instead of hours)</li>
+    <li>Expensive (API costs for distributed attacks)</li>
+    <li>Detectable (sustained high-volume patterns)</li>
+  </ul>
+
+  <h3>Training Data Extraction</h3>
+  <p>
+    Extracting memorized training data requires diverse prompts and sampling. Limits on:
+  </p>
+  <ul>
+    <li>Requests per time window</li>
+    <li>High-temperature generations</li>
+    <li>Completion length</li>
+  </ul>
+
+  <h3>Systematic Jailbreak Attempts</h3>
+  <p>
+    Automated jailbreak discovery requires testing many prompt variations. Rate limiting slows adversarial prompt search.
+  </p>
+
+  <h3>Cost Amplification (DoS)</h3>
+  <p>
+    AI inference is computationally expensive. Attackers can cause financial damage through:
+  </p>
+  <ul>
+    <li>Long input/output sequences consuming GPU time</li>
+    <li>Complex reasoning tasks requiring multiple inference passes</li>
+    <li>Batch requests overwhelming infrastructure</li>
+  </ul>
+
+  <hr />
+
+  <h2>Rate Limiting Strategies</h2>
+
+  <h3>Request-Based Limits</h3>
+  <pre><code># Simple request counting
+class RequestRateLimiter:
+    def __init__(self, max_requests: int, window_seconds: int):
+        self.max_requests = max_requests
+        self.window_seconds = window_seconds
+        self.requests = defaultdict(list)
+
+    def allow_request(self, user_id: str) -> bool:
+        now = time.time()
+        window_start = now - self.window_seconds
+
+        # Clean old requests
+        self.requests[user_id] = [
+            t for t in self.requests[user_id]
+            if t > window_start
+        ]
+
+        if len(self.requests[user_id]) >= self.max_requests:
+            return False
+
+        self.requests[user_id].append(now)
+        return True
+
+# Example: 100 requests per minute
+limiter = RequestRateLimiter(max_requests=100, window_seconds=60)</code></pre>
+
+  <h3>Token-Based Limits</h3>
+  <p>More granular control accounting for request complexity:</p>
+  <pre><code>class TokenRateLimiter:
+    def __init__(self, max_tokens: int, window_seconds: int):
+        self.max_tokens = max_tokens
+        self.window_seconds = window_seconds
+        self.usage = defaultdict(list)
+
+    def allow_request(self, user_id: str, estimated_tokens: int) -> bool:
+        now = time.time()
+        window_start = now - self.window_seconds
+
+        # Calculate tokens used in window
+        recent_usage = [
+            (t, tokens) for t, tokens in self.usage[user_id]
+            if t > window_start
+        ]
+        total_tokens = sum(tokens for _, tokens in recent_usage)
+
+        if total_tokens + estimated_tokens > self.max_tokens:
+            return False
+
+        self.usage[user_id].append((now, estimated_tokens))
+        return True
+
+# Example: 100K tokens per hour
+token_limiter = TokenRateLimiter(max_tokens=100000, window_seconds=3600)</code></pre>
+
+  <h3>Cost-Based Limits</h3>
+  <pre><code>class CostBasedLimiter:
+    """Limit based on actual compute cost"""
+
+    def __init__(self, max_cost_per_day: float):
+        self.max_cost = max_cost_per_day
+        self.daily_costs = defaultdict(float)
+
+    def track_cost(self, user_id: str, input_tokens: int, output_tokens: int):
+        # Example pricing (adjust to actual costs)
+        cost = (input_tokens * 0.00001) + (output_tokens * 0.00003)
+        self.daily_costs[user_id] += cost
+
+    def allow_request(self, user_id: str) -> bool:
+        return self.daily_costs[user_id] < self.max_cost</code></pre>
+
+  <h3>Behavioral Limits</h3>
+  <p>Limits based on usage patterns rather than raw counts:</p>
+  <ul>
+    <li><strong>Burst detection</strong> — Flag sudden increases in request rate</li>
+    <li><strong>Diversity scoring</strong> — Limit users making highly similar requests</li>
+    <li><strong>Session limits</strong> — Cap total queries per conversation/session</li>
+    <li><strong>Entropy monitoring</strong> — Flag suspiciously systematic query patterns</li>
+  </ul>
+
+  <hr />
+
+  <h2>Implementation Architecture</h2>
+
+  <h3>Layered Rate Limiting</h3>
+  <pre><code>┌─────────────────────────────────────────────────────────┐
+│                    CDN/Edge Layer                        │
+│              Global rate limits, DDoS protection         │
+└────────────────────────┬────────────────────────────────┘
+                         ▼
+┌─────────────────────────────────────────────────────────┐
+│                  API Gateway Layer                       │
+│         Per-user/API-key rate limits                     │
+│         Authentication, request validation               │
+└────────────────────────┬────────────────────────────────┘
+                         ▼
+┌─────────────────────────────────────────────────────────┐
+│                Application Layer                         │
+│         Token/cost-based limits                          │
+│         Behavioral analysis                              │
+│         Model-specific limits                            │
+└────────────────────────┬────────────────────────────────┘
+                         ▼
+┌─────────────────────────────────────────────────────────┐
+│                   Model Layer                            │
+│         Queue management                                 │
+│         Priority scheduling                              │
+└─────────────────────────────────────────────────────────┘</code></pre>
+
+  <h3>Distributed Rate Limiting</h3>
+  <pre><code>{`# Redis-based distributed rate limiter
+import redis
+
+class DistributedRateLimiter:
+    def __init__(self, redis_client: redis.Redis):
+        self.redis = redis_client
+
+    def allow_request(self, user_id: str, limit: int, window: int) -> bool:
+        key = f"ratelimit:{user_id}"
+        pipe = self.redis.pipeline()
+
+        now = time.time()
+        window_start = now - window
+
+        # Remove old entries
+        pipe.zremrangebyscore(key, 0, window_start)
+        # Count current entries
+        pipe.zcard(key)
+        # Add new entry
+        pipe.zadd(key, {str(now): now})
+        # Set expiry
+        pipe.expire(key, window)
+
+        _, count, _, _ = pipe.execute()
+
+        return count < limit`}</code></pre>
+
+  <hr />
+
+  <h2>Evasion and Countermeasures</h2>
+
+  <h3>Common Evasion Techniques</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Technique</th>
+        <th>Method</th>
+        <th>Countermeasure</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Account rotation</td>
+        <td>Multiple accounts</td>
+        <td>Device fingerprinting, payment verification</td>
+      </tr>
+      <tr>
+        <td>IP rotation</td>
+        <td>Proxies, VPNs</td>
+        <td>Account-based limits, behavior analysis</td>
+      </tr>
+      <tr>
+        <td>Slow and low</td>
+        <td>Stay under thresholds</td>
+        <td>Aggregate limits, anomaly detection</td>
+      </tr>
+      <tr>
+        <td>Distributed attacks</td>
+        <td>Botnet distribution</td>
+        <td>Global rate limits, ML detection</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Adaptive Rate Limiting</h3>
+  <pre><code>{`class AdaptiveRateLimiter:
+    def __init__(self):
+        self.base_limits = {"requests_per_min": 60}
+        self.user_scores = defaultdict(lambda: 1.0)
+
+    def get_limit(self, user_id: str) -> int:
+        """Adjust limits based on trust score"""
+        score = self.user_scores[user_id]
+        return int(self.base_limits["requests_per_min"] * score)
+
+    def update_score(self, user_id: str, behavior: dict):
+        """Adjust trust based on behavior"""
+        if behavior.get("suspicious_patterns"):
+            self.user_scores[user_id] *= 0.5  # Reduce limit
+        elif behavior.get("good_standing"):
+            self.user_scores[user_id] = min(2.0, self.user_scores[user_id] * 1.1)`}</code></pre>
+
+  <hr />
+
+  <h2>Best Practices</h2>
+  <ul>
+    <li><strong>Multiple limit types</strong> — Combine requests, tokens, and cost limits</li>
+    <li><strong>Graceful degradation</strong> — Queue requests rather than hard reject where possible</li>
+    <li><strong>Clear communication</strong> — Return rate limit headers (X-RateLimit-*)</li>
+    <li><strong>Tier-based limits</strong> — Different limits for different user tiers</li>
+    <li><strong>Monitor and adjust</strong> — Track legitimate vs. abusive patterns</li>
+    <li><strong>Log everything</strong> — Enable forensic analysis of attacks</li>
+  </ul>
+
+  <hr />
+
+  <h2>References</h2>
+  <ul>
+    <li>MITRE (2023). "AML.M0004: Restrict Number of ML Model Queries." ATLAS Framework.</li>
+    <li>OWASP (2023). "Rate Limiting." API Security Top 10.</li>
+    <li>Tramèr, F. et al. (2016). "Stealing Machine Learning Models via Prediction APIs." USENIX Security.</li>
+  </ul>
+</WikiEntryLayout>

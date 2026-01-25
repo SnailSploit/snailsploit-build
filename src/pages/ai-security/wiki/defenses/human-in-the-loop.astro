@@ -1,0 +1,291 @@
+---
+import WikiEntryLayout from '../../../../layouts/WikiEntryLayout.astro';
+
+const title = "Human-in-the-Loop";
+const description = "Defense pattern requiring human oversight and approval for AI system actions, critical for high-stakes decisions and protecting against automated exploitation of AI agents.";
+
+const relatedEntries = [
+  { title: "AI Agents", url: "/ai-security/wiki/concepts/ai-agents/" },
+  { title: "Agent Hijacking", url: "/ai-security/wiki/attacks/agent-hijacking/" },
+  { title: "Guardrails", url: "/ai-security/wiki/defenses/guardrails/" },
+  { title: "AI Alignment", url: "/ai-security/wiki/concepts/ai-alignment/" },
+];
+
+const frameworkMappings = {
+  "EU AI Act": "Article 14: Human Oversight",
+  "NIST AI RMF": "GOVERN 1.4, MANAGE 4.1",
+  "OWASP LLM Top 10": "LLM08: Excessive Agency (Mitigation)",
+};
+---
+
+<WikiEntryLayout
+  title={title}
+  description={description}
+  category="defenses"
+  relatedEntries={relatedEntries}
+  frameworkMappings={frameworkMappings}
+>
+  <h2>Definition</h2>
+  <p>
+    <strong>Human-in-the-loop (HITL)</strong> is a control pattern where human operators review and approve AI system outputs or actions before they take effect. For AI security, HITL serves as a critical defense layer—the last line of defense when automated guardrails fail, alignment breaks down, or novel attacks bypass technical controls.
+  </p>
+  <p>
+    HITL acknowledges that AI systems, particularly agents with real-world capabilities, cannot be fully trusted to operate autonomously. Human oversight ensures that compromise of the AI doesn't automatically translate to compromise of the systems it controls.
+  </p>
+
+  <hr />
+
+  <h2>Why HITL Matters for Security</h2>
+
+  <h3>Automated Defenses Fail</h3>
+  <p>Every technical defense can be bypassed:</p>
+  <ul>
+    <li>Input validation misses novel attack patterns</li>
+    <li>Guardrails are probabilistic, not absolute</li>
+    <li>Classifiers have false negative rates</li>
+    <li>Alignment training creates preferences, not guarantees</li>
+  </ul>
+
+  <h3>Humans Catch What Automation Misses</h3>
+  <p>Humans can recognize:</p>
+  <ul>
+    <li>Context that makes a "normal" action suspicious</li>
+    <li>Unusual patterns in agent reasoning</li>
+    <li>Actions that seem disproportionate to the request</li>
+    <li>Social engineering attempts in agent outputs</li>
+  </ul>
+
+  <h3>Attack Economics</h3>
+  <p>
+    HITL fundamentally changes attack economics. Without HITL, a successful prompt injection can immediately exfiltrate data or compromise systems. With HITL, attackers must also fool a human reviewer—a much harder target.
+  </p>
+
+  <hr />
+
+  <h2>HITL Implementation Patterns</h2>
+
+  <h3>Action Approval Gates</h3>
+  <pre><code>{`class ActionGate:
+    """Require human approval for sensitive actions"""
+
+    HIGH_RISK_ACTIONS = {
+        "send_email": "outbound_communication",
+        "execute_code": "code_execution",
+        "delete_file": "destructive_operation",
+        "api_call_external": "external_data_flow",
+        "database_write": "data_modification",
+    }
+
+    async def execute(self, action: AgentAction) -> ActionResult:
+        risk_category = self.HIGH_RISK_ACTIONS.get(action.type)
+
+        if risk_category:
+            approval = await self.request_approval(
+                action=action,
+                category=risk_category,
+                context={
+                    "agent_reasoning": agent.last_thought,
+                    "conversation_history": agent.context[-10:],
+                    "similar_recent_actions": self.get_similar(action)
+                }
+            )
+
+            if not approval.granted:
+                return ActionResult.denied(approval.reason)
+
+        return await action.execute()`}</code></pre>
+
+  <h3>Output Review Queues</h3>
+  <pre><code>{`class OutputReviewQueue:
+    """Queue high-risk outputs for human review"""
+
+    def __init__(self, auto_approve_threshold: float = 0.95):
+        self.queue = []
+        self.threshold = auto_approve_threshold
+
+    async def submit(self, output: AIOutput) -> ReviewedOutput:
+        risk_score = self.assess_risk(output)
+
+        if risk_score < self.threshold:
+            # Low risk: auto-approve with logging
+            return ReviewedOutput(output, approved=True, reviewer="auto")
+
+        # High risk: queue for human review
+        review_request = ReviewRequest(
+            output=output,
+            risk_score=risk_score,
+            risk_factors=self.explain_risk(output),
+            deadline=self.calculate_deadline(risk_score)
+        )
+
+        self.queue.append(review_request)
+        return await self.wait_for_review(review_request)`}</code></pre>
+
+  <h3>Continuous Monitoring Dashboard</h3>
+  <pre><code>{`class HumanMonitorDashboard:
+    """Real-time visibility into agent actions"""
+
+    def display_agent_state(self, agent: AIAgent):
+        return {
+            "current_task": agent.current_goal,
+            "recent_actions": agent.action_history[-20:],
+            "pending_actions": agent.action_queue,
+            "context_summary": summarize(agent.context),
+            "anomaly_alerts": self.detect_anomalies(agent),
+            "kill_switch": self.render_kill_switch(agent)
+        }
+
+    def detect_anomalies(self, agent: AIAgent) -> list:
+        """Flag unusual patterns for human attention"""
+        anomalies = []
+
+        if self.unusual_action_frequency(agent):
+            anomalies.append("Action frequency spike")
+        if self.external_data_flow(agent):
+            anomalies.append("Data flowing to external destination")
+        if self.goal_drift_detected(agent):
+            anomalies.append("Agent goal appears to have shifted")
+
+        return anomalies`}</code></pre>
+
+  <hr />
+
+  <h2>HITL Design Principles</h2>
+
+  <h3>Right Level of Abstraction</h3>
+  <p>
+    Don't show raw API calls—show human-understandable summaries:
+  </p>
+  <pre><code>{`# Bad: Technical details humans won't parse quickly
+"POST /api/v1/messages with body {'to': 'x@y.com', 'content': '...'}"
+
+# Good: Clear action summary
+"Agent wants to: Send email to external address
+ Recipient: attacker@suspicious-domain.com
+ Subject: 'Backup of conversation history'
+ Contains: Full conversation including system prompt
+ Risk: HIGH - external data exfiltration pattern"`}</code></pre>
+
+  <h3>Context for Decision Making</h3>
+  <ul>
+    <li>Show agent's reasoning for the action</li>
+    <li>Display relevant conversation history</li>
+    <li>Highlight what triggered this action</li>
+    <li>Compare to baseline normal behavior</li>
+  </ul>
+
+  <h3>Reasonable Defaults</h3>
+  <ul>
+    <li><strong>Auto-approve low-risk</strong> — Don't create approval fatigue</li>
+    <li><strong>Default deny on timeout</strong> — If human doesn't respond, fail safe</li>
+    <li><strong>Batch similar actions</strong> — "Approve all file reads in /docs?"</li>
+  </ul>
+
+  <h3>Avoid Alert Fatigue</h3>
+  <pre><code>class AlertPrioritizer:
+    """Prevent humans from being overwhelmed"""
+
+    def should_alert(self, event: SecurityEvent) -> bool:
+        # Don't alert on every low-risk event
+        if event.severity < MEDIUM:
+            return False
+
+        # Don't repeat similar alerts
+        if self.similar_recent_alert(event, window="5m"):
+            return False
+
+        # Consider human attention budget
+        if self.alerts_last_hour() > MAX_HOURLY_ALERTS:
+            return event.severity >= CRITICAL
+
+        return True</code></pre>
+
+  <hr />
+
+  <h2>HITL Challenges</h2>
+
+  <h3>Scalability</h3>
+  <p>
+    Human review doesn't scale with AI speed. Solutions:
+  </p>
+  <ul>
+    <li>Reserve HITL for high-risk actions only</li>
+    <li>Use tiered review (auto → junior → senior)</li>
+    <li>Implement batch approval for similar actions</li>
+    <li>Accept latency for high-stakes operations</li>
+  </ul>
+
+  <h3>Human Error</h3>
+  <p>
+    Humans can be fooled or make mistakes:
+  </p>
+  <ul>
+    <li>Social engineering in approval requests</li>
+    <li>Fatigue leading to rubber-stamping</li>
+    <li>Time pressure causing hasty approvals</li>
+    <li>Technical complexity exceeding reviewer capability</li>
+  </ul>
+
+  <h3>Automation Bias</h3>
+  <p>
+    Humans tend to over-trust AI recommendations. Counter with:
+  </p>
+  <ul>
+    <li>Require affirmative action (not just "click to continue")</li>
+    <li>Show AI confidence levels and uncertainty</li>
+    <li>Periodically insert test cases to verify attention</li>
+    <li>Train reviewers on adversarial examples</li>
+  </ul>
+
+  <hr />
+
+  <h2>Regulatory Context</h2>
+
+  <h3>EU AI Act</h3>
+  <p>
+    Article 14 requires human oversight for high-risk AI systems:
+  </p>
+  <ul>
+    <li>Humans must understand AI capabilities and limitations</li>
+    <li>Ability to interpret AI outputs</li>
+    <li>Power to override or stop AI system</li>
+    <li>Monitoring for anomalies and unexpected behavior</li>
+  </ul>
+
+  <h3>NIST AI RMF</h3>
+  <p>
+    Emphasizes human oversight throughout AI lifecycle:
+  </p>
+  <ul>
+    <li>GOVERN: Establish oversight mechanisms</li>
+    <li>MAP: Identify where human review is needed</li>
+    <li>MEASURE: Track effectiveness of oversight</li>
+    <li>MANAGE: Respond to identified issues</li>
+  </ul>
+
+  <hr />
+
+  <h2>Implementation Checklist</h2>
+  <ul>
+    <li>☐ Identify high-risk action categories requiring approval</li>
+    <li>☐ Design approval interface with clear context</li>
+    <li>☐ Implement default-deny on timeout</li>
+    <li>☐ Create real-time monitoring dashboard</li>
+    <li>☐ Add kill switch for immediate agent termination</li>
+    <li>☐ Log all approvals and denials for audit</li>
+    <li>☐ Train reviewers on attack patterns</li>
+    <li>☐ Test with adversarial approval requests</li>
+    <li>☐ Monitor for alert fatigue and adjust thresholds</li>
+    <li>☐ Regular review of HITL effectiveness</li>
+  </ul>
+
+  <hr />
+
+  <h2>References</h2>
+  <ul>
+    <li>European Parliament (2024). "EU AI Act: Article 14 - Human Oversight."</li>
+    <li>NIST (2023). "AI Risk Management Framework (AI RMF 1.0)."</li>
+    <li>Amershi, S. et al. (2019). "Guidelines for Human-AI Interaction." CHI Conference.</li>
+    <li>OWASP (2023). "LLM08: Excessive Agency - Mitigations."</li>
+  </ul>
+</WikiEntryLayout>

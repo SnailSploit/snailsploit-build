@@ -32,6 +32,11 @@ const allEntries = [
   { title: "Prompt Injection", description: "A vulnerability class where untrusted input causes LLMs to deviate from intended instructions.", url: "/ai-security/wiki/concepts/prompt-injection/", category: "concepts" },
   { title: "Adversarial AI", description: "The study and practice of manipulating AI systems through carefully crafted inputs.", url: "/ai-security/wiki/concepts/adversarial-ai/", category: "concepts" },
   { title: "AI Red Teaming", description: "Systematic adversarial testing of AI systems to identify vulnerabilities.", url: "/ai-security/wiki/concepts/ai-red-teaming/", category: "concepts" },
+  { title: "Large Language Models (LLMs)", description: "Foundation AI models that generate human-like text and power modern AI applications.", url: "/ai-security/wiki/concepts/large-language-models/", category: "concepts" },
+  { title: "AI Agents", description: "Autonomous AI systems that can plan, execute actions, and use tools to accomplish goals.", url: "/ai-security/wiki/concepts/ai-agents/", category: "concepts" },
+  { title: "RAG", description: "Retrieval-Augmented Generation architecture that enhances LLMs with external knowledge.", url: "/ai-security/wiki/concepts/rag/", category: "concepts" },
+  { title: "Hallucination", description: "AI failure mode where models generate false or fabricated information with confidence.", url: "/ai-security/wiki/concepts/hallucination/", category: "concepts" },
+  { title: "AI Alignment", description: "The challenge of ensuring AI systems reliably pursue intended goals and human values.", url: "/ai-security/wiki/concepts/ai-alignment/", category: "concepts" },
   // Attacks
   { title: "Jailbreaking", description: "Techniques to bypass safety training and guardrails in language models.", url: "/ai-security/wiki/attacks/jailbreaking/", category: "attacks" },
   { title: "Indirect Prompt Injection", description: "Embedding malicious instructions in content processed by LLM applications.", url: "/ai-security/wiki/attacks/indirect-prompt-injection/", category: "attacks" },
@@ -40,6 +45,17 @@ const allEntries = [
   { title: "System Prompt Extraction", description: "Techniques to extract confidential system prompts from LLM applications.", url: "/ai-security/wiki/attacks/system-prompt-extraction/", category: "attacks" },
   { title: "Guardrail Bypass", description: "Methods to circumvent safety mechanisms in AI systems.", url: "/ai-security/wiki/attacks/guardrail-bypass/", category: "attacks" },
   { title: "Supply Chain Attacks", description: "Compromising AI systems through dependencies, datasets, or third-party components.", url: "/ai-security/wiki/attacks/supply-chain-attacks/", category: "attacks" },
+  { title: "Training Data Extraction", description: "Privacy attack that extracts memorized data from language models.", url: "/ai-security/wiki/attacks/training-data-extraction/", category: "attacks" },
+  { title: "Adversarial Examples", description: "Inputs with subtle perturbations that cause ML models to produce incorrect outputs.", url: "/ai-security/wiki/attacks/adversarial-examples/", category: "attacks" },
+  { title: "Backdoor Attacks", description: "Embedding hidden malicious behaviors that activate with specific triggers.", url: "/ai-security/wiki/attacks/backdoor-attacks/", category: "attacks" },
+  { title: "Agent Hijacking", description: "Attacks that compromise AI agents with tool-use capabilities.", url: "/ai-security/wiki/attacks/agent-hijacking/", category: "attacks" },
+  { title: "Membership Inference", description: "Determining whether specific data was used to train a model.", url: "/ai-security/wiki/attacks/membership-inference/", category: "attacks" },
+  // Defenses
+  { title: "Input Validation", description: "First line of defense against prompt injection using filtering and classification.", url: "/ai-security/wiki/defenses/input-validation/", category: "defenses" },
+  { title: "Output Filtering", description: "Inspecting and sanitizing AI outputs to prevent data leakage and harmful content.", url: "/ai-security/wiki/defenses/output-filtering/", category: "defenses" },
+  { title: "Guardrails", description: "Architectural safety mechanisms that constrain AI model behavior.", url: "/ai-security/wiki/defenses/guardrails/", category: "defenses" },
+  { title: "Rate Limiting", description: "Controlling request frequency to protect against extraction and DoS attacks.", url: "/ai-security/wiki/defenses/rate-limiting/", category: "defenses" },
+  { title: "Human-in-the-Loop", description: "Requiring human oversight and approval for AI system actions.", url: "/ai-security/wiki/defenses/human-in-the-loop/", category: "defenses" },
 ];
 
 const categories = [
@@ -50,7 +66,7 @@ const categories = [
     color: '#3b82f6',
     description: 'Foundational definitions and theoretical frameworks. Start here if you\'re new to AI security.',
     url: '/ai-security/wiki/concepts/',
-    keyEntries: ['Prompt Injection', 'Adversarial AI', 'AI Red Teaming']
+    keyEntries: ['Large Language Models', 'Prompt Injection', 'AI Agents', 'AI Alignment']
   },
   {
     id: 'attacks',
@@ -59,7 +75,7 @@ const categories = [
     color: '#ef4444',
     description: 'Tactical techniques used to compromise AI systems. Each entry covers mechanism, detection, and examples.',
     url: '/ai-security/wiki/attacks/',
-    keyEntries: ['Indirect Prompt Injection', 'Jailbreaking', 'Model Extraction', 'Data Poisoning']
+    keyEntries: ['Indirect Prompt Injection', 'Agent Hijacking', 'Jailbreaking', 'Backdoor Attacks']
   },
   {
     id: 'defenses',
@@ -68,7 +84,7 @@ const categories = [
     color: '#22c55e',
     description: 'Countermeasures, controls, and architectural patterns for securing AI systems.',
     url: '/ai-security/wiki/defenses/',
-    keyEntries: ['Input Validation', 'Output Filtering', 'Guardrails', 'Red Team Testing']
+    keyEntries: ['Input Validation', 'Output Filtering', 'Guardrails', 'Human-in-the-Loop']
   },
 ];
 ---

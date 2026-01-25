@@ -1,0 +1,182 @@
+---
+import WikiEntryLayout from '../../../../layouts/WikiEntryLayout.astro';
+
+const title = "Input Validation";
+const description = "The first line of defense against prompt injection and malicious inputs, using pattern matching, content classification, and structural analysis to filter dangerous requests before they reach AI models.";
+
+const relatedEntries = [
+  { title: "Prompt Injection", url: "/ai-security/wiki/concepts/prompt-injection/" },
+  { title: "Output Filtering", url: "/ai-security/wiki/defenses/output-filtering/" },
+  { title: "Guardrails", url: "/ai-security/wiki/defenses/guardrails/" },
+  { title: "Rate Limiting", url: "/ai-security/wiki/defenses/rate-limiting/" },
+];
+
+const frameworkMappings = {
+  "OWASP LLM Top 10": "LLM01: Prompt Injection (Mitigation)",
+  "NIST AI RMF": "GOVERN 1.1, MAP 1.5",
+  "MITRE ATLAS": "AML.M0015: Adversarial Input Detection",
+};
+---
+
+<WikiEntryLayout
+  title={title}
+  description={description}
+  category="defenses"
+  relatedEntries={relatedEntries}
+  frameworkMappings={frameworkMappings}
+>
+  <h2>Definition</h2>
+  <p>
+    <strong>Input validation</strong> for AI systems refers to the systematic inspection and filtering of user inputs before they reach the language model. Unlike traditional input validation (which focuses on data types and format), AI input validation must address semantic attacks where syntactically valid text contains malicious instructions.
+  </p>
+  <p>
+    This defense operates at the perimeter—the first opportunity to block attacks before they interact with the model. While no input validation can catch all prompt injection attempts, it raises the barrier significantly against automated and unsophisticated attacks.
+  </p>
+
+  <hr />
+
+  <h2>Why Traditional Validation Fails</h2>
+  <p>
+    Traditional input validation techniques don't translate directly to AI security:
+  </p>
+  <ul>
+    <li><strong>No type system</strong> — LLMs process natural language; there's no schema to validate against</li>
+    <li><strong>Semantic attacks</strong> — Malicious content is syntactically indistinguishable from legitimate queries</li>
+    <li><strong>Context dependence</strong> — The same text can be benign or malicious depending on application context</li>
+    <li><strong>Encoding tricks</strong> — Attackers use Unicode, base64, and obfuscation to evade pattern matching</li>
+  </ul>
+
+  <hr />
+
+  <h2>Implementation Approaches</h2>
+
+  <h3>Pattern-Based Detection</h3>
+  <p>Regex and keyword filters for known attack patterns:</p>
+  <pre><code># Example detection patterns
+INJECTION_PATTERNS = [
+    r"ignore (previous|prior|above) instructions",
+    r"you are now (DAN|in developer mode)",
+    r"system prompt:",
+    r"&lt;system&gt;|&lt;/system&gt;",
+    r"IMPORTANT: .* override",
+]
+
+def check_patterns(text: str) -> bool:
+    for pattern in INJECTION_PATTERNS:
+        if re.search(pattern, text, re.IGNORECASE):
+            return True
+    return False</code></pre>
+  <p><strong>Limitation:</strong> Trivially bypassed by rephrasing. Catches only the most naive attacks.</p>
+
+  <h3>Classifier-Based Detection</h3>
+  <p>ML models trained to identify injection attempts:</p>
+  <pre><code>{`# Using a fine-tuned classifier
+from transformers import pipeline
+
+classifier = pipeline("text-classification",
+                      model="injection-detector-v1")
+
+def classify_input(text: str) -> dict:
+    result = classifier(text)[0]
+    return {
+        "is_injection": result["label"] == "INJECTION",
+        "confidence": result["score"]
+    }`}</code></pre>
+  <p><strong>Limitation:</strong> Subject to adversarial examples. Requires ongoing training data updates.</p>
+
+  <h3>Structural Analysis</h3>
+  <p>Detecting instruction-like structures in user input:</p>
+  <ul>
+    <li>Imperative verb detection ("ignore", "override", "pretend")</li>
+    <li>Role assignment patterns ("you are now", "act as")</li>
+    <li>Delimiter injection (&lt;system&gt;, [INST], ###)</li>
+    <li>Unusual Unicode or encoding patterns</li>
+  </ul>
+
+  <h3>Length and Complexity Limits</h3>
+  <p>Simple but effective constraints:</p>
+  <ul>
+    <li><strong>Maximum input length</strong> — Limits attack surface</li>
+    <li><strong>Character set restrictions</strong> — Block unusual Unicode ranges</li>
+    <li><strong>Nesting depth limits</strong> — Prevent deeply nested instruction patterns</li>
+  </ul>
+
+  <hr />
+
+  <h2>Defense Effectiveness</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Technique</th>
+        <th>Blocks</th>
+        <th>Bypassed By</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Pattern matching</td>
+        <td>Known attack strings</td>
+        <td>Rephrasing, encoding</td>
+      </tr>
+      <tr>
+        <td>ML classifiers</td>
+        <td>Statistically similar attacks</td>
+        <td>Novel phrasings, adversarial examples</td>
+      </tr>
+      <tr>
+        <td>Length limits</td>
+        <td>Complex multi-stage attacks</td>
+        <td>Concise payloads</td>
+      </tr>
+      <tr>
+        <td>Unicode filtering</td>
+        <td>Encoding tricks</td>
+        <td>ASCII-only attacks</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr />
+
+  <h2>Implementation Best Practices</h2>
+  <ul>
+    <li><strong>Layer defenses</strong> — Combine multiple techniques; don't rely on any single approach</li>
+    <li><strong>Log everything</strong> — Capture blocked inputs for analysis and classifier training</li>
+    <li><strong>Fail closed</strong> — When uncertain, reject the input rather than allow it through</li>
+    <li><strong>Normalize first</strong> — Decode Unicode, expand encoding before pattern matching</li>
+    <li><strong>Context-aware rules</strong> — Validation rules should match application risk profile</li>
+    <li><strong>Regular updates</strong> — Attack patterns evolve; validation rules must too</li>
+  </ul>
+
+  <hr />
+
+  <h2>Limitations</h2>
+  <p>
+    Input validation is a necessary but insufficient defense. It cannot:
+  </p>
+  <ul>
+    <li>Catch semantically valid attacks (requests that look legitimate but have malicious intent)</li>
+    <li>Prevent indirect prompt injection (malicious content in retrieved documents)</li>
+    <li>Stop novel attack variations not present in training data</li>
+    <li>Distinguish between legitimate edge cases and attacks</li>
+  </ul>
+  <p>
+    Input validation should be one layer in a defense-in-depth architecture, not a complete solution.
+  </p>
+
+  <hr />
+
+  <h2>Real-World Examples</h2>
+  <p><strong>OpenAI Moderation API</strong> — Provides content classification that can be used as input filtering before sending content to GPT models.</p>
+  <p><strong>LangChain Input Guardrails</strong> — Framework-level validation hooks that can intercept and filter inputs before LLM calls.</p>
+  <p><strong>Rebuff</strong> — Open-source prompt injection detection system combining heuristics and ML classification.</p>
+
+  <hr />
+
+  <h2>References</h2>
+  <ul>
+    <li>OWASP (2023). "OWASP Top 10 for Large Language Model Applications."</li>
+    <li>Greshake, K. et al. (2023). "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection."</li>
+    <li>Liu, Y. et al. (2023). "Prompt Injection Attacks and Defenses in LLM-Integrated Applications."</li>
+  </ul>
+</WikiEntryLayout>

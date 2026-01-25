@@ -1,0 +1,341 @@
+---
+import WikiEntryLayout from '../../../../layouts/WikiEntryLayout.astro';
+
+const title = "Membership Inference";
+const description = "Privacy attack that determines whether specific data records were used to train a machine learning model, potentially revealing sensitive information about individuals in training datasets.";
+
+const relatedEntries = [
+  { title: "Training Data Extraction", url: "/ai-security/wiki/attacks/training-data-extraction/" },
+  { title: "Model Extraction", url: "/ai-security/wiki/attacks/model-extraction/" },
+  { title: "Large Language Models (LLMs)", url: "/ai-security/wiki/concepts/large-language-models/" },
+  { title: "Data Poisoning", url: "/ai-security/wiki/attacks/data-poisoning/" },
+];
+
+const frameworkMappings = {
+  "MITRE ATLAS": "AML.T0024: Infer Training Data Membership",
+  "OWASP LLM Top 10": "LLM06: Sensitive Information Disclosure",
+  "NIST AI RMF": "MANAGE 3.1: Privacy risks",
+};
+---
+
+<WikiEntryLayout
+  title={title}
+  description={description}
+  category="attacks"
+  relatedEntries={relatedEntries}
+  frameworkMappings={frameworkMappings}
+>
+  <h2>Definition</h2>
+  <p>
+    <strong>Membership inference</strong> is a privacy attack that determines whether a specific data record was included in a machine learning model's training dataset. The attack exploits differences in how models behave on data they were trained on versus data they haven't seen.
+  </p>
+  <p>
+    While membership inference doesn't directly extract training data, confirming membership can reveal sensitive information: knowing someone's medical record was used to train a disease prediction model implies they have that disease.
+  </p>
+
+  <hr />
+
+  <h2>Why Membership Matters</h2>
+
+  <h3>Privacy Implications</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Scenario</th>
+        <th>Membership Reveals</th>
+        <th>Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Medical diagnosis model</td>
+        <td>Person has specific condition</td>
+        <td>Health privacy violation</td>
+      </tr>
+      <tr>
+        <td>Credit risk model</td>
+        <td>Person applied for credit</td>
+        <td>Financial privacy exposure</td>
+      </tr>
+      <tr>
+        <td>Location model</td>
+        <td>Person visited specific places</td>
+        <td>Physical privacy, stalking risk</td>
+      </tr>
+      <tr>
+        <td>Employee model</td>
+        <td>Person works at organization</td>
+        <td>Employment status disclosure</td>
+      </tr>
+      <tr>
+        <td>LLM training</td>
+        <td>Person's data scraped from web</td>
+        <td>Personal info in model</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Legal and Regulatory Concerns</h3>
+  <ul>
+    <li><strong>GDPR</strong> — Right to know if personal data was processed</li>
+    <li><strong>HIPAA</strong> — Health data usage must be disclosed</li>
+    <li><strong>CCPA</strong> — Consumers can request data usage information</li>
+    <li><strong>Data minimization</strong> — Membership reveals data collection practices</li>
+  </ul>
+
+  <hr />
+
+  <h2>How Membership Inference Works</h2>
+
+  <h3>Core Intuition</h3>
+  <p>
+    Models behave differently on training data vs. unseen data:
+  </p>
+  <ul>
+    <li><strong>Lower loss</strong> — Model predicts training data more accurately</li>
+    <li><strong>Higher confidence</strong> — Predictions on training data are more confident</li>
+    <li><strong>Different gradients</strong> — Gradient patterns differ for seen vs. unseen data</li>
+  </ul>
+
+  <h3>Basic Attack Pipeline</h3>
+  <pre><code>def membership_inference_attack(target_model, data_point):
+    """Determine if data_point was in training set"""
+
+    # Query target model
+    prediction = target_model.predict(data_point)
+    confidence = max(prediction.probabilities)
+
+    # Training data typically has higher confidence
+    threshold = 0.8  # Tuned on shadow models
+    return confidence > threshold</code></pre>
+
+  <h3>Shadow Model Attack</h3>
+  <p>Train "shadow" models to learn membership signals:</p>
+  <pre><code>{`class ShadowModelAttack:
+    def __init__(self, target_model_type):
+        self.shadow_models = []
+        self.attack_model = None
+
+    def train_shadow_models(self, similar_data, num_shadows=10):
+        """Train models mimicking target's training process"""
+        for i in range(num_shadows):
+            # Split data into train/test
+            train, test = random_split(similar_data)
+
+            # Train shadow model
+            shadow = target_model_type()
+            shadow.fit(train)
+
+            # Collect membership labels
+            for x in train:
+                self.collect_features(shadow, x, member=True)
+            for x in test:
+                self.collect_features(shadow, x, member=False)
+
+    def collect_features(self, model, x, member: bool):
+        """Extract features that correlate with membership"""
+        prediction = model.predict(x)
+        features = {
+            "confidence": max(prediction),
+            "entropy": entropy(prediction),
+            "loss": model.loss(x),
+            "correct": prediction.argmax() == x.label
+        }
+        self.training_data.append((features, member))
+
+    def train_attack_model(self):
+        """Train classifier to predict membership from features"""
+        self.attack_model = BinaryClassifier()
+        self.attack_model.fit(self.training_data)
+
+    def infer_membership(self, target_model, x) -> bool:
+        """Predict if x was in target's training set"""
+        prediction = target_model.predict(x)
+        features = self.extract_features(prediction)
+        return self.attack_model.predict(features)`}</code></pre>
+
+  <hr />
+
+  <h2>Attack Variants</h2>
+
+  <h3>Confidence-Based Attack</h3>
+  <p>Simplest approach using prediction confidence:</p>
+  <pre><code>def confidence_attack(model, x, threshold):
+    """Member if model is highly confident"""
+    probs = model.predict_proba(x)
+    return max(probs) > threshold</code></pre>
+
+  <h3>Loss-Based Attack</h3>
+  <pre><code>def loss_attack(model, x, y, threshold):
+    """Member if model has low loss on sample"""
+    loss = model.compute_loss(x, y)
+    return loss < threshold  # Lower loss → likely member</code></pre>
+
+  <h3>Label-Only Attack</h3>
+  <p>Works even without confidence scores:</p>
+  <pre><code>def label_only_attack(model, x, y):
+    """Infer membership using only predicted labels"""
+    # Perturb input and observe label stability
+    perturbations = [add_noise(x, eps) for _ in range(100)]
+    predictions = [model.predict(p) for p in perturbations]
+
+    # Training data: predictions more stable under perturbation
+    stability = sum(1 for p in predictions if p == y) / len(predictions)
+    return stability > threshold</code></pre>
+
+  <h3>LLM-Specific Attacks</h3>
+  <pre><code>{`def llm_membership_attack(model, text):
+    """Check if text was in LLM training data"""
+
+    # Approach 1: Perplexity
+    perplexity = model.compute_perplexity(text)
+    # Very low perplexity suggests memorization
+
+    # Approach 2: Completion consistency
+    prefix = text[:len(text)//2]
+    completions = [model.generate(prefix) for _ in range(10)]
+    # If completions consistently match original → likely trained on it
+
+    # Approach 3: Verbatim recall
+    prompt = f"Complete this text: {text[:100]}"
+    completion = model.generate(prompt)
+    similarity = text_similarity(completion, text[100:])
+    # High similarity suggests training data
+
+    return assess_membership(perplexity, completions, similarity)`}</code></pre>
+
+  <hr />
+
+  <h2>Factors Affecting Attack Success</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Factor</th>
+        <th>Effect on Attack</th>
+        <th>Reason</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Model overfitting</td>
+        <td>Higher success</td>
+        <td>Greater gap between train/test behavior</td>
+      </tr>
+      <tr>
+        <td>Model capacity</td>
+        <td>Higher success</td>
+        <td>Larger models memorize more</td>
+      </tr>
+      <tr>
+        <td>Training set size</td>
+        <td>Lower success</td>
+        <td>Less memorization per sample</td>
+      </tr>
+      <tr>
+        <td>Regularization</td>
+        <td>Lower success</td>
+        <td>Reduces overfitting</td>
+      </tr>
+      <tr>
+        <td>Differential privacy</td>
+        <td>Lower success</td>
+        <td>Adds noise, obscures membership signal</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr />
+
+  <h2>Defenses</h2>
+
+  <h3>Differential Privacy</h3>
+  <pre><code># DP-SGD: Differentially private training
+from opacus import PrivacyEngine
+
+model = YourModel()
+optimizer = torch.optim.SGD(model.parameters(), lr=0.01)
+
+privacy_engine = PrivacyEngine()
+model, optimizer, dataloader = privacy_engine.make_private(
+    module=model,
+    optimizer=optimizer,
+    data_loader=dataloader,
+    noise_multiplier=1.1,  # Privacy parameter
+    max_grad_norm=1.0,     # Gradient clipping
+)
+
+# Training with DP provides mathematical privacy guarantees</code></pre>
+
+  <h3>Confidence Masking</h3>
+  <pre><code>def mask_confidence(predictions, temperature=2.0):
+    """Reduce confidence signal without changing predictions"""
+    # Apply temperature scaling
+    scaled = predictions ** (1 / temperature)
+    return scaled / scaled.sum()
+
+# Or: Only return top-k predictions
+def top_k_predictions(predictions, k=3):
+    top_k_idx = predictions.argsort()[-k:]
+    masked = np.zeros_like(predictions)
+    masked[top_k_idx] = predictions[top_k_idx]
+    return masked / masked.sum()</code></pre>
+
+  <h3>Regularization</h3>
+  <ul>
+    <li><strong>L2 regularization</strong> — Reduces overfitting</li>
+    <li><strong>Dropout</strong> — Prevents memorization</li>
+    <li><strong>Early stopping</strong> — Stop before overfitting</li>
+    <li><strong>Data augmentation</strong> — Increases effective training set size</li>
+  </ul>
+
+  <h3>Prediction Perturbation</h3>
+  <pre><code>def add_prediction_noise(predictions, epsilon=0.1):
+    """Add noise to predictions to obscure membership signal"""
+    noise = np.random.laplace(0, epsilon, predictions.shape)
+    noisy = predictions + noise
+    return np.clip(noisy, 0, 1) / np.clip(noisy, 0, 1).sum()</code></pre>
+
+  <hr />
+
+  <h2>Measuring Attack Effectiveness</h2>
+
+  <h3>Metrics</h3>
+  <ul>
+    <li><strong>Accuracy</strong> — Overall correct membership predictions</li>
+    <li><strong>TPR at low FPR</strong> — Identifying members without false positives</li>
+    <li><strong>AUC-ROC</strong> — Overall discriminative ability</li>
+    <li><strong>Precision-Recall</strong> — When membership is rare</li>
+  </ul>
+
+  <h3>Baseline Comparison</h3>
+  <pre><code>{`def evaluate_attack(attack, target_model, members, non_members):
+    """Evaluate membership inference attack"""
+    predictions = []
+    labels = []
+
+    for x in members:
+        predictions.append(attack(target_model, x))
+        labels.append(1)  # Member
+
+    for x in non_members:
+        predictions.append(attack(target_model, x))
+        labels.append(0)  # Non-member
+
+    return {
+        "accuracy": accuracy_score(labels, predictions),
+        "precision": precision_score(labels, predictions),
+        "recall": recall_score(labels, predictions),
+        "auc_roc": roc_auc_score(labels, predictions)
+    }`}</code></pre>
+
+  <hr />
+
+  <h2>References</h2>
+  <ul>
+    <li>Shokri, R. et al. (2017). "Membership Inference Attacks Against Machine Learning Models." IEEE S&P.</li>
+    <li>Salem, A. et al. (2019). "ML-Leaks: Model and Data Independent Membership Inference Attacks and Defenses." NDSS.</li>
+    <li>Carlini, N. et al. (2022). "Membership Inference Attacks From First Principles." IEEE S&P.</li>
+    <li>Yeom, S. et al. (2018). "Privacy Risk in Machine Learning: Analyzing the Connection to Overfitting." CSF.</li>
+  </ul>
+</WikiEntryLayout>

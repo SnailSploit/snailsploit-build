@@ -1,0 +1,209 @@
+---
+import WikiEntryLayout from '../../../../layouts/WikiEntryLayout.astro';
+
+const title = "Hallucination";
+const description = "AI failure mode where language models generate false, fabricated, or misleading information presented with unwarranted confidence, creating security risks in automated systems and decision-making pipelines.";
+
+const relatedEntries = [
+  { title: "Large Language Models (LLMs)", url: "/ai-security/wiki/concepts/large-language-models/" },
+  { title: "RAG", url: "/ai-security/wiki/concepts/rag/" },
+  { title: "AI Agents", url: "/ai-security/wiki/concepts/ai-agents/" },
+  { title: "Output Filtering", url: "/ai-security/wiki/defenses/output-filtering/" },
+];
+
+const frameworkMappings = {
+  "NIST AI RMF": "MEASURE 2.5, MANAGE 2.3",
+  "OWASP LLM Top 10": "LLM09: Overreliance",
+  "EU AI Act": "Article 13: Transparency",
+};
+---
+
+<WikiEntryLayout
+  title={title}
+  description={description}
+  category="concepts"
+  relatedEntries={relatedEntries}
+  frameworkMappings={frameworkMappings}
+>
+  <h2>Definition</h2>
+  <p>
+    <strong>Hallucination</strong> in AI refers to the generation of content that is factually incorrect, fabricated, or not grounded in the model's training data or provided context—delivered with the same confidence as accurate information. The term captures the model's "confident confabulation."
+  </p>
+  <p>
+    While often discussed as an accuracy problem, hallucination has significant security implications when LLM outputs are used in automated systems, decision pipelines, or anywhere human oversight is limited.
+  </p>
+
+  <hr />
+
+  <h2>Types of Hallucination</h2>
+
+  <h3>Factual Hallucination</h3>
+  <p>Generating false facts:</p>
+  <pre><code>User: "When was the Golden Gate Bridge built?"
+LLM: "The Golden Gate Bridge was completed in 1942."
+     (Actual: 1937)
+
+User: "Who wrote 'The Great Gatsby'?"
+LLM: "Ernest Hemingway wrote The Great Gatsby."
+     (Actual: F. Scott Fitzgerald)</code></pre>
+
+  <h3>Source Hallucination</h3>
+  <p>Inventing citations and references:</p>
+  <pre><code>User: "Cite a paper on prompt injection."
+LLM: "See 'Prompt Injection Attacks on LLMs' by Smith et al.,
+      published in IEEE S&P 2022."
+      (Paper doesn't exist)</code></pre>
+
+  <h3>Context Hallucination</h3>
+  <p>Adding details not present in provided context:</p>
+  <pre><code>Context: "The meeting is scheduled for Tuesday."
+User: "What time is the meeting?"
+LLM: "The meeting is at 2:00 PM on Tuesday."
+      (Time was never specified)</code></pre>
+
+  <h3>Code Hallucination</h3>
+  <p>Generating non-existent APIs, functions, or libraries:</p>
+  <pre><code># LLM-generated code referencing fake API
+from langchain.security import PromptInjectionFilter  # Doesn't exist
+from openai.safety import ContentModerator  # Doesn't exist
+
+result = prompt_sanitizer.clean(input)  # Fabricated function</code></pre>
+
+  <hr />
+
+  <h2>Security Implications</h2>
+
+  <h3>Automated Pipeline Risks</h3>
+  <p>When hallucinated outputs feed into automated systems:</p>
+  <ul>
+    <li><strong>Fake vulnerability reports</strong> — LLM invents CVEs, leading to wasted remediation effort</li>
+    <li><strong>Incorrect configurations</strong> — Hallucinated settings create security gaps</li>
+    <li><strong>Fabricated compliance data</strong> — False audit results in regulatory systems</li>
+    <li><strong>Ghost dependencies</strong> — Code using non-existent packages (potential supply chain attack vector)</li>
+  </ul>
+
+  <h3>Decision Support Failures</h3>
+  <p>Hallucination in advisory contexts:</p>
+  <ul>
+    <li>Fabricated threat intelligence leading to misallocated resources</li>
+    <li>Invented precedents in legal or policy decisions</li>
+    <li>False financial data influencing investment decisions</li>
+  </ul>
+
+  <h3>Agent-Specific Risks</h3>
+  <p>AI agents acting on hallucinated information:</p>
+  <pre><code># Agent hallucinates the existence of a cleanup function
+Agent thought: "I should call security_cleanup() to finish"
+Agent action: Execute code calling security_cleanup()
+Result: Error, or worse—calling a malicious function
+        with a similar name that does exist</code></pre>
+
+  <hr />
+
+  <h2>Why LLMs Hallucinate</h2>
+
+  <h3>Training Dynamics</h3>
+  <ul>
+    <li><strong>Pattern completion</strong> — Models learn to produce plausible-sounding text, not verified facts</li>
+    <li><strong>No knowledge verification</strong> — Training doesn't ground outputs against fact databases</li>
+    <li><strong>Confident by default</strong> — RLHF training often rewards confident, helpful responses</li>
+    <li><strong>Rare events</strong> — Long-tail knowledge has weak signal in training data</li>
+  </ul>
+
+  <h3>Inference Factors</h3>
+  <ul>
+    <li><strong>Temperature</strong> — Higher temperature increases creative (hallucinatory) outputs</li>
+    <li><strong>Context limitations</strong> — Missing information filled with plausible inventions</li>
+    <li><strong>Prompt pressure</strong> — Users demanding answers push models past knowledge boundaries</li>
+  </ul>
+
+  <hr />
+
+  <h2>Mitigation Strategies</h2>
+
+  <h3>Retrieval-Augmented Generation (RAG)</h3>
+  <p>Ground responses in retrieved documents:</p>
+  <ul>
+    <li>Reduces hallucination by providing factual context</li>
+    <li>Creates attribution trail for verification</li>
+    <li>Limitation: RAG itself can be poisoned with false information</li>
+  </ul>
+
+  <h3>Chain-of-Thought Verification</h3>
+  <pre><code>{`prompt = """
+Question: {question}
+
+Think through this step by step:
+1. What specific facts do I need to answer this?
+2. Do I actually know these facts from reliable sources?
+3. If uncertain, clearly state "I'm not certain about..."
+4. Provide answer only for claims I can support.
+
+If I don't have reliable information, say "I don't have
+verified information about this."
+"""`}</code></pre>
+
+  <h3>Output Verification</h3>
+  <ul>
+    <li><strong>Fact-checking layers</strong> — Second model or system verifies claims</li>
+    <li><strong>Citation verification</strong> — Check if referenced sources actually exist</li>
+    <li><strong>Code execution</strong> — Run generated code to verify functionality</li>
+  </ul>
+
+  <h3>Confidence Calibration</h3>
+  <pre><code>{`prompt = """
+Rate your confidence in each claim:
+- HIGH: Based on well-established facts from training
+- MEDIUM: Likely correct but could be imprecise
+- LOW: Uncertain, user should verify independently
+
+{question}
+"""`}</code></pre>
+
+  <h3>Human-in-the-Loop</h3>
+  <ul>
+    <li>Review high-stakes outputs before action</li>
+    <li>Verify citations and references manually</li>
+    <li>Don't automate decisions based solely on LLM claims</li>
+  </ul>
+
+  <hr />
+
+  <h2>Detection Approaches</h2>
+
+  <h3>Consistency Checking</h3>
+  <pre><code>def check_consistency(model, question, n_samples=5):
+    """Multiple samples should agree if factual"""
+    responses = [model.generate(question) for _ in range(n_samples)]
+    # High variance suggests uncertainty/hallucination
+    return calculate_semantic_variance(responses)</code></pre>
+
+  <h3>Source Verification</h3>
+  <pre><code>def verify_citations(response):
+    """Check if cited sources exist"""
+    citations = extract_citations(response)
+    verified = []
+    for cite in citations:
+        if is_real_source(cite):
+            verified.append(cite)
+        else:
+            flag_hallucinated_citation(cite)
+    return verified</code></pre>
+
+  <hr />
+
+  <h2>Real-World Examples</h2>
+  <p><strong>Lawyer Uses ChatGPT (2023)</strong> — Attorney submitted legal brief with fabricated case citations generated by ChatGPT. None of the cases existed.</p>
+  <p><strong>Package Hallucination Attacks (2024)</strong> — Researchers found LLMs consistently hallucinate the same package names; attackers could register these names with malicious code.</p>
+  <p><strong>Medical Chatbot Hallucinations</strong> — Health-focused chatbots have provided fabricated medical advice and invented drug interactions.</p>
+
+  <hr />
+
+  <h2>References</h2>
+  <ul>
+    <li>Ji, Z. et al. (2023). "Survey of Hallucination in Natural Language Generation." ACM Computing Surveys.</li>
+    <li>Huang, L. et al. (2023). "A Survey on Hallucination in Large Language Models." arXiv.</li>
+    <li>Lanyado, B. (2024). "Can You Trust ChatGPT's Package Recommendations?" Vulcan Cyber.</li>
+    <li>OWASP (2023). "LLM09: Overreliance." OWASP Top 10 for LLM Applications.</li>
+  </ul>
+</WikiEntryLayout>

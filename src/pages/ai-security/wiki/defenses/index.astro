@@ -4,8 +4,14 @@ import WikiHubLayout from '../../../../layouts/WikiHubLayout.astro';
 const title = "AI Security Defenses";
 const description = "Countermeasures, controls, and architectural patterns for protecting AI systems against adversarial attacks, data theft, and misuse.";
 
-// Defenses entries will be added as they're created
-const entries: any[] = [];
+// Defenses entries
+const entries = [
+  { title: "Input Validation", description: "First line of defense against prompt injection using pattern matching, content classification, and structural analysis.", url: "/ai-security/wiki/defenses/input-validation/", category: "defenses" },
+  { title: "Output Filtering", description: "Inspecting and sanitizing AI outputs to prevent data leakage, harmful content, and policy violations.", url: "/ai-security/wiki/defenses/output-filtering/", category: "defenses" },
+  { title: "Guardrails", description: "Architectural safety mechanisms that constrain AI model behavior through rules, policies, and behavioral boundaries.", url: "/ai-security/wiki/defenses/guardrails/", category: "defenses" },
+  { title: "Rate Limiting", description: "Perimeter defense controlling request frequency to protect against extraction attacks and denial of service.", url: "/ai-security/wiki/defenses/rate-limiting/", category: "defenses" },
+  { title: "Human-in-the-Loop", description: "Defense pattern requiring human oversight and approval for AI system actions in high-stakes decisions.", url: "/ai-security/wiki/defenses/human-in-the-loop/", category: "defenses" },
+];
 
 const faqs = [
   {
@@ -213,10 +219,4 @@ const keywords = ['AI security defenses', 'LLM guardrails', 'prompt injection pr
     </div>
   </section>
 
-  <!-- Coming Soon -->
-  <section class="mt-16 text-center">
-    <p class="text-gray-500 italic">
-      Individual defense entries are being developed. Check back for detailed implementation guides.
-    </p>
-  </section>
 </WikiHubLayout>
