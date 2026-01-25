@@ -124,16 +124,21 @@ const latestArticles = [
   <main class="homepage">
     <!-- Loading Screen -->
     <div id="loading-screen" class="loading-screen">
-      <video
-        id="loading-video"
-        class="loading-video"
-        autoplay
-        muted
-        playsinline
-        preload="auto"
-      >
-        <source src="/videos/newvid.mp4" type="video/mp4" />
-      </video>
+      <div class="loading-content">
+        <video
+          id="loading-video"
+          class="loading-video"
+          autoplay
+          muted
+          playsinline
+          preload="auto"
+        >
+          <source src="/videos/newvid.mp4" type="video/mp4" />
+        </video>
+        <div class="loading-fallback" id="loading-fallback">
+          <div class="loading-spinner"></div>
+        </div>
+      </div>
     </div>
 
     <!-- Hero Section -->
@@ -466,7 +471,7 @@ const latestArticles = [
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
   }
 
   .loading-screen.hidden {
@@ -475,10 +480,47 @@ const latestArticles = [
     pointer-events: none;
   }
 
+  .loading-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .loading-video {
-    width: 200px;
-    height: 200px;
+    width: 280px;
+    height: 280px;
     object-fit: contain;
+  }
+
+  .loading-fallback {
+    position: absolute;
+    display: none;
+  }
+
+  .loading-video:not([src]),
+  .loading-video[src=""] ~ .loading-fallback {
+    display: flex;
+  }
+
+  .loading-spinner {
+    width: 48px;
+    height: 48px;
+    border: 3px solid rgba(57, 255, 20, 0.2);
+    border-top-color: #39FF14;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  @media (max-width: 768px) {
+    .loading-video {
+      width: 200px;
+      height: 200px;
+    }
   }
 
   .headline {
@@ -1297,24 +1339,57 @@ const latestArticles = [
 <script>
   const loadingScreen = document.getElementById('loading-screen');
   const loadingVideo = document.getElementById('loading-video') as HTMLVideoElement;
+  const loadingFallback = document.getElementById('loading-fallback');
 
   if (loadingVideo && loadingScreen) {
-    loadingVideo.addEventListener('ended', () => {
-      loadingScreen.classList.add('hidden');
-    });
-
-    const playVideo = () => {
-      loadingVideo.play().catch(() => {
+    const hideLoading = () => {
+      if (!loadingScreen.classList.contains('hidden')) {
         loadingScreen.classList.add('hidden');
-      });
+      }
     };
 
-    playVideo();
-    document.addEventListener('touchstart', playVideo, { once: true });
+    const showFallback = () => {
+      if (loadingFallback) {
+        loadingVideo.style.display = 'none';
+        loadingFallback.style.display = 'flex';
+      }
+    };
 
-    setTimeout(() => {
-      loadingScreen.classList.add('hidden');
-    }, 4000);
+    // Hide when video ends
+    loadingVideo.addEventListener('ended', hideLoading);
+
+    // Listen for when video can play through
+    loadingVideo.addEventListener('canplaythrough', () => {
+      loadingVideo.play().catch(() => {
+        showFallback();
+        setTimeout(hideLoading, 1000);
+      });
+    }, { once: true });
+
+    // Try to play immediately if ready
+    if (loadingVideo.readyState >= 3) {
+      loadingVideo.play().catch(() => {
+        showFallback();
+        setTimeout(hideLoading, 1000);
+      });
+    }
+
+    // Handle errors - show fallback then hide
+    loadingVideo.addEventListener('error', () => {
+      showFallback();
+      setTimeout(hideLoading, 1000);
+    });
+
+    // Mobile touch fallback
+    document.addEventListener('touchstart', () => {
+      loadingVideo.play().catch(() => {
+        showFallback();
+        setTimeout(hideLoading, 1000);
+      });
+    }, { once: true });
+
+    // Fallback timeout - hide after 5 seconds max
+    setTimeout(hideLoading, 5000);
   }
 
   // Scroll-triggered reveal for cards
