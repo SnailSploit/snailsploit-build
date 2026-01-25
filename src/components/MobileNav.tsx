@@ -118,17 +118,21 @@ export default function MobileNav({ navItems }: MobileNavProps) {
 
       {/* Backdrop */}
       <div
-        className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-[249] md:hidden transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-[9999] md:hidden transition-opacity duration-300 ${
           isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
         onClick={() => setIsOpen(false)}
+        aria-hidden={!isOpen}
       />
 
       {/* Mobile Menu Drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-[85%] max-w-sm z-[250] md:hidden transition-transform duration-300 ease-out flex flex-col ${
+        className={`fixed top-0 right-0 h-full w-[85%] max-w-sm z-[10000] md:hidden transition-transform duration-300 ease-out flex flex-col ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation menu"
         style={{
           backgroundColor: 'var(--color-bg)',
           borderLeft: '1px solid var(--color-border)',

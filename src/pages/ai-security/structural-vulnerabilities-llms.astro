@@ -1,0 +1,167 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+---
+
+<ArticleLayout
+  title="The Structural Vulnerabilities of Large Language Models"
+  description="Tokenization evasion, parsing limits, and alignment failure modes in production AI. A pipeline security report for LLM deployments."
+  date="2025-01-25"
+  canonical="https://snailsploit.com/ai-security/structural-vulnerabilities-llms/"
+  keywords={['LLM vulnerabilities', 'tokenization security', 'AI alignment failures', 'prompt injection', 'LLM security']}
+  category="ai-security"
+  tags={['AI-security', 'LLM', 'tokenization', 'alignment', 'technical-analysis']}
+  readingTime="12 min read"
+>
+
+<p class="lead"><strong>Tokenization evasion, parsing limits, and alignment failure modes in production AI.</strong></p>
+
+<p>LLM security breaks differently than classical software security.</p>
+
+<p>Traditional systems fail when the implementation is wrong. Language model systems fail even when the implementation is clean, because the core engine is probabilistic and the boundaries we rely on are soft. Text is normalized, tokenized, embedded, routed, retrieved, and then interpreted in one blended context stream. That entire pipeline becomes the attack surface.</p>
+
+<p>If you deploy LLMs into support, automation, data processing, code generation, tool execution, or agentic workflows, you are building a system where "input" is not just data. Input is influence.</p>
+
+<p>This report maps three structural layers where failures repeatedly show up in real deployments:</p>
+
+<ul>
+  <li>The tokenization and normalization layer</li>
+  <li>The parsing layer, including instruction and data separation</li>
+  <li>The alignment layer, including preference tuning and reward optimization</li>
+</ul>
+
+<p>It is not a jailbreak recipe. It is a pipeline security report.</p>
+
+<h2>1) The pipeline is the product</h2>
+
+<p>Most teams still think in terms of "the model." That framing is outdated.</p>
+
+<p>In production you have a chain: normalization, filters, tokenization, retrieval, model inference, tool routing, output parsing, logging. Every stage can interpret the same string differently. If those interpretations diverge, you get a canonicalization gap. Gaps are where bypasses live.</p>
+
+<figure>
+  <img src="/assets/img/posts/structural-vulnerabilities-llms/figure-01-data-pipeline.png" alt="LLM alignment and data pipeline diagram showing collection, labeling, review, reward model training, and controls for provenance and anomaly detection" loading="lazy" width="1200" height="675">
+  <figcaption><strong>Figure 1.</strong> The pipeline is the attack surface. Provenance and anomaly detection belong inside the loop, not after incidents.</figcaption>
+</figure>
+
+<h2>2) Tokenization is a security boundary</h2>
+
+<p>Tokenization is usually treated like plumbing. It is not plumbing. It is a security boundary that quietly decides what the model "sees."</p>
+
+<p>Security controls often inspect raw text. The model consumes token IDs. If your filter and your generator do not share the same representation, you are asking two different systems to agree on the meaning of input. Attackers love that.</p>
+
+<figure>
+  <img src="/assets/img/posts/structural-vulnerabilities-llms/figure-02-tokenization-gap.png" alt="Tokenization gap illustration where filter view sees fragmented characters as low risk while LLM view reconstructs the full meaning" loading="lazy" width="1200" height="675">
+  <figcaption><strong>Figure 2.</strong> Tokenization gap. The filter evaluates raw text fragments, the LLM reconstructs intent from tokens and context.</figcaption>
+</figure>
+
+<h3>BPE merge brittleness is a built-in instability</h3>
+
+<p>Subword tokenizers are deterministic, but brittle. A minor input change can reshape token boundaries and produce a different token ID sequence. That matters when your security logic depends on recognizing strings, keywords, or patterns before the model runs.</p>
+
+<figure>
+  <img src="/assets/img/posts/structural-vulnerabilities-llms/figure-03-bpe-merge-brittleness.png" alt="Byte pair encoding merge brittleness showing near identical strings producing different token splits and different token ID sequences" loading="lazy" width="1200" height="675">
+  <figcaption><strong>Figure 3.</strong> BPE merge brittleness. Small edits can fully change token splits, which can degrade detection and policy enforcement.</figcaption>
+</figure>
+
+<h3>Trust boundary rule for tokenization</h3>
+
+<p>If your filter sees one representation and the model sees another, your filter is not a gate. It is a suggestion.</p>
+
+<p>When that happens in real systems, the model often "heals" fragmented meaning. Filters do not.</p>
+
+<h2>3) Parsing and instruction versus data separation</h2>
+
+<p>Classic security relies on separation: code and data do not share the same channel. LLMs do not get that luxury. System policy, developer instructions, user prompts, and retrieved content often exist as one blended stream.</p>
+
+<p>That is why injection attacks keep working. You cannot delimiter your way out of the architecture.</p>
+
+<figure>
+  <img src="/assets/img/posts/structural-vulnerabilities-llms/figure-04-context-trust-boundaries.png" alt="Context trust boundaries diagram showing system, developer, user, and retrieved content all influencing a single decision node" loading="lazy" width="1200" height="675">
+  <figcaption><strong>Figure 4.</strong> Blended context. When untrusted text shares the same channel as authority, attention can cross trust boundaries.</figcaption>
+</figure>
+
+<h3>Grammar constraints help syntax, not intent</h3>
+
+<p>Structured decoding and schema enforcement can keep outputs valid. That is useful. It does not make them safe. You can generate perfectly valid structure that encodes the wrong action, the wrong tool call, or the wrong policy decision.</p>
+
+<figure>
+  <img src="/assets/img/posts/structural-vulnerabilities-llms/figure-05-grammar-constrained-decoding.png" alt="Grammar constrained decoding diagram showing allowed tokens constrained to valid JSON while meaning can still encode unsafe intent" loading="lazy" width="1200" height="675">
+  <figcaption><strong>Figure 5.</strong> Grammar constrained decoding enforces valid structure. It does not guarantee safe meaning.</figcaption>
+</figure>
+
+<h3>Normalization order is where bypasses are born</h3>
+
+<p>If your pipeline normalizes at different stages, your system can disagree with itself. Filters, retrieval, model, and tool routing can all see different versions of the "same" input. That disagreement is a vulnerability.</p>
+
+<figure>
+  <img src="/assets/img/posts/structural-vulnerabilities-llms/figure-08-normalization-order.png" alt="Normalization order vulnerability showing filter, retrieval, model, and tool router interpreting the same path string differently due to encoding and normalization differences" loading="lazy" width="1200" height="675">
+  <figcaption><strong>Figure 6.</strong> Canonicalization gaps across stages. Normalize once, early, and consistently, or you will eventually ship a bypass.</figcaption>
+</figure>
+
+<h2>4) Alignment is another attack surface</h2>
+
+<p>Alignment improves usability. It also creates new failure modes.</p>
+
+<p>Preference tuned models often optimize for answers that feel cooperative. That can show up as compliance pressure, confidence inflation, and refusal boundary instability. In high privilege systems, that is not a personality quirk. It is risk.</p>
+
+<figure>
+  <img src="/assets/img/posts/structural-vulnerabilities-llms/figure-09-sycophancy-failure-mode.png" alt="Sycophancy failure mode diagram showing safe refusal and factual correction routes competing with agreeable compliance under reward pressure" loading="lazy" width="1200" height="675">
+  <figcaption><strong>Figure 7.</strong> Sycophancy failure mode. When reward favors agreement, safety and truth can lose under pressure.</figcaption>
+</figure>
+
+<h3>Reward hacking becomes cost amplification</h3>
+
+<p>If your reward model prefers verbosity and confidence, your policy can learn to output more words, more certainty, and more filler. In production that can become latency spikes, cost spikes, and monitoring noise.</p>
+
+<figure>
+  <img src="/assets/img/posts/structural-vulnerabilities-llms/figure-10-reward-hacking-verbosity.png" alt="Reward hacking diagram showing rising tokens and cost as verbosity increases without improving quality" loading="lazy" width="1200" height="675">
+  <figcaption><strong>Figure 8.</strong> Reward hacking by verbosity. Output inflation is an availability problem, not just a quality problem.</figcaption>
+</figure>
+
+<h3>Preference data is high leverage</h3>
+
+<p>You do not need pretraining access to create long-term impact. Preference data, fine-tuning sets, and feedback loops are high leverage, low visibility. This is where provenance and anomaly detection matter most.</p>
+
+<figure>
+  <img src="/assets/img/posts/structural-vulnerabilities-llms/figure-11-preference-data-provenance.png" alt="Preference data pipeline diagram showing collectors, labeling, review, and anomaly guards to reduce poisoning and drift risk" loading="lazy" width="1200" height="675">
+  <figcaption><strong>Figure 9.</strong> Preference data provenance. If you cannot audit your feedback loop, you cannot trust your alignment layer.</figcaption>
+</figure>
+
+<h2>5) Real failures chain layers together</h2>
+
+<p>Most high impact incidents do not come from a single weak point. They come from a chain: representation gaps, blended context, alignment pressure, and then execution in a high privilege environment.</p>
+
+<figure>
+  <img src="/assets/img/posts/structural-vulnerabilities-llms/figure-06-layered-exploit-chain.png" alt="Layered exploit chain diagram showing evasion, injection, coercion, and execution phases across an LLM pipeline" loading="lazy" width="1200" height="675">
+  <figcaption><strong>Figure 10.</strong> Layered failure chain. Defense must be layered too, because attackers already are.</figcaption>
+</figure>
+
+<h2>6) What actually helps</h2>
+
+<p>If you want a short version: stop treating probabilistic systems like deterministic parsers.</p>
+
+<p>Normalize once, early, and consistently. Make every stage consume the same representation. Keep tokenization consistent between filters and generators when possible. Partition untrusted content so it cannot override authority. Validate structured outputs with deterministic parsers, then fail closed. Gate tools with explicit capability policy.</p>
+
+<p>Hardening is not glamorous. It works.</p>
+
+<figure>
+  <img src="/assets/img/posts/structural-vulnerabilities-llms/figure-12-defense-stack.png" alt="Defense stack diagram showing layered controls: normalize, tokenize, partition context, validate output, with a shield icon indicating layered security" loading="lazy" width="1200" height="675">
+  <figcaption><strong>Figure 11.</strong> Defense stack that holds up in production: consistent normalization, consistent tokenization, context partitioning, deterministic validation, and capability gated tools.</figcaption>
+</figure>
+
+<h2>A note on reliability and "glitch" behavior</h2>
+
+<p>Even when "glitch" token behavior does not produce a direct safety bypass, it can destabilize outputs. In production that becomes availability and predictability risk, which is still security.</p>
+
+<figure>
+  <img src="/assets/img/posts/structural-vulnerabilities-llms/figure-07-glitch-token-cluster.png" alt="Glitch token cluster diagram showing anomalous tokens outside the natural language manifold causing repetition, coherence drop, and safety drift" loading="lazy" width="1200" height="675">
+  <figcaption><strong>Figure 12.</strong> Reliability is security. Off-manifold token behavior can trigger repetition, coherence loss, and unstable refusals.</figcaption>
+</figure>
+
+<h2>About the Author</h2>
+
+<p><strong>Kai Aizen (SnailSploit)</strong> is a security researcher from Israel.<br>
+He builds offensive/defensive methods for AI systems (AATMF, P.R.O.M.P.T.), publishes jailbreak case studies (GPT-01 context inheritance, custom instruction backdoors) and develops tooling (SnailPath, KubeRoast, Burp-MCP, SnailHunter).<br>
+He is also the author of the upcoming book <strong>Adversarial Minds</strong>.<br>
+His work appears in <strong>eForensics</strong> (<em>The BIG Pull</em>), <strong>PenTest Magazine</strong> ("Design Your Penetration Testing Setup"), and <strong>Hakin9</strong> ("Weaponization in the Cloud...", <strong>LLM Mayhem</strong> eBook).</p>
+
+</ArticleLayout>
