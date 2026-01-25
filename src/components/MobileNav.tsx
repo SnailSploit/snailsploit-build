@@ -305,7 +305,7 @@ export default function MobileNav({ navItems }: MobileNavProps) {
             <img
               src="/images/navbar.png"
               alt="SnailSploit"
-              className="h-24 w-auto opacity-90"
+              className="h-10 w-auto opacity-90"
             />
             <span
               className="text-xs uppercase tracking-wider"

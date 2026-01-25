@@ -74,10 +74,11 @@ const featuredCards = [
 ];
 
 const cves = [
-  { id: 'CVE-2025-9776', plugin: 'CatFolders', type: 'SQL Injection', severity: 'High', url: '/security-research/cves/cve-2025-9776/' },
-  { id: 'CVE-2025-12030', plugin: 'ACF to REST API', type: 'IDOR', severity: 'High', url: '/security-research/cves/cve-2025-12030/' },
-  { id: 'CVE-2025-11171', plugin: 'Chartify', type: 'Missing Auth', severity: 'Medium', url: '/security-research/cves/cve-2025-11171/' },
-  { id: 'CVE-2025-12163', plugin: 'OmniPress', type: 'XSS', severity: 'Medium', url: '/security-research/cves/cve-2025-12163/' },
+  { id: 'CVE-2025-12030', plugin: 'ACF to REST API', type: 'IDOR', severity: 'High', cvss: 7.5, url: '/security-research/cves/cve-2025-12030/', github: 'https://github.com/SnailSploit/CVE-2025-12030' },
+  { id: 'CVE-2025-9776', plugin: 'CatFolders', type: 'SQL Injection', severity: 'Medium', cvss: 6.5, url: '/security-research/cves/cve-2025-9776/', github: 'https://github.com/SnailSploit/CVE-2025-9776' },
+  { id: 'CVE-2025-12163', plugin: 'OmniPress', type: 'XSS', severity: 'Medium', cvss: 6.4, url: '/security-research/cves/cve-2025-12163/', github: 'https://github.com/SnailSploit/CVE-2025-12163' },
+  { id: 'CVE-2025-11171', plugin: 'Chartify', type: 'Missing Auth', severity: 'Medium', cvss: 5.3, url: '/security-research/cves/cve-2025-11171/', github: 'https://github.com/SnailSploit/CVE-2025-11171' },
+  { id: 'CVE-2025-11174', plugin: 'Document Library Lite', type: 'Info Exposure', severity: 'Medium', cvss: 5.3, url: '/security-research/cves/cve-2025-11174/', github: 'https://github.com/SnailSploit/CVE-2025-11174' },
 ];
 
 const latestArticles = [
@@ -275,13 +276,21 @@ const latestArticles = [
 
         <div class="cve-list">
           {cves.map((cve) => (
-            <a href={cve.url} class="cve-row">
-              <div class="cve-info">
+            <div class="cve-row">
+              <a href={cve.url} class="cve-info">
                 <span class="cve-id">{cve.id}</span>
                 <p class="cve-plugin">{cve.plugin} — {cve.type}</p>
+              </a>
+              <div class="cve-meta">
+                <span class="cve-cvss">CVSS {cve.cvss}</span>
+                <span class={`cve-severity severity-${cve.severity.toLowerCase()}`}>{cve.severity}</span>
+                <a href={cve.github} target="_blank" rel="noopener noreferrer" class="cve-github" aria-label="GitHub PoC">
+                  <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                  </svg>
+                </a>
               </div>
-              <span class={`cve-severity severity-${cve.severity.toLowerCase()}`}>{cve.severity}</span>
-            </a>
+            </div>
           ))}
         </div>
       </div>
@@ -1045,6 +1054,43 @@ const latestArticles = [
     color: #ffc107;
   }
 
+  .cve-info {
+    text-decoration: none;
+    flex: 1;
+  }
+
+  .cve-info:hover .cve-id {
+    color: #d063ff;
+  }
+
+  .cve-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .cve-cvss {
+    font-family: 'JetBrains Mono', var(--font-mono), monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #8B949E;
+  }
+
+  .cve-github {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8B949E;
+    padding: 0.35rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .cve-github:hover {
+    color: #E6EDF3;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
   /* Trust Bar */
   .trust-bar {
     padding: 4rem 2rem;
@@ -1244,7 +1290,7 @@ const latestArticles = [
 
   @media (max-width: 768px) {
     .hero {
-      padding: 2rem 1.5rem;
+      padding: 1.5rem 1rem;
       min-height: calc(100vh - 64px);
     }
 
@@ -1332,6 +1378,44 @@ const latestArticles = [
     .card-arrow {
       top: 1.75rem;
       right: 1.75rem;
+    }
+
+    .cve-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem;
+    }
+
+    .cve-meta {
+      width: 100%;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .cve-id {
+      font-size: 0.85rem;
+    }
+
+    .cve-plugin {
+      font-size: 0.8rem;
+    }
+
+    .cve-section {
+      padding: 3rem 1rem;
+    }
+
+    .articles-section {
+      padding: 3rem 1rem;
+    }
+
+    .featured {
+      padding: 4rem 1rem;
+    }
+
+    .cta-section {
+      padding: 4rem 1rem;
     }
   }
 </style>
