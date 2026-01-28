@@ -1,98 +1,8 @@
 ---
-import HubLayout from '../../layouts/HubLayout.astro';
-
-const glossary = [
-  {
-    term: "AATMF",
-    definition: "Adversarial AI Threat Modeling Framework - A comprehensive taxonomy of 14 tactics and 40+ techniques for AI red teaming, with quantitative risk scoring and MITRE ATLAS alignment.",
-    link: "/frameworks/aatmf/"
-  },
-  {
-    term: "P.R.O.M.P.T",
-    definition: "Purpose, Results, Obstacles, Mindset, Preferences, Technical - A systematic methodology for crafting effective AI prompts based on fundamental communication principles.",
-    link: "/frameworks/prompt/"
-  },
-  {
-    term: "Threat Modeling",
-    definition: "Systematic identification of potential threats and vulnerabilities in a system, enabling prioritized security controls and risk mitigation strategies."
-  },
-  {
-    term: "Red Teaming",
-    definition: "Adversarial security testing that simulates real-world attacks to identify vulnerabilities before malicious actors can exploit them."
-  },
-  {
-    term: "Attack Surface",
-    definition: "The sum of all points where an attacker can attempt to enter or extract data from a system. In AI, this includes prompts, context, tools, and training data."
-  },
-  {
-    term: "Risk Scoring",
-    definition: "Quantitative assessment of threats based on likelihood, impact, detectability, and recoverability. AATMF uses the formula: R = L × I × (6-D) × (6-R)."
-  }
-];
-
-const faqs = [
-  {
-    question: "What makes these frameworks different from existing security standards?",
-    answer: "These frameworks are built from hands-on offensive security research, not theoretical compliance requirements. They provide actionable techniques, real-world examples, and measurable evaluation criteria that practitioners can immediately apply to test and harden AI systems."
-  },
-  {
-    question: "Are these frameworks free to use?",
-    answer: "Yes, all frameworks are open-source and freely available. AATMF is released under CC BY-SA 4.0 license. We believe security knowledge should be accessible to defenders everywhere."
-  },
-  {
-    question: "How do these frameworks integrate with existing security programs?",
-    answer: "AATMF provides crosswalks to OWASP LLM Top-10, NIST AI RMF, and MITRE ATLAS, making it easy to map findings to existing risk frameworks. P.R.O.M.P.T complements any AI interaction workflow."
-  },
-  {
-    question: "Can I contribute to these frameworks?",
-    answer: "Absolutely. AATMF is maintained on GitHub and welcomes contributions from the security community. Submit new techniques, suggest improvements, or share real-world case studies."
-  }
-];
-
-const startHere = [
-  {
-    title: "AATMF Overview",
-    href: "/frameworks/aatmf/",
-    description: "The flagship framework for AI threat modeling with 14 tactics, 40+ techniques, and quantitative risk scoring."
-  },
-  {
-    title: "P.R.O.M.P.T Framework",
-    href: "/frameworks/prompt/",
-    description: "Master effective AI interactions with this systematic prompting methodology."
-  },
-  {
-    title: "AI Security Research",
-    href: "/ai-security/",
-    description: "Explore the research that informs these frameworks - real attacks, real defenses."
-  }
-];
-
-const articles = [
-  {
-    title: "AATMF: Adversarial AI Threat Modeling Framework",
-    href: "/frameworks/aatmf/",
-    date: "October 2025",
-    excerpt: "Complete framework with 14 tactics, 40+ techniques, Red-Cards for CI/CD, and crosswalks to OWASP/NIST/MITRE."
-  },
-  {
-    title: "P.R.O.M.P.T: The Last Prompt Engineering Guide",
-    href: "/frameworks/prompt/",
-    date: "September 2025",
-    excerpt: "Systematic methodology for effective AI interactions based on fundamental principles."
-  },
-  {
-    title: "Adversarial AI Prompting Framework",
-    href: "/frameworks/adversarial-prompting-framework/",
-    date: "March 2025",
-    excerpt: "Understanding how adversarial prompting exploits AI safety measures."
-  },
-  {
-    title: "SEF: Social Engineering Framework",
-    href: "/frameworks/sef/",
-    date: "Coming Soon",
-    excerpt: "Structured methodology for social engineering assessments combining psychology and practical attack simulations."
-  }
-];
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import BreadcrumbSchema from '../../components/schemas/BreadcrumbSchema.astro';
 
 const breadcrumbs = [
   { name: "Home", url: "https://snailsploit.com/" },
@@ -100,9 +10,9 @@ const breadcrumbs = [
 ];
 ---
 
-<HubLayout
-  title="Security Frameworks | AATMF, P.R.O.M.P.T, SEF"
-  description="Original security frameworks by Kai Aizen: AATMF for AI threat modeling, P.R.O.M.P.T for prompt engineering, and SEF for social engineering assessment."
+<BaseLayout
+  title="Security Frameworks | Unified Adversarial Psychology"
+  description="Three frameworks, one principle. AATMF for AI threat modeling, SEF for social engineering, P.R.O.M.P.T for communication. Built on unified adversarial psychology."
   canonical="https://snailsploit.com/frameworks/"
   ogImage="/images/og-frameworks.jpg"
   keywords={[
@@ -111,94 +21,225 @@ const breadcrumbs = [
     'prompt engineering methodology',
     'P.R.O.M.P.T framework',
     'social engineering framework',
-    'LLM security methodology'
+    'adversarial psychology'
   ]}
-  heading="Security Frameworks"
-  intro="Security frameworks transform scattered knowledge into systematic methodologies. The frameworks here emerged from years of hands-on penetration testing, AI red teaming, and security research—distilled into actionable structures that practitioners can immediately apply. AATMF brings the rigor of MITRE ATT&CK to AI security, cataloging adversarial techniques with reproducible evaluations and measurable controls. P.R.O.M.P.T provides a principled approach to AI interactions, whether for security testing or productive use. These aren't theoretical constructs—they're battle-tested tools refined through real-world engagements. All frameworks are open-source because effective security requires shared knowledge."
-  glossary={glossary}
-  faqs={faqs}
-  startHere={startHere}
-  articles={articles}
-  breadcrumbs={breadcrumbs}
 >
-  <!-- Framework Cards -->
-  <section class="mb-16">
-    <h2 class="title-section mb-8">
-      Available Frameworks
-    </h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <a
-        href="/frameworks/aatmf/"
-        class="group p-8 surface-slate transition-all hover:scale-[1.02]"
-      >
-        <h3 class="text-2xl font-bold mb-2 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
-          AATMF
-        </h3>
-        <p class="text-sm font-mono mb-4" style="color: var(--color-text-muted);">
-          Adversarial AI Threat Modeling Framework
-        </p>
-        <p class="text-base mb-4" style="color: var(--color-text-secondary);">
-          14 tactics, 40+ techniques, quantitative risk scoring, MITRE ATT&CK integration. The definitive AI red teaming resource.
-        </p>
-        <div class="text-sm font-mono" style="color: var(--color-accent-red);">
-          Explore →
-        </div>
-      </a>
+  <Navigation slot="header" />
+  <BreadcrumbSchema items={breadcrumbs} />
 
-      <a
-        href="/frameworks/prompt/"
-        class="group p-8 surface-slate transition-all hover:scale-[1.02]"
-      >
-        <h3 class="text-2xl font-bold mb-2 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
-          P.R.O.M.P.T
-        </h3>
-        <p class="text-sm font-mono mb-4" style="color: var(--color-text-muted);">
-          Purpose, Results, Obstacles, Mindset, Preferences, Technical
-        </p>
-        <p class="text-base mb-4" style="color: var(--color-text-secondary);">
-          Systematic methodology for effective AI interactions grounded in established communication theory.
-        </p>
-        <div class="text-sm font-mono" style="color: var(--color-accent-red);">
-          Learn →
-        </div>
-      </a>
+  <article class="main-content py-12 fade-in">
+    <header class="mb-12">
+      <h1 class="title-hero title-gradient mb-6">Security Frameworks</h1>
+      <p class="subtitle-hero">Three frameworks, one foundation</p>
+    </header>
 
-      <a
-        href="/frameworks/sef/"
-        class="group p-8 surface-slate transition-all hover:scale-[1.02] relative"
-      >
-        <span
-          class="absolute top-4 right-4 px-3 py-1 text-xs font-mono rounded"
-          style="background-color: var(--color-accent-yellow); color: var(--color-bg);"
-        >
-          Coming Soon
-        </span>
-        <h3 class="text-2xl font-bold mb-2 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
-          SEF
-        </h3>
-        <p class="text-sm font-mono mb-4" style="color: var(--color-text-muted);">
-          Social Engineering Framework
+    <div class="prose prose-invert prose-lg max-w-none">
+      <section class="mb-12">
+        <h2 style="color: var(--color-text-primary);">Inherited Vulnerabilities</h2>
+        <p>
+          Every security framework I've built starts from a single observation: <strong>LLMs exhibit the same trust reflexes as humans because they learned from human-generated data.</strong>
         </p>
-        <p class="text-base mb-4" style="color: var(--color-text-secondary);">
-          Structured methodology combining psychology principles with practical attack simulations.
+        <p>
+          This isn't metaphor. It's a consequence of how these systems are trained.
         </p>
-        <div class="text-sm font-mono" style="color: var(--color-accent-red);">
-          Preview →
+        <p>
+          Large language models learn from billions of documents capturing how humans communicate, persuade, comply, and resist. When an LLM encounters a request framed as authority, it tends to respond the way humans respond to authority. When it sees social proof, urgency, or reciprocity, it activates compliance patterns that social engineers have exploited in humans for decades.
+        </p>
+        <p>
+          The implication reshapes how we think about AI security: <strong>social engineering and prompt injection aren't merely analogous — they're the same attack class, executed against different substrates.</strong>
+        </p>
+        <p>
+          This observation unifies my research. Rather than treating AI security, social engineering, and adversarial communication as separate disciplines, I approach them as applications of one underlying principle: adversarial psychology operates independently of whether the target is carbon or silicon.
+        </p>
+      </section>
+
+      <hr class="section-divider" />
+
+      <section class="mb-12">
+        <h2 style="color: var(--color-text-primary);">Three Frameworks, One Foundation</h2>
+
+        <h3 style="color: var(--color-text-primary);">AATMF — Adversarial AI Threat Modeling Framework</h3>
+        <p>
+          AATMF applies adversarial psychology to machine systems.
+        </p>
+        <p>
+          The framework provides 14 tactics and 40+ techniques for systematically testing AI systems — LLMs, RAG pipelines, multimodal models, and autonomous agents. But unlike checklists that treat prompt injection as an isolated vulnerability class, AATMF maps AI attacks to the psychological principles that make them effective.
+        </p>
+        <p>
+          Persona Override (AT-001) exploits authority compliance. Contextual Drift (AT-003) exploits gradual escalation — the same boiling-frog phenomenon that bypasses human judgment when changes are incremental. Euphemism Substitution (AT-010) exploits the linguistic reframing techniques that social engineers use to make dangerous requests sound benign.
+        </p>
+        <p>The framework includes:</p>
+        <ul>
+          <li>Quantitative risk scoring (AATMF-R)</li>
+          <li>Red-Card evaluations for CI/CD integration</li>
+          <li>Crosswalks to OWASP LLM Top-10, NIST AI RMF, and MITRE ATLAS</li>
+        </ul>
+        <p><a href="/frameworks/aatmf/">Explore AATMF →</a></p>
+      </section>
+
+      <hr class="section-divider" />
+
+      <section class="mb-12">
+        <h3 style="color: var(--color-text-primary);">SEF — Social Engineering Framework</h3>
+        <p>
+          SEF applies adversarial psychology to human systems.
+        </p>
+        <p>
+          Social engineering assessments often rely on ad-hoc testing — a phishing campaign here, a vishing call there. SEF provides a structured methodology for comprehensive human-factor security assessment, grounded in the same psychological principles that AATMF applies to AI.
+        </p>
+        <p>The framework covers:</p>
+        <p>
+          <strong>Attack Taxonomy</strong> — Categorized by psychological vector (authority, social proof, urgency, reciprocity, commitment/consistency, liking) rather than delivery mechanism. A phishing email and a pretexting call that both exploit authority are functionally the same attack; SEF treats them that way.
+        </p>
+        <p>
+          <strong>Assessment Methodology</strong> — Phased approach from reconnaissance through exploitation, with metrics for measuring organizational resilience rather than just click rates.
+        </p>
+        <p>
+          <strong>AI-Era Adaptations</strong> — Modern social engineering increasingly uses deepfakes, voice cloning, and LLM-generated personalization. SEF includes threat matrices for these emerging vectors and assessment techniques that account for AI-augmented attacks.
+        </p>
+        <p>
+          <strong>Quantifiable Metrics</strong> — Success rates by attack vector, role-based vulnerability profiles, and benchmarks for measuring improvement over time.
+        </p>
+        <p><a href="/frameworks/sef/">Explore SEF →</a></p>
+      </section>
+
+      <hr class="section-divider" />
+
+      <section class="mb-12">
+        <h3 style="color: var(--color-text-primary);">P.R.O.M.P.T — Adversarial Communication Framework</h3>
+        <p>
+          P.R.O.M.P.T applies adversarial psychology to communication itself.
+        </p>
+        <p>
+          The framework began as a prompt engineering methodology, but its applications extend to any high-stakes communication where you're trying to elicit specific behavior from a system — human or artificial.
+        </p>
+        <ul>
+          <li><strong>P</strong> — Purpose: Define the outcome before the interaction.</li>
+          <li><strong>R</strong> — Results: Specify measurable success criteria.</li>
+          <li><strong>O</strong> — Obstacles: Anticipate resistance and plan mitigation.</li>
+          <li><strong>M</strong> — Mindset: Frame the request to align with the target's existing beliefs.</li>
+          <li><strong>P</strong> — Preferences: Adapt to the target's communication style.</li>
+          <li><strong>T</strong> — Technical: Handle constraints and edge cases.</li>
+        </ul>
+        <p>
+          For AI systems, P.R.O.M.P.T structures effective prompts. For human interactions, it structures effective requests. The methodology is consistent because the underlying psychology is consistent.
+        </p>
+        <p><a href="/frameworks/prompt/">Explore P.R.O.M.P.T →</a></p>
+      </section>
+
+      <hr class="section-divider" />
+
+      <section class="mb-12">
+        <h2 style="color: var(--color-text-primary);">Why Unified Frameworks Matter</h2>
+        <p>
+          Security practitioners typically specialize. AI red teamers don't run phishing assessments. Social engineers don't audit RAG pipelines. But attackers don't observe these boundaries. A sophisticated adversary might chain a social engineering attack (compromise a developer's credentials) with a prompt injection attack (poison the knowledge base that developer accesses) with a traditional exploit (pivot from the AI system to infrastructure).
+        </p>
+        <p>
+          Unified frameworks enable unified defense. Understanding that authority exploitation operates similarly against humans and AI systems allows you to build defenses that address root causes rather than chasing attack variants.
+        </p>
+        <p>My frameworks are designed to work together:</p>
+        <ul>
+          <li><strong>Threat modeling an AI-powered customer service system?</strong> Use AATMF for the LLM attack surface and SEF for the human operators who can override it.</li>
+          <li><strong>Assessing organizational security posture?</strong> Use SEF for the human layer, AATMF for AI systems in the environment, and P.R.O.M.P.T to structure engagement communications.</li>
+          <li><strong>Building AI safety controls?</strong> Map AATMF techniques to SEF psychological vectors to understand which controls address root causes versus symptoms.</li>
+        </ul>
+      </section>
+
+      <hr class="section-divider" />
+
+      <section class="mb-12">
+        <h2 style="color: var(--color-text-primary);">Getting Started</h2>
+        <p>
+          <strong>New to adversarial AI?</strong> Start with AATMF's Key Concepts and the foundational articles in the "Start Here" section.
+        </p>
+        <p>
+          <strong>Experienced security practitioner?</strong> Jump to AATMF's Tactics & Techniques for the full taxonomy, or explore SEF's assessment methodology.
+        </p>
+        <p>
+          <strong>Interested in the underlying theory?</strong> Adversarial Minds provides the deep dive on the psychology that informs all three frameworks.
+        </p>
+        <div class="cta-links">
+          <a href="/frameworks/aatmf/" class="cta-link">Explore AATMF →</a>
+          <a href="/frameworks/sef/" class="cta-link">Explore SEF →</a>
+          <a href="/adversarial-minds/" class="cta-link">Read Adversarial Minds →</a>
         </div>
-      </a>
+      </section>
     </div>
-  </section>
+  </article>
 
-  <!-- Why These Frameworks -->
-  <section class="mb-16 p-8 surface-slate">
-    <h2 class="title-section mb-4">
-      Why These Frameworks?
-    </h2>
-    <p class="mb-4" style="color: var(--color-text-secondary);">
-      These frameworks were born from practical experience in AI security research and penetration testing. They represent systematic approaches to complex security challenges, built for practitioners by practitioners.
-    </p>
-    <p style="color: var(--color-text-secondary);">
-      All frameworks are open-source and continuously evolving based on real-world testing and community feedback. They integrate with existing security methodologies while addressing the unique challenges of AI systems.
-    </p>
-  </section>
-</HubLayout>
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .prose {
+    color: var(--color-text-primary);
+  }
+
+  .prose h2 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    font-family: var(--font-mono);
+  }
+
+  .prose h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 1.75em;
+    margin-bottom: 0.75em;
+    font-family: var(--font-mono);
+  }
+
+  .prose p {
+    margin-bottom: 1.25em;
+    line-height: 1.75;
+  }
+
+  .prose a {
+    color: var(--color-accent-red);
+    text-decoration: underline;
+  }
+
+  .prose a:hover {
+    color: var(--color-accent-green);
+  }
+
+  .prose ul {
+    margin: 1.25em 0;
+    padding-left: 1.5em;
+  }
+
+  .prose li {
+    margin-bottom: 0.5em;
+  }
+
+  .prose strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 3rem 0;
+  }
+
+  .cta-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .cta-link {
+    color: var(--color-accent-red);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .cta-link:hover {
+    color: var(--color-accent-green);
+  }
+</style>

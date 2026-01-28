@@ -1,97 +1,8 @@
 ---
-import HubLayout from '../../layouts/HubLayout.astro';
-
-const glossary = [
-  {
-    term: "CVE",
-    definition: "Common Vulnerabilities and Exposures - A standardized identifier for publicly known security vulnerabilities, enabling consistent tracking and communication across the security community.",
-    link: "/security-research/cves/"
-  },
-  {
-    term: "Responsible Disclosure",
-    definition: "The practice of privately reporting security vulnerabilities to affected vendors before public disclosure, allowing time for patches to be developed and deployed."
-  },
-  {
-    term: "CVSS Score",
-    definition: "Common Vulnerability Scoring System - A standardized method for rating the severity of security vulnerabilities on a scale of 0-10, considering factors like attack complexity and impact."
-  },
-  {
-    term: "Penetration Testing",
-    definition: "Authorized simulated attacks on computer systems to evaluate security controls and identify exploitable vulnerabilities before malicious actors discover them."
-  },
-  {
-    term: "Zero-Day",
-    definition: "A vulnerability that is unknown to the vendor and has no available patch. Zero-day exploits are particularly dangerous as defenses don't yet exist."
-  },
-  {
-    term: "Attack Chain",
-    definition: "The sequence of steps an attacker takes to achieve their objective, from initial reconnaissance through exploitation to achieving their goal."
-  }
-];
-
-const faqs = [
-  {
-    question: "How do you discover these vulnerabilities?",
-    answer: "Through systematic security research combining manual code review, automated scanning, and creative attack surface exploration. Each CVE represents significant research time following responsible disclosure practices."
-  },
-  {
-    question: "Are these CVEs currently being exploited?",
-    answer: "All disclosed CVEs have been responsibly reported and patched. We only publish details after vendors have released fixes and users have had reasonable time to update."
-  },
-  {
-    question: "How can I protect my systems from these vulnerabilities?",
-    answer: "Keep software updated, especially WordPress plugins. Subscribe to security advisories, implement Web Application Firewalls, and follow the specific remediation steps provided in each CVE disclosure."
-  },
-  {
-    question: "Do you offer security testing services?",
-    answer: "This research is shared for educational purposes and to improve overall security. For professional penetration testing services, contact through LinkedIn."
-  }
-];
-
-const startHere = [
-  {
-    title: "CVE Disclosures",
-    href: "/security-research/cves/",
-    description: "Browse all CVE discoveries with technical details, CVSS scores, and remediation guidance."
-  },
-  {
-    title: "General Security Research",
-    href: "/security-research/general/",
-    description: "Deep-dive articles on container security, EDR evasion, cloud exploitation, and more."
-  },
-  {
-    title: "AATMF Framework",
-    href: "/frameworks/aatmf/",
-    description: "Apply systematic threat modeling to your security research."
-  }
-];
-
-const articles = [
-  {
-    title: "CVE-2025-12030",
-    href: "/security-research/cves/cve-2025-12030/",
-    date: "2025",
-    excerpt: "High severity WordPress plugin vulnerability with detailed technical analysis."
-  },
-  {
-    title: "Cloud Vulnerability Exploitation",
-    href: "/security-research/general/cloud-vulnerability-exploitation/",
-    date: "2025",
-    excerpt: "Comprehensive analysis of cloud-specific attack vectors and defense strategies."
-  },
-  {
-    title: "Advanced Container Escapes",
-    href: "/security-research/general/advanced-container-escapes/",
-    date: "2025",
-    excerpt: "Techniques for breaking out of containerized environments."
-  },
-  {
-    title: "EDR Evasion Techniques",
-    href: "/security-research/general/edr-evasion-techniques/",
-    date: "2025",
-    excerpt: "Understanding how attackers bypass endpoint detection and response solutions."
-  }
-];
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import BreadcrumbSchema from '../../components/schemas/BreadcrumbSchema.astro';
 
 const breadcrumbs = [
   { name: "Home", url: "https://snailsploit.com/" },
@@ -99,9 +10,9 @@ const breadcrumbs = [
 ];
 ---
 
-<HubLayout
-  title="Security Research | CVE Disclosures & Vulnerability Analysis"
-  description="Security research by Kai Aizen including CVE disclosures, vulnerability analysis, penetration testing techniques, and defensive security strategies."
+<BaseLayout
+  title="Security Research | Vulnerability Discovery & Methodology"
+  description="CVE discoveries and vulnerability research methodology. WordPress plugin vulnerabilities, container security, cloud exploitation, and traditional AppSec research."
   canonical="https://snailsploit.com/security-research/"
   ogImage="/images/og-research.png"
   keywords={[
@@ -112,62 +23,191 @@ const breadcrumbs = [
     'WordPress vulnerabilities',
     'container security'
   ]}
-  heading="Security Research"
-  intro="Security research is the foundation of effective defense. This hub contains original vulnerability discoveries, technical deep-dives, and practical attack analysis from years of penetration testing and security research. Every CVE disclosure here represents the complete lifecycle: discovery, responsible disclosure, vendor coordination, and public documentation. Beyond individual vulnerabilities, the general research covers systematic approaches to cloud security, container escapes, and endpoint evasion—knowledge that helps both offensive and defensive practitioners. All research follows responsible disclosure practices and aims to improve security for everyone."
-  glossary={glossary}
-  faqs={faqs}
-  startHere={startHere}
-  articles={articles}
-  breadcrumbs={breadcrumbs}
 >
-  <!-- Research Categories -->
-  <section class="mb-16">
-    <h2 class="title-section mb-8">
-      Research Categories
-    </h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <a
-        href="/security-research/cves/"
-        class="group p-8 surface-slate transition-all hover:scale-[1.02]"
-      >
-        <h3 class="text-2xl font-bold mb-4 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
-          CVE Disclosures
-        </h3>
-        <p class="text-base mb-4" style="color: var(--color-text-secondary);">
-          6x CVE holder with documented WordPress plugin vulnerabilities. Each disclosure includes technical details, CVSS scoring, and remediation steps.
-        </p>
-        <div class="text-sm font-mono" style="color: var(--color-accent-red);">
-          6 CVEs →
-        </div>
-      </a>
+  <Navigation slot="header" />
+  <BreadcrumbSchema items={breadcrumbs} />
 
-      <a
-        href="/security-research/general/"
-        class="group p-8 surface-slate transition-all hover:scale-[1.02]"
-      >
-        <h3 class="text-2xl font-bold mb-4 group-hover:text-[var(--color-accent-red)] transition-colors" style="color: var(--color-text-primary);">
-          General Research
-        </h3>
-        <p class="text-base mb-4" style="color: var(--color-text-secondary);">
-          Deep technical analysis of container security, cloud exploitation, EDR evasion, and zero-trust architectures.
+  <article class="main-content py-12 fade-in">
+    <header class="mb-12">
+      <h1 class="title-hero title-gradient mb-6">Security Research</h1>
+      <p class="subtitle-hero">Vulnerability discovery & methodology</p>
+    </header>
+
+    <div class="prose prose-invert prose-lg max-w-none">
+      <section class="mb-12">
+        <h2 style="color: var(--color-text-primary);">Research Philosophy</h2>
+        <p>
+          I find vulnerabilities by looking for trust assumptions.
         </p>
-        <div class="text-sm font-mono" style="color: var(--color-accent-red);">
-          4 articles →
-        </div>
-      </a>
+        <p>
+          Every system — software, human, AI — operates on assumptions about what inputs are valid, what users are authorized, and what data is trustworthy. Vulnerabilities exist where those assumptions don't hold.
+        </p>
+        <p>
+          This sounds straightforward, but it changes how you approach research. Instead of running automated scanners and triaging outputs, I ask: <em>What does this system trust? Why? What happens when that trust is misplaced?</em>
+        </p>
+        <p>
+          For WordPress plugins, that means examining how they handle user input, how they verify authorization, and where they assume database-sourced data is safe. For container security, it means questioning what the runtime trusts about the images it executes. For AI systems, it means testing what the model trusts about the prompts it receives.
+        </p>
+        <p>
+          The methodology stays consistent. The substrates vary.
+        </p>
+      </section>
+
+      <hr class="section-divider" />
+
+      <section class="mb-12">
+        <h2 style="color: var(--color-text-primary);">CVE Portfolio</h2>
+        <p>
+          Responsibly disclosed vulnerabilities in WordPress plugins, documented on NVD and MITRE:
+        </p>
+
+        <h3 style="color: var(--color-text-primary);">High Severity</h3>
+        <p>
+          <strong>CVE-2025-12030</strong> — IDOR in ACF to REST API (CVSS 7.5)<br />
+          Unauthorized access to restricted field data through predictable object references.
+        </p>
+
+        <h3 style="color: var(--color-text-primary);">Medium Severity</h3>
+        <p>
+          <strong>CVE-2025-9776</strong> — SQL Injection in CatFolders (CVSS 6.5)<br />
+          Insufficient input sanitization in folder management queries.
+        </p>
+        <p>
+          <strong>CVE-2025-12163</strong> — Stored XSS in OmniPress (CVSS 6.4)<br />
+          User input rendered without escaping in admin context.
+        </p>
+        <p>
+          <strong>CVE-2025-11171</strong> — Missing Authorization in Chartify (CVSS 5.3)<br />
+          Administrative functions accessible without capability checks.
+        </p>
+        <p>
+          <strong>CVE-2025-11174</strong> — Information Exposure in Document Library Lite (CVSS 5.3)<br />
+          Sensitive metadata leaked through API endpoints.
+        </p>
+        <p>
+          <strong>CVE-2026-1208</strong> — WordPress Plugin Vulnerability<br />
+          Details pending coordinated disclosure.
+        </p>
+        <p><a href="/security-research/cves/">View All CVE Details →</a></p>
+      </section>
+
+      <hr class="section-divider" />
+
+      <section class="mb-12">
+        <h2 style="color: var(--color-text-primary);">Research Areas</h2>
+
+        <h3 style="color: var(--color-text-primary);">WordPress Security</h3>
+        <p>
+          The WordPress ecosystem powers over 40% of the web, running on plugins developed with varying security maturity. My research focuses on common vulnerability patterns in plugin architecture: authorization bypasses, injection flaws, and insecure data handling.
+        </p>
+        <p><a href="/security-research/cves/">Explore WordPress Research →</a></p>
+      </section>
+
+      <hr class="section-divider" />
+
+      <section class="mb-12">
+        <h3 style="color: var(--color-text-primary);">Container Security</h3>
+        <p>
+          Containers promised isolation. Reality delivered attack surface. My container security research examines runtime vulnerabilities, escape techniques, and the gap between container security assumptions and actual isolation guarantees.
+        </p>
+        <p>Key research:</p>
+        <ul>
+          <li><strong>Runtime attestation</strong> — Continuous verification that container state matches expected baselines</li>
+          <li><strong>Container escape techniques</strong> — runC exploits, eBPF weaponization, kernel abuse vectors</li>
+          <li><strong>Zero-trust container architecture</strong> — Defensive patterns that assume breach</li>
+        </ul>
+        <p><a href="/security-research/general/zero-trust-container-runtime/">Explore Container Research →</a></p>
+      </section>
+
+      <hr class="section-divider" />
+
+      <section class="mb-12">
+        <h3 style="color: var(--color-text-primary);">Cloud Security</h3>
+        <p>
+          Cloud environments introduce complexity that creates vulnerability. My cloud research focuses on exploitation patterns in AWS, Azure, and GCP — particularly where service integrations create unexpected trust relationships.
+        </p>
+        <p><a href="/security-research/general/">Explore Cloud Research →</a></p>
+      </section>
+
+      <hr class="section-divider" />
+
+      <section class="mb-12">
+        <h2 style="color: var(--color-text-primary);">Methodology</h2>
+        <p>My vulnerability research follows a consistent process:</p>
+        <ol>
+          <li><strong>Identify trust assumptions</strong> — What does the system believe about its inputs, users, and environment?</li>
+          <li><strong>Map attack surface</strong> — Where can an attacker influence those trusted inputs?</li>
+          <li><strong>Test boundary conditions</strong> — What happens when trust is violated at the edges?</li>
+          <li><strong>Verify exploitability</strong> — Can the violation produce meaningful impact?</li>
+          <li><strong>Document and disclose</strong> — Responsible disclosure with complete technical detail</li>
+        </ol>
+        <p>
+          This methodology applies whether I'm auditing a WordPress plugin or probing an AI system. The principle is consistent: find the trust, test the trust, document what breaks.
+        </p>
+      </section>
     </div>
-  </section>
+  </article>
 
-  <!-- Credentials -->
-  <section class="mb-16 p-8 surface-slate">
-    <h2 class="title-section mb-4">
-      Research Credentials
-    </h2>
-    <ul class="space-y-2" style="color: var(--color-text-secondary);">
-      <li>• 6x CVE Holder (CVE-2025-9776, CVE-2025-11171, CVE-2025-11174, CVE-2025-12030, CVE-2025-12163, CVE-2026-1208)</li>
-      <li>• Published in Hakin9 Magazine, PenTest Magazine, eForensics</li>
-      <li>• Creator of AATMF (accepted into OWASP GenAI Security Project)</li>
-      <li>• <a href="https://www.wordfence.com/threat-intel/vulnerabilities/researchers/kai-aizen" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-accent-red)]" style="color: var(--color-accent-red);">Wordfence Researcher Profile →</a></li>
-    </ul>
-  </section>
-</HubLayout>
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .prose {
+    color: var(--color-text-primary);
+  }
+
+  .prose h2 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    font-family: var(--font-mono);
+  }
+
+  .prose h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 1.75em;
+    margin-bottom: 0.75em;
+    font-family: var(--font-mono);
+  }
+
+  .prose p {
+    margin-bottom: 1.25em;
+    line-height: 1.75;
+  }
+
+  .prose a {
+    color: var(--color-accent-red);
+    text-decoration: underline;
+  }
+
+  .prose a:hover {
+    color: var(--color-accent-green);
+  }
+
+  .prose ul,
+  .prose ol {
+    margin: 1.25em 0;
+    padding-left: 1.5em;
+  }
+
+  .prose li {
+    margin-bottom: 0.5em;
+  }
+
+  .prose strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+
+  .prose em {
+    font-style: italic;
+  }
+
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 3rem 0;
+  }
+</style>
