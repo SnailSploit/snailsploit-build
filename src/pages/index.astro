@@ -153,8 +153,9 @@ const latestArticles = [
 
       <div class="hero-content">
         <h1 class="headline">
-          <span class="line1">Social engineering and prompt injection are the <span class="accent">same attack</span>.</span>
-          <span class="line2">Different substrate.</span>
+          <span class="line1">Social engineering and prompt injection</span>
+          <span class="line2">are the <span class="accent">same attack.</span></span>
+          <span class="line3">Different substrate.</span>
         </h1>
 
         <p class="subtitle">
@@ -163,29 +164,27 @@ const latestArticles = [
 
         <!-- Credentials as badges -->
         <div class="credentials-badges">
-          <span class="badge badge-green" style="animation-delay: 0s">
+          <a href="/frameworks/aatmf/" class="badge badge-green" style="animation-delay: 0s">
             <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
             </svg>
             Creator of AATMF
-          </span>
-          <span class="badge badge-default" style="animation-delay: 0.2s">
+          </a>
+          <a href="/adversarial-minds/" class="badge badge-default" style="animation-delay: 0.2s">
             <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
               <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
             </svg>
             Author of Adversarial Minds
-          </span>
-          <span class="badge badge-purple" style="animation-delay: 0.4s">
+          </a>
+          <a href="/security-research/cves/" class="badge badge-purple" style="animation-delay: 0.4s">
             <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="10"/>
               <path d="M12 16v-4M12 8h.01"/>
             </svg>
             NVD Contributor
-          </span>
+          </a>
         </div>
-
-        <p class="byline">Kai Aizen — SnailSploit / The Jailbreak Chef</p>
 
         <div class="button-row">
           <a href="/about/" class="btn btn-primary group">
@@ -553,20 +552,28 @@ const latestArticles = [
 
   .headline .line2 {
     display: block;
-    background: linear-gradient(135deg, #6e7681, #484f58);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #E6EDF3;
   }
 
-  .headline .accent {
+  .headline .line2 .accent {
     background: linear-gradient(90deg, #39FF14, #7dff5e, #39FF14, #7dff5e);
     background-size: 200% 100%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    position: relative;
     animation: accentShimmer 4s ease-in-out infinite;
+  }
+
+  .headline .line3 {
+    display: block;
+    margin-top: 0.15em;
+    background: linear-gradient(90deg, #39FF14, #7dff5e, #39FF14, #7dff5e);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: accentShimmer 4s ease-in-out infinite;
+    animation-delay: 0.5s;
   }
 
   .subtitle {
@@ -583,86 +590,69 @@ const latestArticles = [
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
   }
 
   .badge {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    border-radius: 100px;
-    font-family: 'Inter', var(--font-sans), sans-serif;
-    font-size: 0.85rem;
+    padding: 0.6rem 1.25rem;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', var(--font-mono), monospace;
+    font-size: 0.8rem;
     font-weight: 500;
+    letter-spacing: -0.01em;
+    text-decoration: none;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     animation: badgeFadeIn 0.6s ease-out backwards;
+    cursor: pointer;
   }
 
   .badge-icon {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
   }
 
   .badge-green {
-    background: rgba(57, 255, 20, 0.1);
-    border: 1px solid rgba(57, 255, 20, 0.3);
+    background: rgba(57, 255, 20, 0.08);
+    border: 1px solid rgba(57, 255, 20, 0.25);
     color: #39FF14;
   }
 
   .badge-green:hover {
     background: rgba(57, 255, 20, 0.15);
     border-color: rgba(57, 255, 20, 0.5);
-    box-shadow: inset 0 0 20px rgba(57, 255, 20, 0.15);
-    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.15);
+    transform: translateY(-2px);
   }
 
   .badge-default {
-    background: rgba(139, 148, 158, 0.1);
-    border: 1px solid rgba(139, 148, 158, 0.3);
+    background: rgba(139, 148, 158, 0.08);
+    border: 1px solid rgba(139, 148, 158, 0.25);
     color: #E6EDF3;
   }
 
   .badge-default:hover {
     background: rgba(139, 148, 158, 0.15);
     border-color: rgba(139, 148, 158, 0.5);
-    box-shadow: inset 0 0 20px rgba(139, 148, 158, 0.1);
-    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(139, 148, 158, 0.1);
+    transform: translateY(-2px);
   }
 
   .badge-purple {
-    background: rgba(189, 52, 254, 0.1);
-    border: 1px solid rgba(189, 52, 254, 0.3);
+    background: rgba(189, 52, 254, 0.08);
+    border: 1px solid rgba(189, 52, 254, 0.25);
     color: #BD34FE;
   }
 
   .badge-purple:hover {
     background: rgba(189, 52, 254, 0.15);
     border-color: rgba(189, 52, 254, 0.5);
-    box-shadow: inset 0 0 20px rgba(189, 52, 254, 0.15);
-    transform: scale(1.02);
-  }
-
-  .byline {
-    font-family: 'JetBrains Mono', var(--font-mono), monospace;
-    font-size: 0.875rem;
-    color: #6e7681;
-    margin-bottom: 2.5rem;
-    position: relative;
-    display: inline-block;
-  }
-
-  .byline::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(57, 255, 20, 0.4), rgba(189, 52, 254, 0.4), transparent);
-    border-radius: 2px;
+    box-shadow: 0 0 20px rgba(189, 52, 254, 0.15);
+    transform: translateY(-2px);
   }
 
   .button-row {

@@ -44,6 +44,7 @@ const navItems = [
         alt="SnailSploit"
         class="logo-img"
       />
+      <span class="logo-text">SnailSploit</span>
     </a>
 
     <!-- Desktop Nav -->
@@ -139,12 +140,30 @@ const navItems = [
     flex-shrink: 0;
     display: flex;
     align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
   }
 
   .logo-img {
-    height: 55px;
+    height: 48px;
     width: auto;
     object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+
+  .logo-text {
+    display: none;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #E6EDF3;
+    letter-spacing: -0.01em;
+  }
+
+  @media (min-width: 640px) {
+    .logo-text {
+      display: block;
+    }
   }
 
   /* Desktop Nav */
@@ -380,7 +399,7 @@ const navItems = [
     }
 
     .logo-img {
-      height: 75px;
+      height: 56px;
     }
 
     .desktop-nav {
@@ -403,7 +422,7 @@ const navItems = [
     }
 
     .logo-img {
-      height: 85px;
+      height: 64px;
     }
 
     .nav-link {
