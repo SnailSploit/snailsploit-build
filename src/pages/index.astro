@@ -74,11 +74,12 @@ const featuredCards = [
 ];
 
 const cves = [
-  { id: 'CVE-2025-12030', plugin: 'ACF to REST API', type: 'IDOR', severity: 'High', cvss: 7.5, url: '/security-research/cves/cve-2025-12030/', github: 'https://github.com/SnailSploit/CVE-2025-12030' },
   { id: 'CVE-2025-9776', plugin: 'CatFolders', type: 'SQL Injection', severity: 'Medium', cvss: 6.5, url: '/security-research/cves/cve-2025-9776/', github: 'https://github.com/SnailSploit/CVE-2025-9776' },
   { id: 'CVE-2025-12163', plugin: 'OmniPress', type: 'XSS', severity: 'Medium', cvss: 6.4, url: '/security-research/cves/cve-2025-12163/', github: 'https://github.com/SnailSploit/CVE-2025-12163' },
   { id: 'CVE-2025-11171', plugin: 'Chartify', type: 'Missing Auth', severity: 'Medium', cvss: 5.3, url: '/security-research/cves/cve-2025-11171/', github: 'https://github.com/SnailSploit/CVE-2025-11171' },
   { id: 'CVE-2025-11174', plugin: 'Document Library Lite', type: 'Info Exposure', severity: 'Medium', cvss: 5.3, url: '/security-research/cves/cve-2025-11174/', github: 'https://github.com/SnailSploit/CVE-2025-11174' },
+  { id: 'CVE-2025-12030', plugin: 'ACF to REST API', type: 'IDOR', severity: 'Medium', cvss: 4.3, url: '/security-research/cves/cve-2025-12030/', github: 'https://github.com/SnailSploit/CVE-2025-12030' },
+  { id: 'CVE-2026-1208', plugin: 'Friendly Functions for Welcart', type: 'CSRF', severity: 'Medium', cvss: 4.3, url: '/security-research/cves/', github: 'https://github.com/SnailSploit/CVE-2026-1208' },
 ];
 
 const latestArticles = [
@@ -144,57 +145,79 @@ const latestArticles = [
 
     <!-- Hero Section -->
     <section class="hero">
-      <!-- Grid background -->
+      <!-- Background layers: grid (lowest) → blobs → scanlines → vignette → particles → content (highest) -->
       <div class="hero-grid"></div>
-      <!-- Gradient orbs -->
       <div class="hero-orb"></div>
       <div class="hero-orb-secondary"></div>
       <div class="hero-orb-tertiary"></div>
+      <div class="hero-scanlines"></div>
+      <div class="hero-vignette"></div>
+
+      <!-- Mouse-tracking glow -->
+      <div class="hero-cursor-glow" id="hero-cursor-glow"></div>
+
+      <!-- Orbiting ring -->
+      <div class="orbit-ring">
+        <div class="orbit-dot"></div>
+        <div class="orbit-dot orbit-dot-2"></div>
+      </div>
+
+      <!-- Floating particles -->
+      <div class="hero-particles">
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+      </div>
 
       <div class="hero-content">
         <h1 class="headline">
-          <span class="line1">Social engineering and prompt injection</span>
-          <span class="line2">are the <span class="accent">same attack.</span></span>
-          <span class="line3">Different substrate.</span>
+          <span class="headline-line hero-stagger">Social engineering &amp; prompt injection</span>
+          <span class="headline-line headline-punch hero-stagger">Same attack. <span class="accent">Different substrate.</span></span>
         </h1>
 
-        <p class="subtitle">
-          I research the adversarial psychology that exploits both<br class="hide-mobile" /> — and build frameworks to defend against it.
+        <div class="hero-divider hero-stagger"></div>
+
+        <p class="subtitle hero-stagger">
+          I research the adversarial psychology that exploits both humans and machines, and build frameworks to defend against it.
         </p>
 
-        <!-- Credentials as badges -->
-        <div class="credentials-badges">
-          <a href="/frameworks/aatmf/" class="badge badge-green" style="animation-delay: 0s">
+        <div class="button-row hero-stagger">
+          <a href="/frameworks/" class="btn btn-primary">
+            <span>View Frameworks</span>
+            <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+          <a href="/about/" class="btn btn-secondary">
+            <span>About Me</span>
+          </a>
+        </div>
+
+        <div class="credentials-badges hero-stagger">
+          <a href="/frameworks/aatmf/" class="badge">
             <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
             </svg>
             Creator of AATMF
           </a>
-          <a href="/adversarial-minds/" class="badge badge-default" style="animation-delay: 0.2s">
+          <a href="/adversarial-minds/" class="badge">
             <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
               <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
             </svg>
             Author of Adversarial Minds
           </a>
-          <a href="/security-research/cves/" class="badge badge-purple" style="animation-delay: 0.4s">
+          <a href="/security-research/cves/" class="badge">
             <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="10"/>
               <path d="M12 16v-4M12 8h.01"/>
             </svg>
             NVD Contributor
-          </a>
-        </div>
-
-        <div class="button-row">
-          <a href="/about/" class="btn btn-primary group">
-            <span>About Me</span>
-            <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </a>
-          <a href="/frameworks/" class="btn btn-secondary">
-            <span>View Frameworks</span>
           </a>
         </div>
       </div>
@@ -358,57 +381,286 @@ const latestArticles = [
 
   /* Hero Section */
   .hero {
-    min-height: 100vh;
+    min-height: calc(100svh - 4.5rem);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem 4rem;
+    padding: 2rem 1.5rem;
     position: relative;
     overflow: hidden;
   }
 
+  /* Layer 1 (lowest): Grid */
   .hero-grid {
     position: absolute;
     inset: 0;
+    z-index: 0;
     background-image:
-      linear-gradient(rgba(57, 255, 20, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(57, 255, 20, 0.03) 1px, transparent 1px);
+      linear-gradient(rgba(57, 255, 20, 0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(57, 255, 20, 0.015) 1px, transparent 1px);
     background-size: 60px 60px;
-    opacity: 0.5;
+    opacity: 0.3;
   }
 
+  /* Layer 2: Blobs — pushed toward edges, heavily blurred */
   .hero-orb {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 800px;
-    height: 800px;
-    background: radial-gradient(circle, rgba(57, 255, 20, 0.12) 0%, transparent 60%);
+    top: 20%;
+    left: -10%;
+    z-index: 1;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(57, 255, 20, 0.07) 0%, transparent 60%);
+    filter: blur(80px);
     pointer-events: none;
     animation: float 8s ease-in-out infinite;
   }
 
   .hero-orb-secondary {
     position: absolute;
-    top: 30%;
-    right: 20%;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(189, 52, 254, 0.12) 0%, transparent 60%);
+    top: 10%;
+    right: 5%;
+    z-index: 1;
+    width: 900px;
+    height: 900px;
+    background: radial-gradient(circle, rgba(189, 52, 254, 0.25) 0%, rgba(189, 52, 254, 0.08) 40%, transparent 65%);
+    filter: blur(30px);
     pointer-events: none;
     animation: float 10s ease-in-out infinite reverse;
   }
 
   .hero-orb-tertiary {
     position: absolute;
-    bottom: 25%;
-    left: 15%;
-    width: 250px;
-    height: 250px;
-    background: radial-gradient(circle, rgba(189, 52, 254, 0.1) 0%, transparent 60%);
+    bottom: 0%;
+    left: 5%;
+    z-index: 1;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(189, 52, 254, 0.20) 0%, rgba(189, 52, 254, 0.06) 40%, transparent 65%);
+    filter: blur(30px);
     pointer-events: none;
     animation: floatTertiary 12s ease-in-out infinite;
+  }
+
+  /* Scanlines overlay */
+  .hero-scanlines {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.03) 2px,
+      rgba(0, 0, 0, 0.03) 4px
+    );
+    pointer-events: none;
+  }
+
+  /* Layer 3: Vignette — clear center, dark edges */
+  .hero-vignette {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, transparent 0%, rgba(13, 17, 23, 0.45) 100%);
+    pointer-events: none;
+  }
+
+  /* Floating particles */
+  .hero-particles {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: rgba(57, 255, 20, 0.6);
+    box-shadow: 0 0 6px rgba(57, 255, 20, 0.4);
+    animation: particleFloat linear infinite;
+    opacity: 0;
+  }
+
+  .particle:nth-child(1) { left: 10%; animation-duration: 12s; animation-delay: 0s; }
+  .particle:nth-child(2) { left: 25%; animation-duration: 16s; animation-delay: 2s; width: 3px; height: 3px; background: rgba(189, 52, 254, 0.6); box-shadow: 0 0 6px rgba(189, 52, 254, 0.4); }
+  .particle:nth-child(3) { left: 40%; animation-duration: 10s; animation-delay: 4s; }
+  .particle:nth-child(4) { left: 55%; animation-duration: 14s; animation-delay: 1s; width: 3px; height: 3px; background: rgba(189, 52, 254, 0.6); box-shadow: 0 0 6px rgba(189, 52, 254, 0.4); }
+  .particle:nth-child(5) { left: 70%; animation-duration: 11s; animation-delay: 3s; }
+  .particle:nth-child(6) { left: 85%; animation-duration: 15s; animation-delay: 5s; width: 3px; height: 3px; }
+  .particle:nth-child(7) { left: 35%; animation-duration: 13s; animation-delay: 6s; background: rgba(189, 52, 254, 0.6); box-shadow: 0 0 6px rgba(189, 52, 254, 0.4); }
+  .particle:nth-child(8) { left: 65%; animation-duration: 17s; animation-delay: 7s; }
+
+  @keyframes particleFloat {
+    0% { transform: translateY(100vh) scale(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-20vh) scale(1); opacity: 0; }
+  }
+
+  /* Animated gradient divider line */
+  .hero-divider {
+    width: 80px;
+    height: 2px;
+    margin: 1.5rem auto 0;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #39FF14, #7dff5e, #BD34FE, #39FF14);
+    background-size: 300% 100%;
+    animation: dividerShift 4s ease-in-out infinite;
+  }
+
+  @keyframes dividerShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* Staggered entrance animation */
+  .hero-stagger {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: staggerIn 0.7s ease-out forwards;
+  }
+
+  .hero-stagger:nth-child(1) { animation-delay: 0.1s; }
+  .hero-stagger:nth-child(2) { animation-delay: 0.25s; }
+  .hero-stagger:nth-child(3) { animation-delay: 0.4s; }
+  .hero-stagger:nth-child(4) { animation-delay: 0.55s; }
+  .hero-stagger:nth-child(5) { animation-delay: 0.7s; }
+  .hero-stagger:nth-child(6) { animation-delay: 0.85s; }
+
+  @keyframes staggerIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes accentGlow {
+    0%, 100% { filter: drop-shadow(0 0 4px rgba(57, 255, 20, 0.2)); }
+    50% { filter: drop-shadow(0 0 16px rgba(57, 255, 20, 0.5)); }
+  }
+
+  /* Mouse-tracking glow */
+  .hero-cursor-glow {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(57, 255, 20, 0.08) 0%, rgba(189, 52, 254, 0.04) 40%, transparent 70%);
+    pointer-events: none;
+    z-index: 2;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .hero:hover .hero-cursor-glow {
+    opacity: 1;
+  }
+
+  /* Orbiting ring */
+  .orbit-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+    width: 550px;
+    height: 550px;
+    border-radius: 50%;
+    border: 1px solid rgba(57, 255, 20, 0.06);
+    z-index: 2;
+    pointer-events: none;
+    animation: orbitSpin 30s linear infinite;
+  }
+
+  .orbit-dot {
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    margin-left: -3px;
+    border-radius: 50%;
+    background: #39FF14;
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.6), 0 0 25px rgba(57, 255, 20, 0.3);
+    animation: dotPulse 2s ease-in-out infinite;
+  }
+
+  .orbit-dot-2 {
+    top: auto;
+    bottom: -3px;
+    background: #BD34FE;
+    box-shadow: 0 0 10px rgba(189, 52, 254, 0.6), 0 0 25px rgba(189, 52, 254, 0.3);
+    animation-delay: 1s;
+  }
+
+  @keyframes orbitSpin {
+    from { transform: translate(-50%, -55%) rotate(0deg); }
+    to { transform: translate(-50%, -55%) rotate(360deg); }
+  }
+
+  @keyframes dotPulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.5); }
+  }
+
+  /* Grid pulse animation */
+  .hero-grid {
+    animation: gridPulse 6s ease-in-out infinite;
+  }
+
+  @keyframes gridPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.5; }
+  }
+
+  /* Glitch flicker on accent text */
+  .headline .accent {
+    position: relative;
+  }
+
+  .headline .accent::before,
+  .headline .accent::after {
+    content: 'Different substrate.';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #39FF14, #7dff5e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .headline .accent::before {
+    animation: glitch1 8s ease-in-out infinite;
+    color: #39FF14;
+  }
+
+  .headline .accent::after {
+    animation: glitch2 8s ease-in-out infinite;
+    color: #BD34FE;
+  }
+
+  @keyframes glitch1 {
+    0%, 92%, 100% { opacity: 0; transform: none; }
+    93% { opacity: 0.8; transform: translate(-2px, -1px); }
+    94% { opacity: 0; transform: none; }
+    95% { opacity: 0.6; transform: translate(2px, 1px); }
+    96% { opacity: 0; transform: none; }
+  }
+
+  @keyframes glitch2 {
+    0%, 94%, 100% { opacity: 0; transform: none; }
+    95% { opacity: 0.6; transform: translate(2px, -1px); }
+    96% { opacity: 0; transform: none; }
+    97% { opacity: 0.4; transform: translate(-1px, 2px); }
+    98% { opacity: 0; transform: none; }
   }
 
   @keyframes float {
@@ -457,17 +709,19 @@ const latestArticles = [
     50% { box-shadow: 0 0 20px rgba(57, 255, 20, 0.3); }
   }
 
+  /* Layer 4 (highest): Content */
   .hero-content {
     max-width: 1000px;
     text-align: center;
     position: relative;
-    z-index: 1;
+    z-index: 3;
+    transform: translateY(-2vh);
     animation: fadeInUp 0.8s ease-out;
   }
 
   @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    to { opacity: 1; transform: translateY(-2vh); }
   }
 
   /* Loading Screen */
@@ -536,53 +790,53 @@ const latestArticles = [
     }
   }
 
+  /* Headline */
   .headline {
     font-family: 'Space Grotesk', var(--font-display), sans-serif;
-    font-size: clamp(3rem, 8vw, 5.5rem);
-    font-weight: 700;
-    line-height: 1.05;
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.03em;
+    font-size: clamp(2.25rem, 5.5vw, 3.75rem);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    color: rgba(230, 237, 243, 0.92);
+    max-width: 22ch;
+    margin: 0 auto;
+    text-wrap: balance;
   }
 
-  .headline .line1 {
+  .headline-line {
     display: block;
-    color: #E6EDF3;
   }
 
-  .headline .line2 {
-    display: block;
-    color: #E6EDF3;
+  .headline-punch {
+    margin-top: 0.25em;
   }
 
-  .headline .line2 .accent {
+  .headline .accent {
     background: linear-gradient(90deg, #39FF14, #7dff5e, #39FF14, #7dff5e);
     background-size: 200% 100%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: accentShimmer 4s ease-in-out infinite;
+    animation: accentShimmer 4s ease-in-out infinite, accentGlow 3s ease-in-out infinite;
   }
 
-  .headline .line3 {
-    display: block;
-    margin-top: 0.15em;
-    background: linear-gradient(90deg, #39FF14, #7dff5e, #39FF14, #7dff5e);
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: accentShimmer 4s ease-in-out infinite;
-    animation-delay: 0.5s;
-  }
-
+  /* Subhead */
   .subtitle {
     font-family: 'Inter', var(--font-sans), sans-serif;
-    font-size: 1.25rem;
-    color: #8B949E;
-    line-height: 1.7;
-    max-width: 650px;
-    margin: 0 auto 2rem;
+    font-size: 1.125rem;
+    color: rgba(230, 237, 243, 0.72);
+    line-height: 1.65;
+    max-width: 52ch;
+    margin: 1.5rem auto 0;
+  }
+
+  /* CTA Buttons */
+  .button-row {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
   }
 
   /* Credential Badges */
@@ -591,75 +845,38 @@ const latestArticles = [
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.75rem;
-    margin-bottom: 2rem;
+    margin-top: 1.5rem;
   }
 
   .badge {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.6rem 1.25rem;
-    border-radius: 8px;
+    padding: 0.375rem 0.75rem;
+    border-radius: 9999px;
     font-family: 'JetBrains Mono', var(--font-mono), monospace;
     font-size: 0.8rem;
     font-weight: 500;
     letter-spacing: -0.01em;
     text-decoration: none;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(230, 237, 243, 0.6);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     animation: badgeFadeIn 0.6s ease-out backwards;
-    cursor: pointer;
+  }
+
+  .badge:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: rgba(230, 237, 243, 0.85);
   }
 
   .badge-icon {
     width: 14px;
     height: 14px;
     flex-shrink: 0;
-  }
-
-  .badge-green {
-    background: rgba(57, 255, 20, 0.08);
-    border: 1px solid rgba(57, 255, 20, 0.25);
-    color: #39FF14;
-  }
-
-  .badge-green:hover {
-    background: rgba(57, 255, 20, 0.15);
-    border-color: rgba(57, 255, 20, 0.5);
-    box-shadow: 0 0 20px rgba(57, 255, 20, 0.15);
-    transform: translateY(-2px);
-  }
-
-  .badge-default {
-    background: rgba(139, 148, 158, 0.08);
-    border: 1px solid rgba(139, 148, 158, 0.25);
-    color: #E6EDF3;
-  }
-
-  .badge-default:hover {
-    background: rgba(139, 148, 158, 0.15);
-    border-color: rgba(139, 148, 158, 0.5);
-    box-shadow: 0 0 20px rgba(139, 148, 158, 0.1);
-    transform: translateY(-2px);
-  }
-
-  .badge-purple {
-    background: rgba(189, 52, 254, 0.08);
-    border: 1px solid rgba(189, 52, 254, 0.25);
-    color: #BD34FE;
-  }
-
-  .badge-purple:hover {
-    background: rgba(189, 52, 254, 0.15);
-    border-color: rgba(189, 52, 254, 0.5);
-    box-shadow: 0 0 20px rgba(189, 52, 254, 0.15);
-    transform: translateY(-2px);
-  }
-
-  .button-row {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
+    opacity: 0.7;
   }
 
   .btn {
@@ -683,15 +900,13 @@ const latestArticles = [
     background: #39FF14;
     color: #0D1117;
     border: none;
-    box-shadow: 0 4px 20px rgba(57, 255, 20, 0.3);
-    animation: ctaPulse 3s ease-in-out infinite;
+    box-shadow: 0 4px 15px rgba(57, 255, 20, 0.25);
   }
 
   .btn-primary:hover {
     background: #4dff33;
-    box-shadow: 0 8px 30px rgba(57, 255, 20, 0.4);
+    box-shadow: 0 8px 30px rgba(57, 255, 20, 0.35);
     transform: translateY(-2px);
-    animation: none;
   }
 
   .btn-primary:hover .btn-arrow {
@@ -731,8 +946,6 @@ const latestArticles = [
     0%, 100% { transform: translateX(-50%) translateY(0); }
     50% { transform: translateX(-50%) translateY(6px); }
   }
-
-  .hide-mobile { display: inline; }
 
   /* Featured Section */
   .featured {
@@ -1283,22 +1496,62 @@ const latestArticles = [
     }
   }
 
-  @media (max-width: 768px) {
+  @media (min-width: 640px) {
+    .headline {
+      max-width: 26ch;
+      font-size: clamp(2.75rem, 5.5vw, 3.75rem);
+    }
+
+    .subtitle {
+      font-size: 1.15rem;
+    }
+  }
+
+  @media (min-width: 768px) {
     .hero {
-      padding: 1.5rem 1rem;
-      min-height: calc(100vh - 64px);
+      padding: 2rem 3rem;
+    }
+
+    .hero-content {
+      text-align: left;
     }
 
     .headline {
-      font-size: clamp(2rem, 10vw, 3rem);
+      margin: 0;
+    }
+
+    .subtitle {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .button-row {
+      justify-content: flex-start;
+    }
+
+    .credentials-badges {
+      justify-content: flex-start;
+    }
+
+    .hero-divider {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hero {
+      padding: 1.5rem 1rem;
+      min-height: calc(100svh - 4.5rem);
+    }
+
+    .headline {
+      font-size: clamp(2rem, 8vw, 2.75rem);
+      max-width: 20ch;
     }
 
     .subtitle {
       font-size: 1rem;
-    }
-
-    .hide-mobile {
-      display: none;
     }
 
     .credentials-badges {
@@ -1307,7 +1560,7 @@ const latestArticles = [
 
     .badge {
       font-size: 0.75rem;
-      padding: 0.4rem 0.75rem;
+      padding: 0.3rem 0.625rem;
     }
 
     .cards-grid,
@@ -1496,5 +1749,19 @@ const latestArticles = [
   const featuredSection = document.querySelector('.featured');
   if (featuredSection) {
     cardObserver.observe(featuredSection);
+  }
+
+  // Mouse-tracking glow
+  const heroSection = document.querySelector('.hero') as HTMLElement;
+  const cursorGlow = document.getElementById('hero-cursor-glow');
+
+  if (heroSection && cursorGlow) {
+    heroSection.addEventListener('mousemove', (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      cursorGlow.style.left = `${x}px`;
+      cursorGlow.style.top = `${y}px`;
+    });
   }
 </script>

@@ -61,12 +61,6 @@ const breadcrumbs = [
           Responsibly disclosed vulnerabilities in WordPress plugins, documented on NVD and MITRE:
         </p>
 
-        <h3 style="color: var(--color-text-primary);">High Severity</h3>
-        <p>
-          <strong>CVE-2025-12030</strong> — IDOR in ACF to REST API (CVSS 7.5)<br />
-          Unauthorized access to restricted field data through predictable object references.
-        </p>
-
         <h3 style="color: var(--color-text-primary);">Medium Severity</h3>
         <p>
           <strong>CVE-2025-9776</strong> — SQL Injection in CatFolders (CVSS 6.5)<br />
@@ -85,8 +79,12 @@ const breadcrumbs = [
           Sensitive metadata leaked through API endpoints.
         </p>
         <p>
-          <strong>CVE-2026-1208</strong> — WordPress Plugin Vulnerability<br />
-          Details pending coordinated disclosure.
+          <strong>CVE-2025-12030</strong> — IDOR in ACF to REST API (CVSS 4.3)<br />
+          Unauthorized access to restricted field data through predictable object references.
+        </p>
+        <p>
+          <strong>CVE-2026-1208</strong> — CSRF in Friendly Functions for Welcart (CVSS 4.3)<br />
+          Missing nonce verification allows settings update via forged requests.
         </p>
         <p><a href="/security-research/cves/">View All CVE Details →</a></p>
       </section>

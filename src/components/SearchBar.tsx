@@ -131,7 +131,7 @@ export default function SearchBar() {
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
           onFocus={() => query.length > 0 && setIsOpen(true)}
-          placeholder="search snailsploit..."
+          placeholder="Search frameworks, posts, tools…"
           className="flex-1 bg-transparent text-sm outline-none"
           style={{ color: 'var(--color-text-primary)', fontFamily: 'var(--font-mono)' }}
         />
