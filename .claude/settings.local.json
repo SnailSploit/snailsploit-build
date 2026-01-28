@@ -98,7 +98,13 @@
       "Bash(git restore:*)",
       "Bash(for i in 1 2 3 4 5 6)",
       "Bash(do echo \"Request $i:\")",
-      "Bash(pkill:*)"
+      "Bash(pkill:*)",
+      "Bash(npx astro build:*)",
+      "Bash(python3:*)",
+      "Bash(kill:*)",
+      "Bash(git status:*)",
+      "Bash(for repo in CVE-2025-12030 CVE-2025-9776 CVE-2025-12163 CVE-2025-11171 CVE-2025-11174 CVE-2026-1208)",
+      "Bash(do echo \"=== $repo ===\" gh api \"repos/SnailSploit/$repo/readme\" --jq '.content')"
     ],
     "deny": [],
     "ask": []
